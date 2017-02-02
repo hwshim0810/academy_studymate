@@ -51,8 +51,8 @@ public class ReviewServiceImpl extends CommonServiceUtil implements ServiceInter
 		if (update.equals("no"))
 			reviewDao.updateReadCount(borvNum);
 
-		model.addAttribute("reviewReply", reviewDao.readReply(borvNum));
 		model.addAttribute("reviewDto", reviewDao.read(borvNum));
+		model.addAttribute("reviewReply", reviewDao.readReply(borvNum));
 		model.addAttribute("reviewPrev", reviewDao.readPrev(borvNum));
 		model.addAttribute("reviewNext", reviewDao.readNext(borvNum));
 		model.addAttribute("currentPage", currentPage);
@@ -88,10 +88,12 @@ public class ReviewServiceImpl extends CommonServiceUtil implements ServiceInter
 	}
 
 	public void writeReply(ReviewReplyDto replyDto) {
+		reviewDao.updateAddReplyCount(replyDto.getBorvNum());
 		reviewDao.writeReply(replyDto);
 	}
 
-	public void deleteReply(int repNum) {
+	public void deleteReply(int borvNum, int repNum) {
+		reviewDao.updateDownReplyCount(borvNum);
 		reviewDao.deleteReply(repNum);
 	}
 

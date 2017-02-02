@@ -1,13 +1,22 @@
 package com.studymate.review.model;
 
+import java.sql.Date;
+
 import com.studymate.common.Dto;
 
 public class ReviewReplyDto extends Dto {
 	int repNum;
 	String repContent;
 	int borvNum;
+	Date repRegdate;
 	String memName, memId;
 	
+	public Date getRepRegdate() {
+		return repRegdate;
+	}
+	public void setRepRegdate(Date repRegdate) {
+		this.repRegdate = repRegdate;
+	}
 	public int getRepNum() {
 		return repNum;
 	}

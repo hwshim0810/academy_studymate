@@ -89,7 +89,7 @@ public class ReviewController {
 			return "/review/reviewRead";
 
 		reviewService.writeReply(replyDto);
-		return "redirect:/reviewRead?borvNum=" + borvNum + "&currentPage=" + currentPage + "&update=yes";
+		return "redirect:/reviewRead?borvNum=" + borvNum + "&currentPage=" + currentPage + "&update=" + update;
 	}
 	
 	@RequestMapping("revReplyDelete")
@@ -97,7 +97,7 @@ public class ReviewController {
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
 		
-		reviewService.deleteReply(repNum);
+		reviewService.deleteReply(borvNum, repNum);
 		return "redirect:/reviewRead?borvNum=" + borvNum + "&currentPage=" + currentPage + "&update=yes";
 	}
 }

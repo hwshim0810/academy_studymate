@@ -8,70 +8,91 @@
 		<where>
 			<if test="keyWord!=null and keyWord!=''">
 				<if test="keyField=='titleNcontent'">
-					bonContent LIKE '%'||#{keyWord}||'%' or boqTitle LIKE '%'||#{keyWord}||'%' 
+					borvContent LIKE '%'||#{keyWord}||'%' or borvTitle LIKE '%'||#{keyWord}||'%' 
 				</if>
 				<if test="keyField=='title'">
-					bonTitle LIKE '%'||#{keyWord}||'%' 
+					borvTitle LIKE '%'||#{keyWord}||'%' 
 				</if>
 				<if test="keyField=='content'">
-					bonContent like '%${keyWord}%' 
+					borvContent like '%${keyWord}%' 
 				</if>
 			</if>
 		</where>
 	</sql>
 
 	<select id="totalcount" resultType="Integer" >
-		SELECT count(*) FROM notice <include refid="search" />
+		SELECT count(*) FROM review <include refid="search" />
 	</select>
 	
-	<select id="list" resultType="NoticeDto" parameterType="java.util.HashMap">
-		SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate   
-		FROM( SELECT ROWNUM num, bonNum, bonTitle, bonContent, bonReadcount, bonRegdate  
-			FROM ( SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate FROM notice 
+	<select id="list" resultType="ReviewDto" parameterType="java.util.HashMap">
+		SELECT borvNum, borvTitle, borvContent, borvReplycount, borvReadcount, borvRegdate, memName, memId 
+		FROM( SELECT ROWNUM num, borvNum, borvTitle, borvContent, borvReplycount, borvReadcount, borvRegdate, memName, memId 
+			FROM ( SELECT borvNum, borvTitle, borvContent, borvReplycount, borvReadcount, borvRegdate, memName, memId FROM review 
 			<include refid="search" /> 
-				ORDER BY bonRegdate DESC ) ) WHERE num between #{startRow} and #{endRow}
+				ORDER BY borvRegdate DESC ) ) WHERE num between #{startRow} and #{endRow}
 	</select>
 	
-	<select id="read" resultType="NoticeDto"  parameterType="Integer">
-		SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate FROM notice WHERE bonNum = #{bonNum}
+	<select id="read" resultType="ReviewDto"  parameterType="Integer">
+		SELECT borvNum, borvTitle, borvContent, borvReplycount, borvReadcount, borvRegdate, memName, memId FROM review WHERE borvNum = #{borvNum}
 	</select>
 	
-	<select id="readPrev" resultType="NoticeDto"  parameterType="Integer">
+	<select id="readReply" resultType="ReviewReplyDto" parameterType="Integer" >
+		SELECT repNum, repContent, borvNum, repRegdate, memName, memId FROM rvreply WHERE borvNum = #{borvNum} 
+	</select>
+	
+	<select id="readPrev" resultType="ReviewDto"  parameterType="Integer">
 		<![CDATA[
-        SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate 
+        SELECT borvNum, borvTitle, borvContent, borvReplycount, borvReadcount, borvRegdate, memName, memId 
           FROM (
-	                SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate FROM notice 
-	                WHERE bonNum > #{bonNum}  
-	                ORDER BY bonNum ASC 
+	                SELECT borvNum, borvTitle, borvContent, borvReplycount, borvReadcount, borvRegdate, memName, memId FROM review 
+	                WHERE borvNum > #{borvNum}  
+	                ORDER BY borvNum ASC 
                ) WHERE ROWNUM = 1
          ]]>
 	</select>
 	
-	<select id="readNext" resultType="NoticeDto"  parameterType="Integer">
+	<select id="readNext" resultType="ReviewDto"  parameterType="Integer">
 		<![CDATA[
-        SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate 
+        SELECT borvNum, borvTitle, borvContent, borvReplycount, borvReadcount, borvRegdate, memName, memId 
           FROM (
-	                SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate FROM notice 
-	                WHERE bonNum < #{bonNum}  
-	                ORDER BY bonNum ASC 
+	                SELECT borvNum, borvTitle, borvContent, borvReplycount, borvReadcount, borvRegdate, memName, memId FROM review 
+	                WHERE borvNum < #{borvNum}  
+	                ORDER BY borvNum ASC 
                ) WHERE ROWNUM = 1
          ]]>
 	</select>
 	
-	<insert id="write"  parameterType="NoticeDto">
-		INSERT INTO notice VALUES (	bonNum.nextval, #{bonTitle}, #{bonContent}, 0, sysdate)
+	<insert id="write"  parameterType="ReviewDto">
+		INSERT INTO review VALUES (	borvNum.nextval, #{borvTitle}, #{borvContent}, 0, 0, sysdate, '운영자', 'admin' ) 
+ 	</insert>
+	
+	<insert id="writeReply" parameterType="ReviewReplyDto">
+		INSERT INTO rvreply VALUES ( repNum.nextval, #{repContent}, #{borvNum}, sysdate, '운영자', 'admin') 
 	</insert>
 	
-	<update id="update" parameterType="NoticeDto">
-		UPDATE notice SET bonTitle = #{bonTitle}, bonContent = #{bonContent} WHERE bonNum = #{bonNum}  
+	<update id="update" parameterType="ReviewDto">
+		UPDATE review SET borvTitle = #{borvTitle}, borvContent = #{borvContent} WHERE borvNum = #{borvNum}  
 	</update>
 	
 	<update id="updateReadCount" parameterType="Integer">
-		UPDATE notice SET bonReadcount = bonReadcount+1 WHERE bonNum = #{bonNum} 
+		UPDATE review SET borvReadcount = borvReadcount+1 WHERE borvNum = #{borvNum} 
+	</update>
+	
+	<update id="updateAddReplyCount" parameterType="Integer">
+		UPDATE review SET borvReplycount = borvReplycount+1 WHERE borvNum = #{borvNum} 
+	</update>
+	
+	<update id="updateDownReplyCount" parameterType="Integer">
+		UPDATE review SET borvReplycount = borvReplycount-1 WHERE borvNum = #{borvNum} 
 	</update>
 	
 	<delete id="delete" parameterType="Integer">
-		DELETE FROM notice WHERE bonNum = #{bonNum} 
+		DELETE FROM review WHERE borvNum = #{borvNum} 
 	</delete>
+	
+	<delete id="deleteReply" parameterType="Integer">
+		DELETE FROM rvreply WHERE repNum = #{repNum} 
+	</delete>
+	
 	
 </mapper>

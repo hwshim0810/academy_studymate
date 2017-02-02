@@ -1,18 +1,18 @@
 package com.studymate.review.model;
 
-import java.util.Map;
+import java.util.List;
 
 import com.studymate.common.Dao;
 
 public interface ReviewDao extends Dao{
-	public int maxSequence();
-
-	public void updateSeq(Map<String, Object> map);
-
 	public void deleteReply(int repNum);
 
 	public void writeReply(ReviewReplyDto replyDto);
 
-	public ReviewReplyDto readReply(int borvNum);
+	public List<ReviewReplyDto> readReply(int borvNum);
+
+	public void updateAddReplyCount(int borvNum);
+
+	public void updateDownReplyCount(int borvNum);
 
 }

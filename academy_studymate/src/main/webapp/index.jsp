@@ -13,6 +13,7 @@
 		<a href='noticelist'>공지</a>
 		<a href='qnalist'>Qna</a>
 		<a href='roomList'>Room</a>
+		<a href="reviewList">Review</a>
 	</div>
 </body>
 </html>
