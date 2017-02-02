@@ -9,6 +9,7 @@
 </head>
 <body>
 <form action="qnaDelete" id="delForm" method="post">
+	<input type="hidden" name="boqGroupnum" value="${param.gNum}">
 	<input type="hidden"  name="boqNum" value="${param.boqNum}">
 	<input type="hidden"  name="currentPage" value="${param.currentPage}">
 </form>

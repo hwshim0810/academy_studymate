@@ -71,9 +71,9 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value = "qnaDelete", method = RequestMethod.POST)
-	public String delete(Model model, int boqNum, int currentPage) {
-		qnaService.delete(model, boqNum);
-		return "redirect:/qnalist?currentPage=" + currentPage;
+	public String deleteQna(Model model, int boqGroupnum, int boqNum, int currentPage) {
+		String page = qnaService.deleteQna(model, boqGroupnum, boqNum, currentPage);
+		return page;
 	}
 	
 	@RequestMapping(value = "qnaComment", method = RequestMethod.GET)

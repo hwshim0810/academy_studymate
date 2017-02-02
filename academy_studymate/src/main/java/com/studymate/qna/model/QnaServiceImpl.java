@@ -76,11 +76,24 @@ public class QnaServiceImpl extends CommonServiceUtil implements ServiceInterfac
 		return model;
 	}
 
-	@Override
+	@Override // 답글때문에 사용안하는 Method
 	public Model delete(Model model, int boqNum) {
 		qnaDao.delete(boqNum);
 		return model;
 	}
+	
+	public String deleteQna(Model model, int boqGroupnum, int boqNum, int currentPage) {
+		QnaDto qnaDto = qnaDao.isComment(boqNum);
+		int commentCount = qnaDao.hasComment(boqGroupnum);
+		
+		if (qnaDto.getBoqSeq() > 0 || commentCount == 1) {
+			qnaDao.delete(boqNum);
+			return "redirect:/qnalist?currentPage=" + currentPage;
+		}
+		else
+			return "redirect:/qna/deleteError";
+	}
+	
 
 	public void writeComment(QnaDto qnaDto) {
 		int boqGroupnum = qnaDao.maxSequence();

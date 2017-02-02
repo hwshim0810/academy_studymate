@@ -9,7 +9,7 @@ function member_update(){
 	location.href="qnaUpdate?boqNum=${qnaDto.boqNum}&currentPage=${currentPage}&update=yes";
 }
 function member_delete(){
-	location.href="qnaDelete?boqNum=${qnaDto.boqNum}&currentPage=${currentPage}";
+	location.href="qnaDelete?boqNum=${qnaDto.boqNum}&currentPage=${currentPage}&gNum=${qnaDto.boqGroupnum}";
 }
 function member_comment(){
 	location.href="qnaComment?boqNum=${qnaDto.boqNum}&currentPage=${currentPage}&update=no";
