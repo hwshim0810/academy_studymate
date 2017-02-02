@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+              "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+              
+<mapper namespace="com.studymate.reserve.model.ReserveDao">
+
+	<sql id="search">
+		<where>
+			<if test="keyWord!=null and keyWord!=''">
+				<if test="keyField=='titleNcontent'">
+					bonContent LIKE '%'||#{keyWord}||'%' or boqTitle LIKE '%'||#{keyWord}||'%' 
+				</if>
+				<if test="keyField=='title'">
+					bonTitle LIKE '%'||#{keyWord}||'%' 
+				</if>
+				<if test="keyField=='content'">
+					bonContent like '%${keyWord}%' 
+				</if>
+			</if>
+		</where>
+	</sql>
+
+	<select id="totalcount" resultType="Integer" >
+		SELECT count(*) FROM notice <include refid="search" />
+	</select>
+	
+	<select id="list" resultType="NoticeDto" parameterType="java.util.HashMap">
+		SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate   
+		FROM( SELECT ROWNUM num, bonNum, bonTitle, bonContent, bonReadcount, bonRegdate  
+			FROM ( SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate FROM notice 
+			<include refid="search" /> 
+				ORDER BY bonRegdate DESC ) ) WHERE num between #{startRow} and #{endRow}
+	</select>
+	
+	<select id="read" resultType="NoticeDto"  parameterType="Integer">
+		SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate FROM notice WHERE bonNum = #{bonNum}
+	</select>
+	
+	<select id="readPrev" resultType="NoticeDto"  parameterType="Integer">
+		<![CDATA[
+        SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate 
+          FROM (
+	                SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate FROM notice 
+	                WHERE bonNum > #{bonNum}  
+	                ORDER BY bonNum ASC 
+               ) WHERE ROWNUM = 1
+         ]]>
+	</select>
+	
+	<select id="readNext" resultType="NoticeDto"  parameterType="Integer">
+		<![CDATA[
+        SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate 
+          FROM (
+	                SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate FROM notice 
+	                WHERE bonNum < #{bonNum}  
+	                ORDER BY bonNum ASC 
+               ) WHERE ROWNUM = 1
+         ]]>
+	</select>
+	
+	<insert id="write"  parameterType="NoticeDto">
+		INSERT INTO notice VALUES (	bonNum.nextval, #{bonTitle}, #{bonContent}, 0, sysdate)
+	</insert>
+	
+	<update id="update" parameterType="NoticeDto">
+		UPDATE notice SET bonTitle = #{bonTitle}, bonContent = #{bonContent} WHERE bonNum = #{bonNum}  
+	</update>
+	
+	<update id="updateReadCount" parameterType="Integer">
+		UPDATE notice SET bonReadcount = bonReadcount+1 WHERE bonNum = #{bonNum} 
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM notice WHERE bonNum = #{bonNum} 
+	</delete>
+	
+</mapper>

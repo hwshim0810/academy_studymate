@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+              "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+              
+<mapper namespace="com.studymate.qna.model.QnaDao">
+
+	<sql id="search">
+		<where>
+			<if test="keyWord!=null and keyWord!=''">
+				<if test="keyField=='titleNcontent'">
+					boqContent LIKE '%'||#{keyWord}||'%' or boqTitle LIKE '%'||#{keyWord}||'%' 
+				</if>
+				<if test="keyField=='title'">
+					boqTitle LIKE '%'||#{keyWord}||'%' 
+				</if>
+				<if test="keyField=='content'">
+					boqContent like '%${keyWord}%' 
+				</if>
+				<if test="keyField=='author'">
+					memName like '%${keyWord}%' 
+				</if>
+			</if>
+		</where>
+	</sql>
+
+
+	<select id="totalcount" resultType="Integer" >
+		SELECT count(*) FROM qna <include refid="search" />
+	</select>
+	
+	<select id="maxSequence" resultType="Integer">
+		SELECT nvl(max(boqNum),1) FROM qna 
+	</select>
+	
+	<select id="list" resultType="QnaDto" parameterType="java.util.HashMap">
+		SELECT boqNum, boqTitle, boqContent, boqGroupnum, boqSeq, boqLev, boqRegdate, memName, memId 
+		FROM( SELECT ROWNUM num, boqNum, boqTitle, boqContent, boqGroupnum, boqSeq, boqLev, boqRegdate, memName, memId   
+			FROM ( SELECT boqNum, boqTitle, boqContent, boqGroupnum, boqSeq, boqLev, boqRegdate, memName, memId  FROM qna  
+			<include refid="search" /> 
+				ORDER BY boqGroupnum DESC, boqSeq ASC ) ) WHERE num between #{startRow} and #{endRow}
+	</select>
+	
+	<select id="read" resultType="QnaDto"  parameterType="Integer">
+		SELECT boqNum, boqTitle, boqContent, boqGroupnum, boqSeq, boqLev, boqRegdate, memName, memId  FROM qna WHERE boqNum = #{bonNum}
+	</select>
+	
+	<select id="readPrev" resultType="QnaDto"  parameterType="Integer">
+		<![CDATA[
+        SELECT boqNum, boqTitle, boqContent, boqGroupnum, boqSeq, boqLev, boqRegdate, memName, memId  
+          FROM (
+	                SELECT boqNum, boqTitle, boqContent, boqGroupnum, boqSeq, boqLev, boqRegdate, memName, memId   FROM qna 
+	                WHERE boqNum > #{boqNum}  
+	                ORDER BY boqNum ASC 
+               ) WHERE ROWNUM = 1
+         ]]>
+	</select>
+	
+	<select id="readNext" resultType="QnaDto"  parameterType="Integer">
+		<![CDATA[
+        SELECT boqNum, boqTitle, boqContent, boqGroupnum, boqSeq, boqLev, boqRegdate, memName, memId  
+          FROM (
+	                SELECT boqNum, boqTitle, boqContent, boqGroupnum, boqSeq, boqLev, boqRegdate, memName, memId   FROM qna 
+	                WHERE boqNum < #{boqNum}  
+	                ORDER BY boqNum ASC 
+               ) WHERE ROWNUM = 1
+         ]]>
+	</select>
+	
+	<insert id="write"  parameterType="QnaDto">
+		INSERT INTO qna VALUES (	boqNum.nextval, #{boqTitle}, #{boqContent}, #{boqGroupnum}, #{boqSeq}, #{boqLev}, sysdate, 0,'운영자', 'admin') 
+	</insert>
+	
+	<update id="update" parameterType="QnaDto">
+		UPDATE qna SET boqTitle = #{boqTitle}, boqContent = #{boqContent} WHERE boqNum = #{boqNum}  
+	</update>
+	
+	<update id="updateReadCount" parameterType="Integer">
+		UPDATE qna SET boqReadcount = boqReadcount+1 WHERE boqNum = #{boqNum} 
+	</update>
+	
+	<update id="updateSeq" parameterType="java.util.HashMap">
+		<![CDATA[
+			UPDATE qna SET boqSeq = boqSeq+1 WHERE boqGroupnum = #{boqGroupnum} and boqSeq > #{boqSeq}
+		 ]]> 
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM qna WHERE boqNum = #{boqNum} 
+	</delete>
+	
+</mapper>

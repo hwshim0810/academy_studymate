@@ -1,0 +1,99 @@
+package com.studymate.qna.model;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+
+import com.studymate.common.CommonServiceUtil;
+import com.studymate.common.Dto;
+import com.studymate.common.ServiceInterface;
+
+@Service
+public class QnaServiceImpl extends CommonServiceUtil implements ServiceInterface {
+	@Autowired
+	QnaDao qnaDao;
+	
+	@Override
+	public Model list(HttpSession session, Model model, int currentPage, String keyField, String keyWord) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyWord", keyWord);
+		map.put("keyField", keyField);
+		
+		int blockCount = 5; 
+		int blockPage = 5;
+		int totalCount = getTotalCount(qnaDao, map);
+
+		QnaPaging qnaPaging = new QnaPaging(currentPage, totalCount, blockCount, blockPage, keyField, keyWord);
+		
+		map.put("startRow", qnaPaging.getStartCount());
+		map.put("endRow", qnaPaging.getEndCount());
+		
+		List<Dto> list = getList(qnaDao, map);
+
+		model.addAttribute("qnaList", list);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("pageHtml", qnaPaging.getPagingHtml().toString());
+		model.addAttribute("keyField", keyField);
+		model.addAttribute("keyWord", keyWord);
+		
+		session.setAttribute("page", "qnalist");
+		return model;
+	}
+
+	@Override
+	public Model read(Model model, int boqNum, int currentPage, String update, String keyField, String keyWord) {
+		if (update.equals("no"))
+			qnaDao.updateReadCount(boqNum);
+
+		model.addAttribute("qnaDto", qnaDao.read(boqNum));
+		model.addAttribute("qnaPrev", qnaDao.readPrev(boqNum));
+		model.addAttribute("qnaNext", qnaDao.readNext(boqNum));
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("keyField", keyField);
+		model.addAttribute("keyWord", keyWord);
+		return model;
+	}
+
+	@Override
+	public void write(Dto qnaDto) {
+		int boqGroupnum = qnaDao.maxSequence();
+		if (boqGroupnum != 1) boqGroupnum++;
+		
+		((QnaDto) qnaDto).setBoqGroupnum(boqGroupnum);
+		
+		qnaDao.write(qnaDto);
+	}
+
+	@Override
+	public Model update(Model model, Dto qnaDto) {
+		qnaDao.update(qnaDto);
+		return model;
+	}
+
+	@Override
+	public Model delete(Model model, int boqNum) {
+		qnaDao.delete(boqNum);
+		return model;
+	}
+
+	public void writeComment(QnaDto qnaDto) {
+		int boqGroupnum = qnaDao.maxSequence();
+		if (boqGroupnum != 1) boqGroupnum++;
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("boqGroupnum", boqGroupnum);
+		map.put("boqSeq", qnaDto.getBoqSeq());
+		qnaDao.updateSeq(map);
+		
+		qnaDto.setBoqLev(qnaDto.getBoqLev()+1);
+		qnaDto.setBoqSeq(qnaDto.getBoqSeq()+1);
+		qnaDao.write(qnaDto);
+	}
+
+}
