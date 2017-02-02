@@ -75,12 +75,12 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value = "reviewDelete", method = RequestMethod.POST)
-	public String delete(Model model, int borvNum, int currentPage) {
-		reviewService.delete(model, borvNum);
-		return "redirect:/reviewList?currentPage=" + currentPage;
+	public String deleteHasReply(int borvNum, int currentPage) {
+		String result = reviewService.deleteHasReply(borvNum, currentPage);
+		return result;
 	}
 	
-	@RequestMapping(value = "reviewReply", method = RequestMethod.POST)
+	@RequestMapping(value = "revReplyWrite", method = RequestMethod.POST)
 	public String writeReply(@Valid ReviewReplyDto replyDto, BindingResult result, 
 			int borvNum, int currentPage, String update,
 			@RequestParam(required = false) String keyField, 
@@ -89,6 +89,15 @@ public class ReviewController {
 			return "/review/reviewRead";
 
 		reviewService.writeReply(replyDto);
+		return "redirect:/reviewRead?borvNum=" + borvNum + "&currentPage=" + currentPage + "&update=yes";
+	}
+	
+	@RequestMapping("revReplyDelete")
+	public String deleteReply(int borvNum, int currentPage, int repNum, String update,
+			@RequestParam(required = false) String keyField, 
+			@RequestParam(required = false) String keyWord) {
+		
+		reviewService.deleteReply(repNum);
 		return "redirect:/reviewRead?borvNum=" + borvNum + "&currentPage=" + currentPage + "&update=yes";
 	}
 }

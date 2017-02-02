@@ -51,6 +51,7 @@ public class ReviewServiceImpl extends CommonServiceUtil implements ServiceInter
 		if (update.equals("no"))
 			reviewDao.updateReadCount(borvNum);
 
+		model.addAttribute("reviewReply", reviewDao.readReply(borvNum));
 		model.addAttribute("reviewDto", reviewDao.read(borvNum));
 		model.addAttribute("reviewPrev", reviewDao.readPrev(borvNum));
 		model.addAttribute("reviewNext", reviewDao.readNext(borvNum));
@@ -71,14 +72,27 @@ public class ReviewServiceImpl extends CommonServiceUtil implements ServiceInter
 		return model;
 	}
 
-	@Override
-	public Model delete(Model model, int boqNum) {
-		reviewDao.delete(boqNum);
+	@Override // 댓글때문에 사용하지 않음
+	public Model delete(Model model, int borvNum) {
 		return model;
+	}
+	
+	public String deleteHasReply(int borvNum, int currentPage) {
+		int replyCount =  reviewDao.hasReply(borvNum);
+		
+		if (replyCount == 0) {
+			reviewDao.delete(borvNum);
+			return "redirect:/reviewList?currentPage=" + currentPage;
+		} else
+			return "/reserve/deleteError";
 	}
 
 	public void writeReply(ReviewReplyDto replyDto) {
-//		reviewDao.writeReply(replyDto);
+		reviewDao.writeReply(replyDto);
+	}
+
+	public void deleteReply(int repNum) {
+		reviewDao.deleteReply(repNum);
 	}
 
 }
