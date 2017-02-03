@@ -29,13 +29,13 @@ public class NoticeController {
 		return "/notice/noticeMain";
 	}
 	
-	@RequestMapping(value = "noticeWrite", method = RequestMethod.GET)
+	@RequestMapping(value = "noticelist/noticeWrite", method = RequestMethod.GET)
 	public String write(Model model) {
 		model.addAttribute("noticeDto", new NoticeDto());
 		return "/notice/noticeWriteForm";
 	}
 	
-	@RequestMapping(value = "noticeWrite", method = RequestMethod.POST)
+	@RequestMapping(value = "noticelist/noticeWrite", method = RequestMethod.POST)
 	public String write(@Valid NoticeDto noticeDto, BindingResult result) {
 		if (result.hasErrors())
 			return "/notice/noticeWriteForm";
