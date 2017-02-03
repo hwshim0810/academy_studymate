@@ -1,11 +1,17 @@
 package com.studymate.member.model;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.studymate.common.CommonServiceUtil;
+import com.studymate.common.Dto;
 
 @Service
 public class MemberServiceImpl extends CommonServiceUtil implements MemberService {
@@ -52,8 +58,50 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 	public String isAbleId(String memId) {
 		MemberDto memDto = memDao.isAbleId(memId);
 
-		if (memDto == null) return "yes";
-		return "no";
+		if (memDto == null) return "y";
+		return "n";
+	}
+
+	@Override
+	public Model list(HttpSession session, Model model, int currentPage, String keyField, String keyWord) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyWord", keyWord);
+		map.put("keyField", keyField);
+		
+		int blockCount = 5; 
+		int blockPage = 5;
+		int totalCount = getTotalCount(memDao, map);
+		
+		MemberPaging memPaging = new MemberPaging(currentPage, totalCount, blockCount, blockPage, keyField, keyWord);
+		
+		map.put("startRow", memPaging.getStartCount());
+		map.put("endRow", memPaging.getEndCount());
+		
+		List<Dto> list = getList(memDao, map); 
+		
+		model.addAttribute("memList", list);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("pageHtml", memPaging.getPagingHtml().toString());
+		model.addAttribute("keyField", keyField);
+		model.addAttribute("keyWord", keyWord);
+		
+		session.setAttribute("page", "memberList/1");
+		return model;
+	}
+
+	@Override
+	public Model read(Model model, String memId, int currentPage, String keyField, String keyWord) {
+		model.addAttribute("memDto", memDao.read(memId));
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("keyField", keyField);
+		model.addAttribute("keyWord", keyWord);
+		return model;		
+	}
+
+	@Override
+	public Model update(Model model, MemberDto memDto) {
+		memDao.update(memDto);
+		return model;
 	}
 
 }

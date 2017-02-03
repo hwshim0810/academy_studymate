@@ -42,7 +42,7 @@ public class NoticeServiceImpl extends CommonServiceUtil implements ServiceInter
 		model.addAttribute("keyField", keyField);
 		model.addAttribute("keyWord", keyWord);
 		
-		session.setAttribute("page", "noticelist");
+		session.setAttribute("page", "noticelist/1");
 		return model;
 	}
 

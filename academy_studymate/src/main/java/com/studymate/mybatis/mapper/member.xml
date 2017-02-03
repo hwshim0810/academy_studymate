@@ -3,48 +3,53 @@
               "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
               
 <mapper namespace="com.studymate.member.model.MemberDao">
+	<sql id="columns"> memId, memPass, memName, memSex, memBirth, memAddr, memArea, memEmail, memSiteout , memRegdate </sql>
+	
+	<sql id="search">
+		<where>
+			<if test="keyWord!=null and keyWord!=''">
+				<if test="keyField=='memId'">
+					memId LIKE '%'||#{keyWord}||'%'  
+				</if>
+				<if test="keyField=='memName'">
+					memName LIKE '%'||#{keyWord}||'%' 
+				</if>
+				<if test="keyField=='memAddr'">
+					memAddr like '%${keyWord}%' or memArea like '%${keyWord}%' 
+				</if>
+				<if test="keyField=='memEmail'">
+					memEmail like '%${keyWord}%' 
+				</if>
+				<if test="keyField=='memSiteout'">
+					memSiteout like '%${keyWord}%' 
+				</if>
+			</if>
+		</where>
+	</sql>
+
 
 	<select id="totalcount" resultType="Integer" >
-		SELECT count(*) FROM member 
-	</select>
-	
-	<select id="totalcountById"  resultType="Integer">
-		SELECT count(*) FROM member WHERE memId LIKE '%'||#{keyWord}||'%'
-	</select>
-
-	<select id="totalcountByName" resultType="Integer">
-		SELECT count(*) FROM member WHERE memName LIKE '%'||#{keyWord}||'%'
-	</select>
-	
-	<select id="totalcountByEmail" resultType="Integer">
-		SELECT count(*) FROM member WHERE memEmail LIKE '%'||#{keyWord}||'%'
-	</select>
-	
-	<select id="totalcountByAddr" resultType="Integer">
-		SELECT count(*) FROM member WHERE memAddr LIKE '%'||#{keyWord}||'%' or m_area LIKE '%'||#{keyWord}||'%' 
+		SELECT count(*) FROM member <include refid="search" /> 
 	</select>
 	
 	<select id="list" resultType="MemberDto" parameterType="java.util.HashMap">
-		SELECT m_id, m_name, m_sex, m_birth, m_addr, m_area, m_email, m_job, m_siteout, m_regdate 
-		FROM( SELECT ROWNUM num, m_id, m_name, m_sex, m_birth, m_addr, m_area, m_email, m_job, m_siteout, m_regdate 
-			FROM ( SELECT m_id, m_name, m_sex, m_birth, m_addr, m_area, m_email, m_job, m_siteout, m_regdate FROM member
-				ORDER BY m_regdate DESC ) ) WHERE num between #{startRow} and #{endRow}
+		SELECT <include refid="columns" />  
+		FROM( SELECT ROWNUM num, <include refid="columns" /> 
+			FROM ( SELECT <include refid="columns" />  FROM member
+			<include refid="search" /> 
+				ORDER BY memRegdate DESC ) ) WHERE num between #{startRow} and #{endRow}
 	</select>
 	
-	<select id="read" resultType="MemberDto"  parameterType="Integer">
-		SELECT bon_num, bon_title, bon_content, bon_readcount, bon_regdate FROM notice WHERE bon_num = #{bon_num}
+	<select id="read" resultType="MemberDto"  parameterType="String">
+		SELECT <include refid="columns" />  FROM member WHERE memId = #{memId}
 	</select>
 	
 	<insert id="write"  parameterType="MemberDto">
-		INSERT INTO notice VALUES (	bon_num.nextval, #{bon_title}, #{bon_content}, 0, sysdate)
+		INSERT INTO member VALUES ( #{memId}, #{memPass}, #{memName}, #{memSex}, #{memBirth}, #{memAddr}, #{memArea}, #{memEmail}, #{memSiteout}, sysdate) 
 	</insert>
 	
 	<update id="update" parameterType="MemberDto">
-		UPDATE notice SET bon_title = #{bon_title}, bon_content = #{bon_content} WHERE bon_num = #{bon_num}  
-	</update>
-	
-	<update id="updateReadCount" parameterType="Integer">
-		UPDATE notice SET bon_readcount = bon_readcount+1 WHERE bon_num = #{bon_num} 
+		UPDATE member SET memPass = #{memPass}, memBirth = #{memBirth}, memAddr = #{memAddr}, memArea = #{memArea}, memEmail = #{memEmail} WHERE memId = #{memId}  
 	</update>
 	
 	<delete id="delete" parameterType="Integer">

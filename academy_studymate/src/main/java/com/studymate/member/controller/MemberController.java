@@ -5,9 +5,12 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.studymate.member.model.LoginDto;
 import com.studymate.member.model.MemberDto;
@@ -59,4 +62,46 @@ public class MemberController {
 		return memberService.isAbleId(memId);
 	}
 	
+	@RequestMapping("memberList/{currentPage}")
+	public String list(HttpSession session, Model model, 
+			@PathVariable("currentPage") int currentPage, 
+			@RequestParam(required = false) String keyField, 
+			@RequestParam(required = false) String keyWord) {
+		memberService.list(session, model, currentPage, keyField, keyWord);
+		return "/member/memberMain";
+	}
+	
+	@RequestMapping("memberAdRead/{currentPage}-{memId}")
+	public String adread(Model model, 
+			@PathVariable("memId") String memId, 
+			@PathVariable("currentPage") int currentPage,
+			@RequestParam(required = false) String keyField, 
+			@RequestParam(required = false) String keyWord) {
+		memberService.read(model, memId, currentPage, keyField, keyWord);
+		return "/member/memberAdRead";
+	}
+	
+	@RequestMapping("memberRead/{currentPage}-{memId}")
+	public String read(Model model, 
+			@PathVariable("memId") String memId, 
+			@PathVariable("currentPage") int currentPage,
+			@RequestParam(required = false) String keyField, 
+			@RequestParam(required = false) String keyWord) {
+		memberService.read(model, memId, currentPage, keyField, keyWord);
+		return "/member/memberAdRead";
+	}
+	
+	@RequestMapping(value = "memberUpdate", method = RequestMethod.GET)
+	public String update(Model model, String memId, int currentPage,
+			@RequestParam(required = false) String keyField, 
+			@RequestParam(required = false) String keyWord) {
+		memberService.read(model, memId, currentPage, keyField, keyWord);
+		return "/member/memberUpdateForm";
+	}
+	
+	@RequestMapping(value = "memberUpdate", method = RequestMethod.POST)
+	public String update(Model model ,MemberDto memDto, String memId, int currentPage) {
+		memberService.update(model, memDto);
+		return "redirect:/memberRead/" + currentPage + "-" + memId;
+	}
 }

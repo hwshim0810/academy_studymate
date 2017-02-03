@@ -3,6 +3,7 @@
               "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
               
 <mapper namespace="com.studymate.notice.model.NoticeDao">
+	<sql id="columns"> bonNum, bonTitle, bonContent, bonReadcount, bonRegdate </sql>
 
 	<sql id="search">
 		<where>
@@ -25,15 +26,15 @@
 	</select>
 	
 	<select id="list" resultType="NoticeDto" parameterType="java.util.HashMap">
-		SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate   
-		FROM( SELECT ROWNUM num, bonNum, bonTitle, bonContent, bonReadcount, bonRegdate  
-			FROM ( SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate FROM notice 
+		SELECT <include refid="columns" />   
+		FROM( SELECT ROWNUM num,<include refid="columns" />  
+			FROM ( SELECT <include refid="columns" />  FROM notice 
 			<include refid="search" /> 
 				ORDER BY bonRegdate DESC ) ) WHERE num between #{startRow} and #{endRow}
 	</select>
 	
 	<select id="read" resultType="NoticeDto"  parameterType="Integer">
-		SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate FROM notice WHERE bonNum = #{bonNum}
+		SELECT <include refid="columns" /> FROM notice WHERE bonNum = #{bonNum}
 	</select>
 	
 	<select id="readPrev" resultType="NoticeDto"  parameterType="Integer">
@@ -59,7 +60,7 @@
 	</select>
 	
 	<insert id="write"  parameterType="NoticeDto">
-		INSERT INTO notice VALUES (	bonNum.nextval, #{bonTitle}, #{bonContent}, 0, sysdate)
+		INSERT INTO notice VALUES ( bonNum.nextval, #{bonTitle}, #{bonContent}, 0, sysdate)
 	</insert>
 	
 	<update id="update" parameterType="NoticeDto">
