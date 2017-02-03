@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,9 +21,9 @@ public class RoomController {
 	@Autowired
 	RoomServiceImpl roomService;
 	
-	@RequestMapping("roomList")
+	@RequestMapping("roomList/{currentPage}")
 	public String list(HttpSession session, Model model, 
-			@RequestParam(defaultValue = "1") int currentPage, 
+			@PathVariable("currentPage") int currentPage, 
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
 		roomService.list(session, model, currentPage, keyField, keyWord);
@@ -40,7 +41,7 @@ public class RoomController {
 			@RequestParam(required = false, defaultValue = "1") int currentPage) {
 		MultipartFile file = request.getFile("file");
 		roomService.write(roomDto, file);
-		return "redirect:/roomList?currentPage=" + currentPage;
+		return "redirect:/roomList/" + currentPage;
 	}
 	
 	@RequestMapping("roomRead")
@@ -62,7 +63,7 @@ public class RoomController {
 	@RequestMapping(value = "roomUpdate", method = RequestMethod.POST)
 	public String update(Model model ,RoomDto roomDto, int bonNum, int currentPage) {
 		roomService.update(model, roomDto);
-		return "redirect:/roomRead?borNum=" + bonNum + "&currentPage=" + currentPage + "&update=yes";
+		return "redirect:/roomRead/"+ currentPage + "-" + bonNum + "?update=y";
 	}
 	
 	@RequestMapping(value = "roomDelete", method = RequestMethod.GET)
@@ -73,7 +74,7 @@ public class RoomController {
 	@RequestMapping(value = "roomDelete", method = RequestMethod.POST)
 	public String delete(Model model, int borNum, int currentPage) {
 		roomService.delete(model, borNum);
-		return "redirect:/roomList?currentPage=" + currentPage;
+		return "redirect:/roomList/" + currentPage;
 	}
 	
 	@RequestMapping("recommendRoom")

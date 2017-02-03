@@ -47,5 +47,5 @@ public class ReserveDto extends Dto {
 	public void setMemId(String memId) {
 		this.memId = memId;
 	}
-		
+	
 }

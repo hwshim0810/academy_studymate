@@ -53,7 +53,7 @@ public class NoticeServiceImpl extends CommonServiceUtil implements ServiceInter
 
 	@Override// 상세읽기 : 조회수는 update로 오지않았을경우만
 	public Model read(Model model, int bonNum, int currentPage, String update, String keyField, String keyWord) {
-		if (update.equals("no"))
+		if (update.equals("n"))
 			noticeDao.updateReadCount(bonNum);
 		
 		model.addAttribute("noticeDto", noticeDao.read(bonNum));

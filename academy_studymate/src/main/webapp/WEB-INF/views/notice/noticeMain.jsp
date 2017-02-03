@@ -36,10 +36,8 @@
 				</thead>
 				<tbody>
 					<c:forEach var="item" items="${noticeList}">
-						<c:url value="/noticeRead" var="readUrl">
-							<c:param name="bonNum" value="${item.bonNum}" />
-							<c:param name="currentPage" value="${currentPage}" />
-							<c:param name="update" value="no" />
+						<c:url value="/noticeRead/${currentPage}-${item.bonNum}" var="readUrl">
+							<c:param name="update" value="n" />
 							<c:param name="keyField" value="${keyField}" />
 							<c:param name="keyWord" value="${keyWord}" />
 						</c:url>

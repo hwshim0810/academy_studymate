@@ -42,7 +42,7 @@ public class ReserveServiceImpl extends CommonServiceUtil implements ServiceInte
 		model.addAttribute("keyField", keyField);
 		model.addAttribute("keyWord", keyWord);
 		
-		session.setAttribute("page", "reserveList");
+		session.setAttribute("page", "reserveList/1");
 		return model;
 	}
 
@@ -53,12 +53,10 @@ public class ReserveServiceImpl extends CommonServiceUtil implements ServiceInte
 
 	@Override// 상세읽기 : 조회수는 update로 오지않았을경우만
 	public Model read(Model model, int resNum, int currentPage, String update, String keyField, String keyWord) {
-		if (update.equals("no"))
+		if (update.equals("n"))
 			reserveDao.updateReadCount(resNum);
 		
 		model.addAttribute("resDto", reserveDao.read(resNum));
-		model.addAttribute("resPrev", reserveDao.readPrev(resNum));
-		model.addAttribute("resNext", reserveDao.readNext(resNum));
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("keyField", keyField);
 		model.addAttribute("keyWord", keyWord);

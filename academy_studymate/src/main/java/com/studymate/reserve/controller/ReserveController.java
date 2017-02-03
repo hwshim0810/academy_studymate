@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,9 +20,9 @@ public class ReserveController {
 	@Autowired
 	ReserveServiceImpl resService;
 	
-	@RequestMapping("reserveList")
+	@RequestMapping("reserveList/{currentPage}")
 	public String list(HttpSession session, Model model, 
-			@RequestParam(defaultValue = "1") int currentPage, 
+			@PathVariable("currentPage") int currentPage, 
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
 		resService.list(session, model, currentPage, keyField, keyWord);
@@ -40,7 +41,7 @@ public class ReserveController {
 			return "/reserve/reserveWriteForm";
 
 		resService.write(resDto);
-		return "redirect:/reserveList";
+		return "redirect:/reserveList/1";
 	}
 	
 	@RequestMapping("reserveRead")
@@ -62,7 +63,7 @@ public class ReserveController {
 	@RequestMapping(value = "reserveUpdate", method = RequestMethod.POST)
 	public String update(Model model ,ReserveDto resDto, int resNum, int currentPage) {
 		resService.update(model, resDto);
-		return "redirect:/reserveRead?resNum=" + resNum + "&currentPage=" + currentPage + "&update=yes";
+		return "redirect:/reserveRead/" + currentPage  + "-" + resNum + "?update=y";
 	}
 	
 	@RequestMapping(value = "reserveDelete", method = RequestMethod.GET)
@@ -73,7 +74,7 @@ public class ReserveController {
 	@RequestMapping(value = "reserveDelete", method = RequestMethod.POST)
 	public String delete(Model model, int resNum, int currentPage) {
 		resService.delete(model, resNum);
-		return "redirect:/reserveList?currentPage=" + currentPage;
+		return "redirect:/reserveList/" + currentPage;
 	}
 	
 }

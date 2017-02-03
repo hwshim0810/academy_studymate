@@ -42,13 +42,13 @@ public class ReviewServiceImpl extends CommonServiceUtil implements ServiceInter
 		model.addAttribute("keyField", keyField);
 		model.addAttribute("keyWord", keyWord);
 		
-		session.setAttribute("page", "reviewList");
+		session.setAttribute("page", "reviewList/1");
 		return model;
 	}
 
 	@Override
 	public Model read(Model model, int borvNum, int currentPage, String update, String keyField, String keyWord) {
-		if (update.equals("no"))
+		if (update.equals("n"))
 			reviewDao.updateReadCount(borvNum);
 
 		model.addAttribute("reviewDto", reviewDao.read(borvNum));
@@ -82,7 +82,7 @@ public class ReviewServiceImpl extends CommonServiceUtil implements ServiceInter
 		
 		if (replyCount == 0) {
 			reviewDao.delete(borvNum);
-			return "redirect:/reviewList?currentPage=" + currentPage;
+			return "redirect:/reviewList/" + currentPage;
 		} else
 			return "/reserve/deleteError";
 	}

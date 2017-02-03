@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,9 +20,9 @@ public class NoticeController {
 	@Autowired
 	NoticeServiceImpl noticeService;
 	
-	@RequestMapping("noticelist")
+	@RequestMapping("noticelist/{currentPage}")
 	public String list(HttpSession session, Model model, 
-			@RequestParam(defaultValue = "1") int currentPage, 
+			@PathVariable("currentPage") int currentPage, 
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
 		noticeService.list(session, model, currentPage, keyField, keyWord);
@@ -40,11 +41,13 @@ public class NoticeController {
 			return "/notice/noticeWriteForm";
 
 		noticeService.write(noticeDto);
-		return "redirect:/noticelist";
+		return "redirect:/noticelist/1";
 	}
 	
-	@RequestMapping("noticeRead")
-	public String read(Model model, int bonNum, int currentPage, String update,
+	@RequestMapping("noticeRead/{currentPage}-{bonNum}")
+	public String read(Model model, 
+			@PathVariable("bonNum") int bonNum, 
+			@PathVariable("currentPage") int currentPage, String update,
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
 		noticeService.read(model, bonNum, currentPage, update, keyField, keyWord);
@@ -62,7 +65,7 @@ public class NoticeController {
 	@RequestMapping(value = "noticeUpdate", method = RequestMethod.POST)
 	public String update(Model model ,NoticeDto noticeDto, int bonNum, int currentPage) {
 		noticeService.update(model, noticeDto);
-		return "redirect:/noticeRead?bonNum=" + bonNum + "&currentPage=" + currentPage + "&update=yes";
+		return "redirect:/noticeRead/" + currentPage + "-" + bonNum + "?update=y";
 	}
 	
 	@RequestMapping(value = "noticeDelete", method = RequestMethod.GET)
@@ -73,7 +76,7 @@ public class NoticeController {
 	@RequestMapping(value = "noticeDelete", method = RequestMethod.POST)
 	public String delete(Model model, int bonNum, int currentPage) {
 		noticeService.delete(model, bonNum);
-		return "redirect:/noticelist?currentPage=" + currentPage;
+		return "redirect:/noticelist/" + currentPage;
 	}
 	
 }

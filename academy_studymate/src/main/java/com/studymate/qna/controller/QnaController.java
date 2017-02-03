@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,9 +20,9 @@ public class QnaController {
 	@Autowired
 	QnaServiceImpl qnaService;
 	
-	@RequestMapping("qnalist")
+	@RequestMapping("qnalist/{currentPage}")
 	public String list(HttpSession session, Model model, 
-			@RequestParam(defaultValue = "1") int currentPage, 
+			@PathVariable("currentPage") int currentPage, 
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
 		qnaService.list(session, model, currentPage, keyField, keyWord);
@@ -40,7 +41,7 @@ public class QnaController {
 			return "/qna/qnaWriteForm";
 
 		qnaService.write(qnaDto);
-		return "redirect:/qnalist";
+		return "redirect:/qnalist/1";
 	}
 	
 	@RequestMapping("qnaRead")
@@ -62,7 +63,7 @@ public class QnaController {
 	@RequestMapping(value = "qnaUpdate", method = RequestMethod.POST)
 	public String update(Model model ,QnaDto qnaDto, int boqNum, int currentPage) {
 		qnaService.update(model, qnaDto);
-		return "redirect:/qnaRead?boqNum=" + boqNum + "&currentPage=" + currentPage + "&update=yes";
+		return "redirect:/qnaRead/" + currentPage + "-"  + boqNum + "?update=y";
 	}
 	
 	@RequestMapping(value = "qnaDelete", method = RequestMethod.GET)
@@ -90,6 +91,6 @@ public class QnaController {
 			return "/qna/qnaCommentForm";
 
 		qnaService.writeComment(qnaDto);
-		return "redirect:/qnalist";
+		return "redirect:/qnalist/1";
 	}
 }

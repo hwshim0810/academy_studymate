@@ -43,7 +43,7 @@ public class RoomServiceImpl extends CommonServiceUtil implements ServiceInterfa
 		model.addAttribute("keyField", keyField);
 		model.addAttribute("keyWord", keyWord);
 		
-		session.setAttribute("page", "roomList");
+		session.setAttribute("page", "roomList/1");
 		return model;
 	}
 
@@ -64,7 +64,7 @@ public class RoomServiceImpl extends CommonServiceUtil implements ServiceInterfa
 
 	@Override// 상세읽기 : 조회수는 update로 오지않았을경우만
 	public Model read(Model model, int borNum, int currentPage, String update, String keyField, String keyWord) {
-		if (update.equals("no"))
+		if (update.equals("n"))
 			roomDao.updateReadCount(borNum);
 		
 		model.addAttribute("roomDto", roomDao.read(borNum));

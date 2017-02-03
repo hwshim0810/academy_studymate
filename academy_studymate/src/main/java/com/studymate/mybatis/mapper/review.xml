@@ -3,7 +3,10 @@
               "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
               
 <mapper namespace="com.studymate.review.model.ReviewDao">
-
+	
+	<sql id="columns"> borvNum, borvTitle, borvContent, borvReplycount, borvReadcount, borvRegdate, memName, memId </sql>
+	<sql id="replyColumns"> repNum, repContent, borvNum, repRegdate, memName, memId </sql>
+	
 	<sql id="search">
 		<where>
 			<if test="keyWord!=null and keyWord!=''">
@@ -25,19 +28,19 @@
 	</select>
 	
 	<select id="list" resultType="ReviewDto" parameterType="java.util.HashMap">
-		SELECT borvNum, borvTitle, borvContent, borvReplycount, borvReadcount, borvRegdate, memName, memId 
-		FROM( SELECT ROWNUM num, borvNum, borvTitle, borvContent, borvReplycount, borvReadcount, borvRegdate, memName, memId 
-			FROM ( SELECT borvNum, borvTitle, borvContent, borvReplycount, borvReadcount, borvRegdate, memName, memId FROM review 
+		SELECT <include refid="columns" /> 
+		FROM( SELECT ROWNUM num, <include refid="columns" /> 
+			FROM ( SELECT <include refid="columns" /> FROM review 
 			<include refid="search" /> 
 				ORDER BY borvRegdate DESC ) ) WHERE num between #{startRow} and #{endRow}
 	</select>
 	
 	<select id="read" resultType="ReviewDto"  parameterType="Integer">
-		SELECT borvNum, borvTitle, borvContent, borvReplycount, borvReadcount, borvRegdate, memName, memId FROM review WHERE borvNum = #{borvNum}
+		SELECT <include refid="columns" /> FROM review WHERE borvNum = #{borvNum}
 	</select>
 	
 	<select id="readReply" resultType="ReviewReplyDto" parameterType="Integer" >
-		SELECT repNum, repContent, borvNum, repRegdate, memName, memId FROM rvreply WHERE borvNum = #{borvNum} 
+		SELECT <include refid="replyColumns" /> FROM rvreply WHERE borvNum = #{borvNum} 
 	</select>
 	
 	<select id="readPrev" resultType="ReviewDto"  parameterType="Integer">

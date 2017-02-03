@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,9 +21,9 @@ public class ReviewController {
 	@Autowired
 	ReviewServiceImpl reviewService;
 	
-	@RequestMapping("reviewList")
+	@RequestMapping("reviewList/{currentPage}")
 	public String list(HttpSession session, Model model, 
-			@RequestParam(defaultValue = "1") int currentPage, 
+			@PathVariable("currentPage") int currentPage, 
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
 		reviewService.list(session, model, currentPage, keyField, keyWord);
@@ -41,11 +42,13 @@ public class ReviewController {
 			return "/review/reviewWriteForm";
 
 		reviewService.write(reviewDto);
-		return "redirect:/reviewList";
+		return "redirect:/reviewList/1";
 	}
 	
-	@RequestMapping("reviewRead")
-	public String read(Model model, int borvNum, int currentPage, String update,
+	@RequestMapping("reviewRead/{currentPage}-{borvNum}")
+	public String read(Model model, 
+			@PathVariable("borvNum") int borvNum, 
+			@PathVariable("currentPage") int currentPage, String update,
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
 		reviewService.read(model, borvNum, currentPage, update, keyField, keyWord);
@@ -66,7 +69,7 @@ public class ReviewController {
 			return "/review/reviewUpdateForm";
 		
 		reviewService.update(model, reviewDto);
-		return "redirect:/reviewRead?borvNum=" + borvNum + "&currentPage=" + currentPage + "&update=yes";
+		return "redirect:/reviewRead/" + currentPage + "-" + borvNum  +"?update=y";
 	}
 	
 	@RequestMapping(value = "reviewDelete", method = RequestMethod.GET)
@@ -89,7 +92,7 @@ public class ReviewController {
 			return "/review/reviewRead";
 
 		reviewService.writeReply(replyDto);
-		return "redirect:/reviewRead?borvNum=" + borvNum + "&currentPage=" + currentPage + "&update=" + update;
+		return "redirect:/reviewRead/" + currentPage + "-" + borvNum  +"?update=" + update;
 	}
 	
 	@RequestMapping("revReplyDelete")
@@ -98,6 +101,6 @@ public class ReviewController {
 			@RequestParam(required = false) String keyWord) {
 		
 		reviewService.deleteReply(borvNum, repNum);
-		return "redirect:/reviewRead?borvNum=" + borvNum + "&currentPage=" + currentPage + "&update=yes";
+		return "redirect:/reviewRead/" + currentPage + "-" + borvNum  +"?update=y";
 	}
 }

@@ -3,15 +3,13 @@
               "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
               
 <mapper namespace="com.studymate.reserve.model.ReserveDao">
-
+	<sql id="columns"> resNum, resDate, resTime, resRegdate, borNum, memId </sql>
+	
 	<sql id="search">
 		<where>
 			<if test="keyWord!=null and keyWord!=''">
-				<if test="keyField=='titleNcontent'">
-					bonContent LIKE '%'||#{keyWord}||'%' or boqTitle LIKE '%'||#{keyWord}||'%' 
-				</if>
-				<if test="keyField=='title'">
-					bonTitle LIKE '%'||#{keyWord}||'%' 
+				<if test="keyField=='memId'">
+					memId LIKE '%'||#{keyWord}||'%' 
 				</if>
 				<if test="keyField=='content'">
 					bonContent like '%${keyWord}%' 
@@ -19,17 +17,17 @@
 			</if>
 		</where>
 	</sql>
-
+	
 	<select id="totalcount" resultType="Integer" >
-		SELECT count(*) FROM notice <include refid="search" />
+		SELECT count(*) FROM reserve <include refid="search" />
 	</select>
 	
-	<select id="list" resultType="NoticeDto" parameterType="java.util.HashMap">
-		SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate   
-		FROM( SELECT ROWNUM num, bonNum, bonTitle, bonContent, bonReadcount, bonRegdate  
-			FROM ( SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate FROM notice 
+	<select id="list" resultType="ReserveDto" parameterType="java.util.HashMap">
+		SELECT <include refid="columns" />   
+		FROM( SELECT ROWNUM num, <include refid="columns" />  
+			FROM ( SELECT <include refid="columns" /> FROM reserve 
 			<include refid="search" /> 
-				ORDER BY bonRegdate DESC ) ) WHERE num between #{startRow} and #{endRow}
+				ORDER BY resRegdate DESC ) ) WHERE num between #{startRow} and #{endRow}
 	</select>
 	
 	<select id="read" resultType="NoticeDto"  parameterType="Integer">

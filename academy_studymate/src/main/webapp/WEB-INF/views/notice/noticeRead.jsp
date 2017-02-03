@@ -45,10 +45,7 @@ function member_delete(){
 				<c:otherwise>
 				</c:otherwise>
 			</c:choose>-->
-			<c:url value="/noticelist" var="listUrl">
-				<c:param name="bonNum" value="${item.bonNum}" />
-				<c:param name="currentPage" value="${currentPage}" />
-				<c:param name="update" value="no" />
+			<c:url value="/noticelist/${currentPage}" var="listUrl">
 				<c:param name="keyField" value="${keyField}" />
 				<c:param name="keyWord" value="${keyWord}" />
 			</c:url>
