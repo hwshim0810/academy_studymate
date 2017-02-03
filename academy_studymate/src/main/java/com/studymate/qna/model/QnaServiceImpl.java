@@ -108,5 +108,11 @@ public class QnaServiceImpl extends CommonServiceUtil implements ServiceInterfac
 		qnaDto.setBoqSeq(qnaDto.getBoqSeq()+1);
 		qnaDao.write(qnaDto);
 	}
+	
+	@Override
+	public Model setCurrentPage(Model model, int currentPage) {
+		model.addAttribute("currentPage", currentPage);
+		return model;
+	}
 
 }

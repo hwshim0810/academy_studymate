@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.studymate.member.model.LoginDto;
 import com.studymate.member.model.MemberDto;
 import com.studymate.member.model.MemberService;
+import com.studymate.notice.model.NoticeDto;
 
 
 @Controller
@@ -91,17 +92,45 @@ public class MemberController {
 		return "/member/memberAdRead";
 	}
 	
-	@RequestMapping(value = "memberUpdate", method = RequestMethod.GET)
-	public String update(Model model, String memId, int currentPage,
+	@RequestMapping(value = "memberUpdate/{currentPage}-{memId}", method = RequestMethod.GET)
+	public String update(Model model, 
+			@PathVariable("currentPage") int currentPage,
+			@PathVariable("memId") String memId, 
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
 		memberService.read(model, memId, currentPage, keyField, keyWord);
 		return "/member/memberUpdateForm";
 	}
 	
-	@RequestMapping(value = "memberUpdate", method = RequestMethod.POST)
-	public String update(Model model ,MemberDto memDto, String memId, int currentPage) {
+	@RequestMapping(value = "memberUpdate/{currentPage}-{memId}", method = RequestMethod.POST)
+	public String update(Model model ,MemberDto memDto, 
+			@PathVariable("memId") String memId, 
+			@PathVariable("currentPage") int currentPage) {
 		memberService.update(model, memDto);
 		return "redirect:/memberRead/" + currentPage + "-" + memId;
+	}
+	
+	@RequestMapping(value = "memberDelete", method = RequestMethod.GET)
+	public String updateDelMem(MemberDto memDto) {
+		return "/member/memberDeleteForm";
+	}
+	
+	@RequestMapping(value = "memberDelete", method = RequestMethod.POST)
+	public String updateDelMem(HttpSession session, String memId) {
+		memberService.updateDelMem(memId);
+		memberService.logout(session);
+		return "redirect:/member/memberOutMsg";
+	}
+	
+	@RequestMapping(value = "memberRealDel/{currentPage}", method = RequestMethod.GET)
+	public String deleteMem(Model model, MemberDto memDto, @PathVariable("currentPage") int currentPage) {
+		memberService.setCurrentPage(model, currentPage);
+		return "/member/memberRealDelForm";
+	}
+	
+	@RequestMapping(value = "memberRealDel/{currentPage}", method = RequestMethod.POST)
+	public String deleteMem(String memId, @PathVariable("currentPage") int currentPage) {
+		memberService.deleteMem(memId);
+		return "redirect:/member/memberList/" + currentPage;
 	}
 }

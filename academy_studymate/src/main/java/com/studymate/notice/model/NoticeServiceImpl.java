@@ -77,4 +77,10 @@ public class NoticeServiceImpl extends CommonServiceUtil implements ServiceInter
 		return model;
 	}
 
+	@Override
+	public Model setCurrentPage(Model model, int currentPage) {
+		model.addAttribute("currentPage", currentPage);
+		return model;
+	}
+
 }

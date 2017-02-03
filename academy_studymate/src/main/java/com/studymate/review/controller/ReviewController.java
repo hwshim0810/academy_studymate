@@ -45,10 +45,11 @@ public class ReviewController {
 		return "redirect:/reviewList/1";
 	}
 	
-	@RequestMapping("reviewRead/{currentPage}-{borvNum}")
+	@RequestMapping("reviewRead/{currentPage}-{borvNum}-{update}")
 	public String read(Model model, 
 			@PathVariable("borvNum") int borvNum, 
-			@PathVariable("currentPage") int currentPage, String update,
+			@PathVariable("currentPage") int currentPage, 
+			@PathVariable("update") String update,
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
 		reviewService.read(model, borvNum, currentPage, update, keyField, keyWord);
@@ -72,35 +73,41 @@ public class ReviewController {
 		return "redirect:/reviewRead/" + currentPage + "-" + borvNum  +"?update=y";
 	}
 	
-	@RequestMapping(value = "reviewDelete", method = RequestMethod.GET)
-	public String delete(ReviewDto reviewDto) {
+	@RequestMapping(value = "reviewDelete/{currentPage}", method = RequestMethod.GET)
+	public String delete(Model model, ReviewDto reviewDto, @PathVariable("currentPage") int currentPage) {
+		reviewService.setCurrentPage(model, currentPage);
 		return "/review/reviewDeleteForm";
 	}
 	
-	@RequestMapping(value = "reviewDelete", method = RequestMethod.POST)
-	public String deleteHasReply(int borvNum, int currentPage) {
+	@RequestMapping(value = "reviewDelete/{currentPage}", method = RequestMethod.POST)
+	public String deleteHasReply(int borvNum, @PathVariable("currentPage") int currentPage) {
 		String result = reviewService.deleteHasReply(borvNum, currentPage);
 		return result;
 	}
 	
-	@RequestMapping(value = "revReplyWrite", method = RequestMethod.POST)
+	@RequestMapping(value = "reviewRead/revReplyWrite/{currentPage}-{update}", method = RequestMethod.POST)
 	public String writeReply(@Valid ReviewReplyDto replyDto, BindingResult result, 
-			int borvNum, int currentPage, String update,
+			int borvNum, 
+			@PathVariable("currentPage") int currentPage, 
+			@PathVariable("update") String update,
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
 		if (result.hasErrors())
 			return "/review/reviewRead";
 
 		reviewService.writeReply(replyDto);
-		return "redirect:/reviewRead/" + currentPage + "-" + borvNum  +"?update=" + update;
+		return "redirect:/reviewRead/" + currentPage + "-" + borvNum  + "-" + update + "?keyField=" + keyField + "&keyWord=" + keyWord;
 	}
 	
-	@RequestMapping("revReplyDelete")
-	public String deleteReply(int borvNum, int currentPage, int repNum, String update,
+	@RequestMapping("reviewRead/revReplyDelete/{currentPage}-{borvNum}-{repNum}-{update}")
+	public String deleteReply(@PathVariable("currentPage") int currentPage, 
+			@PathVariable("borvNum") int borvNum,  
+			@PathVariable("repNum") int repNum, 
+			@PathVariable("update") String update,
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
 		
 		reviewService.deleteReply(borvNum, repNum);
-		return "redirect:/reviewRead/" + currentPage + "-" + borvNum  +"?update=y";
+		return "redirect:/reviewRead/" + currentPage + "-" + borvNum  +"-" + update;
 	}
 }

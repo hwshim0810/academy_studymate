@@ -4,7 +4,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
 
-public interface MemberService {
+import com.studymate.common.ServiceInterface;
+
+public interface MemberService  {
 	public static final String GUESTLEVEL = "notMem";
 	public static final String WRONGPASS = "wrongPass";
 	
@@ -22,4 +24,9 @@ public interface MemberService {
 
 	Model update(Model model, MemberDto memDto);
 
+	void updateDelMem(String memId);
+
+	void deleteMem(String memId);
+	
+	Model setCurrentPage(Model model, int currentPage);
 }

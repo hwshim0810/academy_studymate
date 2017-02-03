@@ -72,4 +72,8 @@
 		DELETE FROM notice WHERE bonNum = #{bonNum} 
 	</delete>
 	
+	<delete id="deleteMem" parameterType="String">
+		DELETE FROM reserve WHERE memId = #{memId} 
+	</delete>
+	
 </mapper>

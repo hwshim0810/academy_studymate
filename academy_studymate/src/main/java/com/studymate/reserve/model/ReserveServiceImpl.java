@@ -74,5 +74,11 @@ public class ReserveServiceImpl extends CommonServiceUtil implements ServiceInte
 		reserveDao.delete(resNum);
 		return model;
 	}
+	
+	@Override
+	public Model setCurrentPage(Model model, int currentPage) {
+		model.addAttribute("currentPage", currentPage);
+		return model;
+	}
 
 }

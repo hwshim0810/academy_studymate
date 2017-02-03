@@ -52,8 +52,12 @@
 		UPDATE member SET memPass = #{memPass}, memBirth = #{memBirth}, memAddr = #{memAddr}, memArea = #{memArea}, memEmail = #{memEmail} WHERE memId = #{memId}  
 	</update>
 	
-	<delete id="delete" parameterType="Integer">
-		DELETE FROM notice WHERE bon_num = #{bon_num} 
+	<update id="updateDelMem" parameterType="String">
+		UPDATE member SET memPass = '', memSex = '', memBirth = '', memAddr = '', memArea = '', memEmail = '', memSiteout = 'Y') WHERE memId = #{memId}  
+	</update>
+	
+	<delete id="deleteMem" parameterType="String">
+		DELETE FROM member WHERE memId = #{memId}
 	</delete>
 	
 </mapper>

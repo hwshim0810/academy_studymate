@@ -97,4 +97,9 @@ public class ReviewServiceImpl extends CommonServiceUtil implements ServiceInter
 		reviewDao.deleteReply(repNum);
 	}
 
+	@Override
+	public Model setCurrentPage(Model model, int currentPage) {
+		model.addAttribute("currentPage", currentPage);
+		return model;
+	}
 }

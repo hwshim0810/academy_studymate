@@ -68,8 +68,10 @@ public class NoticeController {
 		return "redirect:/noticeRead/" + currentPage + "-" + bonNum + "?update=y";
 	}
 	
-	@RequestMapping(value = "noticeDelete", method = RequestMethod.GET)
-	public String delete(NoticeDto noticeDto) {
+	@RequestMapping(value = "noticeDelete/{currentPage}", method = RequestMethod.GET)
+	public String delete(Model model, NoticeDto noticeDto, 
+			@PathVariable("currentPage") int currentPage) {
+		noticeService.setCurrentPage(model, currentPage);
 		return "/notice/noticeDeleteForm";
 	}
 	

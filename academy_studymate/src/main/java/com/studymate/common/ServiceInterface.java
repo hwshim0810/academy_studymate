@@ -14,4 +14,6 @@ public interface ServiceInterface {
 	Model update(Model model, Dto dto);
 
 	Model delete(Model model, int num);
+	
+	Model setCurrentPage(Model model, int currentPage);
 }

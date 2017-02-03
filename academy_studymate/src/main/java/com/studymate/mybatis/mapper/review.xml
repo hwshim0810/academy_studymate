@@ -97,5 +97,13 @@
 		DELETE FROM rvreply WHERE repNum = #{repNum} 
 	</delete>
 	
+	<delete id="deleteMem">
+		DELETE FROM review WHERE memId= #{memId} 
+	</delete>
+	
+	<delete id="deleteReplyMem" parameterType="String">
+		DELETE FROM rvreply WHERE memId = #{memId} 
+	</delete>
+	
 	
 </mapper>

@@ -40,7 +40,7 @@
 		<tr>
 			<td class="writer">				
 				<p>${comment.memName}
-					<br /><a href="revReplyDelete?borvNum=${reviewDto.borvNum}&currentPage=${currentPage}&repNum=${comment.repNum}&update=yes"><small>댓글 삭제</small></a>					
+					<br /><a href="revReplyDelete/${currentPage}-${reviewDto.borvNum}-${comment.repNum}-y"><small>댓글 삭제</small></a>					
 				</p>
 			</td>
 			<td class="content" align="left">
@@ -52,7 +52,9 @@
 		<tr>
 			<td class="writer"><strong>댓글 쓰기</strong></td>
 			<td class="content">
-				<form id="comfrm" action="revReplyWrite?currentPage=${currentPage}&update=yes" method="post">
+				<form id="comfrm" action="revReplyWrite/${currentPage}-y" method="post">
+					<input type="hidden" id="keyField" name="keyField" value="${param.keyField}">
+					<input type="hidden" id="keyWord" name="keyWord" value="${param.keyWord}">
 					<input type="hidden" id="memName" name="memName" value="운영자" />
 					<input type="hidden" id="memId" name="memId" value="admin" />
 					<input type="hidden" id="borvNum" name="borvNum" value="${reviewDto.borvNum}" />

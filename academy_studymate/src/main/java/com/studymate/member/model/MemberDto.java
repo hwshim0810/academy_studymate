@@ -2,7 +2,9 @@ package com.studymate.member.model;
 
 import java.sql.Date;
 
-public class MemberDto {
+import com.studymate.common.Dto;
+
+public class MemberDto extends Dto {
 	private String memId, memPass, memName, memSex, memBirth, memAddr, memArea, memEmail, memSiteout;
 	private Date memRegdate;
 	

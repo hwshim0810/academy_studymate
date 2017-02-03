@@ -12,11 +12,23 @@ import org.springframework.ui.Model;
 
 import com.studymate.common.CommonServiceUtil;
 import com.studymate.common.Dto;
+import com.studymate.find.model.FindDao;
+import com.studymate.notice.model.NoticeDao;
+import com.studymate.reserve.model.ReserveDao;
+import com.studymate.review.model.ReviewDao;
 
 @Service
 public class MemberServiceImpl extends CommonServiceUtil implements MemberService {
 	@Autowired
 	MemberDao memDao;
+	@Autowired
+	NoticeDao noticeDao;
+	@Autowired
+	ReserveDao resDao;
+	@Autowired
+	ReviewDao reviewDao;
+	@Autowired
+	FindDao findDao;
 	
 	@Override
 	public String login(HttpSession session, LoginDto loginDto) {
@@ -29,18 +41,23 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 		
 		String id = memDto.getMemId();
 		String pass = memDto.getMemPass();
+		String siteOut = memDto.getMemSiteout();
 		
 		if (id.equals("admin") && pass.equals(memPass)) {
 			session.setAttribute("memId", id);
 			session.setAttribute("memName", memDto.getMemName());
 			return (String) session.getAttribute("page");
 			
-		} else if (pass.equals(memPass)) {
+		} else if (pass.equals(memPass) && siteOut.equals("N")) {
 			session.setAttribute("memId", id);
 			session.setAttribute("memName", memDto.getMemName());			
 			return (String) session.getAttribute("page");
 			
-		} else return WRONGPASS;
+		} else if  (siteOut.equals("Y")) {
+			return GUESTLEVEL;
+		} else {
+			return WRONGPASS;
+		}
 		
 	}
 
@@ -101,6 +118,27 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 	@Override
 	public Model update(Model model, MemberDto memDto) {
 		memDao.update(memDto);
+		return model;
+	}
+
+	@Override
+	public void updateDelMem(String memId) {
+		memDao.updateDelMem(memId);
+	}
+
+	public void deleteMem(String memId) {
+		noticeDao.deleteMem(memId);
+		resDao.deleteMem(memId);
+		reviewDao.deleteReplyMem(memId);
+		reviewDao.deleteMem(memId);
+		findDao.deleteMem(memId);
+		
+		memDao.deleteMem(memId);
+	}
+
+	@Override
+	public Model setCurrentPage(Model model, int currentPage) {
+		model.addAttribute("currentPage", currentPage);
 		return model;
 	}
 

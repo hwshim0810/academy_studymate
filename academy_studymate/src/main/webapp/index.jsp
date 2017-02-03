@@ -11,9 +11,9 @@
 	<div align="center">
 		<h1>인덱스 페이지</h1>
 		<a href='noticelist/1'>공지</a>
-		<a href='qnalist'>Qna</a>
+		<a href='qnalist/1'>Qna</a>
 		<a href='roomList'>Room</a>
-		<a href="reviewList">Review</a>
+		<a href="reviewList/1">Review</a>
 	</div>
 </body>
 </html>

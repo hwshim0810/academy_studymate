@@ -36,8 +36,7 @@
 				</thead>
 				<tbody>
 					<c:forEach var="item" items="${reviewList}">
-						<c:url value="/reviewRead/${currentPage}-${item.borvNum}" var="readUrl">
-							<c:param name="update" value="n" />
+						<c:url value="/reviewRead/${currentPage}-${item.borvNum}-n" var="readUrl">
 							<c:param name="keyField" value="${keyField}" />
 							<c:param name="keyWord" value="${keyWord}" />
 						</c:url>

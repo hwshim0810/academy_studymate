@@ -10,10 +10,12 @@ public interface MemberDao extends Dao {
 
 	MemberDto isAbleId(String memId);
 
-	void updateReadCount(String memId);
-
 	MemberDto read(String memId);
 
-	void update(MemberDto memDto);
+	void updateReadCount(String memId);
+
+	void updateDelMem(String memId);
+
+	void deleteMem(String memId);
 
 }

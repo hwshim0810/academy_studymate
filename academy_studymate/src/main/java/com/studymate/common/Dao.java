@@ -24,6 +24,10 @@ public interface Dao {
 	public void update(Dto Dto);
 
 	public void delete(int bonNum);
+	
+	public void deleteMem(String memId);
+	
+	public void deleteReplyMem(String memId);
 
 	public void updateReadCount(int bonNum);
 	
