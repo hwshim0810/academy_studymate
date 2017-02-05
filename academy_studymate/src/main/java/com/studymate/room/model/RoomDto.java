@@ -6,10 +6,16 @@ import com.studymate.common.Dto;
 
 public class RoomDto extends Dto{
 	int borNum;
-	String borName, borAddr, borArea, borFilename;
+	String borName, borAddr, borArea, borFilename, borNewFilename;
 	int borPrice, borReadcount;
 	Date borRegdate;
 	
+	public String getBorNewFilename() {
+		return borNewFilename;
+	}
+	public void setBorNewFilename(String borNewFilename) {
+		this.borNewFilename = borNewFilename;
+	}
 	public int getBorNum() {
 		return borNum;
 	}

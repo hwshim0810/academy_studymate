@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.studymate.common.CommonServiceUtil;
 import com.studymate.common.Dto;
@@ -46,19 +47,26 @@ public class RoomServiceImpl extends CommonServiceUtil implements ServiceInterfa
 		session.setAttribute("page", "roomList/1");
 		return model;
 	}
-
-	public void write(Dto roomDto, MultipartFile file) {
+	
+	@Override // multipart때문에 미사용
+	public void write(Dto dto) {}
+	
+	public void write(MultipartHttpServletRequest request, Dto roomDto) {
+		MultipartFile file = request.getFile("file");
 		String uploadPath = "C:/Source/upload/"; //임시경로
 	    /*
 	    String uploadPath = request.getServletContext().getRealPath("upload");
 	    System.out.println("실제 파일 업로드 경로 : "+uploadPath);
 	    */
-		String fileName = file.getOriginalFilename();
+		String orginFileName = file.getOriginalFilename();
+		String newFileName = "";
 		
-		if (!(fileName.equals("")))
-			fileUpload(file, fileName, uploadPath);
+		if (!(orginFileName.equals("")))
+			newFileName = fileUpload(file, orginFileName, uploadPath);
 		
-		((RoomDto) roomDto).setBorFilename(fileName);
+		((RoomDto) roomDto).setBorFilename(orginFileName);
+		((RoomDto) roomDto).setBorNewFilename(newFileName);
+		
 		roomDao.write(roomDto);
 	}
 
@@ -82,11 +90,18 @@ public class RoomServiceImpl extends CommonServiceUtil implements ServiceInterfa
 
 	@Override
 	public Model delete(Model model, int borNum) {
+		String filePath = ((RoomDto) roomDao.read(borNum)).getBorNewFilename();
+		if (!(filePath.equals(""))) fileDelete(filePath);
+		
 		roomDao.delete(borNum);
+		
 		return model;
 	}
 
 	@Override
-	public void write(Dto dto) {}
+	public Model setCurrentPage(Model model, int currentPage) {
+		model.addAttribute("currentPage", currentPage);
+		return model;
+	}
 
 }

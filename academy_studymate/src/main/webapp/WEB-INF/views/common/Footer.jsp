@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Insert title here</title>
-	</head>
-	<body>
-		
-	</body>
-</html>
+<footer class="footer">
+	<div class="clearfix center_align pos_r">
+		<a class="top" href="#"></a>
+		<div class="copyright col-xs-12">
+			<p>(주)스터디메이트  대표이사 : 심현우</p>
+			<p>주소 : 서울특별시 강남구 그린아카데미</p>
+			<p>©STUDYMATE 2017 ALL RIGHTS RESERVED</p>
+		</div>
+	</div>
+</footer>

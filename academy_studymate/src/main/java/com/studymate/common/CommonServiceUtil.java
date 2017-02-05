@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,17 +18,28 @@ public class CommonServiceUtil {
 		return list;
 	}
 	
-	protected void fileUpload(MultipartFile file, String fileName, String uploadPath) {
-			File uploadFile = new File(uploadPath + fileName);
+	protected String fileUpload(MultipartFile file, String originFileName, String uploadPath) {
+			File uploadFile = new File(uploadPath + originFileName);
 			// 같은 파일 존재시
 			if(uploadFile.exists()){
-				fileName = new Date().getTime() + fileName;
-				uploadFile = new File(uploadPath + fileName);
+				originFileName = new Date().getTime() + originFileName;
+				uploadFile = new File(uploadPath + originFileName);
 			}
 			try {
 				file.transferTo(uploadFile);
 			} catch (Exception e) {
 				System.err.println("Upload Exception");
 			}
+			return uploadFile.getPath();
 	}
+	
+	protected void fileDelete(String filePath) {
+		File file = new File(filePath);
+		if (file.exists()) file.delete();
+	}
+	
+    protected String getRandomString(){
+        return UUID.randomUUID().toString().replaceAll("-", "");
+    }
+
 }

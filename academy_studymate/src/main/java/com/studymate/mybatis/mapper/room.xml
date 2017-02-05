@@ -3,75 +3,51 @@
               "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
               
 <mapper namespace="com.studymate.room.model.RoomDao">
-
+	<sql id="columns"> borNum, borName, borAddr, borArea, borFilename, borNewFilename, borPrice, borReadcount, borRegdate </sql>
+	
 	<sql id="search">
 		<where>
 			<if test="keyWord!=null and keyWord!=''">
-				<if test="keyField=='titleNcontent'">
-					bonContent LIKE '%'||#{keyWord}||'%' or boqTitle LIKE '%'||#{keyWord}||'%' 
+				<if test="keyField=='name'">
+					borName LIKE '%'||#{keyWord}||'%' 
 				</if>
-				<if test="keyField=='title'">
-					bonTitle LIKE '%'||#{keyWord}||'%' 
-				</if>
-				<if test="keyField=='content'">
-					bonContent like '%${keyWord}%' 
+				<if test="keyField=='addr'">
+					bonAddr LIKE '%'||#{keyWord}||'%' or boqArea LIKE '%'||#{keyWord}||'%'  
 				</if>
 			</if>
 		</where>
 	</sql>
 
 	<select id="totalcount" resultType="Integer" >
-		SELECT count(*) FROM notice <include refid="search" />
+		SELECT count(*) FROM room <include refid="search" />
 	</select>
 	
-	<select id="list" resultType="NoticeDto" parameterType="java.util.HashMap">
-		SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate   
-		FROM( SELECT ROWNUM num, bonNum, bonTitle, bonContent, bonReadcount, bonRegdate  
-			FROM ( SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate FROM notice 
+	<select id="list" resultType="RoomDto" parameterType="java.util.HashMap">
+		SELECT <include refid="columns" />   
+		FROM( SELECT ROWNUM num, <include refid="columns" />  
+			FROM ( SELECT <include refid="columns" /> FROM room 
 			<include refid="search" /> 
-				ORDER BY bonRegdate DESC ) ) WHERE num between #{startRow} and #{endRow}
+				ORDER BY borRegdate DESC ) ) WHERE num between #{startRow} and #{endRow}
 	</select>
 	
-	<select id="read" resultType="NoticeDto"  parameterType="Integer">
-		SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate FROM notice WHERE bonNum = #{bonNum}
+	<select id="read" resultType="RoomDto"  parameterType="Integer">
+		SELECT <include refid="columns" /> FROM room WHERE borNum = #{borNum}
 	</select>
 	
-	<select id="readPrev" resultType="NoticeDto"  parameterType="Integer">
-		<![CDATA[
-        SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate 
-          FROM (
-	                SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate FROM notice 
-	                WHERE bonNum > #{bonNum}  
-	                ORDER BY bonNum ASC 
-               ) WHERE ROWNUM = 1
-         ]]>
-	</select>
-	
-	<select id="readNext" resultType="NoticeDto"  parameterType="Integer">
-		<![CDATA[
-        SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate 
-          FROM (
-	                SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate FROM notice 
-	                WHERE bonNum < #{bonNum}  
-	                ORDER BY bonNum ASC 
-               ) WHERE ROWNUM = 1
-         ]]>
-	</select>
-	
-	<insert id="write"  parameterType="NoticeDto">
-		INSERT INTO notice VALUES (	bonNum.nextval, #{bonTitle}, #{bonContent}, 0, sysdate)
+	<insert id="write"  parameterType="RoomDto">
+		INSERT INTO room VALUES (	borNum.nextval, 'borName', 'addr', 'area', #{borFilename}, #{borNewFilename}, 0, 0, sysdate) 
 	</insert>
 	
-	<update id="update" parameterType="NoticeDto">
-		UPDATE notice SET bonTitle = #{bonTitle}, bonContent = #{bonContent} WHERE bonNum = #{bonNum}  
+	<update id="update" parameterType="RoomDto">
+		UPDATE room SET borName = #{borName}, borAddr = #{borAddr}, borArea = #{borArea}, borPrice = #{borPrice} WHERE borNum = #{borNum}  
 	</update>
 	
 	<update id="updateReadCount" parameterType="Integer">
-		UPDATE notice SET bonReadcount = bonReadcount+1 WHERE bonNum = #{bonNum} 
+		UPDATE room SET borReadcount = borReadcount+1 WHERE borNum = #{borNum} 
 	</update>
 	
 	<delete id="delete" parameterType="Integer">
-		DELETE FROM notice WHERE bonNum = #{bonNum} 
+		DELETE FROM room WHERE borNum = #{borNum} 
 	</delete>
 	
 </mapper>

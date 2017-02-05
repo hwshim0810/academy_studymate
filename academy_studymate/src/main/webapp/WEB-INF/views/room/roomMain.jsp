@@ -4,12 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@include file="../common/Head.jsp" %>
+<meta charset="UTF-8" />
 <title>bbs</title>
 </head>
 <body>
-<%@include file="../common/Header.jsp" %>
-	<div class="body center_align">
+	<div style="margin:auto; width:700px;">
 		<!-- <div style="text-align:right;">
 			<c:if test="${id==null}">
 				<form action="/bbs/login.bbs">
@@ -24,7 +23,7 @@
 			</c:if>
 		</div> -->
 		<br>
-		<div>
+		<div style="margin:auto; width:700px;">
 			<table border="1" width="100%">
 				<thead>
 					<tr>
@@ -36,18 +35,18 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="item" items="${noticeList}">
-						<c:url value="/noticeRead/${currentPage}-${item.bonNum}" var="readUrl">
-							<c:param name="update" value="n" />
+					<c:forEach var="item" items="${roomList}">
+						<c:url value="/roomRead/${currentPage}-${item.borNum}" var="readUrl">
 							<c:param name="keyField" value="${keyField}" />
 							<c:param name="keyWord" value="${keyWord}" />
+							<c:param name="update" value="n" />
 						</c:url>
 						<tr>
-							<td>${item.bonNum}</td>
-							<td><a href="${readUrl}">${item.bonTitle}</a></td>
+							<td>${item.borNum}</td>
+							<td><a href="${readUrl}">${item.borName}</a></td>
 							<td></td>
-							<td>${item.bonRegdate}</td>
-							<td>${item.bonReadcount}</td>
+							<td>${item.borRegdate}</td>
+							<td>${item.borReadcount}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -57,10 +56,9 @@
 					</tr>
 				</tfoot>
 			</table>
-			<button onclick="location.href='noticeWrite'">글쓰기</button>
-			<button onclick="location.href='noticelist'">전체글</button>
+			<button onclick="location.href='<%=request.getContextPath()%>/roomWrite">글쓰기</button>
+			<button onclick="location.href='roomList'">전체글</button>
 		</div>
 	</div>
-	<%@include file="../common/Footer.jsp" %>
 </body>
 </html>

@@ -77,4 +77,10 @@ public class FindServiceImpl extends CommonServiceUtil implements ServiceInterfa
 		return model;
 	}
 
+	@Override
+	public Model setCurrentPage(Model model, int currentPage) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

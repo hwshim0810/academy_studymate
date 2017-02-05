@@ -23,6 +23,11 @@
 	
 	<beans:bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
 	
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
+		<beans:property name="maxUploadSize" value="100000000" />
+		<beans:property name="maxInMemorySize" value="100000000" />
+	</beans:bean>
+	
 	<context:component-scan base-package="com.studymate.*" />
 	
 	<beans:bean id="noticeDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
