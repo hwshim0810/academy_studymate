@@ -20,7 +20,7 @@ public class QnaController {
 	@Autowired
 	QnaServiceImpl qnaService;
 	
-	@RequestMapping("qnalist/{currentPage}")
+	@RequestMapping("qnaList/{currentPage}")
 	public String list(HttpSession session, Model model, 
 			@PathVariable("currentPage") int currentPage, 
 			@RequestParam(required = false) String keyField, 
@@ -41,58 +41,66 @@ public class QnaController {
 			return "/qna/qnaWriteForm";
 
 		qnaService.write(qnaDto);
-		return "redirect:/qnalist/1";
+		return "redirect:/qnaList/1";
 	}
 	
-	@RequestMapping("qnaRead")
-	public String read(Model model, int bonNum, int currentPage, String update,
+	@RequestMapping("qnaRead/{currentPage}-{boqNum}")
+	public String read(Model model, 
+			@PathVariable("boqNum") int boqNum, 
+			@PathVariable("currentPage") int currentPage, String update,
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
-		qnaService.read(model, bonNum, currentPage, update, keyField, keyWord);
+		qnaService.read(model, boqNum, currentPage, update, keyField, keyWord);
 		return "/qna/qnaRead";
 	}
 	
-	@RequestMapping(value = "qnaUpdate", method = RequestMethod.GET)
-	public String update(Model model, int boqNum, int currentPage, String update,
+	@RequestMapping(value = "qnaUpdate/{currentPage}-{boqNum}", method = RequestMethod.GET)
+	public String update(Model model, 
+			@PathVariable("boqNum") int boqNum, 
+			@PathVariable("currentPage") int currentPage, String update,
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
 		qnaService.read(model, boqNum, currentPage, update, keyField, keyWord);
 		return "/qna/qnaUpdateForm";
 	}
 	
-	@RequestMapping(value = "qnaUpdate", method = RequestMethod.POST)
-	public String update(Model model ,QnaDto qnaDto, int boqNum, int currentPage) {
+	@RequestMapping(value = "qnaUpdate/{currentPage}-{boqNum}", method = RequestMethod.POST)
+	public String update(Model model ,@Valid QnaDto qnaDto, 
+			@PathVariable("boqNum") int boqNum, 
+			@PathVariable("currentPage") int currentPage, BindingResult result) {
 		qnaService.update(model, qnaDto);
 		return "redirect:/qnaRead/" + currentPage + "-"  + boqNum + "?update=y";
 	}
 	
-	@RequestMapping(value = "qnaDelete/{currentPage}", method = RequestMethod.GET)
-	public String delete(Model model, QnaDto qnaDto, @PathVariable("currentPage") int currentPage) {
+	@RequestMapping(value = "qnaDelete", method = RequestMethod.GET)
+	public String delete(Model model, QnaDto qnaDto, int currentPage) {
 		qnaService.setCurrentPage(model, currentPage);
 		return "/qna/qnaDeleteForm";
 	}
 	
-	@RequestMapping(value = "qnaDelete/{currentPage}", method = RequestMethod.POST)
-	public String deleteQna(Model model, int boqGroupnum, int boqNum, 
-			@PathVariable("currentPage") int currentPage) {
+	@RequestMapping(value = "qnaDelete", method = RequestMethod.POST)
+	public String deleteQna(Model model, int boqGroupnum, int boqNum, int currentPage) {
 		String page = qnaService.deleteQna(model, boqGroupnum, boqNum, currentPage);
 		return page;
 	}
 	
-	@RequestMapping(value = "qnaComment", method = RequestMethod.GET)
-	public String writeComment(Model model, int boqNum, int currentPage, String update,
+	@RequestMapping(value = "qnaComment/{currentPage}-{boqNum}", method = RequestMethod.GET)
+	public String writeComment(Model model,
+			@PathVariable("boqNum") int boqNum, 
+			@PathVariable("currentPage") int currentPage, String update,
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
 		qnaService.read(model, boqNum, currentPage, update, keyField, keyWord);
 		return "/qna/qnaCommentForm";
 	}
 	
-	@RequestMapping(value = "qnaComment", method = RequestMethod.POST)
-	public String writeComment(@Valid QnaDto qnaDto, BindingResult result) {
+	@RequestMapping(value = "qnaComment/{currentPage}", method = RequestMethod.POST)
+	public String writeComment(@Valid QnaDto qnaDto, BindingResult result, 
+			@PathVariable("currentPage") int currentPage) {
 		if (result.hasErrors())
 			return "/qna/qnaCommentForm";
 
 		qnaService.writeComment(qnaDto);
-		return "redirect:/qnalist/1";
+		return "redirect:/qnaList/" + currentPage;
 	}
 }

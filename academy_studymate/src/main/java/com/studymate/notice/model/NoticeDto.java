@@ -12,7 +12,6 @@ public class NoticeDto extends Dto {
 	int bonNum;
 	@NotEmpty @Size(min=5, message="제목은 최소 5글자 이상입니다.")
 	String bonTitle;
-	@NotEmpty @Size(min=5, message="내용은 최소 5글자 이상입니다.")
 	String bonContent;
 	int bonReadcount;
 	Date bonRegdate;

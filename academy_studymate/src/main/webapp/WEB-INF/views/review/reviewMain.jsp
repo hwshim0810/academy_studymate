@@ -1,51 +1,51 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8" />
-<title>bbs</title>
-</head>
-<body>
-	<div style="margin:auto; width:700px;">
-		<!-- <div style="text-align:right;">
-			<c:if test="${id==null}">
-				<form action="/bbs/login.bbs">
-					<input type="text" name="userName" placeholder="name">
-					<input type="password" name="password" placeholder="pass">
-					<input type="submit" value="Login">
-				</form>
-			</c:if>
-			<c:if test="${id!=null}">
-					${id}
-					<button onclick="location.href='/bbs/index.bbs'">로그아웃</button>
-			</c:if>
-		</div> -->
-		<br>
-		<div style="margin:auto; width:700px;">
-			<table border="1" width="100%">
+	<head>
+		<%@include file="../common/Head.jsp" %>
+	</head>
+	<body>
+		<%@include file="../common/Header.jsp" %>
+		<div class="body_top">
+		</div>
+		<div class="body center_align">
+			<%@include file="../common/BoardSubnav.jsp" %>
+			<div class="boardtitle lottemartdream"></div>
+			<div class="pull-left count">
+				<span>총 ${totalCount}건 ${currentPage}페이지</span>
+			</div>
+			<div class="pull-right">
+				<ol class="breadcrumb">
+				  <li><a href="/studymate">Home</a></li>
+				  <li class="active">방문후기</li>
+				</ol>
+			</div>
+			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th width="10%">글 번호</th>
-						<th width="30%">글 제목</th>
-						<th width="20%">리플수</th>
-						<th width="30%">글 적은 날</th>
-						<th width="10%">조회수</th>
+						<th class="hidden-xs hidden-sm">번호</th>
+						<th>제목</th>
+						<th>글쓴이</th>
+						<th>작성일</th>
+						<th class="hidden-xs hidden-sm">조회</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="item" items="${reviewList}">
-						<c:url value="/reviewRead/${currentPage}-${item.borvNum}-n" var="readUrl">
-							<c:param name="keyField" value="${keyField}" />
-							<c:param name="keyWord" value="${keyWord}" />
+						<c:url value="/reviewRead/${currentPage}-${item.borvNum}" var="readUrl">
+							<c:param name="update" value="n" />
+							<c:if test="${not empty keyField && not empty keyWord}">
+								<c:param name="keyField" value="${keyField}" />
+								<c:param name="keyWord" value="${keyWord}" />
+							</c:if>
 						</c:url>
 						<tr>
-							<td>${item.borvNum}</td>
-							<td><a href="${readUrl}">${item.borvTitle}</a></td>
-							<td>${item.borvReplycount}</td>
-							<td>${item.borvRegdate}</td>
-							<td>${item.borvReadcount}</td>
+							<td class="hidden-xs hidden-sm table_center">${item.borvNum}</td>
+							<td class="table_center"><a href="${readUrl}">${item.borvTitle}</a></td>
+							<td class="table_center">${item.memName}</td>
+							<td class="table_center">${item.borvRegdate}</td>
+							<td class="hidden-xs hidden-sm table_center">${item.borvReadcount}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -55,9 +55,20 @@
 					</tr>
 				</tfoot>
 			</table>
-			<button onclick="location.href='reviewWrite'">글쓰기</button>
-			<button onclick="location.href='reviewList'">전체글</button>
+			<%@include file="../common/BoardSearch.jsp" %>
+			<br>
+			<div class="btndiv">
+				<div class="pull-right">
+					<button class="btn btn-success btn-font" id="btnwrite">글쓰기</button>
+				</div>
+				<div class="pull-left">
+					<button class="btn btn-primary btn-font" id="btnlist">목록</button>
+				</div>
+			</div>
 		</div>
-	</div>
-</body>
+		<input type="hidden" id="boardtitle" value="방문후기">
+		<input type="hidden" id="boardid" value="review">
+		<%@include file="../common/Footer.jsp" %>
+		<%@include file="../common/Board.jsp" %>
+	</body>
 </html>

@@ -20,7 +20,7 @@ public class NoticeController {
 	@Autowired
 	NoticeServiceImpl noticeService;
 	
-	@RequestMapping("noticelist/{currentPage}")
+	@RequestMapping("noticeList/{currentPage}")
 	public String list(HttpSession session, Model model, 
 			@PathVariable("currentPage") int currentPage, 
 			@RequestParam(required = false) String keyField, 
@@ -29,19 +29,19 @@ public class NoticeController {
 		return "/notice/noticeMain";
 	}
 	
-	@RequestMapping(value = "noticelist/noticeWrite", method = RequestMethod.GET)
+	@RequestMapping(value = "noticeWrite", method = RequestMethod.GET)
 	public String write(Model model) {
 		model.addAttribute("noticeDto", new NoticeDto());
 		return "/notice/noticeWriteForm";
 	}
 	
-	@RequestMapping(value = "noticelist/noticeWrite", method = RequestMethod.POST)
+	@RequestMapping(value = "noticeWrite", method = RequestMethod.POST)
 	public String write(@Valid NoticeDto noticeDto, BindingResult result) {
 		if (result.hasErrors())
 			return "/notice/noticeWriteForm";
 
 		noticeService.write(noticeDto);
-		return "redirect:/noticelist/1";
+		return "redirect:/noticeList/1";
 	}
 	
 	@RequestMapping("noticeRead/{currentPage}-{bonNum}")
@@ -54,31 +54,33 @@ public class NoticeController {
 		return "/notice/noticeRead";
 	}
 	
-	@RequestMapping(value = "noticeUpdate", method = RequestMethod.GET)
-	public String update(Model model, int bonNum, int currentPage, String update,
+	@RequestMapping(value = "noticeUpdate/{currentPage}-{bonNum}", method = RequestMethod.GET)
+	public String update(Model model, 
+			@PathVariable("bonNum") int bonNum, 
+			@PathVariable("currentPage") int currentPage, String update,
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
 		noticeService.read(model, bonNum, currentPage, update, keyField, keyWord);
 		return "/notice/noticeUpdateForm";
 	}
 	
-	@RequestMapping(value = "noticeUpdate", method = RequestMethod.POST)
-	public String update(Model model ,NoticeDto noticeDto, int bonNum, int currentPage) {
+	@RequestMapping(value = "noticeUpdate/{currentPage}", method = RequestMethod.POST)
+	public String update(Model model ,NoticeDto noticeDto, int bonNum, 
+			@PathVariable("currentPage") int currentPage) {
 		noticeService.update(model, noticeDto);
 		return "redirect:/noticeRead/" + currentPage + "-" + bonNum + "?update=y";
 	}
 	
-	@RequestMapping(value = "noticeDelete/{currentPage}", method = RequestMethod.GET)
-	public String delete(Model model, NoticeDto noticeDto, 
-			@PathVariable("currentPage") int currentPage) {
+	@RequestMapping(value = "noticeDelete", method = RequestMethod.GET)
+	public String delete(Model model, NoticeDto noticeDto, int currentPage) {
 		noticeService.setCurrentPage(model, currentPage);
 		return "/notice/noticeDeleteForm";
 	}
 	
 	@RequestMapping(value = "noticeDelete", method = RequestMethod.POST)
-	public String delete(Model model, int bonNum, int currentPage) {
+	public String delete(Model model,  int bonNum, int currentPage) {
 		noticeService.delete(model, bonNum);
-		return "redirect:/noticelist/" + currentPage;
+		return "redirect:/noticeList/" + currentPage;
 	}
 	
 }

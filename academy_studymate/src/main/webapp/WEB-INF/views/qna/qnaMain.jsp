@@ -1,61 +1,58 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8" />
-<title>bbs</title>
-</head>
-<body>
-	<div style="margin:auto; width:700px;">
-		<!-- <div style="text-align:right;">
-			<c:if test="${id==null}">
-				<form action="/bbs/login.bbs">
-					<input type="text" name="userName" placeholder="name">
-					<input type="password" name="password" placeholder="pass">
-					<input type="submit" value="Login">
-				</form>
-			</c:if>
-			<c:if test="${id!=null}">
-					${id}
-					<button onclick="location.href='/bbs/index.bbs'">로그아웃</button>
-			</c:if>
-		</div> -->
-		<br>
-		<div style="margin:auto; width:700px;">
-			<table border="1" width="100%">
+	<head>
+		<%@include file="../common/Head.jsp" %>
+	</head>
+	<body>
+		<%@include file="../common/Header.jsp" %>
+		<div class="body_top">
+		</div>
+		<div class="body center_align">
+			<%@include file="../common/BoardSubnav.jsp" %>
+			<div class="boardtitle lottemartdream"></div>
+			<div class="pull-left count">
+				<span>총 ${totalCount}건 ${currentPage}페이지</span>
+			</div>
+			<div class="pull-right">
+				<ol class="breadcrumb">
+				  <li><a href="/studymate">Home</a></li>
+				  <li class="active">QnA</li>
+				</ol>
+			</div>
+			<table class="table table-hover">
 				<thead>
 					<tr>
-						<th width="10%">글 번호</th>
-						<th width="30%">글 제목</th>
-						<th width="20%">글 쓴이</th>
-						<th width="30%">글 적은 날</th>
-						<th width="10%">조회수</th>
+						<th class="hidden-xs hidden-sm">번호</th>
+						<th>제목</th>
+						<th>글쓴이</th>
+						<th>작성일</th>
+						<th class="hidden-xs hidden-sm">조회</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="item" items="${qnaList}">
-						<c:url value="/qnaRead" var="readUrl">
-							<c:param name="boqNum" value="${item.boqNum}" />
-							<c:param name="currentPage" value="${currentPage}" />
-							<c:param name="update" value="no" />
-							<c:param name="keyField" value="${keyField}" />
-							<c:param name="keyWord" value="${keyWord}" />
+						<c:url value="/qnaRead/${currentPage}-${item.boqNum}" var="readUrl">
+							<c:param name="update" value="n" />
+							<c:if test="${not empty keyField && not empty keyWord}">
+								<c:param name="keyField" value="${keyField}" />
+								<c:param name="keyWord" value="${keyWord}" />
+							</c:if>
 						</c:url>
 						<tr>
-							<td>${item.boqNum}</td>
+							<td class="hidden-xs hidden-sm table_center">${item.boqNum}</td>
 							<c:choose>
 								<c:when test="${item.boqLev > 0 }">
-								<td><a href="${readUrl}">답변 : ${item.boqTitle}</a></td>
+								<td class="table_center"><a href="${readUrl}">답변 : ${item.boqTitle}</a></td>
 								</c:when>
 								<c:otherwise>
-								<td><a href="${readUrl}">${item.boqTitle}</a></td>
+								<td class="table_center"><a href="${readUrl}">${item.boqTitle}</a></td>
 								</c:otherwise>
 							</c:choose>
-							<td></td>
-							<td>${item.boqRegdate}</td>
-							<td>${item.boqReadcount}</td>
+							<td class="table_center">${item.memName}</td>
+							<td class="table_center">${item.boqRegdate}</td>
+							<td class="hidden-xs hidden-sm table_center">${item.boqReadcount}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -65,9 +62,21 @@
 					</tr>
 				</tfoot>
 			</table>
-			<button onclick="location.href='qnaWrite'">글쓰기</button>
-			<button onclick="location.href='qnalist'">전체글</button>
+			<%@include file="../common/BoardSearch.jsp" %>
+			<br>
+			<!-- Button Area -->
+			<div class="btndiv">
+				<div class="pull-right">
+					<button class="btn btn-success btn-font" id="btnwrite">글쓰기</button>
+				</div>
+				<div class="pull-left">
+					<button class="btn btn-primary btn-font" id="btnlist">목록</button>
+				</div>
+			</div>
 		</div>
-	</div>
-</body>
+		<input type="hidden" id="boardtitle" value="QnA">
+		<input type="hidden" id="boardid" value="qna">
+		<%@include file="../common/Footer.jsp" %>
+		<%@include file="../common/Board.jsp" %>
+	</body>
 </html>

@@ -1,36 +1,57 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8"/>
-<title>writeForm</title>
-</head>
-<body>
-	<div style="margin:auto; width:300px; text-align:center;">
-		<form:form method="POST" commandName="qnaDto" action="qnaComment">
-			<div>
-				<label for="title">제목</label><br>
-				<input type="hidden"  value="${qnaDto.boqNum}">
-				<input type="hidden" name="boqGroupnum" value="${qnaDto.boqGroupnum}">
-				<form:input path="boqTitle" value="${qnaDto.boqTitle}" />
-				<form:errors path="boqTitle" />
-			</div>
-			<br>
-			<div>
-				<label for="boqContent">내용</label><br>
-				<form:textarea path="boqContent" value="${qnaDto.boqContent}" />
-			</div>
-			<br>
-			<input type="submit">
-
-		</form:form>
-	</div>
-	
-<script type="text/javascript">
-
-</script>
-</body>
+	<head>
+		<%@include file="../common/Head.jsp" %>
+	</head>
+	<body>
+		<%@include file="../common/Header.jsp" %>
+		<div class="body_top">
+		</div>
+		<div class="body center_align">
+			<div class="boardtitle lottemartdream"></div>
+				<div class="pull-right">
+					<ol class="breadcrumb">
+					  <li><a href="/studymate">Home</a></li>
+					  <li class="active">QnA</li>
+					</ol>
+				</div>
+			<form:form name = "updateform" action="/studymate/qnaComment/${currentPage}" method="post" commandName="qnaDto">
+				<table class="table">
+					<tr>
+						<td><label for="memName">작성자</label></td>
+						<td>${qnaDto.memName}</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td><label for="boqTitle">제목</label></td>
+						<td>${qnaDto.boqTitle}</td>
+						<td><input type="hidden" name="boqTitle" value="${qnaDto.boqTitle}"></td>
+					</tr>
+					<tr>
+						<td><label for="boqContent">내용</label></td>
+						<td><form:textarea cssClass="textcontent" path="boqContent" value="${qnaDto.boqContent}" /></td>
+						<td></td>
+					</tr>
+				</table>
+				<div class="btndiv">
+					<div class="pull-right">
+						<button class="btn btn-success btn-font" id="btnreg">등록</button>
+					</div>
+					<div class="pull-left">
+						<button class="btn btn-info btn-font" id="btnback">뒤로</button>
+						<button class="btn btn-primary btn-font" id="btnlist">목록</button>
+					</div>
+				</div>
+				<input type="hidden" name="boqNum" value="${qnaDto.boqNum}">
+			</form:form>
+		</div>
+		<input type="hidden" id="boardtitle" value="QnA">
+		<input type="hidden" id="boardid" value="qna">
+		<%@include file="../common/Footer.jsp" %>
+		<%@include file="../common/Board.jsp" %>
+		<script src="<c:url value='/resources/js/boardWrite/qnaWrite.js'/>" charset="utf-8"></script>
+	</body>
 </html>

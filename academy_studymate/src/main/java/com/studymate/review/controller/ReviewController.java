@@ -45,11 +45,10 @@ public class ReviewController {
 		return "redirect:/reviewList/1";
 	}
 	
-	@RequestMapping("reviewRead/{currentPage}-{borvNum}-{update}")
+	@RequestMapping("reviewRead/{currentPage}-{borvNum}")
 	public String read(Model model, 
 			@PathVariable("borvNum") int borvNum, 
-			@PathVariable("currentPage") int currentPage, 
-			@PathVariable("update") String update,
+			@PathVariable("currentPage") int currentPage, String update,
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
 		reviewService.read(model, borvNum, currentPage, update, keyField, keyWord);

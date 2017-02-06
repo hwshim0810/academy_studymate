@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.studymate.member.model.LoginDto;
 import com.studymate.member.model.MemberDto;
 import com.studymate.member.model.MemberService;
-import com.studymate.notice.model.NoticeDto;
 
 
 @Controller

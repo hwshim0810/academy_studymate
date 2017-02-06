@@ -25,8 +25,8 @@ public class NoticeServiceImpl extends CommonServiceUtil implements ServiceInter
 		map.put("keyWord", keyWord);
 		map.put("keyField", keyField);
 		
-		int blockCount = 5; 
-		int blockPage = 5;
+		int blockCount = 10; 
+		int blockPage = 10;
 		int totalCount = getTotalCount(noticeDao, map);
 		
 		NoticePaging noticePaging = new NoticePaging(currentPage, totalCount, blockCount, blockPage, keyField, keyWord);
@@ -36,13 +36,14 @@ public class NoticeServiceImpl extends CommonServiceUtil implements ServiceInter
 		
 		List<Dto> list = getList(noticeDao, map); 
 		
+		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("noticeList", list);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("pageHtml", noticePaging.getPagingHtml().toString());
 		model.addAttribute("keyField", keyField);
 		model.addAttribute("keyWord", keyWord);
 		
-		session.setAttribute("page", "noticelist/1");
+		session.setAttribute("page", "noticeList/1");
 		return model;
 	}
 

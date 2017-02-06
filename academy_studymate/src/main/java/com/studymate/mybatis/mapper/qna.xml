@@ -3,6 +3,7 @@
               "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
               
 <mapper namespace="com.studymate.qna.model.QnaDao">
+	<sql id="columns"> boqNum, boqTitle, boqContent, boqGroupnum, boqSeq, boqLev, boqRegdate, memName, memId </sql>
 
 	<sql id="search">
 		<where>
@@ -33,15 +34,15 @@
 	</select>
 	
 	<select id="list" resultType="QnaDto" parameterType="java.util.HashMap">
-		SELECT boqNum, boqTitle, boqContent, boqGroupnum, boqSeq, boqLev, boqRegdate, memName, memId 
-		FROM( SELECT ROWNUM num, boqNum, boqTitle, boqContent, boqGroupnum, boqSeq, boqLev, boqRegdate, memName, memId   
-			FROM ( SELECT boqNum, boqTitle, boqContent, boqGroupnum, boqSeq, boqLev, boqRegdate, memName, memId  FROM qna  
+		SELECT <include refid="columns" /> 
+		FROM( SELECT ROWNUM num, <include refid="columns" />   
+			FROM ( SELECT <include refid="columns" />  FROM qna  
 			<include refid="search" /> 
 				ORDER BY boqGroupnum DESC, boqSeq ASC ) ) WHERE num between #{startRow} and #{endRow}
 	</select>
 	
 	<select id="read" resultType="QnaDto"  parameterType="Integer">
-		SELECT boqNum, boqTitle, boqContent, boqGroupnum, boqSeq, boqLev, boqRegdate, memName, memId  FROM qna WHERE boqNum = #{bonNum}
+		SELECT <include refid="columns" />  FROM qna WHERE boqNum = #{bonNum}
 	</select>
 	
 	<select id="readPrev" resultType="QnaDto"  parameterType="Integer">
@@ -64,6 +65,14 @@
 	                ORDER BY boqNum ASC 
                ) WHERE ROWNUM = 1
          ]]>
+	</select>
+	
+	<select id="isComment" resultType="QnaDto"  parameterType="Integer">
+		SELECT <include refid="columns" />  FROM qna WHERE boqNum = #{bonNum} 
+	</select>
+	
+	<select id="hasComment" resultType="Integer">
+		SELECT count(*) FROM qna WHERE boqGroupnum = #{boqGroupnum} 
 	</select>
 	
 	<insert id="write"  parameterType="QnaDto">

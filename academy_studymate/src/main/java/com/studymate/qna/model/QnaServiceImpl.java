@@ -36,13 +36,14 @@ public class QnaServiceImpl extends CommonServiceUtil implements ServiceInterfac
 		
 		List<Dto> list = getList(qnaDao, map);
 
+		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("qnaList", list);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("pageHtml", qnaPaging.getPagingHtml().toString());
 		model.addAttribute("keyField", keyField);
 		model.addAttribute("keyWord", keyWord);
 		
-		session.setAttribute("page", "qnalist/1");
+		session.setAttribute("page", "qnaList/1");
 		return model;
 	}
 
@@ -88,7 +89,7 @@ public class QnaServiceImpl extends CommonServiceUtil implements ServiceInterfac
 		
 		if (qnaDto.getBoqSeq() > 0 || commentCount == 1) {
 			qnaDao.delete(boqNum);
-			return "redirect:/qnalist/" + currentPage;
+			return "redirect:/qnaList/" + currentPage;
 		}
 		else
 			return "redirect:/qna/deleteError";

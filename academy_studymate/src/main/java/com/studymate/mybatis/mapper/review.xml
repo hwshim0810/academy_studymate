@@ -19,6 +19,9 @@
 				<if test="keyField=='content'">
 					borvContent like '%${keyWord}%' 
 				</if>
+				<if test="keyField=='author'">
+					memName like '%${keyWord}%' 
+				</if>
 			</if>
 		</where>
 	</sql>

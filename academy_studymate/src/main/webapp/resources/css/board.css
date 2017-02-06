@@ -1,0 +1,56 @@
+.table_center {
+	text-align: center;
+}
+.subnav {
+	text-align: center;
+	padding: 30px 15px;
+}
+
+.block {
+	display: inline-block;
+}
+
+.count {
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.main {
+	min-height: 700px;
+    padding-top: 120px;
+    padding-left: 15px
+}
+
+.dtoinfo {
+	padding-bottom: 10px;
+    border-bottom: 1px solid;
+    padding-top: 10px;
+}
+
+.boardtitle {
+	margin-bottom: 30px;
+}
+
+.htag {
+	padding: 10px 10px;
+}
+
+.btndiv {
+	margin: 20px 0px;
+}
+
+@media screen and (max-width: 760px) {
+.textcontent {
+	min-width:320px;
+	}
+}
+@media screen and (min-width: 760px) {
+.areadiv {
+	left: 200px;
+	}
+
+.field {
+	padding-left: 0px;
+}
+}

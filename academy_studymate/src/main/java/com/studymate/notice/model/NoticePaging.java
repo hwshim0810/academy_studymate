@@ -39,9 +39,9 @@ public class NoticePaging {
 		// 이전 block 페이지
 		pagingHtml = new StringBuffer();
 		
-		if (keyWord == null || keyWord.equals("") || keyField.equals("all")) {
+		if (keyWord == null || keyWord.equals("")) {
 			if (currentPage > blockPage) {
-				pagingHtml.append("<a href='noticelist?currentPage=" + (startPage - 1) + "&keyField=&keyWord='>");
+				pagingHtml.append("<a href='/studymate/noticeList/" + (startPage - 1) + "'>");
 				pagingHtml.append("이전");
 				pagingHtml.append("</a>");
 			}
@@ -56,9 +56,9 @@ public class NoticePaging {
 					pagingHtml.append(i);
 					pagingHtml.append("</font></strong>");
 				} else {
-					pagingHtml.append("&nbsp;<a href='noticelist?currentPage=");
+					pagingHtml.append("&nbsp;<a href='/studymate/noticeList/");
 					pagingHtml.append(i);
-					pagingHtml.append("&keyField=&keyWord='>");
+					pagingHtml.append("'>");
 					pagingHtml.append(i);
 					pagingHtml.append("</a>");
 				}
@@ -67,13 +67,13 @@ public class NoticePaging {
 			pagingHtml.append("&nbsp;&nbsp;|&nbsp;&nbsp;");
 			// 다음 block 페이지
 			if (totalPage - startPage >= blockPage) {
-				pagingHtml.append("<a href='noticelist?currentPage=" + (endPage + 1) + "&keyField=&keyWord='>");
+				pagingHtml.append("<a href='/studymate/noticeList/" + (endPage + 1) + "'>");
 				pagingHtml.append("다음");
 				pagingHtml.append("</a>");
 			}
 		} else { // 검색이 있는 경우
 			if (currentPage > blockPage) {
-				pagingHtml.append("<a href='noticelist?currentPage=" + (startPage - 1) + "&keyField=" + keyField
+				pagingHtml.append("<a href='/studymate/noticeList/" + (startPage - 1) + "?keyField=" + keyField
 						+ "&keyWord=" + keyWord + "'>");
 				pagingHtml.append("[이전]");
 				pagingHtml.append("</a>");
@@ -88,9 +88,9 @@ public class NoticePaging {
 					pagingHtml.append(i);
 					pagingHtml.append("</font></b>");
 				} else {
-					pagingHtml.append("&nbsp;<a href='noticelist?currentPage=");
+					pagingHtml.append("&nbsp;<a href='/studymate/noticeList/");
 					pagingHtml.append(i);
-					pagingHtml.append("&keyField=" + keyField + "&keyWord=" + keyWord + "'>");
+					pagingHtml.append("?keyField=" + keyField + "&keyWord=" + keyWord + "'>");
 					pagingHtml.append(i);
 					pagingHtml.append("</a>");
 				}
@@ -98,7 +98,7 @@ public class NoticePaging {
 			}
 			pagingHtml.append("&nbsp;&nbsp;|&nbsp;&nbsp;");
 			if (endPage < totalPage) {
-				pagingHtml.append("<a href='noticelist?currentPage=" + (endPage + 1) + "&keyField=" + keyField
+				pagingHtml.append("<a href='/studymate/noticeList/" + (endPage + 1) + "?keyField=" + keyField
 						+ "&keyWord=" + keyWord + "'>");
 				pagingHtml.append("[다음]");
 				pagingHtml.append("</a>");
