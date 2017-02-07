@@ -13,11 +13,16 @@ import org.springframework.ui.Model;
 import com.studymate.common.CommonServiceUtil;
 import com.studymate.common.Dto;
 import com.studymate.common.ServiceInterface;
+import com.studymate.room.model.RoomDao;
+import com.studymate.room.model.RoomDto;
 
 @Service
 public class ReserveServiceImpl extends CommonServiceUtil implements ServiceInterface {
 	@Autowired
 	ReserveDao reserveDao;
+	
+	@Autowired
+	RoomDao roomDao;
 	
 	@Override
 	public Model list(HttpSession session, Model model, int currentPage, String keyField, String keyWord) {
@@ -25,8 +30,8 @@ public class ReserveServiceImpl extends CommonServiceUtil implements ServiceInte
 		map.put("keyWord", keyWord);
 		map.put("keyField", keyField);
 		
-		int blockCount = 5; 
-		int blockPage = 5;
+		int blockCount = 10; 
+		int blockPage = 10;
 		int totalCount = getTotalCount(reserveDao, map);
 		
 		ReservePaging noticePaging = new ReservePaging(currentPage, totalCount, blockCount, blockPage, keyField, keyWord);
@@ -36,6 +41,7 @@ public class ReserveServiceImpl extends CommonServiceUtil implements ServiceInte
 		
 		List<Dto> list = getList(reserveDao, map); 
 		
+		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("resList", list);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("pageHtml", noticePaging.getPagingHtml().toString());
@@ -43,6 +49,17 @@ public class ReserveServiceImpl extends CommonServiceUtil implements ServiceInte
 		model.addAttribute("keyWord", keyWord);
 		
 		session.setAttribute("page", "reserveList/1");
+		return model;
+	}
+	
+	public Model writeForm(Model model) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("keyWord", "");
+		map.put("keyField", "");
+		List<RoomDto> list = roomDao.getAllRoom(map);
+		
+		model.addAttribute("resDto", new ReserveDto());
+		model.addAttribute("rooms", list);
 		return model;
 	}
 

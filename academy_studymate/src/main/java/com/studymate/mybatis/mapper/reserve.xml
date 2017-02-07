@@ -3,19 +3,17 @@
               "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
               
 <mapper namespace="com.studymate.reserve.model.ReserveDao">
-	<sql id="columns"> resNum, resDate, resTime, resRegdate, borNum, memId </sql>
+	<sql id="columns"> resNum, resDate, resTime, borName, resRegdate, borNum, resCount, memId </sql>
 	
 	<sql id="search">
-		<where>
-			<if test="keyWord!=null and keyWord!=''">
-				<if test="keyField=='memId'">
-					memId LIKE '%'||#{keyWord}||'%' 
-				</if>
-				<if test="keyField=='content'">
-					bonContent like '%${keyWord}%' 
-				</if>
+		<if test="keyWord!=null and keyWord!=''">
+			<if test="keyField=='memId'">
+				memId LIKE '%'||#{keyWord}||'%' 
 			</if>
-		</where>
+			<if test="keyField=='borName'">
+				borName like '%${keyWord}%' 
+			</if>
+		</if>
 	</sql>
 	
 	<select id="totalcount" resultType="Integer" >
@@ -30,46 +28,42 @@
 				ORDER BY resRegdate DESC ) ) WHERE num between #{startRow} and #{endRow}
 	</select>
 	
-	<select id="read" resultType="NoticeDto"  parameterType="Integer">
-		SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate FROM notice WHERE bonNum = #{bonNum}
+	<select id="read" resultType="ReserveDto"  parameterType="Integer">
+		SELECT <include refid="columns" /> FROM reserve WHERE resNum = #{resNum}
 	</select>
 	
-	<select id="readPrev" resultType="NoticeDto"  parameterType="Integer">
+	<select id="readPrev" resultType="ReserveDto"  parameterType="Integer">
 		<![CDATA[
-        SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate 
+        SELECT resNum, resDate, resTime, borName, resRegdate, borNum, resCount, memId 
           FROM (
-	                SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate FROM notice 
-	                WHERE bonNum > #{bonNum}  
-	                ORDER BY bonNum ASC 
+	                SELECT resNum, resDate, resTime, borName, resRegdate, borNum, resCount, memId FROM reserve 
+	                WHERE resNum > #{resNum}  
+	                ORDER BY resNum ASC 
                ) WHERE ROWNUM = 1
          ]]>
 	</select>
 	
-	<select id="readNext" resultType="NoticeDto"  parameterType="Integer">
+	<select id="readNext" resultType="ReserveDto"  parameterType="Integer">
 		<![CDATA[
-        SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate 
+        SELECT resNum, resDate, resTime, borName, resRegdate, borNum, resCount, memId 
           FROM (
-	                SELECT bonNum, bonTitle, bonContent, bonReadcount, bonRegdate FROM notice 
-	                WHERE bonNum < #{bonNum}  
-	                ORDER BY bonNum ASC 
+	                SELECT resNum, resDate, resTime, borName, resRegdate, borNum, resCount, memId FROM reserve 
+	                WHERE resNum < #{resNum}  
+	                ORDER BY resNum ASC 
                ) WHERE ROWNUM = 1
          ]]>
 	</select>
 	
-	<insert id="write"  parameterType="NoticeDto">
-		INSERT INTO notice VALUES (	bonNum.nextval, #{bonTitle}, #{bonContent}, 0, sysdate)
+	<insert id="write"  parameterType="ReserveDto">
+		INSERT INTO reserve VALUES (	resNum.nextval, #{resDate}, #{resTime}, #{borName}, sysdate, #{borNum}, #{resCount}, #{memId} ) 
 	</insert>
 	
-	<update id="update" parameterType="NoticeDto">
-		UPDATE notice SET bonTitle = #{bonTitle}, bonContent = #{bonContent} WHERE bonNum = #{bonNum}  
-	</update>
-	
-	<update id="updateReadCount" parameterType="Integer">
-		UPDATE notice SET bonReadcount = bonReadcount+1 WHERE bonNum = #{bonNum} 
+	<update id="update" parameterType="ReserveDto">
+		UPDATE reserve SET resDate = #{resDate}, resTime = #{resTime}, borName = #{borName}, resCount = #{resCount} WHERE resNum = #{resNum}  
 	</update>
 	
 	<delete id="delete" parameterType="Integer">
-		DELETE FROM notice WHERE bonNum = #{bonNum} 
+		DELETE FROM reserve WHERE resNum = #{resNum} 
 	</delete>
 	
 	<delete id="deleteMem" parameterType="String">

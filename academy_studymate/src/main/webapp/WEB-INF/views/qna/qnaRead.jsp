@@ -9,14 +9,8 @@
 		<%@include file="../common/Header.jsp" %>
 		<div class="body_top">
 		</div>
-		<div class="body center_align">
+		<section class="body center_align">
 			<div class="boardtitle lottemartdream"></div>
-			<div class="pull-right">
-				<ol class="breadcrumb">
-				  <li><a href="/studymate">Home</a></li>
-				  <li class="active">QnA</li>
-				</ol>
-			</div>
 			<article id="contents">
 				<header id="con_header" class="col-xs-12">
 					<h2 class="normal w300 subsize">${qnaDto.boqTitle}</h2>
@@ -24,9 +18,12 @@
 						작성일 <strong>${qnaDto.boqRegdate}</strong>&nbsp;조회수 <strong>${qnaDto.boqReadcount}</strong>
 					</div>
 				</header>
-				<div class="main">
+				<article class="main">
 					${qnaDto.boqContent}
-				</div>
+				</article>
+			<br><br>
+			<hr>
+			<!-- Button Area -->
 			<footer id="con_footer">
 				<div class="btndiv">
 					<div class="pull-left">
@@ -46,7 +43,7 @@
 				</div>
 			</footer>
 			</article>
-		</div>
+		</section>
 		<input type="hidden" id="boardtitle" value="QnA">
 		<input type="hidden" id="boardupdate" value="/${currentPage}-${qnaDto.boqNum}/?update=y">
 		<input type="hidden" id="boarddelete" value="/?currentPage=${currentPage}&boqNum=${qnaDto.boqNum}&gNum=${qnaDto.boqGroupnum}">

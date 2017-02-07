@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.studymate.qna.model.QnaDto;
+import com.studymate.review.model.ReviewReplyDto;
 
 public interface Dao {
 
@@ -18,6 +19,8 @@ public interface Dao {
 	public Dto readPrev(int bonNum);
 	
 	public Dto readNext(int bonNum);
+	
+	public List<ReviewReplyDto> readReply(Map<String, Object> map);
 
 	public void write(Dto Dto);
 

@@ -9,7 +9,7 @@
 		<%@include file="../common/Header.jsp" %>
 		<div class="body_top">
 		</div>
-		<div class="body center_align">
+		<section class="body center_align">
 			<div class="boardtitle lottemartdream"></div>
 			<article id="contents">
 				<header id="con_header" class="col-xs-12">
@@ -21,6 +21,9 @@
 				<div class="main">
 					${noticeDto.bonContent}
 				</div>
+			<br><br>
+			<hr>
+			<!-- Button Area -->
 			<footer id="con_footer">
 				<div class="btndiv">
 					<div class="pull-left">
@@ -37,7 +40,7 @@
 				</div>
 			</footer>
 			</article>
-		</div>
+		</section>
 		<input type="hidden" id="boardupdate" value="/${currentPage}-${noticeDto.bonNum}/?update=y">
 		<input type="hidden" id="boarddelete" value="?currentPage=${currentPage}&bonNum=${noticeDto.bonNum}">
 		<input type="hidden" id="boardid" value="notice">

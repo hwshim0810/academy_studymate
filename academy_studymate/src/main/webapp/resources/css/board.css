@@ -4,6 +4,7 @@
 .subnav {
 	text-align: center;
 	padding: 30px 15px;
+	margin-bottom: 50px;
 }
 
 .block {
@@ -17,7 +18,7 @@
 }
 
 .main {
-	min-height: 700px;
+	min-height: 550px;
     padding-top: 120px;
     padding-left: 15px
 }
@@ -32,12 +33,38 @@
 	margin-bottom: 30px;
 }
 
+.margin_btm {
+	margin-bottom: 20px;
+}
+
 .htag {
 	padding: 10px 10px;
 }
 
+.infoP {
+	padding-left: 10px;
+}
+
+/* buttonGroup CSS */
 .btndiv {
 	margin: 20px 0px;
+}
+
+/* reply CSS */
+.reply_list {
+	padding: 0 8px;
+}
+
+.reply_column {
+	padding: 10px 0;
+}
+
+.rppaging {
+	cursor:pointer;
+}
+
+textarea {
+	resize:none;
 }
 
 @media screen and (max-width: 760px) {
@@ -52,5 +79,6 @@
 
 .field {
 	padding-left: 0px;
-}
+	}
+
 }

@@ -30,6 +30,10 @@
 		SELECT count(*) FROM review <include refid="search" />
 	</select>
 	
+	<select id="replyTotalCount" resultType="Integer" parameterType="java.util.HashMap">
+		SELECT count(*) FROM rvreply WHERE borvNum = #{borvNum} 
+	</select>
+	
 	<select id="list" resultType="ReviewDto" parameterType="java.util.HashMap">
 		SELECT <include refid="columns" /> 
 		FROM( SELECT ROWNUM num, <include refid="columns" /> 
@@ -42,8 +46,12 @@
 		SELECT <include refid="columns" /> FROM review WHERE borvNum = #{borvNum}
 	</select>
 	
-	<select id="readReply" resultType="ReviewReplyDto" parameterType="Integer" >
-		SELECT <include refid="replyColumns" /> FROM rvreply WHERE borvNum = #{borvNum} 
+	<select id="readReply" resultType="ReviewReplyDto" parameterType="java.util.HashMap">
+		SELECT <include refid="replyColumns" /> 
+			FROM( SELECT ROWNUM num, <include refid="replyColumns" /> 
+				FROM ( SELECT <include refid="replyColumns" /> FROM rvreply 
+					WHERE borvNum = #{borvNum} 
+					ORDER BY repRegdate DESC ) ) WHERE num between #{startRow} and #{endRow}
 	</select>
 	
 	<select id="readPrev" resultType="ReviewDto"  parameterType="Integer">

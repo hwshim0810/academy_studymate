@@ -10,14 +10,7 @@
 		<%@include file="../common/Header.jsp" %>
 		<div class="body_top">
 		</div>
-		<div class="body center_align">
-			<div class="boardtitle lottemartdream"></div>
-				<div class="pull-right">
-					<ol class="breadcrumb">
-					  <li><a href="/studymate">Home</a></li>
-					  <li class="active">QnA</li>
-					</ol>
-				</div>
+		<section class="body center_align">
 			<form:form name = "updateform" action="/studymate/qnaUpdate/${currentPage}-${qnaDto.boqNum}" method="post" commandName="qnaDto">
 				<table class="table">
 					<tr>
@@ -36,17 +29,22 @@
 						<td></td>
 					</tr>
 				</table>
-				<div class="btndiv">
-					<div class="pull-right">
-						<button class="btn btn-success btn-font" id="btnreg">수정</button>
+				<br><br>
+				<hr>
+				<!-- Button Area -->
+				<footer id="con_footer">
+					<div class="btndiv">
+						<div class="pull-right">
+							<button class="btn btn-success btn-font" id="btnreg">수정</button>
+						</div>
+						<div class="pull-left">
+							<button class="btn btn-info btn-font" id="btnback">뒤로</button>
+							<button class="btn btn-primary btn-font" id="btnlist">목록</button>
+						</div>
 					</div>
-					<div class="pull-left">
-						<button class="btn btn-info btn-font" id="btnback">뒤로</button>
-						<button class="btn btn-primary btn-font" id="btnlist">목록</button>
-					</div>
-				</div>
+				</footer>
 			</form:form>
-		</div>
+		</section>
 		<input type="hidden" id="boardtitle" value="QnA">
 		<input type="hidden" id="boardid" value="qna">
 		<%@include file="../common/Footer.jsp" %>

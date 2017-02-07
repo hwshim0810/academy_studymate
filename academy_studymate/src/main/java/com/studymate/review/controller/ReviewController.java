@@ -1,5 +1,7 @@
 package com.studymate.review.controller;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.studymate.review.model.ReviewDto;
 import com.studymate.review.model.ReviewReplyDto;
@@ -84,18 +87,18 @@ public class ReviewController {
 		return result;
 	}
 	
-	@RequestMapping(value = "reviewRead/revReplyWrite/{currentPage}-{update}", method = RequestMethod.POST)
-	public String writeReply(@Valid ReviewReplyDto replyDto, BindingResult result, 
-			int borvNum, 
-			@PathVariable("currentPage") int currentPage, 
-			@PathVariable("update") String update,
-			@RequestParam(required = false) String keyField, 
-			@RequestParam(required = false) String keyWord) {
-		if (result.hasErrors())
-			return "/review/reviewRead";
-
-		reviewService.writeReply(replyDto);
-		return "redirect:/reviewRead/" + currentPage + "-" + borvNum  + "-" + update + "?keyField=" + keyField + "&keyWord=" + keyWord;
+	@RequestMapping(value = "revReplyList", produces = "application/json")
+	@ResponseBody
+	public HashMap<String, Object> listReply(int replyPage, int borvNum) {
+		HashMap<String, Object> resultmap = reviewService.listReply(replyPage, borvNum);
+		return resultmap;
+	}
+	
+	@RequestMapping(value = "revReplyWrite", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public HashMap<String, Object> writeReply(ReviewReplyDto replyDto, int replyPage) {
+		HashMap<String, Object> resultmap = reviewService.writeReply(replyDto, replyPage);
+		return resultmap;
 	}
 	
 	@RequestMapping("reviewRead/revReplyDelete/{currentPage}-{borvNum}-{repNum}-{update}")

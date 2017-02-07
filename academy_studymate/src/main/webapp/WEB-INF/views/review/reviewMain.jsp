@@ -9,17 +9,11 @@
 		<%@include file="../common/Header.jsp" %>
 		<div class="body_top">
 		</div>
-		<div class="body center_align">
+		<section class="body center_align">
 			<%@include file="../common/BoardSubnav.jsp" %>
 			<div class="boardtitle lottemartdream"></div>
 			<div class="pull-left count">
 				<span>총 ${totalCount}건 ${currentPage}페이지</span>
-			</div>
-			<div class="pull-right">
-				<ol class="breadcrumb">
-				  <li><a href="/studymate">Home</a></li>
-				  <li class="active">방문후기</li>
-				</ol>
 			</div>
 			<table class="table table-hover">
 				<thead>
@@ -55,17 +49,21 @@
 					</tr>
 				</tfoot>
 			</table>
+			<hr>
+			<!-- Button Area -->
 			<%@include file="../common/BoardSearch.jsp" %>
 			<br>
-			<div class="btndiv">
-				<div class="pull-right">
-					<button class="btn btn-success btn-font" id="btnwrite">글쓰기</button>
+			<footer id="con_footer">
+				<div class="btndiv">
+					<div class="pull-right">
+						<button class="btn btn-success btn-font" id="btnwrite">글쓰기</button>
+					</div>
+					<div class="pull-left">
+						<button class="btn btn-primary btn-font" id="btnlist">목록</button>
+					</div>
 				</div>
-				<div class="pull-left">
-					<button class="btn btn-primary btn-font" id="btnlist">목록</button>
-				</div>
-			</div>
-		</div>
+			</footer>
+		</section>
 		<input type="hidden" id="boardtitle" value="방문후기">
 		<input type="hidden" id="boardid" value="review">
 		<%@include file="../common/Footer.jsp" %>

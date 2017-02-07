@@ -13,5 +13,5 @@
 <!-- <script src="<c:url value='/js/common.js'/>" charset="utf-8"></script>  -->
 
 <!-- CommonCss -->
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/common.css?v=3'/>" />
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/common.css?v=4'/>" />
 <title>Studymate</title>

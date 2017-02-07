@@ -1,6 +1,6 @@
 package com.studymate.review.model;
 
-import java.util.List;
+import java.util.Map;
 
 import com.studymate.common.Dao;
 
@@ -9,10 +9,10 @@ public interface ReviewDao extends Dao{
 
 	public void writeReply(ReviewReplyDto replyDto);
 
-	public List<ReviewReplyDto> readReply(int borvNum);
-
 	public void updateAddReplyCount(int borvNum);
 
 	public void updateDownReplyCount(int borvNum);
+
+	public int replyTotalCount(Map<String, Object> map);
 
 }

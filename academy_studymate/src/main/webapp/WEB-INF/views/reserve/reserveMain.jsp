@@ -10,7 +10,7 @@
 		<div class="body_top">
 		</div>
 		<section class="body center_align">
-			<%@include file="../common/BoardSubnav.jsp" %>
+			<%@include file="../common/AdminSubnav.jsp" %>
 			<div class="boardtitle lottemartdream"></div>
 			<div class="pull-left count">
 				<span>총 ${totalCount}건 ${currentPage}페이지</span>
@@ -19,34 +19,26 @@
 				<thead>
 					<tr>
 						<th class="hidden-xs hidden-sm">번호</th>
-						<th>제목</th>
-						<th>글쓴이</th>
-						<th>작성일</th>
-						<th class="hidden-xs hidden-sm">조회</th>
+						<th>예약회원</th>
+						<th>예약지점</th>
+						<th>예약날짜</th>
+						<th>예약시간</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="item" items="${qnaList}">
-						<c:url value="/qnaRead/${currentPage}-${item.boqNum}" var="readUrl">
-							<c:param name="update" value="n" />
+					<c:forEach var="item" items="${resList}">
+						<c:url value="/reserveRead/${currentPage}-${item.resNum}" var="readUrl">
 							<c:if test="${not empty keyField && not empty keyWord}">
 								<c:param name="keyField" value="${keyField}" />
 								<c:param name="keyWord" value="${keyWord}" />
 							</c:if>
 						</c:url>
 						<tr>
-							<td class="hidden-xs hidden-sm table_center">${item.boqNum}</td>
-							<c:choose>
-								<c:when test="${item.boqLev > 0 }">
-								<td class="table_center"><a href="${readUrl}">답변 : ${item.boqTitle}</a></td>
-								</c:when>
-								<c:otherwise>
-								<td class="table_center"><a href="${readUrl}">${item.boqTitle}</a></td>
-								</c:otherwise>
-							</c:choose>
-							<td class="table_center">${item.memName}</td>
-							<td class="table_center">${item.boqRegdate}</td>
-							<td class="hidden-xs hidden-sm table_center">${item.boqReadcount}</td>
+							<td class="hidden-xs hidden-sm table_center">${item.resNum}</td>
+							<td class="table_center"><a href="${readUrl}">${item.memId}</a></td>
+							<td class="table_center">${item.borName}</td>
+							<td class="table_center">${item.resDate}</td>
+							<td class="table_center">${item.resTime}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -56,16 +48,14 @@
 					</tr>
 				</tfoot>
 			</table>
-			<br>
 			<hr>
 			<!-- Button Area -->
-			<%@include file="../common/BoardSearch.jsp" %>
+			<%@include file="../common/ResSearch.jsp" %>
 			<br>
-			<!-- Button Area -->
 			<footer id="con_footer">
 				<div class="btndiv">
 					<div class="pull-right">
-						<button class="btn btn-success btn-font" id="btnwrite">글쓰기</button>
+						<button class="btn btn-success btn-font" id="btnwrite">추가</button>
 					</div>
 					<div class="pull-left">
 						<button class="btn btn-primary btn-font" id="btnlist">목록</button>
@@ -73,8 +63,8 @@
 				</div>
 			</footer>
 		</section>
-		<input type="hidden" id="boardtitle" value="QnA">
-		<input type="hidden" id="boardid" value="qna">
+		<input type="hidden" id="boardtitle" value="예약관리">
+		<input type="hidden" id="boardid" value="reserve">
 		<%@include file="../common/Footer.jsp" %>
 		<%@include file="../common/Board.jsp" %>
 	</body>

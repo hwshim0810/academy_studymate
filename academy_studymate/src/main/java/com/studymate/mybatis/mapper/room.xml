@@ -3,7 +3,7 @@
               "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
               
 <mapper namespace="com.studymate.room.model.RoomDao">
-	<sql id="columns"> borNum, borName, borAddr, borArea, borFilename, borNewFilename, borPrice, borReadcount, borRegdate </sql>
+	<sql id="columns"> borNum, borName, borAddr, borArea, borFilename, borNewFilename, borReadcount, borRegdate </sql>
 	
 	<sql id="search">
 		<where>
@@ -30,6 +30,10 @@
 				ORDER BY borRegdate DESC ) ) WHERE num between #{startRow} and #{endRow}
 	</select>
 	
+	<select id="getAllRoom" resultType="RoomDto">
+		SELECT <include refid="columns" /> FROM room 
+	</select>
+	
 	<select id="read" resultType="RoomDto"  parameterType="Integer">
 		SELECT <include refid="columns" /> FROM room WHERE borNum = #{borNum}
 	</select>
@@ -39,7 +43,7 @@
 	</insert>
 	
 	<update id="update" parameterType="RoomDto">
-		UPDATE room SET borName = #{borName}, borAddr = #{borAddr}, borArea = #{borArea}, borPrice = #{borPrice} WHERE borNum = #{borNum}  
+		UPDATE room SET borName = #{borName}, borAddr = #{borAddr}, borArea = #{borArea}WHERE borNum = #{borNum}  
 	</update>
 	
 	<update id="updateReadCount" parameterType="Integer">

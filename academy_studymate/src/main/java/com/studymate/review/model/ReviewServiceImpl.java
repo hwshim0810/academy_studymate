@@ -25,20 +25,21 @@ public class ReviewServiceImpl extends CommonServiceUtil implements ServiceInter
 		map.put("keyWord", keyWord);
 		map.put("keyField", keyField);
 		
-		int blockCount = 5; 
-		int blockPage = 5;
+		int blockCount = 10; 
+		int blockPage = 10;
 		int totalCount = getTotalCount(reviewDao, map);
 
-		ReviewPaging qnaPaging = new ReviewPaging(currentPage, totalCount, blockCount, blockPage, keyField, keyWord);
+		ReviewPaging reviewPaging = new ReviewPaging(currentPage, totalCount, blockCount, blockPage, keyField, keyWord);
 		
-		map.put("startRow", qnaPaging.getStartCount());
-		map.put("endRow", qnaPaging.getEndCount());
+		map.put("startRow", reviewPaging.getStartCount());
+		map.put("endRow", reviewPaging.getEndCount());
 		
 		List<Dto> list = getList(reviewDao, map);
-
+		
+		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("reviewList", list);
 		model.addAttribute("currentPage", currentPage);
-		model.addAttribute("pageHtml", qnaPaging.getPagingHtml().toString());
+		model.addAttribute("pageHtml", reviewPaging.getPagingHtml().toString());
 		model.addAttribute("keyField", keyField);
 		model.addAttribute("keyWord", keyWord);
 		
@@ -51,8 +52,20 @@ public class ReviewServiceImpl extends CommonServiceUtil implements ServiceInter
 		if (update.equals("n"))
 			reviewDao.updateReadCount(borvNum);
 
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("borvNum", borvNum);
+		int blockCount = 5; 
+		int blockPage = 5;
+		int replyTotalCount = reviewDao.replyTotalCount(map);
+		ReplyPaging replyPaging = new ReplyPaging(1, replyTotalCount, blockCount, blockPage);
+		map.put("startRow", replyPaging.getStartCount());
+		map.put("endRow", replyPaging.getEndCount());
+		
+		List<ReviewReplyDto> list = reviewDao.readReply(map);
+		
 		model.addAttribute("reviewDto", reviewDao.read(borvNum));
-		model.addAttribute("reviewReply", reviewDao.readReply(borvNum));
+		model.addAttribute("reviewReply", list);
+		model.addAttribute("replyPaging", replyPaging.getPagingHtml().toString());
 		model.addAttribute("reviewPrev", reviewDao.readPrev(borvNum));
 		model.addAttribute("reviewNext", reviewDao.readNext(borvNum));
 		model.addAttribute("currentPage", currentPage);
@@ -86,10 +99,36 @@ public class ReviewServiceImpl extends CommonServiceUtil implements ServiceInter
 		} else
 			return "/reserve/deleteError";
 	}
+	
+	public HashMap<String, Object> listReply(int replyPage, int borvNum) {
+		HashMap<String, Object> map = new  HashMap<>();
+		
+		int blockCount = 5; 
+		int blockPage = 5;
+		map.put("borvNum", borvNum);
+		int replyTotalCount = reviewDao.replyTotalCount(map);
+		ReplyPaging replyPaging = new ReplyPaging(replyPage, replyTotalCount, blockCount, blockPage);
+		map.put("startRow", replyPaging.getStartCount());
+		map.put("endRow", replyPaging.getEndCount());
+		
+		return getReplyList(map, reviewDao, replyPaging.getPagingHtml().toString());
+	}
 
-	public void writeReply(ReviewReplyDto replyDto) {
+	public HashMap<String, Object> writeReply(ReviewReplyDto replyDto, int replyPage) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
 		reviewDao.updateAddReplyCount(replyDto.getBorvNum());
 		reviewDao.writeReply(replyDto);
+		
+		int blockCount = 5; 
+		int blockPage = 5;
+		map.put("borvNum", replyDto.getBorvNum());
+		int replyTotalCount = reviewDao.replyTotalCount(map);
+		ReplyPaging replyPaging = new ReplyPaging(replyPage, replyTotalCount, blockCount, blockPage);
+		map.put("startRow", replyPaging.getStartCount());
+		map.put("endRow", replyPaging.getEndCount());
+		
+		return getReplyList(map, reviewDao, replyPaging.getPagingHtml().toString());
 	}
 
 	public void deleteReply(int borvNum, int repNum) {
@@ -102,4 +141,5 @@ public class ReviewServiceImpl extends CommonServiceUtil implements ServiceInter
 		model.addAttribute("currentPage", currentPage);
 		return model;
 	}
+
 }

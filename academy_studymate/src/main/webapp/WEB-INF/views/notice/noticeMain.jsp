@@ -9,16 +9,10 @@
 		<%@include file="../common/Header.jsp" %>
 		<div class="body_top">
 		</div>
-		<div class="body center_align">
+		<section class="body center_align">
 			<div class="boardtitle lottemartdream"></div>
 			<div class="pull-left count">
 				<span>총 ${totalCount}건 ${currentPage}페이지</span>
-			</div>
-			<div class="pull-right">
-				<ol class="breadcrumb">
-				  <li><a href="/studymate">Home</a></li>
-				  <li class="active">공지사항</li>
-				</ol>
 			</div>
 			<table class="table table-hover">
 				<thead>
@@ -50,6 +44,9 @@
 					</tr>
 				</tfoot>
 			</table>
+			<br>
+			<hr>
+			<!-- Button Area -->
 			<div class="searchdiv">
 				<form class="form-inline" id="searchform">
 					<div class="form-group row col-sm-6 col-md-6 col-lg-6">
@@ -80,7 +77,7 @@
 					<button class="btn btn-primary btn-font" id="btnlist">목록</button>
 				</div>
 			</div>
-		</div>
+		</section>
 		<input type="hidden" id="boardtitle" value="공지사항">
 		<input type="hidden" id="boardid" value="notice">
 		<%@include file="../common/Footer.jsp" %>

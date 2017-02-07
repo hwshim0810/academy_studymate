@@ -40,6 +40,8 @@
 					<li><a href="#">로그인</a></li>
 					<li class="hidden-xs hidden-sm bar">|</li>
 					<li><a href="#">회원가입</a></li>
+					<li class="hidden-xs hidden-sm bar">|</li>
+					<li><a href="/studymate/reserveList/1">관리페이지</a></li>
 				</ul>
 			</div>
 		</div>

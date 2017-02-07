@@ -37,6 +37,7 @@
 						<td></td>
 					</tr>
 				</table>
+				<hr>
 				<div class="btndiv">
 					<div class="pull-right">
 						<button class="btn btn-success btn-font" id="btnreg">등록</button>

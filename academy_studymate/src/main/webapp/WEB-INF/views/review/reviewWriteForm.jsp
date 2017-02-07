@@ -13,12 +13,6 @@
 		</div>
 		<div class="body center_align">
 			<div class="boardtitle lottemartdream"></div>
-			<div class="pull-right">
-				<ol class="breadcrumb">
-				  <li><a href="/studymate">Home</a></li>
-				  <li class="active">방문후기</li>
-				</ol>
-			</div>
 			<form:form method="POST" commandName="reviewDto" action="/studymate/reviewWrite">
 				<table class="table">
 					<tr>
@@ -28,7 +22,7 @@
 					</tr>
 					<tr>
 						<td><label for="borvTitle">제목</label></td>
-						<td><form:input id="borvTitle" path="borvTitle" maxlength="30"/></td>
+						<td><form:input id="borvTitle" path="borvTitle" maxlength="30" cssClass="form-control"/></td>
 						<td><form:errors path="borvTitle" /></td>
 					</tr>
 					<tr>
@@ -37,14 +31,19 @@
 						<td></td>
 					</tr>
 				</table>
-				<div class="btndiv">
-					<div class="pull-right">
-						<button class="btn btn-success btn-font" id="btnreg">등록</button>
+				<br><br>
+				<hr>
+				<!-- Button Area -->
+				<footer id="con_footer">
+					<div class="btndiv">
+						<div class="pull-right">
+							<button class="btn btn-success btn-font" id="btnreg">등록</button>
+						</div>
+						<div class="pull-left">
+							<button class="btn btn-primary btn-font" id="btnlist">목록</button>
+						</div>
 					</div>
-					<div class="pull-left">
-						<button class="btn btn-primary btn-font" id="btnlist">목록</button>
-					</div>
-				</div>
+				</footer>
 			</form:form>
 		</div>
 		<input type="hidden" id="boardtitle" value="방문후기">

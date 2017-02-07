@@ -10,7 +10,7 @@
 		<%@include file="../common/Header.jsp" %>
 		<div class="body_top">
 		</div>
-		<div class="body center_align">
+		<section class="body center_align">
 			<form name = "updateform" action="noticeUpdate/${currentPage}" method="post">
 				<div>
 					<input type="hidden" name="bonNum" value="${noticeDto.bonNum}"/>
@@ -22,6 +22,10 @@
 					<label class="sr-only" for="bonContent">내용</label><br>
 					<textarea name="bonContent" rows="10" cols="100" id="bonContent" >${noticeDto.bonContent}</textarea>
 				</div>
+			<br><br>
+			<hr>
+			<!-- Button Area -->
+			<footer id="con_footer">
 				<div class="btndiv">
 					<div class="pull-right">
 						<button class="btn btn-primary btn-font" id="btnreg">수정</button>
@@ -31,8 +35,9 @@
 						<button class="btn btn-primary btn-font" id="btnlist">목록</button>
 					</div>
 				</div>
+			</footer>
 			</form>
-		</div>
+		</section>
 		<input type="hidden" id="boardid" value="notice">
 		<%@include file="../common/Footer.jsp" %>
 		<%@include file="../common/Board.jsp" %>

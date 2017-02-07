@@ -1,14 +1,19 @@
 package com.studymate.common;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.studymate.review.model.ReviewReplyDto;
+
 public class CommonServiceUtil {
+	
 	protected int getTotalCount(Dao dao, Map<String, Object> map) {
 		return dao.totalcount(map);
 	}
@@ -40,6 +45,16 @@ public class CommonServiceUtil {
 	
     protected String getRandomString(){
         return UUID.randomUUID().toString().replaceAll("-", "");
+    }
+    
+    protected HashMap<String, Object> getReplyList(HashMap<String, Object> map, Dao reviewDao, String paging) {
+    	HashMap<String, Object> resultMap = new HashMap<>();
+    	List<ReviewReplyDto> list = reviewDao.readReply(map);
+    	
+    	resultMap.put("reviewReply", list);
+		resultMap.put("replyPaging", paging);
+		resultMap.put("borvNum", map.get("borvNum"));
+		return resultMap;
     }
 
 }

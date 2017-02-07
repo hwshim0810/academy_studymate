@@ -31,7 +31,7 @@ public class ReserveController {
 	
 	@RequestMapping(value = "reserveWrite", method = RequestMethod.GET)
 	public String write(Model model) {
-		model.addAttribute("resDto", new ReserveDto());
+		resService.writeForm(model);
 		return "/reserve/reserveWriteForm";
 	}
 	
@@ -45,7 +45,8 @@ public class ReserveController {
 	}
 	
 	@RequestMapping("reserveRead")
-	public String read(Model model, int resNum, int currentPage, String update,
+	public String read(Model model, int resNum, int currentPage, 
+			@RequestParam(required = false) String update,
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
 		resService.read(model, resNum, currentPage, update, keyField, keyWord);

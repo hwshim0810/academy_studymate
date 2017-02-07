@@ -158,6 +158,18 @@
 			<artifactId>mybatis</artifactId>
 			<version>3.4.1</version>
 		</dependency>
+		
+		<!-- JSON으로 응답하기 위해 필요한 라이브러리 -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
 	
 		<!-- Test -->
 		<dependency>
