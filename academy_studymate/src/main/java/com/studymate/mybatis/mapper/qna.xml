@@ -3,7 +3,7 @@
               "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
               
 <mapper namespace="com.studymate.qna.model.QnaDao">
-	<sql id="columns"> boqNum, boqTitle, boqContent, boqGroupnum, boqSeq, boqLev, boqRegdate, memName, memId </sql>
+	<sql id="columns"> boqNum, boqTitle, boqContent, boqGroupnum, boqSeq, boqLev, boqRegdate, memName, memId, boqRefnum </sql>
 
 	<sql id="search">
 		<where>
@@ -47,9 +47,9 @@
 	
 	<select id="readPrev" resultType="QnaDto"  parameterType="Integer">
 		<![CDATA[
-        SELECT boqNum, boqTitle, boqContent, boqGroupnum, boqSeq, boqLev, boqRegdate, memName, memId  
+        SELECT boqNum, boqTitle, boqContent, boqGroupnum, boqSeq, boqLev, boqRegdate, memName, memId, boqRefnum  
           FROM (
-	                SELECT boqNum, boqTitle, boqContent, boqGroupnum, boqSeq, boqLev, boqRegdate, memName, memId   FROM qna 
+	                SELECT boqNum, boqTitle, boqContent, boqGroupnum, boqSeq, boqLev, boqRegdate, memName, memId, boqRefnum   FROM qna 
 	                WHERE boqNum > #{boqNum}  
 	                ORDER BY boqNum ASC 
                ) WHERE ROWNUM = 1
@@ -58,9 +58,9 @@
 	
 	<select id="readNext" resultType="QnaDto"  parameterType="Integer">
 		<![CDATA[
-        SELECT boqNum, boqTitle, boqContent, boqGroupnum, boqSeq, boqLev, boqRegdate, memName, memId  
+        SELECT boqNum, boqTitle, boqContent, boqGroupnum, boqSeq, boqLev, boqRegdate, memName, memId, boqRefnum  
           FROM (
-	                SELECT boqNum, boqTitle, boqContent, boqGroupnum, boqSeq, boqLev, boqRegdate, memName, memId   FROM qna 
+	                SELECT boqNum, boqTitle, boqContent, boqGroupnum, boqSeq, boqLev, boqRegdate, memName, memId, boqRefnum   FROM qna 
 	                WHERE boqNum < #{boqNum}  
 	                ORDER BY boqNum ASC 
                ) WHERE ROWNUM = 1
@@ -76,7 +76,7 @@
 	</select>
 	
 	<insert id="write"  parameterType="QnaDto">
-		INSERT INTO qna VALUES (	boqNum.nextval, #{boqTitle}, #{boqContent}, #{boqGroupnum}, #{boqSeq}, #{boqLev}, sysdate, 0,'운영자', 'admin') 
+		INSERT INTO qna VALUES (	boqNum.nextval, #{boqTitle}, #{boqContent}, #{boqGroupnum}, #{boqSeq}, #{boqLev}, sysdate, 0, #{memName}, #{memId}, #{boqRefnum} )  
 	</insert>
 	
 	<update id="update" parameterType="QnaDto">
@@ -95,6 +95,10 @@
 	
 	<delete id="delete" parameterType="Integer">
 		DELETE FROM qna WHERE boqNum = #{boqNum} 
+	</delete>
+	
+	<delete id="deleteMem" parameterType="String">
+		DELETE qna  WHERE memId = #{memId} 
 	</delete>
 	
 </mapper>

@@ -13,6 +13,14 @@ public class QnaDto extends Dto {
 	int boqReadcount;
 	String memName;
 	String memId;
+	Integer boqRefnum;
+	
+	public Integer getBoqRefnum() {
+		return boqRefnum;
+	}
+	public void setBoqRefnum(Integer boqRefnum) {
+		this.boqRefnum = boqRefnum;
+	}
 	public int getBoqNum() {
 		return boqNum;
 	}

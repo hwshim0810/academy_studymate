@@ -30,8 +30,6 @@ public interface Dao {
 	
 	public void deleteMem(String memId);
 	
-	public void deleteReplyMem(String memId);
-
 	public void updateReadCount(int bonNum);
 	
 	public QnaDto isComment(int boqNum);

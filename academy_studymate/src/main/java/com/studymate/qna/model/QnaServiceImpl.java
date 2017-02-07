@@ -25,8 +25,8 @@ public class QnaServiceImpl extends CommonServiceUtil implements ServiceInterfac
 		map.put("keyWord", keyWord);
 		map.put("keyField", keyField);
 		
-		int blockCount = 5; 
-		int blockPage = 5;
+		int blockCount = 10; 
+		int blockPage = 10;
 		int totalCount = getTotalCount(qnaDao, map);
 
 		QnaPaging qnaPaging = new QnaPaging(currentPage, totalCount, blockCount, blockPage, keyField, keyWord);
@@ -97,14 +97,14 @@ public class QnaServiceImpl extends CommonServiceUtil implements ServiceInterfac
 	
 
 	public void writeComment(QnaDto qnaDto) {
-		int boqGroupnum = qnaDao.maxSequence();
-		if (boqGroupnum != 1) boqGroupnum++;
+		int boqGroupnum = qnaDto.getBoqGroupnum();
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("boqGroupnum", boqGroupnum);
 		map.put("boqSeq", qnaDto.getBoqSeq());
 		qnaDao.updateSeq(map);
 		
+		qnaDto.setBoqRefnum(qnaDto.getBoqNum());
 		qnaDto.setBoqLev(qnaDto.getBoqLev()+1);
 		qnaDto.setBoqSeq(qnaDto.getBoqSeq()+1);
 		qnaDao.write(qnaDto);

@@ -23,6 +23,9 @@
 				<if test="keyField=='memSiteout'">
 					memSiteout like '%${keyWord}%' 
 				</if>
+				<if test="keyField=='memSex'">
+					memSex like '%${keyWord}%' 
+				</if>
 			</if>
 		</where>
 	</sql>

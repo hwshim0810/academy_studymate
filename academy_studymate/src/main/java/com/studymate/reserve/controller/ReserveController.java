@@ -40,12 +40,14 @@ public class ReserveController {
 		if (result.hasErrors())
 			return "/reserve/reserveWriteForm";
 
-		resService.write(resDto);
-		return "redirect:/reserveList/1";
+		String page = resService.writeNsendEmail(resDto);
+		return page;
 	}
 	
-	@RequestMapping("reserveRead")
-	public String read(Model model, int resNum, int currentPage, 
+	@RequestMapping("reserveRead/{currentPage}-{resNum}")
+	public String read(Model model, 
+			@PathVariable("resNum") int resNum, 
+			@PathVariable("currentPage") int currentPage, 
 			@RequestParam(required = false) String update,
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
@@ -53,18 +55,27 @@ public class ReserveController {
 		return "/reserve/reserveRead";
 	}
 	
-	@RequestMapping(value = "reserveUpdate", method = RequestMethod.GET)
-	public String update(Model model, int resNum, int currentPage, String update,
+	@RequestMapping(value = "reserveUpdate/{currentPage}-{resNum}", method = RequestMethod.GET)
+	public String update(Model model, 
+			@PathVariable("resNum") int resNum, 
+			@PathVariable("currentPage") int currentPage, 
+			@RequestParam(required = false) String update,
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
 		resService.read(model, resNum, currentPage, update, keyField, keyWord);
 		return "/reserve/reserveUpdateForm";
 	}
 	
-	@RequestMapping(value = "reserveUpdate", method = RequestMethod.POST)
-	public String update(Model model ,ReserveDto resDto, int resNum, int currentPage) {
+	@RequestMapping(value = "reserveUpdate/{currentPage}-{resNum}", method = RequestMethod.POST)
+	public String update(Model model ,@Valid ReserveDto resDto, 
+			@PathVariable("resNum") int resNum, 
+			@PathVariable("currentPage") int currentPage,
+			BindingResult result) {
+		if (result.hasErrors())
+			return "/reserve/reserveUpdateForm";
+		
 		resService.update(model, resDto);
-		return "redirect:/reserveRead/" + currentPage  + "-" + resNum + "?update=y";
+		return "redirect:/reserveRead/" + currentPage  + "-" + resNum;
 	}
 	
 	@RequestMapping(value = "reserveDelete/{currentPage}", method = RequestMethod.GET)
@@ -73,9 +84,8 @@ public class ReserveController {
 		return "/reserve/reserveDeleteForm";
 	}
 	
-	@RequestMapping(value = "reserveDelete/{currentPage}", method = RequestMethod.POST)
-	public String delete(Model model, int resNum, 
-			@PathVariable("currentPage") int currentPage) {
+	@RequestMapping(value = "reserveDelete", method = RequestMethod.POST)
+	public String delete(Model model, int resNum, int currentPage) {
 		resService.delete(model, resNum);
 		return "redirect:/reserveList/" + currentPage;
 	}

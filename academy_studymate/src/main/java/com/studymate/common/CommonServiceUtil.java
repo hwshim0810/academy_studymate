@@ -1,7 +1,6 @@
 package com.studymate.common;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.studymate.review.model.ReviewReplyDto;
 
 public class CommonServiceUtil {
-	
+
 	protected int getTotalCount(Dao dao, Map<String, Object> map) {
 		return dao.totalcount(map);
 	}

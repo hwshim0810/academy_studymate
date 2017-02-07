@@ -13,7 +13,7 @@ import org.springframework.ui.Model;
 import com.studymate.common.CommonServiceUtil;
 import com.studymate.common.Dto;
 import com.studymate.find.model.FindDao;
-import com.studymate.notice.model.NoticeDao;
+import com.studymate.qna.model.QnaDao;
 import com.studymate.reserve.model.ReserveDao;
 import com.studymate.review.model.ReviewDao;
 
@@ -22,11 +22,11 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 	@Autowired
 	MemberDao memDao;
 	@Autowired
-	NoticeDao noticeDao;
-	@Autowired
 	ReserveDao resDao;
 	@Autowired
 	ReviewDao reviewDao;
+	@Autowired
+	QnaDao qnaDao;
 	@Autowired
 	FindDao findDao;
 	
@@ -96,6 +96,7 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 		
 		List<Dto> list = getList(memDao, map); 
 		
+		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("memList", list);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("pageHtml", memPaging.getPagingHtml().toString());
@@ -127,11 +128,10 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 	}
 
 	public void deleteMem(String memId) {
-		noticeDao.deleteMem(memId);
 		resDao.deleteMem(memId);
-		reviewDao.deleteReplyMem(memId);
 		reviewDao.deleteMem(memId);
-		findDao.deleteMem(memId);
+		qnaDao.deleteMem(memId);
+//		findDao.deleteMem(memId);
 		
 		memDao.deleteMem(memId);
 	}

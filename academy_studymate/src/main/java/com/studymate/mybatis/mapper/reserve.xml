@@ -3,7 +3,7 @@
               "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
               
 <mapper namespace="com.studymate.reserve.model.ReserveDao">
-	<sql id="columns"> resNum, resDate, resTime, borName, resRegdate, borNum, resCount, memId </sql>
+	<sql id="columns"> resNum, resDate, resVisit, borName, resRegdate, borNum, resCount, resTime,memId, memEmail </sql>
 	
 	<sql id="search">
 		<if test="keyWord!=null and keyWord!=''">
@@ -12,6 +12,9 @@
 			</if>
 			<if test="keyField=='borName'">
 				borName like '%${keyWord}%' 
+			</if>
+			<if test="keyField=='memEmail'">
+				memEmail like '%${keyWord}%' 
 			</if>
 		</if>
 	</sql>
@@ -34,9 +37,9 @@
 	
 	<select id="readPrev" resultType="ReserveDto"  parameterType="Integer">
 		<![CDATA[
-        SELECT resNum, resDate, resTime, borName, resRegdate, borNum, resCount, memId 
+        SELECT resNum, resDate, resVisit, borName, resRegdate, borNum, resCount, resTime,memId, memEmail 
           FROM (
-	                SELECT resNum, resDate, resTime, borName, resRegdate, borNum, resCount, memId FROM reserve 
+	                SELECT resNum, resDate, resVisit, borName, resRegdate, borNum, resCount, resTime, memId, memEmail FROM reserve 
 	                WHERE resNum > #{resNum}  
 	                ORDER BY resNum ASC 
                ) WHERE ROWNUM = 1
@@ -45,9 +48,9 @@
 	
 	<select id="readNext" resultType="ReserveDto"  parameterType="Integer">
 		<![CDATA[
-        SELECT resNum, resDate, resTime, borName, resRegdate, borNum, resCount, memId 
+        SELECT resNum, resDate, resVisit, borName, resRegdate, borNum, resCount, resTime,memId, memEmail  
           FROM (
-	                SELECT resNum, resDate, resTime, borName, resRegdate, borNum, resCount, memId FROM reserve 
+	                SELECT resNum, resDate, resVisit, borName, resRegdate, borNum, resCount, resTime, memId, memEmail FROM reserve 
 	                WHERE resNum < #{resNum}  
 	                ORDER BY resNum ASC 
                ) WHERE ROWNUM = 1
@@ -55,11 +58,11 @@
 	</select>
 	
 	<insert id="write"  parameterType="ReserveDto">
-		INSERT INTO reserve VALUES (	resNum.nextval, #{resDate}, #{resTime}, #{borName}, sysdate, #{borNum}, #{resCount}, #{memId} ) 
+		INSERT INTO reserve VALUES (	resNum.nextval, #{resDate}, #{resVisit}, #{borName}, sysdate, #{borNum}, #{resCount}, #{resTime}, #{memId}, #{memEmail}  ) 
 	</insert>
 	
 	<update id="update" parameterType="ReserveDto">
-		UPDATE reserve SET resDate = #{resDate}, resTime = #{resTime}, borName = #{borName}, resCount = #{resCount} WHERE resNum = #{resNum}  
+		UPDATE reserve SET resDate = #{resDate}, resVisit = #{resVisit}, borName = #{borName}, resCount = #{resCount}, resTime = #{resTime}, memEmail = #{memEmail} WHERE resNum = #{resNum}  
 	</update>
 	
 	<delete id="delete" parameterType="Integer">

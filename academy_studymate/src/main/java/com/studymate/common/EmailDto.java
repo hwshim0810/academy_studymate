@@ -1,5 +1,8 @@
 package com.studymate.common;
 
+import javax.inject.Named;
+
+@Named
 public class EmailDto {
 		private String subject;
 	    private String content;

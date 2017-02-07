@@ -46,6 +46,9 @@
 						<button class="btn btn-primary btn-font" id="btnlist">목록</button>
 					</div>
 				</div>
+				<!-- 수정요망 -->
+				<input type="hidden" name="memId" value="user111" />
+				<input type="hidden" name="memName" id="memName" value="사람" />
 			</form:form>
 		</div>
 		<input type="hidden" id="boardtitle" value="QnA">

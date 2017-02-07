@@ -3,6 +3,7 @@ $(function() {
 	var boardid = $('#boardid').val();
 	var updateid = $('#boardupdate').val();
 	var deleteid = $('#boarddelete').val();
+	var realdelid = $('#realdelete').val();
 	var title = $('#boardtitle').val();
 	
 	$("#btnlist").bind('click', function() {
@@ -25,6 +26,10 @@ $(function() {
 	
 	$("#btndelete").bind('click', function() {
 		location.href = context + boardid + 'Delete' + deleteid;
+	});
+	
+	$('#btnreal').bind('click', function() {
+		location.href = context + boardid + 'RealDel' + realdelid;
 	});
 	
 	$("#btnback").bind('click', function() {
@@ -75,7 +80,7 @@ $(function() {
 	      }
 	 });
 	
-	 $('#resTime').timepicker({
+	 $('#resVisit').timepicker({
 		    timeFormat: 'h:mm p',
 		    interval: 30,
 		    minTime: '7',

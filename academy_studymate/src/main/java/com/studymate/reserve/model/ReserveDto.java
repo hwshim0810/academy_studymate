@@ -6,10 +6,10 @@ import com.studymate.common.Dto;
 
 public class ReserveDto extends Dto {
 	int resNum;
-	String resDate, resTime, borName;
+	String resDate, resVisit, borName;
 	Date resRegdate;
-	int borNum, resCount;
-	String memId;
+	int borNum, resCount, resTime;
+	String memId, memEmail;
 	
 	public int getResNum() {
 		return resNum;
@@ -23,11 +23,11 @@ public class ReserveDto extends Dto {
 	public void setResDate(String resDate) {
 		this.resDate = resDate;
 	}
-	public String getResTime() {
-		return resTime;
+	public String getResVisit() {
+		return resVisit;
 	}
-	public void setResTime(String resTime) {
-		this.resTime = resTime;
+	public void setResVisit(String resVisit) {
+		this.resVisit = resVisit;
 	}
 	public String getBorName() {
 		return borName;
@@ -53,11 +53,23 @@ public class ReserveDto extends Dto {
 	public void setResCount(int resCount) {
 		this.resCount = resCount;
 	}
+	public int getResTime() {
+		return resTime;
+	}
+	public void setResTime(int resTime) {
+		this.resTime = resTime;
+	}
 	public String getMemId() {
 		return memId;
 	}
 	public void setMemId(String memId) {
 		this.memId = memId;
+	}
+	public String getMemEmail() {
+		return memEmail;
+	}
+	public void setMemEmail(String memEmail) {
+		this.memEmail = memEmail;
 	}
 	
 }

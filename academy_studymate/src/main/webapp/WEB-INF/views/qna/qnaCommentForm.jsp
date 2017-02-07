@@ -34,17 +34,20 @@
 				<hr>
 				<!-- Button Area -->
 				<footer id="con_footer">
-					<div class="btndiv">
-						<div class="pull-right">
-							<button class="btn btn-success btn-font" id="btnreg">등록</button>
-						</div>
-						<div class="pull-left">
-							<button class="btn btn-info btn-font" id="btnback">뒤로</button>
-							<button class="btn btn-primary btn-font" id="btnlist">목록</button>
-						</div>
+				<div class="btndiv">
+					<div class="pull-right">
+						<button class="btn btn-success btn-font" id="btnreg">등록</button>
 					</div>
+					<div class="pull-left">
+						<button class="btn btn-info btn-font" id="btnback">뒤로</button>
+						<button class="btn btn-primary btn-font" id="btnlist">목록</button>
+					</div>
+				</div>
 				</footer>
 				<input type="hidden" name="boqNum" value="${qnaDto.boqNum}">
+				<input type="hidden" name="boqGroupnum" value="${qnaDto.boqGroupnum}">
+				<input type="hidden" name="memId" value="admin" />
+				<input type="hidden" name="memName" id="memName" value="운영자" />
 			</form:form>
 		</section>
 		<input type="hidden" id="boardtitle" value="QnA">

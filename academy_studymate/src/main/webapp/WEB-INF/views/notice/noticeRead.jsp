@@ -32,8 +32,10 @@
 					</div>				
 					<div class="pull-right">
 						<c:url value="/noticeList/${currentPage}" var="listUrl">
-							<c:param name="keyField" value="${keyField}" />
-							<c:param name="keyWord" value="${keyWord}" />
+							<c:if test="${not empty param.keyField && not empty param.keyWord}">
+								<c:param name="keyField" value="${param.keyField}" />
+								<c:param name="keyWord" value="${param.keyWord}" />
+							</c:if>
 						</c:url>
 						<a class="btn btn-primary btn-font" href="${listUrl}">목록</a>
 					</div>

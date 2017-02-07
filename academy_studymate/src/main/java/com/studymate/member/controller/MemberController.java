@@ -109,8 +109,8 @@ public class MemberController {
 		return "redirect:/memberRead/" + currentPage + "-" + memId;
 	}
 	
-	@RequestMapping(value = "memberDelete", method = RequestMethod.GET)
-	public String updateDelMem(MemberDto memDto) {
+	@RequestMapping(value = "memberDelete/{currentPage}", method = RequestMethod.GET)
+	public String updateDelMem(MemberDto memDto, @PathVariable("currentPage") int currentPage) {
 		return "/member/memberDeleteForm";
 	}
 	
@@ -127,9 +127,9 @@ public class MemberController {
 		return "/member/memberRealDelForm";
 	}
 	
-	@RequestMapping(value = "memberRealDel/{currentPage}", method = RequestMethod.POST)
-	public String deleteMem(String memId, @PathVariable("currentPage") int currentPage) {
+	@RequestMapping(value = "memberRealDel", method = RequestMethod.POST)
+	public String deleteMem(String memId, int currentPage) {
 		memberService.deleteMem(memId);
-		return "redirect:/member/memberList/" + currentPage;
+		return "redirect:/memberList/" + currentPage;
 	}
 }
