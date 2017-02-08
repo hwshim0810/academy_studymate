@@ -40,6 +40,7 @@
 								<c:param name="keyWord" value="${param.keyWord}" />
 							</c:if>
 						</c:url>
+						<button class="btn btn-info btn-font" id="btnback">뒤로</button>
 						<a class="btn btn-primary btn-font" href="${listUrl}">목록</a>
 					</div>
 				</div>
@@ -47,10 +48,11 @@
 			</article>
 		</section>
 		<!-- Hidden parameter -->
-		<input type="hidden" id="boardtitle" value="QnA">
-		<input type="hidden" id="boardupdate" value="/${currentPage}-${qnaDto.boqNum}/?update=y">
-		<input type="hidden" id="boarddelete" value="/?currentPage=${currentPage}&boqNum=${qnaDto.boqNum}&gNum=${qnaDto.boqGroupnum}">
 		<input type="hidden" id="boardid" value="qna">
+		<input type="hidden" id="boardtitle" value="QnA">
+		<input type="hidden" id="boardsubtitle" value="${qnaDto.boqNum}번 글">
+		<input type="hidden" id="boardupdate" value="${updateUrl}">
+		<input type="hidden" id="boarddelete" value="${deleteUrl}">
 		<%@include file="../common/Footer.jsp" %>
 		<%@include file="../common/Board.jsp" %>
 	</body>

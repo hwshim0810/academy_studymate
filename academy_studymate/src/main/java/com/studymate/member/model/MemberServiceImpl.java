@@ -119,6 +119,10 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("keyField", keyField);
 		model.addAttribute("keyWord", keyWord);
+		model.addAttribute("listBtn", "/memberList/1");
+		model.addAttribute("updateBtn", "/memberUpdate");
+		model.addAttribute("deleteBtn", "/memberDelete");
+		model.addAttribute("primaryKey", memId);
 		return model;		
 	}
 
@@ -150,6 +154,7 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 	
 	@Override
 	public Model writeForm(Model model) {
+		model.addAttribute("loginDto", new LoginDto());
 		model.addAttribute("memDto", new MemberDto());
 		return model;
 	}

@@ -71,16 +71,17 @@ public class RoomController {
 		return "redirect:/roomRead/"+ currentPage + "-" + bonNum + "?update=y";
 	}
 	
-	@RequestMapping(value = "roomDelete/{currentPage}", method = RequestMethod.GET)
-	public String delete(Model model, RoomDto roomDto, @PathVariable("currentPage") int currentPage) {
-		roomService.setCurrentPage(model, currentPage);
+	@RequestMapping(value = "roomDelete/{currentPage}-{borNum}", method = RequestMethod.GET)
+	public String delete(Model model, 
+			@PathVariable("borNum") int borNum, 
+			@PathVariable("currentPage") int currentPage) {
+		roomService.setCurrentPage(model, currentPage, borNum);
 		return "/room/roomDeleteForm";
 	}
 	
-	@RequestMapping(value = "roomDelete/{currentPage}", method = RequestMethod.POST)
-	public String delete(Model model, int borNum, 
-			@PathVariable("currentPage") int currentPage) {
-		roomService.delete(model, borNum);
+	@RequestMapping(value = "roomDelete", method = RequestMethod.POST)
+	public String delete(Model model, RoomDto roomDto, int currentPage) {
+		roomService.delete(model, roomDto);
 		return "redirect:/roomList/" + currentPage;
 	}
 	

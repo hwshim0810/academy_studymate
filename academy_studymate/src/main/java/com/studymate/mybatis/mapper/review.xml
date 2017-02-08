@@ -54,6 +54,10 @@
 					ORDER BY repRegdate DESC ) ) WHERE num between #{startRow} and #{endRow}
 	</select>
 	
+	<select id="hasReply" resultType="Integer" parameterType="Integer">
+		SELECT count(*) FROM rvreply WHERE borvNum = #{borvNum} 
+	</select>
+	
 	<select id="readPrev" resultType="ReviewDto"  parameterType="Integer">
 		<![CDATA[
         SELECT borvNum, borvTitle, borvContent, borvReplycount, borvReadcount, borvRegdate, memName, memId 

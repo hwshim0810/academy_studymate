@@ -11,44 +11,35 @@
 		<%@include file="../common/BoardSubnav.jsp" %>
 		<div class="body_top">
 		</div>
-		<div class="body center_align">
+		<section class="body center_align">
 			<div class="boardtitle lottemartdream"></div>
 			<br><br><br>
-			<form:form method="POST" commandName="reviewDto" action="${pageContext.request.contextPath}/reviewWrite">
+			<form:form name = "updateform" action="${pageContext.request.contextPath}/reviewUpdate/${currentPage}-${reviewDto.borvNum}" method="post" commandName="reviewDto">
 				<table class="table">
 					<tr>
 						<td><label for="memName">작성자</label></td>
-						<td></td>
+						<td>${reviewDto.memName}</td>
 						<td></td>
 					</tr>
 					<tr>
 						<td><label for="borvTitle">제목</label></td>
-						<td><form:input id="borvTitle" path="borvTitle" maxlength="25" cssClass="form-control" placeholder="제목을 입력해주세요"/></td>
+						<td><form:input id="borvTitle" path="borvTitle" cssClass="form-control" maxlength="25" value="${reviewDto.borvTitle}" /></td>
 						<td><form:errors path="borvTitle" /></td>
 					</tr>
 					<tr>
 						<td><label for="borvContent">내용</label></td>
-						<td><form:textarea cssClass="textcontent" path="borvContent" cols="100" rows="20"/></td>
+						<td><form:textarea cssClass="textcontent" path="borvContent" value="${reviewDto.borvContent}" cols="100" rows="20" /></td>
 						<td></td>
 					</tr>
 				</table>
 				<br><br>
 				<hr>
 				<!-- Button Area -->
-				<footer id="con_footer">
-					<div class="btndiv">
-						<div class="pull-right">
-							<button class="btn btn-success btn-font" id="btnreg">등록</button>
-						</div>
-						<div class="pull-left">
-							<button class="btn btn-primary btn-font" id="btnlist">목록</button>
-						</div>
-					</div>
-				</footer>
+				<%@include file="../common/boardBtn/UpdatePageBtn.jsp" %>
 			</form:form>
-		</div>
+		</section>
 		<input type="hidden" id="boardtitle" value="방문후기">
-		<input type="hidden" id="boardsubtitle" value="후기작성">
+		<input type="hidden" id="boardsubtitle" value="후기수정">
 		<input type="hidden" id="boardid" value="review">
 		<%@include file="../common/Footer.jsp" %>
 		<%@include file="../common/Board.jsp" %>

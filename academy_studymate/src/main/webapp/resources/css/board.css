@@ -79,6 +79,15 @@ textarea {
 	margin-bottom: 0px;
 }
 
+/* Member Login Css */
+.divLogin {
+	height: 39px;
+}
+
+.divLogin button {
+	height: 25px;
+}
+
 /* Room Intro Css*/
 #roomcolumn {
   column-width:350px;

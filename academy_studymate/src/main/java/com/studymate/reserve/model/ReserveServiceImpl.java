@@ -24,13 +24,10 @@ import com.studymate.room.model.RoomDto;
 public class ReserveServiceImpl extends CommonServiceUtil implements ServiceInterface {
 	@Autowired
 	ReserveDao reserveDao;
-	
 	@Autowired
 	RoomDao roomDao;
-	
 	@Autowired
     EmailSender emailSender;
-	
 	@Autowired
 	EmailDto email;
 	
@@ -109,6 +106,10 @@ public class ReserveServiceImpl extends CommonServiceUtil implements ServiceInte
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("keyField", keyField);
 		model.addAttribute("keyWord", keyWord);
+		model.addAttribute("listBtn", "/reserveList/1");
+		model.addAttribute("updateBtn", "/reserveUpdate");
+		model.addAttribute("deleteBtn", "/reserveDelete");
+		model.addAttribute("primaryKey", resNum);
 		return model;
 	}
 
@@ -119,13 +120,14 @@ public class ReserveServiceImpl extends CommonServiceUtil implements ServiceInte
 	}
 
 	@Override
-	public Model delete(Model model, int resNum) {
-		reserveDao.delete(resNum);
+	public Model delete(Model model, Dto resDto) {
+		reserveDao.delete(((ReserveDto) resDto).getResNum());
 		return model;
 	}
 	
 	@Override
-	public Model setCurrentPage(Model model, int currentPage) {
+	public Model setCurrentPage(Model model, int currentPage, int resNum) {
+		model.addAttribute("resNum", resNum);
 		model.addAttribute("currentPage", currentPage);
 		return model;
 	}

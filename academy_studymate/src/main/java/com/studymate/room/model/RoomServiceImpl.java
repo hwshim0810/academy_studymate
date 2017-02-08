@@ -78,6 +78,10 @@ public class RoomServiceImpl extends CommonServiceUtil implements ServiceInterfa
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("keyField", keyField);
 		model.addAttribute("keyWord", keyWord);
+		model.addAttribute("listBtn", "/roomList/1");
+		model.addAttribute("updateBtn", "/roomUpdate");
+		model.addAttribute("deleteBtn", "/roomDelete");
+		model.addAttribute("primaryKey", borNum);
 		return model;
 	}
 
@@ -88,7 +92,8 @@ public class RoomServiceImpl extends CommonServiceUtil implements ServiceInterfa
 	}
 
 	@Override
-	public Model delete(Model model, int borNum) {
+	public Model delete(Model model, Dto roomDto) {
+		int borNum = ((RoomDto) roomDto).getBorNum();
 		String filePath = ((RoomDto) roomDao.read(borNum)).getBorNewFilename();
 		if (!(filePath.equals(""))) fileDelete(filePath);
 		
@@ -98,7 +103,8 @@ public class RoomServiceImpl extends CommonServiceUtil implements ServiceInterfa
 	}
 
 	@Override
-	public Model setCurrentPage(Model model, int currentPage) {
+	public Model setCurrentPage(Model model, int currentPage, int borNum) {
+		model.addAttribute("borNum", borNum);
 		model.addAttribute("currentPage", currentPage);
 		return model;
 	}

@@ -78,15 +78,17 @@ public class ReserveController {
 		return "redirect:/reserveRead/" + currentPage  + "-" + resNum;
 	}
 	
-	@RequestMapping(value = "reserveDelete/{currentPage}", method = RequestMethod.GET)
-	public String delete(Model model, ReserveDto resDto, @PathVariable("currentPage") int currentPage) {
-		resService.setCurrentPage(model, currentPage);
+	@RequestMapping(value = "reserveDelete/{currentPage}-{resNum}", method = RequestMethod.GET)
+	public String delete(Model model, 
+			@PathVariable("resNum") int resNum, 
+			@PathVariable("currentPage") int currentPage) {
+		resService.setCurrentPage(model, currentPage, resNum);
 		return "/reserve/reserveDeleteForm";
 	}
 	
 	@RequestMapping(value = "reserveDelete", method = RequestMethod.POST)
-	public String delete(Model model, int resNum, int currentPage) {
-		resService.delete(model, resNum);
+	public String delete(Model model, ReserveDto resDto, int currentPage) {
+		resService.delete(model, resDto);
 		return "redirect:/reserveList/" + currentPage;
 	}
 	

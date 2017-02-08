@@ -58,16 +58,20 @@ public class ReviewController {
 		return "/review/reviewRead";
 	}
 	
-	@RequestMapping(value = "reviewUpdate", method = RequestMethod.GET)
-	public String update(Model model, int borvNum, int currentPage, String update,
+	@RequestMapping(value = "reviewUpdate/{currentPage}-{borvNum}", method = RequestMethod.GET)
+	public String update(Model model, 
+			@PathVariable("borvNum") int borvNum, 
+			@PathVariable("currentPage") int currentPage, String update,
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
 		reviewService.read(model, borvNum, currentPage, update, keyField, keyWord);
 		return "/review/reviewUpdateForm";
 	}
 	
-	@RequestMapping(value = "reviewUpdate", method = RequestMethod.POST)
-	public String update(Model model ,@Valid ReviewDto reviewDto, int borvNum, int currentPage, BindingResult result) {
+	@RequestMapping(value = "reviewUpdate/{currentPage}-{borvNum}", method = RequestMethod.POST)
+	public String update(Model model ,@Valid ReviewDto reviewDto, 
+			@PathVariable("borvNum") int borvNum, 
+			@PathVariable("currentPage") int currentPage, BindingResult result) {
 		if (result.hasErrors())
 			return "/review/reviewUpdateForm";
 		
@@ -75,15 +79,17 @@ public class ReviewController {
 		return "redirect:/reviewRead/" + currentPage + "-" + borvNum  +"?update=y";
 	}
 	
-	@RequestMapping(value = "reviewDelete/{currentPage}", method = RequestMethod.GET)
-	public String delete(Model model, ReviewDto reviewDto, @PathVariable("currentPage") int currentPage) {
-		reviewService.setCurrentPage(model, currentPage);
+	@RequestMapping(value = "reviewDelete/{currentPage}-{borvNum}", method = RequestMethod.GET)
+	public String delete(Model model, 
+			@PathVariable("borvNum") int borvNum, 
+			@PathVariable("currentPage") int currentPage) {
+		reviewService.setCurrentPage(model, currentPage, borvNum);
 		return "/review/reviewDeleteForm";
 	}
 	
-	@RequestMapping(value = "reviewDelete/{currentPage}", method = RequestMethod.POST)
-	public String deleteHasReply(int borvNum, @PathVariable("currentPage") int currentPage) {
-		String result = reviewService.deleteHasReply(borvNum, currentPage);
+	@RequestMapping(value = "reviewDelete", method = RequestMethod.POST)
+	public String deleteHasReply(Model model, ReviewDto reviewDto, int currentPage) {
+		String result = reviewService.deleteHasReply(model, reviewDto, currentPage);
 		return result;
 	}
 	

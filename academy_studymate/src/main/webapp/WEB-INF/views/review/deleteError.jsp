@@ -7,16 +7,9 @@
 	<title>삭제</title>
 	</head>
 	<body>
-		<form action="/studymate/noticeDelete" id="delForm" method="post">
-			<input type="hidden"  name="bonNum" value="${bonNum}">
-			<input type="hidden"  name="currentPage" value="${currentPage}">
-		</form>
 		<script type="text/javascript">
-			if (confirm("글을 삭제하시겠습니까?") == true) {
-				document.getElementById('delForm').submit();
-			} else {
-				history.back();
-			} 
+			alert('댓글이 있는 글은 삭제불가능합니다.');
+			location.href = '${pageContext.request.contextPath}/reviewRead/${currentPage}-${borvNum}?update=y';
 		</script>
 	</body>
 </html>

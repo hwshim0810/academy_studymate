@@ -31,9 +31,10 @@
 			</article>
 		</section>
 		<!-- Hidden parameter -->
-		<input type="hidden" id="boardtitle" value="회원가입">
 		<input type="hidden" id="boardid" value="member">
+		<input type="hidden" id="boardtitle_client" value="회원가입">
 		<%@include file="../common/Footer.jsp" %>
 		<%@include file="../common/Board.jsp" %>
+		<%@include file="../common/Joinscript.jsp" %>
 	</body>
 </html>

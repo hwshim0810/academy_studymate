@@ -71,15 +71,17 @@ public class NoticeController {
 		return "redirect:/noticeRead/" + currentPage + "-" + bonNum + "?update=y";
 	}
 	
-	@RequestMapping(value = "noticeDelete", method = RequestMethod.GET)
-	public String delete(Model model, NoticeDto noticeDto, int currentPage) {
-		noticeService.setCurrentPage(model, currentPage);
+	@RequestMapping(value = "noticeDelete/{currentPage}-{bonNum}", method = RequestMethod.GET)
+	public String delete(Model model, 
+			@PathVariable("bonNum") int bonNum, 
+			@PathVariable("currentPage") int currentPage) {
+		noticeService.setCurrentPage(model, currentPage, bonNum);
 		return "/notice/noticeDeleteForm";
 	}
 	
 	@RequestMapping(value = "noticeDelete", method = RequestMethod.POST)
-	public String delete(Model model,  int bonNum, int currentPage) {
-		noticeService.delete(model, bonNum);
+	public String delete(Model model,  NoticeDto noticeDto, int currentPage) {
+		noticeService.delete(model, noticeDto);
 		return "redirect:/noticeList/" + currentPage;
 	}
 	

@@ -27,7 +27,7 @@
 				<form:form id="memForm" class="form-horizontal" method="POST" commandName="memDto" action="/studymate/memberWrite">
 					<div class="container col-xs-12">
 						<fieldset>
-								<!-- Form Name -->
+							<!-- Form Name -->
 							<legend class="sr-only">회원가입</legend>
 							<div class="col-xs-12">
 								<h3>사이트 이용정보 입력</h3>
@@ -124,8 +124,8 @@
 							<div class="form-group">
 								<label class="col-xs-4 control-label" for="memSex">성별</label>  
 								<div class="col-xs-6">
-									<form:radiobutton path="memSex" value="M" label="남자"/>
-									<form:radiobutton path="memSex" value="F" label="여자"/>
+									<form:radiobutton path="memSex" value="남자" label="남자"/>
+									<form:radiobutton path="memSex" value="여자" label="여자"/>
 								</div>
 								<div class="col-xs-2">
 									<form:errors path="memSex" />
@@ -159,8 +159,9 @@
 				</form:form>
 			</article>
 		</section>
-		<input type="hidden" id="boardtitle" value="회원가입">
 		<input type="hidden" id="boardid" value="member">
+		<input type="hidden" id="boardtitle_client" value="회원가입">
+		<!-- 관리자와 구분필요 -->
 		<%@include file="../common/JoinFooter.jsp" %>
 		<%@include file="../common/Board.jsp" %>
 		<%@include file="../common/Joinscript.jsp" %>

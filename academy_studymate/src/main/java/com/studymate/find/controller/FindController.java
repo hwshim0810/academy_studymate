@@ -74,8 +74,8 @@ public class FindController {
 	}
 	
 	@RequestMapping(value = "findDelete", method = RequestMethod.POST)
-	public String delete(Model model, int bofNum, int currentPage) {
-		findService.delete(model, bofNum);
+	public String delete(Model model, FindDto findDto, int currentPage) {
+		findService.delete(model, findDto);
 		return "redirect:/findList?currentPage=" + currentPage;
 	}
 	

@@ -72,13 +72,13 @@ public class FindServiceImpl extends CommonServiceUtil implements ServiceInterfa
 	}
 
 	@Override
-	public Model delete(Model model, int bofNum) {
-		findDao.delete(bofNum);
+	public Model delete(Model model, Dto findDto) {
+		findDao.delete(((FindDto) findDto).getBofNum());
 		return model;
 	}
 
 	@Override
-	public Model setCurrentPage(Model model, int currentPage) {
+	public Model setCurrentPage(Model model, int currentPage, int bofNum) {
 		// TODO Auto-generated method stub
 		return null;
 	}

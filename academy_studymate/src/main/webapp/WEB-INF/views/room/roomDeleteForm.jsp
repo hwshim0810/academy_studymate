@@ -8,8 +8,9 @@
 <title>삭제</title>
 </head>
 <body>
-<form action="<%=request.getContextPath()%>/roomDelete/${currentPage}" id="delForm" method="post">
-	<input type="hidden"  name="borNum" value="${param.borNum}">
+<form action="<%=request.getContextPath()%>/roomDelete" id="delForm" method="post">
+	<input type="hidden"  name="borNum" value="${borNum}" />
+	<input type="hidden" name="currentPage" value="${currentPage}" />
 </form>
 <script type="text/javascript">
 	if (confirm("글을 삭제하시겠습니까?") == true) {

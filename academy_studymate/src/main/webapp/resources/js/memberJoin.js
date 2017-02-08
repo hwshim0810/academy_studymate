@@ -98,5 +98,13 @@ $(function() {
 		});
 	});
 	
-	
+	var context = '/studymate/';
+	var title = $('#boardtitle_client').val();
+	$('.boardtitle').html(
+			'<h1 class="htag normal w300 subsize">' + title + '</h1>'
+			+ '<div class="pull-right"><ol class="breadcrumb">' 
+			+ '<li><a href="'+ context + '">Home</a></li>'
+			+ '<li class="active">' + title + '</li>'
+			+ '</ol></div>'
+			+ '<br><br><hr>');		
 });

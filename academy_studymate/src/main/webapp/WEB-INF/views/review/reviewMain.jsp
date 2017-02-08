@@ -33,7 +33,7 @@
 						</c:url>
 						<tr>
 							<td class="hidden-xs hidden-sm table_center">${item.borvNum}</td>
-							<td class="table_center"><a href="${readUrl}">${item.borvTitle}</a></td>
+							<td class="table_center"><a href="${readUrl}">${item.borvTitle}</a> <span class="badge">${item.borvReplycount}</span></td>
 							<td class="table_center">${item.memName}</td>
 							<td class="table_center">${item.borvRegdate}</td>
 							<td class="hidden-xs hidden-sm table_center">${item.borvReadcount}</td>
@@ -61,10 +61,10 @@
 				</div>
 			</footer>
 		</section>
+		<input type="hidden" id="boardid" value="review">
+		<input type="hidden" id="boardtitle" value="방문후기">
 		<input type="hidden" id="boardpage" value="${currentPage}">
 		<input type="hidden" id="boardtotal" value="${totalCount}">
-		<input type="hidden" id="boardtitle" value="방문후기">
-		<input type="hidden" id="boardid" value="review">
 		<%@include file="../common/Footer.jsp" %>
 		<%@include file="../common/Board.jsp" %>
 	</body>

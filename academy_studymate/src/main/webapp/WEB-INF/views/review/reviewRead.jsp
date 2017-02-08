@@ -60,14 +60,14 @@
 							</tr>
 						</tfoot>
 					</table>					
-					<form action="/studymate/revReplyList" method="POST" id="pagingform">
+					<form action="${pageContext.request.contextPath}/revReplyList" method="POST" id="pagingform">
 						<input type="hidden" name="borvNum" value="${reviewDto.borvNum}" id="replyBorv" />
 						<input type="hidden" name="replyPage" value=""  id="replyPage"/>
 					</form>
 				</article>
 				<!-- ReplyWrite Area -->
 				<article class="replywrite_div col-xs-12">
-					<form id="replyform" method="POST" action="/studymate/revReplyWrite">
+					<form id="replyform" method="POST" action="${pageContext.request.contextPath}/revReplyWrite">
 						<hr>
 						<div class="row">
 							<div class="col-xs-3 reply_column"><strong>작성자</strong></div>
@@ -100,28 +100,16 @@
 				</article>
 				<br><br>
 				<hr>
-			<!-- Button Area -->
-			<footer id="con_footer">
-				<div class="btndiv">
-					<%@include file="../common/boardBtn/ReadBtn_updel.jsp" %>			
-					<div class="pull-right">
-						<c:url value="/reviewList/${currentPage}" var="listUrl">
-							<c:if test="${not empty param.keyField && not empty param.keyWord}">
-								<c:param name="keyField" value="${param.keyField}" />
-								<c:param name="keyWord" value="${param.keyWord}" />
-							</c:if>
-						</c:url>
-						<a class="btn btn-primary btn-font" href="${listUrl}">목록</a>
-					</div>
-				</div>
-			</footer>
+				<!-- Button Area -->
+				<%@include file="../common/boardBtn/ReadBtn.jsp" %>
 			</article>
 		</section>
 		<!-- Hidden parameter -->
-		<input type="hidden" id="boardtitle" value="방문후기">
-		<input type="hidden" id="boardupdate" value="/${currentPage}-${reviewDto.borvNum}/?update=y">
-		<input type="hidden" id="boarddelete" value="/?currentPage=${currentPage}&borvNum=${reviewDto.borvNum}">
 		<input type="hidden" id="boardid" value="review">
+		<input type="hidden" id="boardtitle" value="방문후기">
+		<input type="hidden" id="boardsubtitle" value="${reviewDto.borvNum}번 글">
+		<input type="hidden" id="boardupdate" value="${updateUrl}">
+		<input type="hidden" id="boarddelete" value="${deleteUrl}">
 		<%@include file="../common/Footer.jsp" %>
 		<%@include file="../common/Board.jsp" %>
 	</body>

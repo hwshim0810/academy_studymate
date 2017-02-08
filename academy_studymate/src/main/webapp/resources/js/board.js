@@ -5,29 +5,33 @@ $(function() {
 	var deleteid = $('#boarddelete').val();
 	var realdelid = $('#realdelete').val();
 	var title = $('#boardtitle').val();
+	var subtitle = $('#boardsubtitle').val();
 	var currentpage = $('#boardpage').val();
 	var totalcount = $('#boardtotal').val();
 	
 	$("#btnlist").bind('click', function() {
 		location.href = context + boardid + 'List/1';
-		return false;
 	});
 	
 	$("#btnwrite").bind('click', function() {
 		location.href = context + boardid + 'Write';
-		return false;
 	});
 	
 	$("#btnreg").bind('click', function() {
 		submitContents();
 	});
-	
+
+//	$(".btn-read").bind('click', function() {
+//		var action = this.prop("id");
+//		location.href = context + boardid + action + updateid;
+//	});
 	$("#btnupdate").bind('click', function() {
-		location.href = context + boardid + 'Update' + updateid;
+		location.href = updateid;
 	});
 	
 	$("#btndelete").bind('click', function() {
-		location.href = context + boardid + 'Delete' + deleteid;
+		console.log(deleteid);
+		location.href = deleteid;
 	});
 	
 	$('#btnreal').bind('click', function() {
@@ -145,13 +149,24 @@ $(function() {
 			+ '</ol></div>'
 			+ '<br><br><hr>');
 	
-	$(".boardtitle").html(
-			'<h1 class="htag normal w300 subsize">'	+ title + '</h1>'
-			+ '<div class="pull-right"><ol class="breadcrumb">' 
-			+ '<li><a href="/studymate">Home</a></li>'
-			+ '<li class="active">' + title + '</li>'
-			+ '</ol></div>'
-			+ '<br><br><hr>');
+	if (title == subtitle) {
+		$(".boardtitle").html(
+				'<h1 class="htag normal w300 subsize">'	+ title + '</h1>'
+				+ '<div class="pull-right"><ol class="breadcrumb">' 
+				+ '<li><a href="'+ context + '">Home</a></li>'
+				+ '<li class="active">' + title + '</li>'
+				+ '</ol></div>'
+				+ '<br><br><hr>');
+	} else {
+		$(".boardtitle").html(
+				'<h1 class="htag normal w300 subsize">'	+ title + '</h1>'
+				+ '<div class="pull-right"><ol class="breadcrumb">' 
+				+ '<li><a href="' + context +'">Home</a></li>'
+				+ '<li><a href="' + context + boardid + 'List/1">' + title + '</a></li>'
+				+ '<li class="active">' + subtitle + '</li>'
+				+ '</ol></div>'
+				+ '<br><br><hr>');
+	}
 	
     //use jQuery MultiFile Plugin 
     $('#multiform input[name=file]').MultiFile({

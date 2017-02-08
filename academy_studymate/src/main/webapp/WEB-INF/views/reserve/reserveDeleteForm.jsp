@@ -8,7 +8,7 @@
 	</head>
 	<body>
 		<form action="/studymate/reserveDelete" id="delForm" method="post">
-			<input type="hidden"  name="resNum" value="${param.resNum}">
+			<input type="hidden"  name="resNum" value="${resNum}">
 			<input type="hidden"  name="currentPage" value="${currentPage}">
 		</form>
 		<script type="text/javascript">

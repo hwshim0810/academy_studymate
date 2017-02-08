@@ -60,30 +60,18 @@
 						</tr>
 					</table>
 				</article>
-			<br><br>
-			<hr>
-			<!-- Button Area -->
-			<footer id="con_footer">
-				<div class="btndiv">
-					<%@include file="../common/boardBtn/ReadBtn_updel.jsp" %>			
-					<div class="pull-right">
-						<c:url value="/memberList/${currentPage}" var="listUrl">
-							<c:if test="${not empty param.keyField && not empty param.keyWord}">
-								<c:param name="keyField" value="${param.keyField}" />
-								<c:param name="keyWord" value="${param.keyWord}" />
-							</c:if>
-						</c:url>
-						<a class="btn btn-primary btn-font" href="${listUrl}">목록</a>
-					</div>
-				</div>
-			</footer>
+				<br><br>
+				<hr>
+				<!-- Button Area -->
+				<%@include file="../common/boardBtn/ReadBtn.jsp"%>
 			</article>
 		</section>
 		<!-- Hidden parameter -->
-		<input type="hidden" id="boardtitle" value="회원관리">
 		<input type="hidden" id="boardid" value="member">
-		<input type="hidden" id="boardupdate" value="/${currentPage}-${memDto.memId}">
-		<input type="hidden" id="realdelete" value="/${currentPage}/?memId=${memDto.memId}">
+		<input type="hidden" id="boardtitle" value="회원관리">
+		<input type="hidden" id="boardsubtitle" value="${memDto.memId}님">
+		<input type="hidden" id="boardupdate" value="${updateUrl}">
+		<input type="hidden" id="boarddelete" value="${deleteUrl}">
 		<%@include file="../common/Footer.jsp" %>
 		<%@include file="../common/Board.jsp" %>
 	</body>

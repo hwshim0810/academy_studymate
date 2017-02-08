@@ -36,8 +36,9 @@
 				</footer>
 			</form:form>
 		</section>
-		<input type="hidden" id="boardtitle" value="공지사항">
 		<input type="hidden" id="boardid" value="notice">
+		<input type="hidden" id="boardtitle" value="공지사항">
+		<input type="hidden" id="boardsubtitle" value="글쓰기">
 		<%@include file="../common/Footer.jsp" %>
 		<%@include file="../common/Board.jsp" %>
 		<script src="<c:url value='/resources/js/boardWrite/noticeWrite.js'/>" charset="utf-8"></script>

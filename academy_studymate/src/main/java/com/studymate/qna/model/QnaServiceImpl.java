@@ -58,6 +58,10 @@ public class QnaServiceImpl extends CommonServiceUtil implements ServiceInterfac
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("keyField", keyField);
 		model.addAttribute("keyWord", keyWord);
+		model.addAttribute("listBtn", "/qnaList/1");
+		model.addAttribute("updateBtn", "/qnaUpdate");
+		model.addAttribute("deleteBtn", "/qnaDelete");
+		model.addAttribute("primaryKey", boqNum);
 		return model;
 	}
 
@@ -78,8 +82,8 @@ public class QnaServiceImpl extends CommonServiceUtil implements ServiceInterfac
 	}
 
 	@Override // 답글때문에 사용안하는 Method
-	public Model delete(Model model, int boqNum) {
-		qnaDao.delete(boqNum);
+	public Model delete(Model model, Dto qnaDto) {
+		qnaDao.delete(((QnaDto) qnaDto).getBoqNum());
 		return model;
 	}
 	
@@ -111,7 +115,8 @@ public class QnaServiceImpl extends CommonServiceUtil implements ServiceInterfac
 	}
 	
 	@Override
-	public Model setCurrentPage(Model model, int currentPage) {
+	public Model setCurrentPage(Model model, int currentPage, int boqNum) {
+		model.addAttribute("boqNum", boqNum);
 		model.addAttribute("currentPage", currentPage);
 		return model;
 	}

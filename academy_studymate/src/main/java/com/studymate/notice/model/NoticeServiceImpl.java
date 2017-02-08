@@ -63,6 +63,9 @@ public class NoticeServiceImpl extends CommonServiceUtil implements ServiceInter
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("keyField", keyField);
 		model.addAttribute("keyWord", keyWord);
+		model.addAttribute("listBtn", "/noticeList/1");
+		model.addAttribute("updateBtn", "/noticeUpdate");
+		model.addAttribute("deleteBtn", "/noticeDelete");
 		return model;
 	}
 
@@ -73,13 +76,14 @@ public class NoticeServiceImpl extends CommonServiceUtil implements ServiceInter
 	}
 
 	@Override
-	public Model delete(Model model, int bonNum) {
-		noticeDao.delete(bonNum);
+	public Model delete(Model model, Dto noticeDto) {
+		noticeDao.delete(((NoticeDto) noticeDto).getBonNum());
 		return model;
 	}
 
 	@Override
-	public Model setCurrentPage(Model model, int currentPage) {
+	public Model setCurrentPage(Model model, int currentPage, int bonNum) {
+		model.addAttribute("bonNum", bonNum);
 		model.addAttribute("currentPage", currentPage);
 		return model;
 	}

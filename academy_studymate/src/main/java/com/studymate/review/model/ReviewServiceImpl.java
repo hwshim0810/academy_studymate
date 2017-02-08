@@ -71,6 +71,10 @@ public class ReviewServiceImpl extends CommonServiceUtil implements ServiceInter
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("keyField", keyField);
 		model.addAttribute("keyWord", keyWord);
+		model.addAttribute("listBtn", "/reviewList/1");
+		model.addAttribute("updateBtn", "/reviewUpdate");
+		model.addAttribute("deleteBtn", "/reviewDelete");
+		model.addAttribute("primaryKey", borvNum);
 		return model;
 	}
 
@@ -86,18 +90,22 @@ public class ReviewServiceImpl extends CommonServiceUtil implements ServiceInter
 	}
 
 	@Override // 댓글때문에 사용하지 않음
-	public Model delete(Model model, int borvNum) {
+	public Model delete(Model model, Dto reviewDto) {
 		return model;
 	}
 	
-	public String deleteHasReply(int borvNum, int currentPage) {
+	public String deleteHasReply(Model model, ReviewDto reviewDto, int currentPage) {
+		int borvNum = ((ReviewDto) reviewDto).getBorvNum();
 		int replyCount =  reviewDao.hasReply(borvNum);
-		
+		// 어떻게 모델처리하지??
 		if (replyCount == 0) {
 			reviewDao.delete(borvNum);
 			return "redirect:/reviewList/" + currentPage;
-		} else
-			return "/reserve/deleteError";
+		} else {
+			model.addAttribute("borvNum", borvNum);
+			model.addAttribute("currentPage", currentPage);
+			return "/review/deleteError";
+		}
 	}
 	
 	public HashMap<String, Object> listReply(int replyPage, int borvNum) {
@@ -137,7 +145,8 @@ public class ReviewServiceImpl extends CommonServiceUtil implements ServiceInter
 	}
 
 	@Override
-	public Model setCurrentPage(Model model, int currentPage) {
+	public Model setCurrentPage(Model model, int currentPage, int borvNum) {
+		model.addAttribute("borvNum", borvNum);
 		model.addAttribute("currentPage", currentPage);
 		return model;
 	}

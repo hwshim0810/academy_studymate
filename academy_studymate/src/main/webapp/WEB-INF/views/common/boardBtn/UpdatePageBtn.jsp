@@ -2,7 +2,7 @@
 <footer id="con_footer">
 	<div class="btndiv">
 		<div class="pull-right">
-			<button class="btn btn-success btn-font" id="btnwrite">추가</button>
+			<button class="btn btn-success btn-font" id="btnreg">수정</button>
 		</div>
 		<div class="pull-left">
 			<button class="btn btn-primary btn-font" id="btnlist">목록</button>
