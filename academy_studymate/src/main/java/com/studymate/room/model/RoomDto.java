@@ -7,7 +7,7 @@ import com.studymate.common.Dto;
 public class RoomDto extends Dto{
 	int borNum;
 	String borName, borAddr, borArea, borFilename, borNewFilename;
-	int borPrice, borReadcount;
+	int borReadcount;
 	Date borRegdate;
 	
 	public String getBorNewFilename() {
@@ -45,12 +45,6 @@ public class RoomDto extends Dto{
 	}
 	public void setBorFilename(String borFilename) {
 		this.borFilename = borFilename;
-	}
-	public int getBorPrice() {
-		return borPrice;
-	}
-	public void setBorPrice(int borPrice) {
-		this.borPrice = borPrice;
 	}
 	public int getBorReadcount() {
 		return borReadcount;

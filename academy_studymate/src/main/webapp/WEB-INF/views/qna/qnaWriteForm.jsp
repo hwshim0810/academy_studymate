@@ -13,12 +13,7 @@
 		</div>
 		<div class="body center_align">
 			<div class="boardtitle lottemartdream"></div>
-			<div class="pull-right">
-				<ol class="breadcrumb">
-				  <li><a href="/studymate">Home</a></li>
-				  <li class="active">QnA</li>
-				</ol>
-			</div>
+			<br><br><br>
 			<form:form method="POST" commandName="qnaDto" action="/studymate/qnaWrite">
 				<table class="table">
 					<tr>
@@ -28,7 +23,7 @@
 					</tr>
 					<tr>
 						<td><label for="boqTitle">제목</label></td>
-						<td><form:input id="boqTitle" path="boqTitle" maxlength="30"/></td>
+						<td><form:input id="boqTitle" path="boqTitle" maxlength="30" placeholder="제목을 입력해주세요"/></td>
 						<td><form:errors path="boqTitle" /></td>
 					</tr>
 					<tr>

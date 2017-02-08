@@ -27,8 +27,8 @@ public class RoomServiceImpl extends CommonServiceUtil implements ServiceInterfa
 		map.put("keyWord", keyWord);
 		map.put("keyField", keyField);
 		
-		int blockCount = 5; 
-		int blockPage = 5;
+		int blockCount = 6; 
+		int blockPage = 10;
 		int totalCount = getTotalCount(roomDao, map);
 		
 		RoomPaging roomPaging = new RoomPaging(currentPage, totalCount, blockCount, blockPage, keyField, keyWord);
@@ -38,6 +38,7 @@ public class RoomServiceImpl extends CommonServiceUtil implements ServiceInterfa
 		
 		List<Dto> list = getList(roomDao, map); 
 		
+		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("roomList", list);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("pageHtml", roomPaging.getPagingHtml().toString());
@@ -51,21 +52,19 @@ public class RoomServiceImpl extends CommonServiceUtil implements ServiceInterfa
 	@Override // multipart때문에 미사용
 	public void write(Dto dto) {}
 	
-	public void write(MultipartHttpServletRequest request, Dto roomDto) {
+	public void write(MultipartHttpServletRequest request, Dto roomDto) throws Exception {
 		MultipartFile file = request.getFile("file");
-		String uploadPath = "C:/Source/upload/"; //임시경로
-	    /*
-	    String uploadPath = request.getServletContext().getRealPath("upload");
-	    System.out.println("실제 파일 업로드 경로 : "+uploadPath);
-	    */
+//		String uploadPath = "C:/Source/upload/"; //임시경로
+	    
+	    String uploadPath = request.getServletContext().getRealPath("resources/roomImg/");
 		String orginFileName = file.getOriginalFilename();
-		String newFileName = "";
+		String[] fileNames = {};
 		
 		if (!(orginFileName.equals("")))
-			newFileName = fileUpload(file, orginFileName, uploadPath);
+			fileNames = fileUpload(file, orginFileName, uploadPath + "/");
 		
-		((RoomDto) roomDto).setBorFilename(orginFileName);
-		((RoomDto) roomDto).setBorNewFilename(newFileName);
+		((RoomDto) roomDto).setBorNewFilename(fileNames[0]);
+		((RoomDto) roomDto).setBorFilename(fileNames[1]);
 		
 		roomDao.write(roomDto);
 	}
@@ -101,6 +100,12 @@ public class RoomServiceImpl extends CommonServiceUtil implements ServiceInterfa
 	@Override
 	public Model setCurrentPage(Model model, int currentPage) {
 		model.addAttribute("currentPage", currentPage);
+		return model;
+	}
+
+	@Override
+	public Model writeForm(Model model) {
+		model.addAttribute("roomDto", new RoomDto());
 		return model;
 	}
 

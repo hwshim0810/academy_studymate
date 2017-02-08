@@ -30,7 +30,7 @@ public class FindController {
 	
 	@RequestMapping(value = "findWrite", method = RequestMethod.GET)
 	public String write(Model model) {
-		model.addAttribute("findDto", new FindDto());
+		findService.writeForm(model);
 		return "/find/findWriteForm";
 	}
 	

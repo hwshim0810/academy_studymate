@@ -11,10 +11,7 @@
 		</div>
 		<section class="body center_align">
 			<%@include file="../common/BoardSubnav.jsp" %>
-			<div class="boardtitle lottemartdream"></div>
-			<div class="pull-left count">
-				<span>총 ${totalCount}건 ${currentPage}페이지</span>
-			</div>
+			<div class="boardmaintitle lottemartdream"></div>
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -59,9 +56,8 @@
 			<br>
 			<hr>
 			<!-- Button Area -->
-			<%@include file="../common/BoardSearch.jsp" %>
+			<%@include file="../common/search/QnaSearch.jsp" %>
 			<br>
-			<!-- Button Area -->
 			<footer id="con_footer">
 				<div class="btndiv">
 					<div class="pull-right">
@@ -73,6 +69,8 @@
 				</div>
 			</footer>
 		</section>
+		<input type="hidden" id="boardpage" value="${currentPage}">
+		<input type="hidden" id="boardtotal" value="${totalCount}">
 		<input type="hidden" id="boardtitle" value="QnA">
 		<input type="hidden" id="boardid" value="qna">
 		<%@include file="../common/Footer.jsp" %>

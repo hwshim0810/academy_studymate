@@ -13,6 +13,7 @@
 		</div>
 		<div class="body center_align">
 			<div class="boardtitle lottemartdream"></div>
+			<br><br><br>
 			<form:form method="POST" commandName="reviewDto" action="/studymate/reviewWrite">
 				<table class="table">
 					<tr>
@@ -22,7 +23,7 @@
 					</tr>
 					<tr>
 						<td><label for="borvTitle">제목</label></td>
-						<td><form:input id="borvTitle" path="borvTitle" maxlength="30" cssClass="form-control"/></td>
+						<td><form:input id="borvTitle" path="borvTitle" maxlength="30" cssClass="form-control" placeholder="제목을 입력해주세요"/></td>
 						<td><form:errors path="borvTitle" /></td>
 					</tr>
 					<tr>

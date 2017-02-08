@@ -11,10 +11,7 @@
 		</div>
 		<section class="body center_align">
 			<%@include file="../common/AdminSubnav.jsp" %>
-			<div class="boardtitle lottemartdream"></div>
-			<div class="pull-left count">
-				<span>총 ${totalCount}건 ${currentPage}페이지</span>
-			</div>
+			<div class="boardmaintitle lottemartdream"></div>
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -50,19 +47,13 @@
 			</table>
 			<hr>
 			<!-- Button Area -->
-			<%@include file="../common/ResSearch.jsp" %>
+			<%@include file="../common/search/ResSearch.jsp" %>
 			<br>
-			<footer id="con_footer">
-				<div class="btndiv">
-					<div class="pull-right">
-						<button class="btn btn-success btn-font" id="btnwrite">추가</button>
-					</div>
-					<div class="pull-left">
-						<button class="btn btn-primary btn-font" id="btnlist">목록</button>
-					</div>
-				</div>
-			</footer>
+			<%@include file="../common/boardBtn/ListBtn_admin.jsp" %>
 		</section>
+		<!-- Hidden parameter -->
+		<input type="hidden" id="boardpage" value="${currentPage}">
+		<input type="hidden" id="boardtotal" value="${totalCount}">
 		<input type="hidden" id="boardtitle" value="예약관리">
 		<input type="hidden" id="boardid" value="reserve">
 		<%@include file="../common/Footer.jsp" %>

@@ -41,7 +41,7 @@ public class RoomPaging {
 		
 		if (keyWord == null || keyWord.equals("") || keyField.equals("all")) {
 			if (currentPage > blockPage) {
-				pagingHtml.append("<a href='roomList?currentPage=" + (startPage - 1) + "&keyField=&keyWord='>");
+				pagingHtml.append("<a href='/studymate/roomList/" + (startPage - 1) + "'>");
 				pagingHtml.append("이전");
 				pagingHtml.append("</a>");
 			}
@@ -56,9 +56,9 @@ public class RoomPaging {
 					pagingHtml.append(i);
 					pagingHtml.append("</font></strong>");
 				} else {
-					pagingHtml.append("&nbsp;<a href='roomList?currentPage=");
+					pagingHtml.append("&nbsp;<a href='/studymate/roomList/");
 					pagingHtml.append(i);
-					pagingHtml.append("&keyField=&keyWord='>");
+					pagingHtml.append("'>");
 					pagingHtml.append(i);
 					pagingHtml.append("</a>");
 				}
@@ -67,13 +67,13 @@ public class RoomPaging {
 			pagingHtml.append("&nbsp;&nbsp;|&nbsp;&nbsp;");
 			// 다음 block 페이지
 			if (totalPage - startPage >= blockPage) {
-				pagingHtml.append("<a href='roomList?currentPage=" + (endPage + 1) + "&keyField=&keyWord='>");
+				pagingHtml.append("<a href='/studymate/roomList/" + (endPage + 1) + "'>");
 				pagingHtml.append("다음");
 				pagingHtml.append("</a>");
 			}
 		} else { // 검색이 있는 경우
 			if (currentPage > blockPage) {
-				pagingHtml.append("<a href='roomList?currentPage=" + (startPage - 1) + "&keyField=" + keyField
+				pagingHtml.append("<a href='/studymate/roomList/" + (startPage - 1) + "/?keyField=" + keyField
 						+ "&keyWord=" + keyWord + "'>");
 				pagingHtml.append("[이전]");
 				pagingHtml.append("</a>");
@@ -88,9 +88,9 @@ public class RoomPaging {
 					pagingHtml.append(i);
 					pagingHtml.append("</font></b>");
 				} else {
-					pagingHtml.append("&nbsp;<a href='roomList?currentPage=");
+					pagingHtml.append("&nbsp;<a href='/studymate/roomList/");
 					pagingHtml.append(i);
-					pagingHtml.append("&keyField=" + keyField + "&keyWord=" + keyWord + "'>");
+					pagingHtml.append("/?keyField=" + keyField + "&keyWord=" + keyWord + "'>");
 					pagingHtml.append(i);
 					pagingHtml.append("</a>");
 				}
@@ -98,7 +98,7 @@ public class RoomPaging {
 			}
 			pagingHtml.append("&nbsp;&nbsp;|&nbsp;&nbsp;");
 			if (endPage < totalPage) {
-				pagingHtml.append("<a href='roomList?currentPage=" + (endPage + 1) + "&keyField=" + keyField
+				pagingHtml.append("<a href='/studymate/roomList/" + (endPage + 1) + "/?keyField=" + keyField
 						+ "&keyWord=" + keyWord + "'>");
 				pagingHtml.append("[다음]");
 				pagingHtml.append("</a>");

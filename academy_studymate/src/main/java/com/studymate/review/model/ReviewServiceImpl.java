@@ -141,5 +141,11 @@ public class ReviewServiceImpl extends CommonServiceUtil implements ServiceInter
 		model.addAttribute("currentPage", currentPage);
 		return model;
 	}
+	
+	@Override
+	public Model writeForm(Model model) {
+		model.addAttribute("reviewDto", new ReviewDto());
+		return model;
+	}
 
 }

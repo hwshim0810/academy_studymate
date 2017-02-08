@@ -8,11 +8,11 @@
 	<sql id="search">
 		<where>
 			<if test="keyWord!=null and keyWord!=''">
-				<if test="keyField=='name'">
+				<if test="keyField=='borName'">
 					borName LIKE '%'||#{keyWord}||'%' 
 				</if>
-				<if test="keyField=='addr'">
-					bonAddr LIKE '%'||#{keyWord}||'%' or boqArea LIKE '%'||#{keyWord}||'%'  
+				<if test="keyField=='borAddr'">
+					borAddr LIKE '%'||#{keyWord}||'%' or borArea LIKE '%'||#{keyWord}||'%'  
 				</if>
 			</if>
 		</where>
@@ -39,11 +39,11 @@
 	</select>
 	
 	<insert id="write"  parameterType="RoomDto">
-		INSERT INTO room VALUES (	borNum.nextval, 'borName', 'addr', 'area', #{borFilename}, #{borNewFilename}, 0, 0, sysdate) 
+		INSERT INTO room VALUES (	borNum.nextval, #{borName}, #{borAddr}, #{borArea}, #{borFilename}, #{borNewFilename}, 0, sysdate) 
 	</insert>
 	
 	<update id="update" parameterType="RoomDto">
-		UPDATE room SET borName = #{borName}, borAddr = #{borAddr}, borArea = #{borArea}WHERE borNum = #{borNum}  
+		UPDATE room SET borName = #{borName}, borAddr = #{borAddr}, borArea = #{borArea} WHERE borNum = #{borNum}  
 	</update>
 	
 	<update id="updateReadCount" parameterType="Integer">

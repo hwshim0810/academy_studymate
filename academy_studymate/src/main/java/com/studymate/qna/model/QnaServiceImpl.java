@@ -115,5 +115,11 @@ public class QnaServiceImpl extends CommonServiceUtil implements ServiceInterfac
 		model.addAttribute("currentPage", currentPage);
 		return model;
 	}
+	
+	@Override
+	public Model writeForm(Model model) {
+		model.addAttribute("qnaDto", new QnaDto());
+		return model;
+	}
 
 }

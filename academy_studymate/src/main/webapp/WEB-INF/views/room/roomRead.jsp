@@ -1,58 +1,56 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<!DOCTYPE html>
 <html>
-<head>
-<script type="text/javascript">
-function member_update(){
-	location.href="noticeUpdate?bonNum=${noticeDto.bonNum}&currentPage=${currentPage}&update=yes";
-}
-function member_delete(){
-	location.href="<%=request.getContextPath()%>/roomDelete/${currentPage}?borNum=${roomDto.borNum}";
-}
-</script>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>정보</title>
-</head>
-<body>
-<h1>정보</h1>
-
-<table width="400">
-	<tr>
-		<th width="150">글쓴이</th><td width="250"></td>
-	</tr>
-	<tr>
-		<th>작성일</th><td>${roomDto.borRegdate}</td>
-	</tr>
-	<tr>
-		<th>제목</th><td>${roomDto.borName}</td>
-	</tr>
-	<tr>
-		<th>내용</th><td>${roomDto.borNewFilename}</td>
-	</tr>
-	<tr>
-		<th>조회수</th><td>${roomDto.borReadcount}</td>
-	</tr>
-	<tr>
-		<td colspan="2" align="center">
-			<input type="button" value="수정" onclick="member_update()"/>
-			<input type="button" value="삭제" onclick="member_delete()"/>
-			<!--<c:choose>
-				<c:when test="${sessionScope.GRADE == 'ADMIN' }">
-					<input type="button" value="회원 목록" onclick="location.href='list.htm'"/>
-				</c:when>
-				<c:otherwise>
-				</c:otherwise>
-			</c:choose>-->
-			<c:url value="/roomList/${currentPage}" var="listUrl">
-				<c:param name="keyField" value="${keyField}" />
-				<c:param name="keyWord" value="${keyWord}" />
-			</c:url>
-			<a href="${listUrl}">글목록</a>
-		</td>
-	</tr>
-	
-</table>
-</body>
+	<head>
+		<%@include file="../common/Head.jsp" %>
+	</head>
+	<body>
+		<%@include file="../common/Header.jsp" %>
+		<div class="body_top">
+		</div>
+		<section class="body center_align">
+			<div class="boardtitle lottemartdream"></div>
+			<article id="contents">
+				<header id="con_header" class="col-xs-12">
+					<h2 class="normal w300 subsize">${roomDto.borName}</h2>
+					<div class="dtoinfo">
+						등록일 <strong>${roomDto.borRegdate}</strong>
+					</div>
+				</header>
+				<div class="main">
+					
+					
+					
+					
+					
+				</div>
+				<br><br>
+				<hr>
+				<!-- Button Area -->
+				<footer id="con_footer">
+					<div class="btndiv">
+						<%@include file="../common/boardBtn/ReadBtn_updel.jsp" %>
+						<div class="pull-right">
+							<c:url value="/roomList/${currentPage}" var="listUrl">
+								<c:if test="${not empty param.keyField && not empty param.keyWord}">
+									<c:param name="keyField" value="${param.keyField}" />
+									<c:param name="keyWord" value="${param.keyWord}" />
+								</c:if>
+							</c:url>
+							<a class="btn btn-primary btn-font" href="${listUrl}">목록</a>
+						</div>
+					</div>
+				</footer>
+			</article>
+		</section>
+		<!-- Hidden parameter -->
+		<input type="hidden" id="boardtitle" value="지점정보">
+		<input type="hidden" id="boardupdate" value="/${currentPage}-${roomDto.borNum}">
+		<input type="hidden" id="boarddelete" value="/?currentPage=${currentPage}&borNum=${roomDto.borNum}">
+		<input type="hidden" id="boardid" value="room">
+		<%@include file="../common/Footer.jsp" %>
+		<%@include file="../common/Board.jsp" %>
+	</body>
 </html>

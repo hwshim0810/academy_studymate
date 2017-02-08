@@ -6,41 +6,33 @@
 	padding: 30px 15px;
 	margin-bottom: 50px;
 }
-
 .block {
 	display: inline-block;
 }
-
 .count {
 	padding-top: 10px;
 	padding-left: 10px;
 	padding-right: 10px;
 }
-
 .main {
 	min-height: 550px;
     padding-top: 120px;
     padding-left: 15px
 }
-
 .dtoinfo {
 	padding-bottom: 10px;
     border-bottom: 1px solid;
     padding-top: 10px;
 }
-
 .boardtitle {
 	margin-bottom: 30px;
 }
-
 .margin_btm {
 	margin-bottom: 20px;
 }
-
 .htag {
 	padding: 10px 10px;
 }
-
 .infoP {
 	padding-left: 10px;
 }
@@ -54,15 +46,12 @@
 .reply_list {
 	padding: 0 8px;
 }
-
 .reply_column {
 	padding: 10px 0;
 }
-
 .rppaging {
 	cursor:pointer;
 }
-
 textarea {
 	resize:none;
 }
@@ -76,9 +65,33 @@ textarea {
 .areadiv {
 	left: 200px;
 	}
-
 .field {
 	padding-left: 0px;
 	}
 
+}
+/* Room Intro Css*/
+#roomcolumn {
+  column-width:350px;
+  column-gap: 15px;
+}
+#roomcolumn figure {
+  display: inline-block;
+  border:1px solid rgba(0,0,0,0.2);
+  margin:0;
+  margin-bottom: 15px;
+  padding:10px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.5);;
+}
+#roomcolumn figure img {
+  width:100%;
+}
+#roomcolumn figure figcaption {
+  border-top:1px solid rgba(0,0,0,0.2);
+  padding:10px;
+  margin-top:11px;
+}
+
+#btnaddr {
+	margin-top: 10px;
 }

@@ -35,7 +35,7 @@ public class ReviewController {
 	
 	@RequestMapping(value = "reviewWrite", method = RequestMethod.GET)
 	public String write(Model model) {
-		model.addAttribute("reviewDto", new ReviewDto());
+		reviewService.writeForm(model);
 		return "/review/reviewWriteForm";
 	}
 	

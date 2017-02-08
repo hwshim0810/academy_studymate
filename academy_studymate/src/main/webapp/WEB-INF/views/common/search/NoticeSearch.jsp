@@ -5,11 +5,9 @@
 			<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3 field">
 				<label for="sel1" class="sr-only">검색 범위</label>
 				<select class="form-control" id="keyField" name="keyField">
-					<option value="borName">아이디</option>
-					<option value="memName">이름</option>
-					<option value="memAddr">주소</option>
-					<option value="memEmail">이메일</option>
-					<option value="memSex">성별</option>
+					<option value="titleNcontent">제목+내용</option>
+					<option value="title">제목</option>
+					<option value="content">내용</option>
 				</select>
 			</div>
 			<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">

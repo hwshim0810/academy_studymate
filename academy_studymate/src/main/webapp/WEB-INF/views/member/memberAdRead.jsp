@@ -65,10 +65,7 @@
 			<!-- Button Area -->
 			<footer id="con_footer">
 				<div class="btndiv">
-					<div class="pull-left">
-						<button class="btn btn-warning btn-font" id="btnupdate">수정</button>
-						<button class="btn btn-danger btn-font" id="btnreal">삭제</button>
-					</div>				
+					<%@include file="../common/boardBtn/ReadBtn_updel.jsp" %>			
 					<div class="pull-right">
 						<c:url value="/memberList/${currentPage}" var="listUrl">
 							<c:if test="${not empty param.keyField && not empty param.keyWord}">
@@ -82,6 +79,7 @@
 			</footer>
 			</article>
 		</section>
+		<!-- Hidden parameter -->
 		<input type="hidden" id="boardtitle" value="회원관리">
 		<input type="hidden" id="boardid" value="member">
 		<input type="hidden" id="boardupdate" value="/${currentPage}-${memDto.memId}">

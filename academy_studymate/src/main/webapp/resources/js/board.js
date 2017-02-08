@@ -5,6 +5,8 @@ $(function() {
 	var deleteid = $('#boarddelete').val();
 	var realdelid = $('#realdelete').val();
 	var title = $('#boardtitle').val();
+	var currentpage = $('#boardpage').val();
+	var totalcount = $('#boardtotal').val();
 	
 	$("#btnlist").bind('click', function() {
 		location.href = context + boardid + 'List/1';
@@ -58,6 +60,10 @@ $(function() {
 		$("#resForm").submit();
 	});
 	
+	$("#btnaddr").bind('click', function() {
+		execDaumPostcode();
+	});
+	
 	 $('#resDate').datepicker({
 		  prevText: '이전 달',
 		  nextText: '다음 달',
@@ -99,12 +105,41 @@ $(function() {
 	    }
 	});
     
-	$(".boardtitle").html('<h1 class="htag normal w300 subsize">' + title + '</h1><div class="pull-right">'
-			+ '<ol class="breadcrumb"><li><a href="/studymate">Home</a></li>'
-			+ '<li class="active">' + title + '</li></ol></div><br><br><hr>');
+	$(".boardmaintitle").html(
+			'<h1 class="htag normal w300 subsize">'	+ title + '</h1>'
+			+ '<div class="pull-left count"><span>총 ' + totalcount + '건 현재 '	+ currentpage + ' 페이지</span></div>'
+			+ '<div class="pull-right"><ol class="breadcrumb">' 
+			+ '<li><a href="/studymate">Home</a></li>'
+			+ '<li class="active">' + title + '</li>'
+			+ '</ol></div>'
+			+ '<br><br><hr>');
 	
-//	$("a[class=rppaging]").on('click', '. everdevel', function(){
-//	$("a[class=rppaging]").click(function(event) {
+	$(".boardtitle").html(
+			'<h1 class="htag normal w300 subsize">'	+ title + '</h1>'
+			+ '<div class="pull-right"><ol class="breadcrumb">' 
+			+ '<li><a href="/studymate">Home</a></li>'
+			+ '<li class="active">' + title + '</li>'
+			+ '</ol></div>'
+			+ '<br><br><hr>');
+	
+    //use jQuery MultiFile Plugin 
+    $('#multiform input[name=file]').MultiFile({
+        max: 1, 
+        accept: 'jpg|png|gif',
+        maxfile: 3024, //각 파일 최대 업로드 크기
+        maxsize: 3024,  //전체 파일 최대 업로드 크기
+        STRING: {
+            remove : "제거", //이미지사용가능
+            duplicate : "$file 은 이미 선택된 파일입니다.", 
+            denied : "$ext 는(은) 업로드 할수 없는 파일확장자입니다.",
+            selected:'$file 을 선택했습니다.', 
+            toomuch: "업로드할 수 있는 최대크기를 초과하였습니다.($size)", 
+            toomany: "업로드할 수 있는 최대 갯수는 $max개 입니다.",
+            toobig: "$file 은 크기가 매우 큽니다. (max $size)"
+        },
+        list:"#filelist" //파일목록을 출력
+    });
+	
 	$(document).on("click", ".rppaging",function(event) {
 		// 클릭한 대상의 아이디를 리플 페이지로 사용
 		var id = event.target.id;
@@ -136,11 +171,9 @@ $(function() {
        beforeSubmit: function (data, frm, opt) {
            return true;
        },
-       //submit이후의 처리
        success: function(data, statusText){
-           output(data); //받은 정보를 화면 출력하는 함수 호출
+           output(data);
        },
-       //ajax error
        error: function(e){
            alert("에러발생!!");
            console.log(e);
@@ -154,7 +187,7 @@ $(function() {
 function output(data) {
 	var count = 0;
 	$("#replyresult").html('');
-	//업로드한 파일을 다운로드할수있도록 화면 구성
+
 	if (data.reviewReply && data.reviewReply.length != 0) {
 		$.each (data.reviewReply, function(index, item) {
 			count++;
@@ -181,11 +214,48 @@ function output(data) {
      
     //IE에서 폼 리셋후 input[type=file] 초기화 안되는 문제. 
     //(파일이름은 지워지지만 files 프로퍼티에는 파일정보 남아있음.)
-    //참고 : http://javaking75.blog.me/220073388169
     /* if(/(MSIE|Trident)/.test(navigator.userAgent)) {
     	//ie 일때 input[type=file] init.
     	$("#multiform input[type=file]").each(function(index){
     		$(this).replaceWith($(this).clone(true));
     	});
     } */
+}
+
+function execDaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var fullAddr = ''; // 최종 주소 변수
+            var extraAddr = ''; // 조합형 주소 변수
+
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                fullAddr = data.roadAddress;
+
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                fullAddr = data.jibunAddress;
+            }
+
+            // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+            if(data.userSelectedType === 'R'){
+                //법정동명이 있을 경우 추가한다.
+                if(data.bname !== ''){
+                    extraAddr += data.bname;
+                }
+                // 건물명이 있을 경우 추가한다.
+                if(data.buildingName !== ''){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            $('#addr').val(fullAddr);
+
+            // 커서를 상세주소 필드로 이동한다.
+           $('#detailaddr').focus();
+        }
+    }).open();
 }

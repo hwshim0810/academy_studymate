@@ -82,5 +82,11 @@ public class FindServiceImpl extends CommonServiceUtil implements ServiceInterfa
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public Model writeForm(Model model) {
+		model.addAttribute("findDto", new FindDto());
+		return model;
+	}
 
 }

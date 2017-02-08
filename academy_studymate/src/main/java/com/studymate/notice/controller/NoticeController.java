@@ -31,7 +31,7 @@ public class NoticeController {
 	
 	@RequestMapping(value = "noticeWrite", method = RequestMethod.GET)
 	public String write(Model model) {
-		model.addAttribute("noticeDto", new NoticeDto());
+		noticeService.writeForm(model);
 		return "/notice/noticeWriteForm";
 	}
 	

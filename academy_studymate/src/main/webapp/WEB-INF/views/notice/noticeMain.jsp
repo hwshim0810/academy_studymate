@@ -10,10 +10,7 @@
 		<div class="body_top">
 		</div>
 		<section class="body center_align">
-			<div class="boardtitle lottemartdream"></div>
-			<div class="pull-left count">
-				<span>총 ${totalCount}건 ${currentPage}페이지</span>
-			</div>
+			<div class="boardmaintitle lottemartdream"></div>
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -47,37 +44,21 @@
 			<br>
 			<hr>
 			<!-- Button Area -->
-			<div class="searchdiv">
-				<form class="form-inline" id="searchform">
-					<div class="form-group row col-sm-6 col-md-6 col-lg-6">
-						<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3 field">
-							<label for="sel1" class="sr-only">검색 범위</label>
-							<select class="form-control" id="keyField" name="keyField">
-								<option value="titleNcontent">제목+내용</option>
-								<option value="title">제목</option>
-								<option value="content">내용</option>
-							</select>
-						</div>
-						<div class="col-xs-5 col-sm-6 col-md-6 col-lg-6">
-							<label class="sr-only">검색 내용:</label>
-							<input type="text" class="form-control" id="keyWord" name="keyWord">
-						</div>
-						<div class="col-xs-1 col-sm-2 col-md-2 col-lg-2">
-							<button class="btn btn-default" id="btnsearch">검색</button>
-						</div>
-					</div>
-				</form>
-			</div>
+			<%@include file="../common/search/NoticeSearch.jsp" %>
 			<br>
-			<div class="btndiv">
-				<div class="pull-right">
-					<button class="btn btn-success btn-font" id="btnwrite">글쓰기</button>
+			<footer id="con_footer">
+				<div class="btndiv">
+					<div class="pull-right">
+						<button class="btn btn-success btn-font" id="btnwrite">글쓰기</button>
+					</div>
+					<div class="pull-left">
+						<button class="btn btn-primary btn-font" id="btnlist">목록</button>
+					</div>
 				</div>
-				<div class="pull-left">
-					<button class="btn btn-primary btn-font" id="btnlist">목록</button>
-				</div>
-			</div>
+			</footer>
 		</section>
+		<input type="hidden" id="boardpage" value="${currentPage}">
+		<input type="hidden" id="boardtotal" value="${totalCount}">
 		<input type="hidden" id="boardtitle" value="공지사항">
 		<input type="hidden" id="boardid" value="notice">
 		<%@include file="../common/Footer.jsp" %>

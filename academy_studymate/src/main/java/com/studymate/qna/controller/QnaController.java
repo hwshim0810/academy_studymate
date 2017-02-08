@@ -31,7 +31,7 @@ public class QnaController {
 	
 	@RequestMapping(value = "qnaWrite", method = RequestMethod.GET)
 	public String write(Model model) {
-		model.addAttribute("qnaDto", new QnaDto());
+		qnaService.writeForm(model);
 		return "/qna/qnaWriteForm";
 	}
 	

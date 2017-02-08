@@ -46,6 +46,7 @@
 			</footer>
 			</article>
 		</section>
+		<!-- Hidden parameter -->
 		<input type="hidden" id="boardtitle" value="QnA">
 		<input type="hidden" id="boardupdate" value="/${currentPage}-${qnaDto.boqNum}/?update=y">
 		<input type="hidden" id="boarddelete" value="/?currentPage=${currentPage}&boqNum=${qnaDto.boqNum}&gNum=${qnaDto.boqGroupnum}">

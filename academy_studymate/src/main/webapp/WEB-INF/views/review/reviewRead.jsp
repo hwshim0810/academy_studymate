@@ -101,10 +101,7 @@
 			<!-- Button Area -->
 			<footer id="con_footer">
 				<div class="btndiv">
-					<div class="pull-left">
-						<button class="btn btn-warning btn-font" id="btnupdate">수정</button>
-						<button class="btn btn-danger btn-font" id="btndelete">삭제</button>
-					</div>				
+					<%@include file="../common/boardBtn/ReadBtn_updel.jsp" %>			
 					<div class="pull-right">
 						<c:url value="/reviewList/${currentPage}" var="listUrl">
 							<c:if test="${not empty param.keyField && not empty param.keyWord}">
@@ -118,6 +115,7 @@
 			</footer>
 			</article>
 		</section>
+		<!-- Hidden parameter -->
 		<input type="hidden" id="boardtitle" value="방문후기">
 		<input type="hidden" id="boardupdate" value="/${currentPage}-${reviewDto.borvNum}/?update=y">
 		<input type="hidden" id="boarddelete" value="/?currentPage=${currentPage}&borvNum=${reviewDto.borvNum}">

@@ -1,10 +1,12 @@
 package com.studymate.room.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,11 +32,16 @@ public class RoomController {
 	
 	@RequestMapping(value = "roomWrite", method = RequestMethod.GET)
 	public String write(Model model) {
+		roomService.writeForm(model);
 		return "/room/roomWriteForm";
 	}
 	
 	@RequestMapping(value = "roomWrite", method = RequestMethod.POST)
-	public String write(MultipartHttpServletRequest request, RoomDto roomDto) throws Exception {
+	public String write(MultipartHttpServletRequest request, @Valid RoomDto roomDto,
+			BindingResult result) throws Exception {
+		if (result.hasErrors())
+			return "/room/roomWriteForm";
+		
 		roomService.write(request, roomDto);
 		return "redirect:/roomList/1";
 	}
@@ -42,7 +49,8 @@ public class RoomController {
 	@RequestMapping("roomRead/{currentPage}-{borNum}")
 	public String read(Model model, 
 			@PathVariable("borNum") int borNum, 
-			@PathVariable("currentPage") int currentPage, String update,
+			@PathVariable("currentPage") int currentPage, 
+			@RequestParam(required = false) String update,
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
 		roomService.read(model, borNum, currentPage, update, keyField, keyWord);

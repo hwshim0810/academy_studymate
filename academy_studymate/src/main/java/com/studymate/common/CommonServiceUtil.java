@@ -22,7 +22,7 @@ public class CommonServiceUtil {
 		return list;
 	}
 	
-	protected String fileUpload(MultipartFile file, String originFileName, String uploadPath) {
+	protected String[] fileUpload(MultipartFile file, String originFileName, String uploadPath) {
 			File uploadFile = new File(uploadPath + originFileName);
 			// 같은 파일 존재시
 			if(uploadFile.exists()){
@@ -34,7 +34,9 @@ public class CommonServiceUtil {
 			} catch (Exception e) {
 				System.err.println("Upload Exception");
 			}
-			return uploadFile.getPath();
+			
+			String[] result = {uploadFile.getPath(), originFileName};
+			return result;
 	}
 	
 	protected void fileDelete(String filePath) {
