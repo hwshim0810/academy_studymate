@@ -70,6 +70,15 @@ textarea {
 	}
 
 }
+/* Member Join Css */
+.msgbox {
+	min-height: 35px;
+}
+
+.mzbzero {
+	margin-bottom: 0px;
+}
+
 /* Room Intro Css*/
 #roomcolumn {
   column-width:350px;

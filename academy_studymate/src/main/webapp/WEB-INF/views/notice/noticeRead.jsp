@@ -41,9 +41,10 @@
 			</article>
 		</section>
 		<!-- Hidden parameter -->
+		<input type="hidden" id="boardtitle" value="공지사항">
+		<input type="hidden" id="boardid" value="notice">
 		<input type="hidden" id="boardupdate" value="/${currentPage}-${noticeDto.bonNum}/?update=y">
 		<input type="hidden" id="boarddelete" value="?currentPage=${currentPage}&bonNum=${noticeDto.bonNum}">
-		<input type="hidden" id="boardid" value="notice">
 		<%@include file="../common/Footer.jsp" %>
 		<%@include file="../common/Board.jsp" %>
 	</body>

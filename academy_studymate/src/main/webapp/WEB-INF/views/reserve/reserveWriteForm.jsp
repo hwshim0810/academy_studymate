@@ -14,7 +14,7 @@
 		<%@include file="../common/AdminSubnav.jsp" %>
 			<div class="boardtitle lottemartdream"></div>
 			<article class="resInfo">
-				<div class="container">
+				<div class="container col-xs-12">
 			    	<div class="jumbotron">
 					    <h3>안내사항</h3>      
 					    <p>예약에 관한 주의사항을 알려드립니다.</p>
@@ -33,8 +33,8 @@
 							<td></td>
 						</tr>
 						<tr>
-							<td><label>Email</label></td>
-							<td><form:input path="memEmail" placeholder="exam@exam.com" maxlength="30"/></td>
+							<td><label for="memEmail">Email</label></td>
+							<td><form:input path="memEmail" placeholder="예)exam@exam.com" maxlength="30"/></td>
 							<td><form:errors path="memEmail" /></td>
 						</tr>
 						<tr>
@@ -49,7 +49,7 @@
 						</tr>
 						<tr>
 							<td><label for="resDate">예약일</label></td>
-							<td><form:input id="resDate" path="resDate"/></td>
+							<td><form:input class="date" path="resDate"/></td>
 							<td><form:errors path="resDate" /></td>
 						</tr>
 						<tr>
@@ -59,12 +59,12 @@
 						</tr>
 						<tr>
 							<td><label for="resTime">이용예정시간</label></td>
-							<td><input type="number" name="resTime" min="1" max="12"  /></td>
+							<td><input type="number" name="resTime" min="1" max="12"  />시간</td>
 							<td></td>
 						</tr>
 						<tr>
 							<td><label for="resCount">예약인원</label></td>
-							<td><input type="number" name="resCount" min="1" max="10"  /></td>
+							<td><input type="number" name="resCount" min="1" max="10"  />명</td>
 							<td></td>
 						</tr>
 					</table>

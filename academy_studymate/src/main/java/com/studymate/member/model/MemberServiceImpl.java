@@ -68,15 +68,21 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 
 	@Override
 	public void memberJoin(MemberDto memDto) {
-		memDao.memberJoin(memDto);
+		memDao.write(memDto);
 	}
 
 	@Override
-	public String isAbleId(String memId) {
-		MemberDto memDto = memDao.isAbleId(memId);
-
-		if (memDto == null) return "y";
-		return "n";
+	public HashMap<String, Object> isAbleId(String memId) {
+		MemberDto memDto = memDao.read(memId);
+		HashMap<String, Object> resultMap = new HashMap<>();
+	
+		if (memDto == null) {
+			resultMap.put("searchResult", "OK");
+			return resultMap;
+		} else {
+			resultMap.put("searchResult", "NO");
+			return resultMap;
+		}
 	}
 
 	@Override
@@ -85,8 +91,8 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 		map.put("keyWord", keyWord);
 		map.put("keyField", keyField);
 		
-		int blockCount = 5; 
-		int blockPage = 5;
+		int blockCount = 10; 
+		int blockPage = 10;
 		int totalCount = getTotalCount(memDao, map);
 		
 		MemberPaging memPaging = new MemberPaging(currentPage, totalCount, blockCount, blockPage, keyField, keyWord);
@@ -139,6 +145,12 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 	@Override
 	public Model setCurrentPage(Model model, int currentPage) {
 		model.addAttribute("currentPage", currentPage);
+		return model;
+	}
+	
+	@Override
+	public Model writeForm(Model model) {
+		model.addAttribute("memDto", new MemberDto());
 		return model;
 	}
 

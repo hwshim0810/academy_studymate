@@ -1,5 +1,7 @@
 package com.studymate.member.controller;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.studymate.member.model.LoginDto;
 import com.studymate.member.model.MemberDto;
@@ -42,23 +45,25 @@ public class MemberController {
 		return "redirect:/main";
 	}
 	
-	@RequestMapping(value = "memberJoin" , method = RequestMethod.GET)
-	public String memberJoin() {
-		return "redirect:/member/memberJoin";
+	@RequestMapping(value = "memberWrite" , method = RequestMethod.GET)
+	public String memberJoin(Model model) {
+		memberService.writeForm(model);
+		return "/member/memberWrite";
 	}
 	
-	@RequestMapping(value = "memberJoin" , method = RequestMethod.POST)
+	@RequestMapping(value = "memberWrite" , method = RequestMethod.POST)
 	public String memberJoin(@Valid MemberDto memDto, BindingResult result) {
 		if (result.hasErrors())
-			return "/member/memberJoin";
+			return "/member/memberWrite";
 		
 		memberService.memberJoin(memDto);
 
-		return "redirect:/member/joinSuccess";
+		return "/member/joinSuccess";
 	}
 	
-	@RequestMapping("isAbleId")
-	public String isAbleId(String memId) {
+	@RequestMapping(value= "isAbleId", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public HashMap<String, Object> isAbleId(String memId) {
 		return memberService.isAbleId(memId);
 	}
 	

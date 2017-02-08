@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<footer class="footer" id="footer">
+<footer class="joinfooter" id="footer">
 	<div class="clearfix center_align pos_r">
 		<a class="top" href="#"></a>
 		<div class="copyright col-xs-12">

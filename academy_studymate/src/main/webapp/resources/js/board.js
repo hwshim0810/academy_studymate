@@ -64,7 +64,15 @@ $(function() {
 		execDaumPostcode();
 	});
 	
-	 $('#resDate').datepicker({
+	$("#btntoindex").bind('click', function() {
+		location.href = '/studymate';
+	});
+	
+	$("#btntologin").bind('click', function() {
+		location.href = '/studymate/login';
+	});
+	
+	 $('.date').datepicker({
 		  prevText: '이전 달',
 		  nextText: '다음 달',
 		  monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
@@ -78,6 +86,29 @@ $(function() {
 		  maxDate:'+30d',
 	      showButtonPanel: true,
 	      minDate: 0, //오늘이후 선택불가
+	      closeText: 'Clear', // 내용클리어버튼
+	      onClose: function(dateText, inst) {
+	        if ($(window.event.srcElement).hasClass('ui-datepicker-close')) {
+	          document.getElementById(this.id).value = '';
+	        }
+	      }
+	 });
+	 
+	 $('.birthdate').datepicker({
+		  prevText: '이전 달',
+		  nextText: '다음 달',
+		  monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		  monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+		  dayNames: ['일','월','화','수','목','금','토'],
+		  dayNamesShort: ['일','월','화','수','목','금','토'],
+		  dayNamesMin: ['일','월','화','수','목','금','토'],
+		  dateFormat: 'yy-mm-dd',
+		  showMonthAfterYear: true,
+	      changeMonth: true,
+	      changeYear: true,
+		  yearSuffix: '년',
+		  maxDate:'+30d',
+	      showButtonPanel: true,
 	      closeText: 'Clear', // 내용클리어버튼
 	      onClose: function(dateText, inst) {
 	        if ($(window.event.srcElement).hasClass('ui-datepicker-close')) {

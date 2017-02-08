@@ -22,6 +22,7 @@
 				<div class="main">
 					${reviewDto.borvContent}
 				</div>
+				<!-- ReplyList Area -->
 				<article class="replyread_div col-xs-12">
 					<div class="pull-left reply_list"><strong>댓글목록</strong></div>
 					<table class="table">
@@ -64,6 +65,7 @@
 						<input type="hidden" name="replyPage" value=""  id="replyPage"/>
 					</form>
 				</article>
+				<!-- ReplyWrite Area -->
 				<article class="replywrite_div col-xs-12">
 					<form id="replyform" method="POST" action="/studymate/revReplyWrite">
 						<hr>

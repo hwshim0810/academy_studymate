@@ -1,10 +1,10 @@
 package com.studymate.member.model;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
-
-import com.studymate.common.ServiceInterface;
 
 public interface MemberService  {
 	public static final String GUESTLEVEL = "notMem";
@@ -16,7 +16,7 @@ public interface MemberService  {
 
 	void memberJoin(MemberDto memDto);
 
-	String isAbleId(String memId);
+	HashMap<String, Object> isAbleId(String memId);
 
 	Model list(HttpSession session, Model model, int currentPage, String keyField, String keyWord);
 
@@ -29,4 +29,6 @@ public interface MemberService  {
 	void deleteMem(String memId);
 	
 	Model setCurrentPage(Model model, int currentPage);
+	
+	Model writeForm(Model model);
 }

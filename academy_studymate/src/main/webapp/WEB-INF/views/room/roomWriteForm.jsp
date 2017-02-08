@@ -27,7 +27,7 @@
 					</tr>
 					<tr>
 						<td class="col-xs-2"><label for="borAddr">주소</label></td>
-						<td class="col-xs-2"><form:input path="borAddr" id="addr" placeholder="주소" cssClass="form-control" /><button type="button" class="btn btn-default"  id="btnaddr" >주소찾기</button></td>
+						<td class="col-xs-6"><form:input path="borAddr" id="addr" placeholder="주소" cssClass="form-control" /><button type="button" class="btn btn-default"  id="btnaddr" >주소찾기</button></td>
 						<td class="col-xs-4"><form:errors path="borAddr" /></td>
 					</tr>
 					<tr>
