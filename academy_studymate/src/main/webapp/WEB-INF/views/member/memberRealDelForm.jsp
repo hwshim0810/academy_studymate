@@ -7,7 +7,7 @@
 	<title>삭제</title>
 	</head>
 	<body>
-		<form action="/studymate/memberRealDel" id="delForm" method="post">
+		<form action="${pageContext.request.contextPath}/memberRealDel" id="delForm" method="post">
 			<input type="hidden"  name="memId" value="${param.memId}">
 			<input type="hidden"  name="currentPage" value="${currentPage}">
 		</form>

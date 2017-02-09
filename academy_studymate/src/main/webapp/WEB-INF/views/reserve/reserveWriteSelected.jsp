@@ -24,15 +24,15 @@
 				<div class="container col-xs-12">
 			    	<div class="jumbotron">
 					    <h3>안내사항</h3>      
-					    <p>관리자 예약추가 주의사항</p>
+					    <p>예약에 관한 주의사항을 알려드립니다.</p>
 					</div>
 					<p class="infoP"><span class="badge">1</span> 이용요금은 현장결제입니다.</p>      
 					<p class="infoP"><span class="badge">2</span> 예약정보는 예약확인시 이용되니 정확히 입력바랍니다.</p>
-					<p class="infoP margin_btm"><span class="badge">3</span> 예약내역은 [예약관리]에서 확인가능합니다.</p> 
+					<p class="infoP margin_btm"><span class="badge">3</span> 예약내역은 [마이페이지]에서 확인가능합니다.</p> 
 				</div>
 			</article>
 			<article>
-				<form:form id="resForm" method="POST" commandName="resDto" action="/studymate/reserveWrite">
+				<form:form id="resForm" method="POST" commandName="resDto" action="${pageContext.request.contextPath}/reserveWrite">
 					<table class="table">
 						<tr>
 							<td><label>아이디</label></td>
@@ -51,19 +51,16 @@
 						</tr>
 						<tr>
 							<td><label>안내메일 수신여부</label></td>
-							<td><input type="checkbox" name='mailCheck'  value="OK"></td>
+							<td><input type="checkbox" name='mailCheck' checked="checked" value="OK"></td>
 							<td></td>
 						</tr>
 						<tr>
-							<td><label for="borNum">예약지점</label></td>
+							<td><label for="borName">예약지점</label></td>
 							<td>
-								<select name="borNum" id="borselect">
-									<c:forEach var="rooms" items="${rooms}">
-										<option value="${rooms.borNum}">${rooms.borName}</option>
-									</c:forEach>
-								</select>
-								<input type="hidden" name="borName"  id="roomName" value="" />
+								<form:input path="borName" readonly="true" maxlength="30" value="${borName}"/>
+								<input type="hidden" name="borNum" value="${borNum}" />
 							</td>
+							<td><form:errors path="borName" /></td>
 						</tr>
 						<tr>
 							<td><label for="resDate">예약일</label></td>
@@ -92,19 +89,29 @@
 					<footer id="con_footer">
 						<div class="btndiv">
 							<div class="pull-right">
-								<button class="btn btn-success btn-font" type="button" id="btnres_unselect">예약</button>
+								<button class="btn btn-success btn-font" id="btnres">예약</button>
 							</div>
 							<div class="pull-left">
-								<button class="btn btn-primary btn-font" id="btnlist">목록</button>
+								<c:choose>
+									<c:when test="${sessionScope.memId eq 'admin'}">
+										<button class="btn btn-primary btn-font" id="btnlist">목록</button>
+										<input type="hidden" id="boardid" value="reserve">
+										<input type="hidden" id="boardtitle" value="예약관리">
+										<input type="hidden" id="boardsubtitle" value="예약추가">
+									</c:when>
+									<c:otherwise>
+										<button class="btn btn-info btn-font" id="btnback">뒤로</button>
+										<input type="hidden" id="boardid" value="room">
+										<input type="hidden" id="boardtitle" value="지점소개">
+										<input type="hidden" id="boardsubtitle" value="지점예약">
+									</c:otherwise>
+								</c:choose>
 							</div>
 						</div>
 					</footer>
 				</form:form>
 			</article>
 		</section>
-		<input type="hidden" id="boardid" value="reserve">
-		<input type="hidden" id="boardtitle" value="지점관리">
-		<input type="hidden" id="boardsubtitle" value="예약추가">
 		<%@include file="../common/Footer.jsp" %>
 		<%@include file="../common/Board.jsp" %>
 	</body>

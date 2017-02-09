@@ -7,7 +7,14 @@
 		<%@include file="../common/Head.jsp" %>
 	</head>
 	<body>
-		<%@include file="../common/Header.jsp" %>
+		<c:choose>
+			<c:when test="${not empty sessionScope.memId}">
+				<%@include file="../common/Header_afterIn.jsp"%>
+			</c:when>
+			<c:otherwise>
+				<%@include file="../common/Header.jsp"%>
+			</c:otherwise>
+		</c:choose>
 		<div class="body_top">
 		</div>
 		<section class="body center_align">
@@ -46,14 +53,12 @@
 								</div>
 							</div>
 							
-							
-							
 							<!-- Button Area -->
 							<div class="col-xs-6">
-								<button type="button" class="btn btn-primary btn-font pull-right" id="btntoindex">회원가입</button>
+								<button type="button" class="btn btn-primary btn-font pull-right" id="btntojoin">회원가입</button>
 							</div>
 							<div class="col-xs-3 divLogin">
-								<button type="button" class="btn btn-success btn-font pull-left form-control" id="btntologin">로그인</button>
+								<button type="button" class="btn btn-success btn-font pull-left form-control" id="btnlogin">로그인</button>
 							</div>
 							<div class="col-xs-3"></div>
 
@@ -67,6 +72,7 @@
 						<div class="btndiv">
 							<div class="pull-left">
 								<button class="btn btn-info btn-font" id="btnback">뒤로</button>
+								<button class="btn btn-primary btn-font" id="btntoindex">홈으로</button>
 							</div>
 						</div>
 					</footer>

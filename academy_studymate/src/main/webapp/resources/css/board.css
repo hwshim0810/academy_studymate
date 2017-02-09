@@ -85,7 +85,7 @@ textarea {
 }
 
 .divLogin button {
-	height: 25px;
+	height: 39px;
 }
 
 /* Room Intro Css*/
@@ -112,4 +112,8 @@ textarea {
 
 #btnaddr {
 	margin-top: 10px;
+}
+
+.ul_padding {
+	padding-left: 15px;
 }

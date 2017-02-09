@@ -9,4 +9,6 @@ public interface RoomDao extends Dao {
 
 	List<RoomDto> getAllRoom(Map<String, Object> map);
 
+	String getBorName(int borNum);
+
 }

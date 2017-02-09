@@ -45,7 +45,7 @@ public class RoomServiceImpl extends CommonServiceUtil implements ServiceInterfa
 		model.addAttribute("keyField", keyField);
 		model.addAttribute("keyWord", keyWord);
 		
-		session.setAttribute("page", "roomList/1");
+		session.setAttribute("page", "redirect:roomList/1");
 		return model;
 	}
 	

@@ -7,7 +7,14 @@
 		<%@include file="../common/Head.jsp" %>
 	</head>
 	<body>
-		<%@include file="../common/Header.jsp" %>
+		<c:choose>
+			<c:when test="${not empty sessionScope.memId}">
+				<%@include file="../common/Header_afterIn.jsp"%>
+			</c:when>
+			<c:otherwise>
+				<%@include file="../common/Header.jsp"%>
+			</c:otherwise>
+		</c:choose>
 		<%@include file="../common/BoardSubnav.jsp" %>
 		<div class="body_top">
 		</div>
@@ -18,7 +25,7 @@
 				<table class="table">
 					<tr>
 						<td><label for="memName">작성자</label></td>
-						<td></td>
+						<td>${sessionScope.memName}</td>
 						<td></td>
 					</tr>
 					<tr>
@@ -47,9 +54,9 @@
 				</footer>
 			</form:form>
 		</div>
+		<input type="hidden" id="boardid" value="review">
 		<input type="hidden" id="boardtitle" value="방문후기">
 		<input type="hidden" id="boardsubtitle" value="후기작성">
-		<input type="hidden" id="boardid" value="review">
 		<%@include file="../common/Footer.jsp" %>
 		<%@include file="../common/Board.jsp" %>
 		<script src="<c:url value='/resources/js/boardWrite/reviewWrite.js'/>" charset="utf-8"></script>

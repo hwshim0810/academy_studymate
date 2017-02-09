@@ -43,7 +43,7 @@ public class QnaServiceImpl extends CommonServiceUtil implements ServiceInterfac
 		model.addAttribute("keyField", keyField);
 		model.addAttribute("keyWord", keyWord);
 		
-		session.setAttribute("page", "qnaList/1");
+		session.setAttribute("page", "redirect:qnaList/1");
 		return model;
 	}
 

@@ -8,7 +8,7 @@
 <title>삭제</title>
 </head>
 <body>
-<form action="<%=request.getContextPath()%>/roomDelete" id="delForm" method="post">
+<form action="${pageContext.request.contextPath}/roomDelete" id="delForm" method="post">
 	<input type="hidden"  name="borNum" value="${borNum}" />
 	<input type="hidden" name="currentPage" value="${currentPage}" />
 </form>

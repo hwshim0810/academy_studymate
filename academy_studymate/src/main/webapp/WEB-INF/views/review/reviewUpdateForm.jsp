@@ -7,7 +7,14 @@
 		<%@include file="../common/Head.jsp" %>
 	</head>
 	<body>
-		<%@include file="../common/Header.jsp" %>
+		<c:choose>
+			<c:when test="${not empty sessionScope.memId}">
+				<%@include file="../common/Header_afterIn.jsp"%>
+			</c:when>
+			<c:otherwise>
+				<%@include file="../common/Header.jsp"%>
+			</c:otherwise>
+		</c:choose>
 		<%@include file="../common/BoardSubnav.jsp" %>
 		<div class="body_top">
 		</div>

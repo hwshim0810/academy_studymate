@@ -9,8 +9,20 @@ public class ReserveDto extends Dto {
 	String resDate, resVisit, borName;
 	Date resRegdate;
 	int borNum, resCount, resTime;
-	String memId, memEmail;
+	String memId, memName, memEmail;
 	
+	@Override
+	public String toString() {
+		return "ReserveDto [resNum=" + resNum + ", resDate=" + resDate + ", resVisit=" + resVisit + ", borName="
+				+ borName + ", resRegdate=" + resRegdate + ", borNum=" + borNum + ", resCount=" + resCount
+				+ ", resTime=" + resTime + ", memId=" + memId + ", memName=" + memName + ", memEmail=" + memEmail + "]";
+	}
+	public String getMemName() {
+		return memName;
+	}
+	public void setMemName(String memName) {
+		this.memName = memName;
+	}
 	public int getResNum() {
 		return resNum;
 	}

@@ -7,7 +7,14 @@
 		<%@include file="../common/Head.jsp" %>
 	</head>
 	<body>
-		<%@include file="../common/Header.jsp" %>
+		<c:choose>
+			<c:when test="${not empty sessionScope.memId}">
+				<%@include file="../common/Header_afterIn.jsp"%>
+			</c:when>
+			<c:otherwise>
+				<%@include file="../common/Header.jsp"%>
+			</c:otherwise>
+		</c:choose>
 		<div class="body_top">
 		</div>
 		<section class="body center_align">
@@ -73,11 +80,10 @@
 								</div>
 							</div>
 							<div class="form-group" >
-								<div class="col-xs-6 msgbox">
-									<span class="help-block" id="passMsg"></span>
+								<div class="col-xs-6 msgbox" id="passMsg">
 								</div>
-								<div class="col-xs-6 msgbox">
-									<span class="text-info" id="lengthmsg">패스워드길이:</span>
+								<div class="col-xs-6 msgbox" id="lengthmsg">
+									<span class="label label-success pull-left" >패스워드길이:</span>
 								</div>
 							</div>
 							<div class="col-xs-12">

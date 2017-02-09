@@ -7,8 +7,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 
 public interface MemberService  {
-	public static final String GUESTLEVEL = "notMem";
-	public static final String WRONGPASS = "wrongPass";
+	public static final String GUESTLEVEL = "member/notMem";
+	public static final String WRONGPASS = "member/wrongPass";
 	
 	String login(HttpSession session, LoginDto loginDto);
 

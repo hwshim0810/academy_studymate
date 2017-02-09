@@ -7,18 +7,30 @@
 		<%@include file="../common/Head.jsp" %>
 	</head>
 	<body>
-		<%@include file="../common/Header.jsp" %>
+		<c:choose>
+			<c:when test="${not empty sessionScope.memId}">
+				<%@include file="../common/Header_afterIn.jsp"%>
+			</c:when>
+			<c:otherwise>
+				<%@include file="../common/Header.jsp"%>
+			</c:otherwise>
+		</c:choose>
 		<div class="body_top">
 		</div>
 		<section class="body center_align">
 			<%@include file="../common/AdminSubnav.jsp" %>
 			<article>
-				<form:form name = "updateform" action="/studymate/qnaUpdate/${currentPage}-${resDto.resNum}" method="post" commandName="resDto">
+				<form:form name = "updateform" action="${pageContext.request.contextPath}/qnaUpdate/${currentPage}-${resDto.resNum}" method="post" commandName="resDto">
 					<table class="table">
 						<tr>
 							<td><label>회원ID</label></td>
 							<td>${resDto.memId}</td>
 							<td></td>
+						</tr>
+						<tr>
+							<td><label for="memName">예약자명</label></td>
+							<td><form:input path="memName" placeholder="예약자명" maxlength="10"/></td>
+							<td><form:errors path="memName" /></td>
 						</tr>
 						<tr>
 							<td><label>Email</label></td>

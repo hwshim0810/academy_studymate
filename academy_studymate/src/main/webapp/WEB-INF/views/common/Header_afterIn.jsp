@@ -38,12 +38,17 @@
 					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="${pageContext.request.contextPath}/login">로그인</a></li>
-					<li class="hidden-xs hidden-sm bar">|</li>
-					<li><a href="${pageContext.request.contextPath}/memberWrite">회원가입</a></li>
-					<!-- 추후 삭제예정 -->
-					<li class="hidden-xs hidden-sm bar">|</li>
-					<li><a href="${pageContext.request.contextPath}/reserveList/1">관리페이지</a></li>
+					<li><a href="${pageContext.request.contextPath}/logoutConfirm">로그아웃</a></li>
+					<c:choose>
+						<c:when test="${sessionScope.memId eq 'admin'}">
+							<li class="hidden-xs hidden-sm bar">|</li>
+							<li><a href="${pageContext.request.contextPath}/reserveList/1">관리페이지</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="hidden-xs hidden-sm bar">|</li>
+							<li><a href="${pageContext.request.contextPath}/memberMypage">마이페이지</a></li>
+						</c:otherwise>
+					</c:choose>
 				</ul>
 			</div>
 		</div>

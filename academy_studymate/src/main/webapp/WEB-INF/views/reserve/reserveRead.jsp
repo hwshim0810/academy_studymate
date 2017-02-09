@@ -6,7 +6,14 @@
 		<%@include file="../common/Head.jsp" %>
 	</head>
 	<body>
-		<%@include file="../common/Header.jsp" %>
+		<c:choose>
+			<c:when test="${not empty sessionScope.memId}">
+				<%@include file="../common/Header_afterIn.jsp"%>
+			</c:when>
+			<c:otherwise>
+				<%@include file="../common/Header.jsp"%>
+			</c:otherwise>
+		</c:choose>
 		<div class="body_top">
 		</div>
 		<section class="body center_align">
@@ -25,6 +32,10 @@
 						<tr>
 							<td><label>회원ID</label></td>
 							<td>${resDto.memId}</td>
+						</tr>
+						<tr>
+							<td><label>예약자명</label></td>
+							<td>${resDto.memName}</td>
 						</tr>
 						<tr>
 							<td><label>예약 Email</label></td>

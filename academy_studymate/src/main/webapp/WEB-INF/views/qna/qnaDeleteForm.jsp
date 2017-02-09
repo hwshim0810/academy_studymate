@@ -7,7 +7,7 @@
 	<title>삭제</title>
 	</head>
 	<body>
-		<form action="/studymate/qnaDelete" id="delForm" method="post">
+		<form action="${pageContext.request.contextPath}/qnaDelete" id="delForm" method="post">
 			<input type="hidden" name="boqGroupnum" value="${param.gNum}">
 			<input type="hidden"  name="boqNum" value="${boqNum}">
 			<input type="hidden"  name="currentPage" value="${currentPage}">

@@ -34,6 +34,10 @@
 		SELECT <include refid="columns" /> FROM room 
 	</select>
 	
+	<select id="getBorName" resultType="String" parameterType="Integer">
+		SELECT borName FROM room WHERE borNum = #{borNum} 
+	</select>
+	
 	<select id="read" resultType="RoomDto"  parameterType="Integer">
 		SELECT <include refid="columns" /> FROM room WHERE borNum = #{borNum}
 	</select>

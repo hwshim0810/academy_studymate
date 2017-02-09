@@ -35,9 +35,14 @@ public class MemberController {
 	public String login(HttpSession session, @Valid LoginDto loginDto, BindingResult result) {
 		if (result.hasErrors())
 			return "/member/loginForm";
-		
+
 		String page = memberService.login(session, loginDto);
 		return page;
+	}
+	
+	@RequestMapping("logoutConfirm")
+	public String logout() {
+		return "/member/logoutForm";
 	}
 	
 	@RequestMapping("logout")

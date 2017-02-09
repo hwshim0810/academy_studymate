@@ -1,5 +1,7 @@
 package com.studymate.reserve.controller;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.studymate.reserve.model.ReserveDto;
 import com.studymate.reserve.model.ReserveServiceImpl;
@@ -35,12 +38,20 @@ public class ReserveController {
 		return "/reserve/reserveWriteForm";
 	}
 	
+	@RequestMapping(value ="reserveSeleted/{borNum}", method = RequestMethod.GET)
+	public String write(Model model, @PathVariable("borNum") int borNum, 
+			String borName) {
+		resService.writeFormSelected(model, borName, borNum);
+		return "/reserve/reserveWriteSelected";
+	}
+	
 	@RequestMapping(value = "reserveWrite", method = RequestMethod.POST)
-	public String write(@Valid ReserveDto resDto, BindingResult result) {
+	public String write(HttpSession session, Model model, 
+			@Valid ReserveDto resDto, String mailCheck, BindingResult result) {
 		if (result.hasErrors())
 			return "/reserve/reserveWriteForm";
 
-		String page = resService.writeNsendEmail(resDto);
+		String page = resService.writeNsendEmail(session, model, resDto, mailCheck);
 		return page;
 	}
 	
@@ -90,6 +101,12 @@ public class ReserveController {
 	public String delete(Model model, ReserveDto resDto, int currentPage) {
 		resService.delete(model, resDto);
 		return "redirect:/reserveList/" + currentPage;
+	}
+	
+	@RequestMapping(value = "getBorName", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public HashMap<String, Object> getBorName(int borNum) {
+		 return resService.getBorName(borNum);
 	}
 	
 }

@@ -55,10 +55,11 @@ public class ReserveServiceImpl extends CommonServiceUtil implements ServiceInte
 		model.addAttribute("keyField", keyField);
 		model.addAttribute("keyWord", keyWord);
 		
-		session.setAttribute("page", "reserveList/1");
+		session.setAttribute("page", "redirect:reserveList/1");
 		return model;
 	}
 	
+	@Override // 관리자 예약시
 	public Model writeForm(Model model) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyWord", "");
@@ -69,9 +70,17 @@ public class ReserveServiceImpl extends CommonServiceUtil implements ServiceInte
 		model.addAttribute("rooms", list);
 		return model;
 	}
+	
+	public Model writeFormSelected(Model model, String borName, int borNum) {
+		model.addAttribute("borNum", borNum);
+		model.addAttribute("borName", borName);
+		model.addAttribute("resDto", new ReserveDto());
+		return model;
+	}
 
-	public String writeNsendEmail(Dto resDto) {
-		if (((ReserveDto) resDto).getMemId().equals("ad")) {
+	public String writeNsendEmail(HttpSession session , Model model, Dto resDto, String mailCheck) {
+		String sessionId = (String) session.getAttribute("memId");
+		if (!mailCheck.equals("OK")) { // 수신미동의시
 			reserveDao.write(resDto);
 		} else {
 			SimpleDateFormat fmt = new SimpleDateFormat("yyyy년 MM월 dd일");
@@ -81,6 +90,7 @@ public class ReserveServiceImpl extends CommonServiceUtil implements ServiceInte
 			email.setReceiver(((ReserveDto) resDto).getMemEmail());
 			email.setContent("안녕하십니까? Studymate에 예약해주셔서 감사합니다.\n"
 					+ "예약번호: " + ((ReserveDto) resDto).getResNum() + "\n"
+					+ "예약자명: " + ((ReserveDto) resDto).getMemName() + "\n"
 					+ "이용예정일: " + ((ReserveDto) resDto).getResDate() + "\n"
 					+ "방문예정시간: " + ((ReserveDto) resDto).getResVisit() + "\n"
 					+ "이용예정시간: " + ((ReserveDto) resDto).getResTime() + "\n"
@@ -97,7 +107,13 @@ public class ReserveServiceImpl extends CommonServiceUtil implements ServiceInte
 			reserveDao.write(resDto);
 		}
 		
-		return "redirect:/reserveList/1";
+		// 예약의 주체에 따라 페이지 이동
+		if (sessionId.equals("admin")) 
+			return "redirect:/reserveList/1";
+		else {
+			model.addAttribute("resDto", resDto);
+			return "/resereve/reserveSuccess"; 
+		}
 	}
 
 	@Override// 상세읽기 : 조회수는 update로 오지않았을경우만
@@ -111,6 +127,14 @@ public class ReserveServiceImpl extends CommonServiceUtil implements ServiceInte
 		model.addAttribute("deleteBtn", "/reserveDelete");
 		model.addAttribute("primaryKey", resNum);
 		return model;
+	}
+	
+	public HashMap<String, Object> getBorName(int borNum) {
+		HashMap<String, Object> resultMap = new HashMap<>();
+		
+		String borName = roomDao.getBorName(borNum);
+		resultMap.put("searchResult", borName);
+		return resultMap;
 	}
 
 	@Override

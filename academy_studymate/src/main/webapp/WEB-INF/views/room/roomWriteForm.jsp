@@ -7,7 +7,14 @@
 		<%@include file="../common/Head.jsp" %>
 	</head>
 	<body>
-		<%@include file="../common/Header.jsp" %>
+		<c:choose>
+			<c:when test="${not empty sessionScope.memId}">
+				<%@include file="../common/Header_afterIn.jsp"%>
+			</c:when>
+			<c:otherwise>
+				<%@include file="../common/Header.jsp"%>
+			</c:otherwise>
+		</c:choose>
 		<%@include file="../common/BoardSubnav.jsp" %>
 		<div class="body_top">
 		</div>
@@ -56,17 +63,19 @@
 				<footer id="con_footer">
 					<div class="btndiv">
 						<div class="pull-right">
-							<button class="btn btn-success btn-font" id="btnreg">등록</button>
+							<button class="btn btn-success btn-font" id="btnreg">예약</button>
 						</div>
 						<div class="pull-left">
 							<button class="btn btn-primary btn-font" id="btnlist">목록</button>
+							<button class="btn btn-info btn-font" id="btnback">뒤로</button>
 						</div>
 					</div>
 				</footer>
 			</form:form>
 		</div>
-		<input type="hidden" id="boardtitle" value="지점등록">
 		<input type="hidden" id="boardid" value="room">
+		<input type="hidden" id="boardtitle" value="지점관리">
+		<input type="hidden" id="boardsubtitle" value="지점등록">
 		<%@include file="../common/Footer.jsp" %>
 		<%@include file="../common/Board.jsp" %>
 	</body>

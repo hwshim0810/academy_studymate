@@ -59,9 +59,19 @@ $(function() {
 	});
 	
 	$("#btnres").bind('click', function() {
-		var borName = $('#borselect option:selected').text();
-		$("#resborName").val(borName);
 		$("#resForm").submit();
+	});
+	
+	$("#btnres_unselect").bind('click', function() {
+		var borNum = $("#borselect").val();
+		console.log('borNum:' + borNum);
+		
+		$.post('/studymate/getBorName', 'borNum=' + borNum, function(temp) {
+			var result = temp.searchResult;
+			$("#roomName").val(result);
+			console.log('borName:' + result);
+			$("#resForm").submit();
+		});
 	});
 	
 	$("#btnaddr").bind('click', function() {
@@ -74,6 +84,14 @@ $(function() {
 	
 	$("#btntologin").bind('click', function() {
 		location.href = '/studymate/login';
+	});
+	
+	$("#btntojoin").bind('click', function() {
+		location.href = '/studymate/memberWrite';
+	});
+	
+	$("#btnlogin").bind('click', function() {
+		$("#loginForm").submit();
 	});
 	
 	 $('.date').datepicker({

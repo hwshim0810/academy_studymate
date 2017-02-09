@@ -14,15 +14,12 @@ import com.studymate.common.CommonServiceUtil;
 import com.studymate.common.Dto;
 import com.studymate.find.model.FindDao;
 import com.studymate.qna.model.QnaDao;
-import com.studymate.reserve.model.ReserveDao;
 import com.studymate.review.model.ReviewDao;
 
 @Service
 public class MemberServiceImpl extends CommonServiceUtil implements MemberService {
 	@Autowired
 	MemberDao memDao;
-	@Autowired
-	ReserveDao resDao;
 	@Autowired
 	ReviewDao reviewDao;
 	@Autowired
@@ -35,7 +32,7 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 		String memId = loginDto.getMemId();
 		String memPass = loginDto.getMemPass();
 		
-		MemberDto memDto = memDao.login(memId);
+		MemberDto memDto = memDao.read(memId);
 		
 		if (memDto == null) return GUESTLEVEL;
 		
@@ -48,12 +45,12 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 			session.setAttribute("memName", memDto.getMemName());
 			return (String) session.getAttribute("page");
 			
-		} else if (pass.equals(memPass) && siteOut.equals("N")) {
+		} else if (pass.equals(memPass) && siteOut.equals("가입")) {
 			session.setAttribute("memId", id);
 			session.setAttribute("memName", memDto.getMemName());			
 			return (String) session.getAttribute("page");
 			
-		} else if  (siteOut.equals("Y")) {
+		} else if  (siteOut.equals("탈퇴")) {
 			return GUESTLEVEL;
 		} else {
 			return WRONGPASS;
@@ -138,7 +135,6 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 	}
 
 	public void deleteMem(String memId) {
-		resDao.deleteMem(memId);
 		reviewDao.deleteMem(memId);
 		qnaDao.deleteMem(memId);
 //		findDao.deleteMem(memId);

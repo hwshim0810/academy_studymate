@@ -4,16 +4,12 @@
 <html>
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>삭제</title>
+	<title>로그아웃</title>
 	</head>
 	<body>
-		<form action="${pageContext.request.contextPath}/reserveDelete" id="delForm" method="post">
-			<input type="hidden"  name="resNum" value="${resNum}">
-			<input type="hidden"  name="currentPage" value="${currentPage}">
-		</form>
 		<script type="text/javascript">
-			if (confirm("예약을 삭제하시겠습니까?") == true) {
-				document.getElementById('delForm').submit();
+			if (confirm("로그아웃 하시겠습니까?") == true) {
+				location.href = '${pageContext.request.contextPath}/logout';
 			} else {
 				history.back();
 			} 

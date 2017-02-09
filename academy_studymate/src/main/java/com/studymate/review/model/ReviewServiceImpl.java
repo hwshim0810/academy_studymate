@@ -43,7 +43,7 @@ public class ReviewServiceImpl extends CommonServiceUtil implements ServiceInter
 		model.addAttribute("keyField", keyField);
 		model.addAttribute("keyWord", keyWord);
 		
-		session.setAttribute("page", "reviewList/1");
+		session.setAttribute("page", "redirect:reviewList/1");
 		return model;
 	}
 

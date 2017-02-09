@@ -6,7 +6,14 @@
 		<%@include file="../common/Head.jsp" %>
 	</head>
 	<body>
-		<%@include file="../common/Header.jsp" %>
+		<c:choose>
+			<c:when test="${not empty sessionScope.memId}">
+				<%@include file="../common/Header_afterIn.jsp"%>
+			</c:when>
+			<c:otherwise>
+				<%@include file="../common/Header.jsp"%>
+			</c:otherwise>
+		</c:choose>
 		<div class="body_top">
 		</div>
 		<section class="body center_align">
@@ -49,13 +56,13 @@
 			<!-- Button Area -->
 			<%@include file="../common/search/ResSearch.jsp" %>
 			<br>
-			<%@include file="../common/boardBtn/ListBtn_admin.jsp" %>
+			<%@include file="../common/boardBtn/ListBtn_withWrite.jsp" %>
 		</section>
 		<!-- Hidden parameter -->
+		<input type="hidden" id="boardid" value="reserve">
+		<input type="hidden" id="boardtitle" value="예약관리">
 		<input type="hidden" id="boardpage" value="${currentPage}">
 		<input type="hidden" id="boardtotal" value="${totalCount}">
-		<input type="hidden" id="boardtitle" value="예약관리">
-		<input type="hidden" id="boardid" value="reserve">
 		<%@include file="../common/Footer.jsp" %>
 		<%@include file="../common/Board.jsp" %>
 	</body>

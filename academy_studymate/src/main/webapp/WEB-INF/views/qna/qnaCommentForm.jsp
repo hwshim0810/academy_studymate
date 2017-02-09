@@ -7,12 +7,19 @@
 		<%@include file="../common/Head.jsp" %>
 	</head>
 	<body>
-		<%@include file="../common/Header.jsp" %>
+		<c:choose>
+			<c:when test="${not empty sessionScope.memId}">
+				<%@include file="../common/Header_afterIn.jsp"%>
+			</c:when>
+			<c:otherwise>
+				<%@include file="../common/Header.jsp"%>
+			</c:otherwise>
+		</c:choose>
 		<div class="body_top">
 		</div>
 		<section class="body center_align">
 			<div class="boardtitle lottemartdream"></div>
-			<form:form name = "updateform" action="/studymate/qnaComment/${currentPage}" method="post" commandName="qnaDto">
+			<form:form name = "updateform" action="${pageContext.request.contextPath}/qnaComment/${currentPage}" method="post" commandName="qnaDto">
 				<table class="table">
 					<tr>
 						<td><label for="memName">작성자</label></td>
