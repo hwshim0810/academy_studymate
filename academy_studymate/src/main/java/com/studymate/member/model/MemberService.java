@@ -31,4 +31,6 @@ public interface MemberService  {
 	Model setCurrentPage(Model model, int currentPage);
 	
 	Model writeForm(Model model);
+
+	Model myPage(Model model, HttpSession session);
 }

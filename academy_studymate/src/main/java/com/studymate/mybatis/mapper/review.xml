@@ -81,11 +81,11 @@
 	</select>
 	
 	<insert id="write"  parameterType="ReviewDto">
-		INSERT INTO review VALUES (	borvNum.nextval, #{borvTitle}, #{borvContent}, 0, 0, sysdate, '운영자', 'admin' ) 
+		INSERT INTO review VALUES (	borvNum.nextval, #{borvTitle}, #{borvContent}, 0, 0, sysdate, #{memName}, #{memId} ) 
  	</insert>
 	
 	<insert id="writeReply" parameterType="ReviewReplyDto">
-		INSERT INTO rvreply VALUES ( repNum.nextval, #{repContent}, #{borvNum}, sysdate, '운영자', 'admin') 
+		INSERT INTO rvreply VALUES ( repNum.nextval, #{repContent}, #{borvNum}, sysdate, #{memName}, #{memId} ) 
 	</insert>
 	
 	<update id="update" parameterType="ReviewDto">

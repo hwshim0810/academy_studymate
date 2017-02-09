@@ -17,7 +17,9 @@
 		<div class="body_top">
 		</div>
 		<section class="body center_align">
-			<%@include file="../common/AdminSubnav.jsp" %>
+			<c:if test="${sessionScope.memId eq 'admin'}">
+				<%@include file="../common/AdminSubnav.jsp" %>
+			</c:if>
 			<div class="boardmaintitle lottemartdream"></div>
 			<article id="roomcolumn">
 				<c:choose>
@@ -26,12 +28,6 @@
 					</c:when>
 					<c:otherwise>
 						<c:forEach var="item" items="${roomList}">
-							<c:url value="/roomRead/${currentPage}-${item.borNum}" var="readUrl">
-								<c:if test="${not empty keyField && not empty keyWord}">
-									<c:param name="keyField" value="${keyField}" />
-									<c:param name="keyWord" value="${keyWord}" />
-								</c:if>
-							</c:url>
 							<figure>
 					        	<img alt="지점이미지" src="${pageContext.request.contextPath}/resources/roomImg/${item.borFilename}">
 						        <figcaption>
@@ -39,6 +35,12 @@
 						        		<li><label>지점명: </label>${item.borName}</li>
 						        		<li><label>주소: </label>${item.borAddr}&nbsp;${item.borArea}</li>
 						        	</ul>
+      								<c:url value="/roomRead/${currentPage}-${item.borNum}" var="readUrl">
+										<c:if test="${not empty keyField && not empty keyWord}">
+											<c:param name="keyField" value="${keyField}" />
+											<c:param name="keyWord" value="${keyWord}" />
+										</c:if>
+									</c:url>
 						        	<a href="${readUrl}" class="btn btn-info btn-font">상세정보</a>
 						        	<c:url value="/reserveSeleted/${item.borNum}" var="selectedRes">
 						        		<c:param name="borName" value="${item.borName}" />

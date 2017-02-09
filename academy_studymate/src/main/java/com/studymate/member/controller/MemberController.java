@@ -92,14 +92,10 @@ public class MemberController {
 		return "/member/memberAdRead";
 	}
 	
-	@RequestMapping("memberRead/{currentPage}-{memId}")
-	public String read(Model model, 
-			@PathVariable("memId") String memId, 
-			@PathVariable("currentPage") int currentPage,
-			@RequestParam(required = false) String keyField, 
-			@RequestParam(required = false) String keyWord) {
-		memberService.read(model, memId, currentPage, keyField, keyWord);
-		return "/member/memberAdRead";
+	@RequestMapping("memberMypage")
+	public String read(Model model, HttpSession session) {
+		memberService.myPage(model, session);
+		return "/member/memberMypage";
 	}
 	
 	@RequestMapping(value = "memberUpdate/{currentPage}-{memId}", method = RequestMethod.GET)

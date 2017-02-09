@@ -19,8 +19,8 @@
 						<li class="hidden-xs hidden-sm bar">|</li>
 					<li><a href="${pageContext.request.contextPath}/roomList/1">지점소개</a></li>
 						<li class="hidden-xs hidden-sm bar">|</li>
-					<li><a href="${pageContext.request.contextPath}/findList/1">모임찾기</a></li>
-						<li class="hidden-xs hidden-sm bar">|</li>
+					<!-- <li><a href="${pageContext.request.contextPath}/findList/1">모임찾기</a></li>
+						<li class="hidden-xs hidden-sm bar">|</li> -->
 					<li class="dropdown">
 						<a class="dropbtn dropdown-toggle" data-toggle="dropdown" href="#">커뮤니티<span class="caret hidden-md hidden-lg"></span></a>
 						<ul class="nonestyle dropdown-menu hidden-md hidden-lg" >
@@ -42,8 +42,8 @@
 					<li class="hidden-xs hidden-sm bar">|</li>
 					<li><a href="${pageContext.request.contextPath}/memberWrite">회원가입</a></li>
 					<!-- 추후 삭제예정 -->
-					<li class="hidden-xs hidden-sm bar">|</li>
-					<li><a href="${pageContext.request.contextPath}/reserveList/1">관리페이지</a></li>
+					<!-- <li class="hidden-xs hidden-sm bar">|</li>
+					<li><a href="${pageContext.request.contextPath}/reserveList/1">관리페이지</a></li> -->
 				</ul>
 			</div>
 		</div>

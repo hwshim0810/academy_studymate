@@ -1,11 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<footer id="con_footer">
-		<div class="btndiv">
-			<div class="pull-left">
-				<button class="btn btn-warning btn-font btn-read"   id="btnupdate">수정</button>
-				<button class="btn btn-danger btn-font btn-read"  id="btndelete">삭제</button>
-			</div>
 		<div class="pull-right">
 			<c:choose>
 				<c:when test="${not empty param.keyField && not empty param.keyWord}">
@@ -37,5 +31,3 @@
 			<button class="btn btn-info btn-font" id="btnback">뒤로</button>
 			<a class="btn btn-primary btn-font" href="${listUrl}">목록</a>
 		</div>
-	</div>
-</footer>

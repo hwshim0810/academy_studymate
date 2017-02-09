@@ -28,30 +28,24 @@
 				<article class="main">
 					${qnaDto.boqContent}
 				</article>
-			<br><br>
-			<hr>
-			<!-- Button Area -->
-			<footer id="con_footer">
-				<div class="btndiv">
-					<div class="pull-left">
-						<button class="btn btn-warning btn-font" id="btnupdate">수정</button>
-						<button class="btn btn-danger btn-font" id="btndelete">삭제</button>
-						<c:if test="${qnaDto.boqLev == 0}">
-							<button class="btn btn-info btn-font" id="btncomment">답글</button>
-						</c:if>
-					</div>				
-					<div class="pull-right">
-						<c:url value="/qnaList/${currentPage}" var="listUrl">
-							<c:if test="${not empty param.keyField && not empty param.keyWord}">
-								<c:param name="keyField" value="${param.keyField}" />
-								<c:param name="keyWord" value="${param.keyWord}" />
+				<br><br>
+				<hr>
+				<!-- Button Area -->
+				<!-- 답글수정필요 -->
+				<footer id="con_footer">
+					<div class="btndiv">
+						<div class="pull-left">
+							<c:if test="${sessionScope.memId eq ${qnaDto.memId}">
+								<button class="btn btn-warning btn-font btn-read"   id="btnupdate">수정</button>
+								<button class="btn btn-danger btn-font btn-read"  id="btndelete">삭제</button>
 							</c:if>
-						</c:url>
-						<button class="btn btn-info btn-font" id="btnback">뒤로</button>
-						<a class="btn btn-primary btn-font" href="${listUrl}">목록</a>
+							<c:if test="${qnaDto.boqLev == 0}">
+								<button class="btn btn-info btn-font" id="btncomment">답글</button>
+							</c:if>
+						</div>
+						<%@include file="../common/boardBtn/ReadBtn.jsp"%>
 					</div>
-				</div>
-			</footer>
+				</footer>
 			</article>
 		</section>
 		<!-- Hidden parameter -->

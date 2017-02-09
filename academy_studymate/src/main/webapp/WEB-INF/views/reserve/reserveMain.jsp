@@ -56,7 +56,7 @@
 			<!-- Button Area -->
 			<%@include file="../common/search/ResSearch.jsp" %>
 			<br>
-			<%@include file="../common/boardBtn/ListBtn_withWrite.jsp" %>
+			<%@include file="../common/boardBtn/ListBtn.jsp" %>
 		</section>
 		<!-- Hidden parameter -->
 		<input type="hidden" id="boardid" value="reserve">

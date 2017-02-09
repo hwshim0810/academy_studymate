@@ -19,7 +19,9 @@
 		</div>
 		<section class="body center_align">
 		<!-- 관리자 여부로 서브메뉴 구분필요 -->
-		<%@include file="../common/AdminSubnav.jsp" %>
+			<c:if test="${sessionScope.memId eq 'admin'}">
+				<%@include file="../common/AdminSubnav.jsp" %>
+			</c:if>
 			<div class="boardtitle lottemartdream"></div>
 			<article class="resInfo">
 				<div class="container col-xs-12">

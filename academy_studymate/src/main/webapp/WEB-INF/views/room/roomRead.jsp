@@ -27,16 +27,29 @@
 					</div>
 				</header>
 				<div class="main">
-					
-					
-					
-					
-					
+					<div class="col-xs-5 read_img">
+						<img alt="지점이미지" src="${pageContext.request.contextPath}/resources/roomImg/${roomDto.borFilename}">
+					</div>
+					<div class="col-xs-5">
+						<ol>
+							<li></li>
+						</ol>
+					</div>					
 				</div>
 				<br><br>
 				<hr>
 				<!-- Button Area -->
-				<%@include file="../common/boardBtn/ReadBtn.jsp"%>
+				<footer id="con_footer">
+					<div class="btndiv">
+						<div class="pull-left">
+							<c:if test="${sessionScope.memId eq 'admin'}">
+								<button class="btn btn-warning btn-font btn-read"   id="btnupdate">수정</button>
+								<button class="btn btn-danger btn-font btn-read"  id="btndelete">삭제</button>
+							</c:if>
+						</div>
+						<%@include file="../common/boardBtn/ReadBtn.jsp"%>
+					</div>
+				</footer>
 			</article>
 		</section>
 		<!-- Hidden parameter -->

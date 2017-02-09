@@ -14,6 +14,7 @@ import com.studymate.common.CommonServiceUtil;
 import com.studymate.common.Dto;
 import com.studymate.find.model.FindDao;
 import com.studymate.qna.model.QnaDao;
+import com.studymate.reserve.model.ReserveDao;
 import com.studymate.review.model.ReviewDao;
 
 @Service
@@ -26,6 +27,8 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 	QnaDao qnaDao;
 	@Autowired
 	FindDao findDao;
+	@Autowired
+	ReserveDao resDao;
 	
 	@Override
 	public String login(HttpSession session, LoginDto loginDto) {
@@ -152,6 +155,14 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 	public Model writeForm(Model model) {
 		model.addAttribute("loginDto", new LoginDto());
 		model.addAttribute("memDto", new MemberDto());
+		return model;
+	}
+
+	@Override
+	public Model myPage(Model model, HttpSession session) {
+		String memId = (String) session.getAttribute("memId");
+		model.addAttribute("memDto", memDao.read(memId));
+		model.addAttribute("resList", resDao.memResList(memId));
 		return model;
 	}
 

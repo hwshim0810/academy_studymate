@@ -79,15 +79,19 @@ $(function() {
 	});
 	
 	$("#btntoindex").bind('click', function() {
-		location.href = '/studymate';
+		location.href = context;
 	});
 	
 	$("#btntologin").bind('click', function() {
-		location.href = '/studymate/login';
+		location.href = context + 'login';
 	});
 	
 	$("#btntojoin").bind('click', function() {
-		location.href = '/studymate/memberWrite';
+		location.href = context + 'memberWrite';
+	});
+	
+	$("#btntomypage").bind('click', function() {
+		location.href = context + 'memberMypage';
 	});
 	
 	$("#btnlogin").bind('click', function() {

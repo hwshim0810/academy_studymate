@@ -55,10 +55,10 @@
 							
 							<!-- Button Area -->
 							<div class="col-xs-6">
-								<button type="button" class="btn btn-primary btn-font pull-right" id="btntojoin">회원가입</button>
+								<button type="button" class="btn btn-primary btn-font pull-right"  type="button" id="btntojoin">회원가입</button>
 							</div>
 							<div class="col-xs-3 divLogin">
-								<button type="button" class="btn btn-success btn-font pull-left form-control" id="btnlogin">로그인</button>
+								<button type="button" class="btn btn-success btn-font pull-left form-control"  type="button" id="btnlogin">로그인</button>
 							</div>
 							<div class="col-xs-3"></div>
 

@@ -26,7 +26,10 @@
 					<tr>
 						<td><label for="memName">작성자</label></td>
 						<td>${sessionScope.memName}</td>
-						<td></td>
+						<td>
+							<input type="hidden" name="memName" value="${sessionScope.memName}">
+							<input type="hidden" name="memId" value="${sessionScope.memId}">
+						</td>
 					</tr>
 					<tr>
 						<td><label for="borvTitle">제목</label></td>
@@ -45,10 +48,10 @@
 				<footer id="con_footer">
 					<div class="btndiv">
 						<div class="pull-right">
-							<button class="btn btn-success btn-font" id="btnreg">등록</button>
+							<button class="btn btn-success btn-font"  type="button"  id="btnreg">등록</button>
 						</div>
 						<div class="pull-left">
-							<button class="btn btn-primary btn-font" id="btnlist">목록</button>
+							<button class="btn btn-primary btn-font" type="button" id="btnlist">목록</button>
 						</div>
 					</div>
 				</footer>

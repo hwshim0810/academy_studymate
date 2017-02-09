@@ -80,7 +80,8 @@ public class ReserveServiceImpl extends CommonServiceUtil implements ServiceInte
 
 	public String writeNsendEmail(HttpSession session , Model model, Dto resDto, String mailCheck) {
 		String sessionId = (String) session.getAttribute("memId");
-		if (!mailCheck.equals("OK")) { // 수신미동의시
+		
+		if (mailCheck == null) { // 수신미동의시
 			reserveDao.write(resDto);
 		} else {
 			SimpleDateFormat fmt = new SimpleDateFormat("yyyy년 MM월 dd일");
@@ -88,7 +89,8 @@ public class ReserveServiceImpl extends CommonServiceUtil implements ServiceInte
 			
 			email.setSubject("Studymate에서 " + ((ReserveDto) resDto).getMemId() +" 님께 보내드리는 예약안내 메일입니다.");
 			email.setReceiver(((ReserveDto) resDto).getMemEmail());
-			email.setContent("안녕하십니까? Studymate에 예약해주셔서 감사합니다.\n"
+			email.setContent(
+						"안녕하십니까? Studymate에 예약해주셔서 감사합니다.\n"
 					+ "예약번호: " + ((ReserveDto) resDto).getResNum() + "\n"
 					+ "예약자명: " + ((ReserveDto) resDto).getMemName() + "\n"
 					+ "이용예정일: " + ((ReserveDto) resDto).getResDate() + "\n"
@@ -112,7 +114,7 @@ public class ReserveServiceImpl extends CommonServiceUtil implements ServiceInte
 			return "redirect:/reserveList/1";
 		else {
 			model.addAttribute("resDto", resDto);
-			return "/resereve/reserveSuccess"; 
+			return "/reserve/reserveSuccess"; 
 		}
 	}
 

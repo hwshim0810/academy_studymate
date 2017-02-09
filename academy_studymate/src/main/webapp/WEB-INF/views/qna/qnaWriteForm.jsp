@@ -42,15 +42,15 @@
 				<hr>
 				<div class="btndiv">
 					<div class="pull-right">
-						<button class="btn btn-success btn-font" id="btnreg">등록</button>
+						<button class="btn btn-success btn-font"  type="button" id="btnreg">등록</button>
 					</div>
 					<div class="pull-left">
-						<button class="btn btn-primary btn-font" id="btnlist">목록</button>
+						<button class="btn btn-primary btn-font" type="button"  id="btnlist">목록</button>
 					</div>
 				</div>
 				<!-- 수정요망 -->
-				<input type="hidden" name="memId" value="user111" />
-				<input type="hidden" name="memName" id="memName" value="사람" />
+				<input type="hidden" name="memId" value="${sessionScope.memId}" />
+				<input type="hidden" name="memName" id="memName" value="${sessionScope.memName}" />
 			</form:form>
 		</div>
 		<input type="hidden" id="boardtitle" value="QnA">

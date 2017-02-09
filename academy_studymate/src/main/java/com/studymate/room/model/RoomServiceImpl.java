@@ -54,7 +54,6 @@ public class RoomServiceImpl extends CommonServiceUtil implements ServiceInterfa
 	
 	public void write(MultipartHttpServletRequest request, Dto roomDto) throws Exception {
 		MultipartFile file = request.getFile("file");
-//		String uploadPath = "C:/Source/upload/"; //임시경로
 	    
 	    String uploadPath = request.getServletContext().getRealPath("resources/roomImg/");
 		String orginFileName = file.getOriginalFilename();
@@ -71,9 +70,6 @@ public class RoomServiceImpl extends CommonServiceUtil implements ServiceInterfa
 
 	@Override// 상세읽기 : 조회수는 update로 오지않았을경우만
 	public Model read(Model model, int borNum, int currentPage, String update, String keyField, String keyWord) {
-		if (update.equals("n"))
-			roomDao.updateReadCount(borNum);
-		
 		model.addAttribute("roomDto", roomDao.read(borNum));
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("keyField", keyField);

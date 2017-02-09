@@ -95,7 +95,7 @@
 								<button class="btn btn-success btn-font" type="button" id="btnres_unselect">예약</button>
 							</div>
 							<div class="pull-left">
-								<button class="btn btn-primary btn-font" id="btnlist">목록</button>
+								<button class="btn btn-primary btn-font" type="button" id="btnlist">목록</button>
 							</div>
 						</div>
 					</footer>

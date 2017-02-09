@@ -19,34 +19,28 @@
 		<section class="body center_align">
 			<div class="boardtitle lottemartdream"></div>
 			<article id="contents">
-				<header id="con_header">
-					<div class="container col-xs-12">
-				    	<div class="jumbotron">
-						    <h3 class="lottemartdream">예약완료</h3>      
-						    <p class='hidden-xs lottemartdream'>예약해주셔서 감사합니다.</p>
-						</div>
-					</div>
-				</header>
 				<div class="main">
-			  		<div class="panel panel-info">
-					    <div class="panel-heading lottemartdream">예약정보</div>
-					    <div class="panel-body">
-					    	<div class="text-center">
-					    		<h4 class="lottemartdream">예약시간에 맞추어 방문해주시기를 바랍니다.</h4>
-					    	</div>
-					    	<div>
-					    		<ol class="text-center nonestyle lottemartdream">
-					    			<li>예약번호 : ${resDto.resNum}</li>
-					    			<li>예약자명 : ${resDto.memName}</li>
-					    			<li>이용예정일:  ${resDto.resDate}</li>
-					    			<li>방문예정시간: ${resDto.resVisit}</li>
-					    			<li>이용예정시간: ${resDto.resTime}</li>
-					    			<li>예약지점: ${resDto.borName}</li>
-					    			<li>예약인원: ${resDto.resCount}</li>
-					    		</ol>
-					    	</div>
+					<div class="container col-xs-12">
+						<div class="panel panel-info">
+						    <div class="panel-heading"><h4 class="lottemartdream text-center">예약완료</h4></div>
+						    <div class="panel-body">
+						    	<div>
+						    		<ol class="text-center nonestyle lottemartdream">
+						    			<li>예약번호 : ${resDto.resNum}</li>
+						    			<li>예약자명 : ${resDto.memName}</li>
+						    			<li>이용예정일:  ${resDto.resDate}</li>
+						    			<li>방문예정시간: ${resDto.resVisit}</li>
+						    			<li>이용예정시간: ${resDto.resTime}</li>
+						    			<li>예약지점: ${resDto.borName}</li>
+						    			<li>예약인원: ${resDto.resCount}</li>
+						    		</ol>
+						    	</div>
+							    <div class="text-center">
+						    		<h4 class="lottemartdream">예약시간에 맞추어 방문해주시기를 바랍니다.</h4>
+						    	</div>
+						    </div>
 					    </div>
-				    </div>
+					</div>
 					<div class="col-xs-6">
 						<button type="button" class="btn btn-primary pull-right" id="btntoindex">메인페이지</button>
 					</div>
@@ -58,7 +52,7 @@
 		</section>
 		<!-- Hidden parameter -->
 		<input type="hidden" id="boardid" value="member">
-		<input type="hidden" id="boardtitle_client" value="회원가입">
+		<input type="hidden" id="boardtitle_client" value="예약완료">
 		<%@include file="../common/Footer.jsp" %>
 		<%@include file="../common/Board.jsp" %>
 		<%@include file="../common/Joinscript.jsp" %>

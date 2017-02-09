@@ -7,7 +7,7 @@
 		<%@include file="../common/Head.jsp" %>
 	</head>
 	<body>
-		<c:choose>
+			<c:choose>
 			<c:when test="${not empty sessionScope.memId}">
 				<%@include file="../common/Header_afterIn.jsp"%>
 			</c:when>
@@ -78,7 +78,11 @@
 						<hr>
 						<div class="row">
 							<div class="col-xs-3 reply_column"><strong>작성자</strong></div>
-							<div class="col-xs-9">${reviewDto.memName}</div>
+							<div class="col-xs-9">
+								${sessionScope.memName}
+								<input type="hidden" name="memName" value="${sessionScope.memName}" />
+								<input type="hidden" name="memId" value="${sessionScope.memId}" />
+							</div>
 						</div>
 						<div class="row">
 							<div class="col-xs-3 reply_column"><strong>내용</strong></div>
