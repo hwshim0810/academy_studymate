@@ -8,6 +8,20 @@ public class MemberDto extends Dto {
 	private String memId, memPass, memName, memSex, memBirth, memAddr, memArea, memEmail, memSiteout;
 	private Date memRegdate;
 	
+	public MemberDto() {}
+	
+	public MemberDto(String memId, String memPass, String memName, String memSex, String memBirth, String memAddr,
+			String memArea, String memEmail) {
+		super();
+		this.memId = memId;
+		this.memPass = memPass;
+		this.memName = memName;
+		this.memSex = memSex;
+		this.memBirth = memBirth;
+		this.memAddr = memAddr;
+		this.memArea = memArea;
+		this.memEmail = memEmail;
+	}
 	public String getMemId() {
 		return memId;
 	}

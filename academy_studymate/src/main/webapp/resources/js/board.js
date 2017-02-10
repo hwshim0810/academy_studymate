@@ -4,11 +4,8 @@ $(function() {
 	var updateid = $('#boardupdate').val();
 	var deleteid = $('#boarddelete').val();
 	var realdelid = $('#realdelete').val();
-	var title = $('#boardtitle').val();
-	var subtitle = $('#boardsubtitle').val();
-	var currentpage = $('#boardpage').val();
-	var totalcount = $('#boardtotal').val();
-	
+	var commentid = $("#boardcomment").val();
+
 	$("#btnlist").bind('click', function() {
 		location.href = context + boardid + 'List/1';
 	});
@@ -30,7 +27,6 @@ $(function() {
 	});
 	
 	$("#btndelete").bind('click', function() {
-		console.log(deleteid);
 		location.href = deleteid;
 	});
 	
@@ -43,7 +39,7 @@ $(function() {
 	});
 	
 	$("#btncomment").bind('click', function() {
-		location.href = context + boardid + 'Comment' + updateid;
+		location.href = commentid;
 	});
 	
 	$("#btnreply").bind('click', function() {
@@ -51,7 +47,13 @@ $(function() {
 	});
 
 	$("#btnrepdel").bind('click', function() {
+		var currentPage = $("#currentPage").val();
+		var borvNum = $("input[name=borvNum]").val();
+		var repNum = $("#repNum").val();
 		
+		$.post('/studymate/revReplyDelete', {currentPage : currentPage, borvNum : borvNum, repNum : repNum} , function(resultMap) {
+			location.href = resultMap.result;
+		});
 	});
 	
 	$("#btnsearch").bind('click', function() {
@@ -64,7 +66,6 @@ $(function() {
 	
 	$("#btnres_unselect").bind('click', function() {
 		var borNum = $("#borselect").val();
-		console.log('borNum:' + borNum);
 		
 		$.post('/studymate/getBorName', 'borNum=' + borNum, function(temp) {
 			var result = temp.searchResult;
@@ -162,34 +163,6 @@ $(function() {
 	    }
 	});
     
-	$(".boardmaintitle").html(
-			'<h1 class="htag normal w300 subsize">'	+ title + '</h1>'
-			+ '<div class="pull-left count"><span>총 ' + totalcount + '건 현재 '	+ currentpage + ' 페이지</span></div>'
-			+ '<div class="pull-right"><ol class="breadcrumb">' 
-			+ '<li><a href="/studymate">Home</a></li>'
-			+ '<li class="active">' + title + '</li>'
-			+ '</ol></div>'
-			+ '<br><br><hr>');
-	
-	if (title == subtitle) {
-		$(".boardtitle").html(
-				'<h1 class="htag normal w300 subsize">'	+ title + '</h1>'
-				+ '<div class="pull-right"><ol class="breadcrumb">' 
-				+ '<li><a href="'+ context + '">Home</a></li>'
-				+ '<li class="active">' + title + '</li>'
-				+ '</ol></div>'
-				+ '<br><br><hr>');
-	} else {
-		$(".boardtitle").html(
-				'<h1 class="htag normal w300 subsize">'	+ title + '</h1>'
-				+ '<div class="pull-right"><ol class="breadcrumb">' 
-				+ '<li><a href="' + context +'">Home</a></li>'
-				+ '<li><a href="' + context + boardid + 'List/1">' + title + '</a></li>'
-				+ '<li class="active">' + subtitle + '</li>'
-				+ '</ol></div>'
-				+ '<br><br><hr>');
-	}
-	
     //use jQuery MultiFile Plugin 
     $('#multiform input[name=file]').MultiFile({
         max: 1, 

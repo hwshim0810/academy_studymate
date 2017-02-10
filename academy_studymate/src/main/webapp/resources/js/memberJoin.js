@@ -1,4 +1,10 @@
 $(function() {
+    $("input[name=memPass]").keypress(function(key) {
+        if (key.keyCode == 13) {
+        	key.preventDefault();
+	        $("#btnlogin").click();
+	    }
+	});
 	
 	$("#memPass").keyup(function() {
 		var chk = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_0123456789\~!@#$%^&*()_+| ";
@@ -84,8 +90,8 @@ $(function() {
 				return false;
 			}
 			
-			$.post('/studymate/isAbleId', 'memId=' + data, function(temp) {
-				var result = temp.searchResult;
+			$.post('/studymate/isAbleId', 'memId=' + data, function(resultMap) {
+				var result = resultMap.searchResult;
 				
 				if (result == 'OK') {
 					$.confirm({
@@ -127,17 +133,6 @@ $(function() {
 		});
 	});
 	
-	var context = '/studymate/';
-	var title = $('#boardtitle_client').val();
-	$('.boardtitle').html(
-			'<h1 class="htag normal w300 subsize">' + title + '</h1>'
-			+ '<div class="pull-right"><ol class="breadcrumb">' 
-			+ '<li><a href="'+ context + '">Home</a></li>'
-			+ '<li class="active">' + title + '</li>'
-			+ '</ol></div>'
-			+ '<br><br><hr>');
-	
-
 	// 쿠키를 이용한 아이디 저장
     // 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
     var userInputId = $.cookie("userInputId");

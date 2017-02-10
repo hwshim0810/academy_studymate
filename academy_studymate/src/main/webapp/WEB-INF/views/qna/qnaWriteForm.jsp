@@ -25,12 +25,15 @@
 				<table class="table">
 					<tr>
 						<td><label for="memName">작성자</label></td>
-						<td></td>
-						<td></td>
+						<td>${sessionScope.memName}</td>
+						<td>
+							<input type="hidden" name="memName" value="${sessionScope.memName}">
+							<input type="hidden" name="memId" value="${sessionScope.memId}">
+						</td>
 					</tr>
 					<tr>
 						<td><label for="boqTitle">제목</label></td>
-						<td><form:input id="boqTitle" path="boqTitle" maxlength="30" placeholder="제목을 입력해주세요"/></td>
+						<td><form:input id="boqTitle" path="boqTitle" maxlength="25" cssClass="form-control" placeholder="제목을 입력해주세요"/></td>
 						<td><form:errors path="boqTitle" /></td>
 					</tr>
 					<tr>
@@ -40,23 +43,15 @@
 					</tr>
 				</table>
 				<hr>
-				<div class="btndiv">
-					<div class="pull-right">
-						<button class="btn btn-success btn-font"  type="button" id="btnreg">등록</button>
-					</div>
-					<div class="pull-left">
-						<button class="btn btn-primary btn-font" type="button"  id="btnlist">목록</button>
-					</div>
-				</div>
-				<!-- 수정요망 -->
-				<input type="hidden" name="memId" value="${sessionScope.memId}" />
-				<input type="hidden" name="memName" id="memName" value="${sessionScope.memName}" />
+				<!-- Button Area -->
+				<%@include file="../common/boardBtn/WriteFormBtn.jsp" %>
 			</form:form>
 		</div>
-		<input type="hidden" id="boardtitle" value="QnA">
 		<input type="hidden" id="boardid" value="qna">
+		<input type="hidden" id="boardtitle" value="QnA">
+		<input type="hidden" id="boardsubtitle" value="문의작성">
 		<%@include file="../common/Footer.jsp" %>
 		<%@include file="../common/Board.jsp" %>
-		<script src="<c:url value='/resources/js/boardWrite/qnaWrite.js?v=2'/>" charset="utf-8"></script>
+		<script src="<c:url value='/resources/js/boardWrite/qnaWrite.js'/>" charset="utf-8"></script>
 	</body>
 </html>

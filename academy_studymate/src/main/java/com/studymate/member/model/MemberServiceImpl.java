@@ -1,5 +1,6 @@
 package com.studymate.member.model;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -134,7 +135,11 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 
 	@Override
 	public void updateDelMem(String memId) {
-		memDao.updateDelMem(memId);
+		String randomString = String.valueOf(new Date().getTime()).substring(8);
+		MemberDto memDto = new MemberDto(memId, randomString, randomString, 
+				randomString, randomString, randomString, randomString, randomString); 
+		
+		memDao.updateDelMem(memDto);
 	}
 
 	public void deleteMem(String memId) {
@@ -164,6 +169,26 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 		model.addAttribute("memDto", memDao.read(memId));
 		model.addAttribute("resList", resDao.memResList(memId));
 		return model;
+	}
+
+	@Override
+	public Model updateClient(Model model, MemberDto memDto) {
+		memDao.updateClient(memDto);
+		return model;
+	}
+
+	@Override
+	public HashMap<String, Object> isRightPass(String memId, String oldPass) {
+		HashMap<String, Object> resultMap = new HashMap<>();
+		MemberDto memDto = memDao.read(memId);
+		
+		if (memDto.getMemPass().equals(oldPass)) {
+			resultMap.put("searchResult", "OK");
+			return resultMap;
+		} else {
+			resultMap.put("searchResult", "NO");
+			return resultMap;
+		}
 	}
 
 }

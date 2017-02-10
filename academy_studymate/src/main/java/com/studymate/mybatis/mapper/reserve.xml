@@ -31,8 +31,8 @@
 				ORDER BY resRegdate DESC ) ) WHERE num between #{startRow} and #{endRow}
 	</select>
 	
-	<select id="memResList" resultType="ReserveDto" parameterMap="String">
-		SELECT <include refid="columns" /> FROM reserve WHERE memId = #{memId} 
+	<select id="memResList" resultType="ReserveDto" parameterType="String">
+		SELECT <include refid="columns" /> FROM reserve WHERE memId = #{memId} ORDER BY resRegdate DESC 
 	</select>
 	
 	<select id="read" resultType="ReserveDto"  parameterType="Integer">

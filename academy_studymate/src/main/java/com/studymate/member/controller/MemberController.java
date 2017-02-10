@@ -98,6 +98,21 @@ public class MemberController {
 		return "/member/memberMypage";
 	}
 	
+	@RequestMapping("memberUpdateClient")
+	public String updateClient(Model model, @Valid MemberDto memDto, BindingResult result) {
+		if (result.hasErrors())
+			return "/member/memberMypage";
+		
+		memberService.updateClient(model, memDto);
+		return "redirect:/memberMypage";
+	}
+	
+	@RequestMapping(value = "isRightPass", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public HashMap<String, Object> isRightPass(String memId, String oldPass) {
+		return memberService.isRightPass(memId, oldPass);
+	}
+	
 	@RequestMapping(value = "memberUpdate/{currentPage}-{memId}", method = RequestMethod.GET)
 	public String update(Model model, 
 			@PathVariable("currentPage") int currentPage,
@@ -108,24 +123,18 @@ public class MemberController {
 		return "/member/memberUpdateForm";
 	}
 	
-	@RequestMapping(value = "memberUpdate/{currentPage}-{memId}", method = RequestMethod.POST)
-	public String update(Model model ,MemberDto memDto, 
-			@PathVariable("memId") String memId, 
+	@RequestMapping(value = "memberUpdate/{currentPage}", method = RequestMethod.POST)
+	public String update(Model model ,MemberDto memDto, String memId, 
 			@PathVariable("currentPage") int currentPage) {
 		memberService.update(model, memDto);
-		return "redirect:/memberRead/" + currentPage + "-" + memId;
-	}
-	
-	@RequestMapping(value = "memberDelete/{currentPage}", method = RequestMethod.GET)
-	public String updateDelMem(MemberDto memDto, @PathVariable("currentPage") int currentPage) {
-		return "/member/memberDeleteForm";
+		return "redirect:/memberAdRead/" + currentPage + "-" + memId;
 	}
 	
 	@RequestMapping(value = "memberDelete", method = RequestMethod.POST)
 	public String updateDelMem(HttpSession session, String memId) {
-		memberService.updateDelMem(memId);
+		memberService.deleteMem(memId);
 		memberService.logout(session);
-		return "redirect:/member/memberOutMsg";
+		return "/member/memberOutMsg";
 	}
 	
 	@RequestMapping(value = "memberRealDel/{currentPage}", method = RequestMethod.GET)

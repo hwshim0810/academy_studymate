@@ -15,37 +15,34 @@
 				<%@include file="../common/Header.jsp"%>
 			</c:otherwise>
 		</c:choose>
+		<%@include file="../common/BoardSubnav.jsp" %>
 		<div class="body_top">
 		</div>
-		<section class="body center_align">
+		<div class="body center_align">
 			<div class="boardtitle lottemartdream"></div>
-			<form:form method="POST" commandName="noticeDto" action="/studymate/noticeWrite" cssClass="center_align">
-				<div>
-					<label for="title">제목</label><br>
-					<form:input path="bonTitle" maxlength="30" />
-					<form:errors path="bonTitle" />
-				</div>
-				<br>
-				<div>
-					<label class="sr-only" for="bon_content">내용</label><br>
-					<form:textarea path="bonContent" rows="20" cols="100" id="bonContent"/>
-				</div>
+			<br><br><br>
+			<form:form method="POST" commandName="noticeDto" action="${pageContext.request.contextPath}/noticeWrite">
+				<table class="table">
+					<tr>
+						<td><label for="bonTitle">제목</label></td>
+						<td><form:input id="bonTitle" path="bonTitle" maxlength="25" cssClass="form-control" placeholder="제목을 입력해주세요"/></td>
+						<td><form:errors path="bonTitle" /></td>
+					</tr>
+					<tr>
+						<td><label for="bonContent">내용</label></td>
+						<td><form:textarea cssClass="textcontent" path="bonContent" cols="100" rows="20"/></td>
+						<td></td>
+					</tr>
+				</table>
+				<br><br>
+				<hr>
 				<!-- Button Area -->
-				<footer id="con_footer">
-					<div class="btndiv">
-						<div class="pull-right">
-							<button class="btn btn-primary btn-font"  type="button" id="btnreg">등록</button>
-						</div>
-						<div class="pull-left">
-							<button class="btn btn-primary btn-font"  type="button" id="btnlist">목록</button>
-						</div>
-					</div>
-				</footer>
+				<%@include file="../common/boardBtn/WriteFormBtn.jsp" %>
 			</form:form>
-		</section>
+		</div>
 		<input type="hidden" id="boardid" value="notice">
 		<input type="hidden" id="boardtitle" value="공지사항">
-		<input type="hidden" id="boardsubtitle" value="글쓰기">
+		<input type="hidden" id="boardsubtitle" value="공지작성">
 		<%@include file="../common/Footer.jsp" %>
 		<%@include file="../common/Board.jsp" %>
 		<script src="<c:url value='/resources/js/boardWrite/noticeWrite.js'/>" charset="utf-8"></script>

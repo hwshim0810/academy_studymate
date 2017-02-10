@@ -50,12 +50,17 @@
 	<insert id="write"  parameterType="MemberDto">
 		INSERT INTO member VALUES ( #{memId}, #{memPass}, #{memName}, #{memSex}, #{memBirth}, #{memAddr}, #{memArea}, #{memEmail}, '가입', sysdate) 
 	</insert>
+	
 	<update id="update" parameterType="MemberDto">
+		UPDATE member SET memBirth = #{memBirth}, memAddr = #{memAddr}, memArea = #{memArea}, memEmail = #{memEmail} WHERE memId = #{memId}  
+	</update>
+	
+	<update id="updateClient" parameterType="MemberDto">
 		UPDATE member SET memPass = #{memPass}, memBirth = #{memBirth}, memAddr = #{memAddr}, memArea = #{memArea}, memEmail = #{memEmail} WHERE memId = #{memId}  
 	</update>
 	
 	<update id="updateDelMem" parameterType="String">
-		UPDATE member SET memPass = '', memSex = '', memBirth = '', memAddr = '', memArea = '', memEmail = '', memSiteout = '탈퇴' WHERE memId = #{memId}  
+		UPDATE member SET memPass = #{memPass}, memSex = #{memSex}, memBirth = #{memBirth}, memAddr = #{memAddr}, memArea = #{memArea}, memEmail = #{memEmail}, memSiteout = '탈퇴' WHERE memId = #{memId}  
 	</update>
 	
 	<delete id="deleteMem" parameterType="String">

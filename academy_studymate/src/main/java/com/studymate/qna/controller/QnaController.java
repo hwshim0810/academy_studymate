@@ -72,13 +72,12 @@ public class QnaController {
 		return "redirect:/qnaRead/" + currentPage + "-"  + boqNum + "?update=y";
 	}
 	
-	@RequestMapping(value = "qnaDelete/{currentPage}-{boqNum}-{boqGroupnum}", method = RequestMethod.GET)
+	@RequestMapping(value = "qnaDelete/{currentPage}-{boqNum}", method = RequestMethod.GET)
 	public String delete(Model model, 
-			@PathVariable("boqNum") int boqNum, 
-			@PathVariable("boqGroupnum") int boqGroupnum,
+			@PathVariable("boqNum") int boqNum,  int gNum,
 			@PathVariable("currentPage") int currentPage) {
 		qnaService.setCurrentPage(model, currentPage, boqNum);
-		return "/qna/qnaDeleteForm?gNum=" + boqGroupnum;
+		return "/qna/qnaDeleteForm?gNum=" + gNum;
 	}
 	
 	@RequestMapping(value = "qnaDelete", method = RequestMethod.POST)

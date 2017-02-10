@@ -18,7 +18,9 @@
 		<div class="body_top">
 		</div>
 		<section class="body center_align">
-		<%@include file="../common/AdminSubnav.jsp" %>
+			<c:if test="${sessionScope.memId eq 'admin'}">
+				<%@include file="../common/AdminSubnav.jsp" %>
+			</c:if>
 			<div class="boardtitle lottemartdream"></div>
 			<article class="resInfo">
 				<div class="container col-xs-12">
@@ -47,7 +49,6 @@
 									<form:input path="memId" id="memId" placeholder="아이디" readonly="true" cssClass="form-control" value="${sessionScope.memId}" />
 								</div>
 								<div class="col-xs-2">
-									<input type="hidden" name="memId" value="${sessionScope.memId}" />
 								</div>
 							</div>
 							<div class="form-group">

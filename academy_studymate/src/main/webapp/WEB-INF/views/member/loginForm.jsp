@@ -71,8 +71,8 @@
 					<footer id="con_footer">
 						<div class="btndiv">
 							<div class="pull-left">
-								<button class="btn btn-info btn-font" id="btnback">뒤로</button>
-								<button class="btn btn-primary btn-font" id="btntoindex">홈으로</button>
+								<button class="btn btn-info btn-font" id="btnback" type="button">뒤로</button>
+								<button class="btn btn-primary btn-font" id="btntoindex" type="button">홈으로</button>
 							</div>
 						</div>
 					</footer>

@@ -33,4 +33,8 @@ public interface MemberService  {
 	Model writeForm(Model model);
 
 	Model myPage(Model model, HttpSession session);
+
+	Model updateClient(Model model, MemberDto memDto);
+
+	HashMap<String, Object> isRightPass(String memId, String oldPass);
 }

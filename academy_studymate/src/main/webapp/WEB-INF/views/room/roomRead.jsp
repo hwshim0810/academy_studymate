@@ -27,21 +27,50 @@
 					</div>
 				</header>
 				<div class="main">
-					<div class="col-xs-5 read_img">
-						<img alt="지점이미지" src="${pageContext.request.contextPath}/resources/roomImg/${roomDto.borFilename}">
+					<div class="row read_row">
+						<div class="col-xs-5 read_img">
+							<img alt="지점이미지" src="${pageContext.request.contextPath}/resources/roomImg/${roomDto.borFilename}">
+						</div>
+						<div class="col-xs-7 read_info">
+							<h2>${roomDto.borName}</h2>
+							<dl>
+								<dt>주소</dt>
+								<dd>${roomDto.borAddr}</dd>
+								<dd>${roomDto.borArea}</dd>
+								<dt>평점</dt>
+								<dd></dd>
+							</dl>
+						</div>
 					</div>
-					<div class="col-xs-5">
-						<ol>
-							<li></li>
-						</ol>
-					</div>					
+					<div class="row read_row">
+						<div class="col-xs-5 read_img">
+							<img alt="지점이미지" src="${pageContext.request.contextPath}/resources/roomImg/${roomDto.borFilename}">
+						</div>
+						<div class="col-xs-7 read_info">
+							<h2>오시는 길</h2>
+							<dl>
+								<dt>지하철</dt>
+								<dd>${roomDto.borAddr}</dd>
+								<dt>버스</dt>
+								<dd></dd>
+								<dt>자가용</dt>
+								<dd></dd>
+							</dl>
+							<br><br>
+							<hr>
+				        	<c:url value="/reserveSeleted/${roomDto.borNum}" var="selectedRes">
+				        		<c:param name="borName" value="${roomDto.borName}" />
+				        	</c:url>
+				        	<a class="btn btn-success btn-font btnwrite pull-right" href="${selectedRes}">예약하기</a>
+						</div>		
+					</div>						
 				</div>
 				<br><br>
 				<hr>
 				<!-- Button Area -->
 				<footer id="con_footer">
 					<div class="btndiv">
-						<div class="pull-left">
+						<div class="pull-right">
 							<c:if test="${sessionScope.memId eq 'admin'}">
 								<button class="btn btn-warning btn-font btn-read"   id="btnupdate">수정</button>
 								<button class="btn btn-danger btn-font btn-read"  id="btndelete">삭제</button>
@@ -55,7 +84,7 @@
 		<!-- Hidden parameter -->
 		<input type="hidden" id="boardid" value="room">
 		<input type="hidden" id="boardtitle" value="지점정보">
-		<input type="hidden" id="boardsubtitle" value="${reviewDto.borNum}번 방">
+		<input type="hidden" id="boardsubtitle" value="${roomDto.borName}">
 		<input type="hidden" id="boardupdate" value="${updateUrl}">
 		<input type="hidden" id="boarddelete" value="${deleteUrl}">
 		<%@include file="../common/Footer.jsp" %>

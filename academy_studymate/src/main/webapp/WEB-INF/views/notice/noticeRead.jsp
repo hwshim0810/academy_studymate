@@ -33,7 +33,7 @@
 				<!-- Button Area -->
 				<footer id="con_footer">
 					<div class="btndiv">
-						<div class="pull-left">
+						<div class="pull-right">
 							<c:if test="${sessionScope.memId eq 'admin'}">
 								<button class="btn btn-warning btn-font btn-read"   id="btnupdate">수정</button>
 								<button class="btn btn-danger btn-font btn-read"  id="btndelete">삭제</button>

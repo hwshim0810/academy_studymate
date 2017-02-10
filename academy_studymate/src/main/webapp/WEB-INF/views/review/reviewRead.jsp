@@ -40,16 +40,17 @@
 										<tr>
 											<td>${reply.memName}</td>
 											<td>${reply.repContent}</td>
-											<td>${reply.repRegdate}</td>
+											<td>	${reply.repRegdate}</td>
 											<c:choose>
-												<c:when test="${not empty reply.memName}">
-													<td><button class="btn btn-danger pull-right" id="btnrepdel">삭제</button></td>
+												<c:when test="${reply.memName eq sessionScope.memName}">
+													<td><button class="btn btn-danger btn-font pull-right" id="btnrepdel" type="button">삭제</button></td>
 												</c:when>
 												<c:otherwise>
 													<td></td>
 												</c:otherwise>
 											</c:choose>
 										</tr>
+										<input type="hidden" id="repNum" value="${reply.repNum}">
 									</c:forEach>
 								</c:when>
 								<c:otherwise>
@@ -104,15 +105,23 @@
 								<input type="hidden" name="replyPage" value="1" />
 							</c:otherwise>
 						</c:choose>
-						<input type="hidden" name="memId" value="${reviewDto.memId}">
-						<input type="hidden" name="memName" value="${reviewDto.memName}">
-						<input type="hidden" name="borvNum" value="${borvNum}">
+						<input type="hidden" name="borvNum" value="${reviewDto.borvNum}">
 					</form>
 				</article>
 				<br><br>
 				<hr>
 				<!-- Button Area -->
-				<%@include file="../common/boardBtn/ReadBtn.jsp" %>
+				<footer id="con_footer">
+					<div class="btndiv">
+						<c:if test="${sessionScope.memId eq reviewDto.memId or sessionScope.memId eq 'admin'}">
+							<div class="pull-right">
+								<button class="btn btn-warning btn-font" id="btnupdate">수정</button>
+								<button class="btn btn-danger btn-font" id="btndelete">삭제</button>
+							</div>
+						</c:if>
+						<%@include file="../common/boardBtn/ReadBtn.jsp" %>
+					</div>
+				</footer>
 			</article>
 		</section>
 		<!-- Hidden parameter -->
@@ -121,6 +130,7 @@
 		<input type="hidden" id="boardsubtitle" value="${reviewDto.borvNum}번 글">
 		<input type="hidden" id="boardupdate" value="${updateUrl}">
 		<input type="hidden" id="boarddelete" value="${deleteUrl}">
+		<input type="hidden" id="currentPage" value="${currentPage}">
 		<%@include file="../common/Footer.jsp" %>
 		<%@include file="../common/Board.jsp" %>
 	</body>

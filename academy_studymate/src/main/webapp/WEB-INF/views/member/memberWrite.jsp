@@ -33,7 +33,7 @@
 				</div>
 			</article>
 			<article>
-				<form:form id="memForm" class="form-horizontal" method="POST" commandName="memDto" action="/studymate/memberWrite">
+				<form:form id="memForm" class="form-horizontal" method="POST" commandName="memDto" action="${pageContext.request.contextPath}/memberWrite">
 					<div class="container col-xs-12">
 						<fieldset>
 							<!-- Form Name -->

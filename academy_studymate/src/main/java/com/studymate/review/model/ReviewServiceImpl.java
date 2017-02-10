@@ -139,9 +139,12 @@ public class ReviewServiceImpl extends CommonServiceUtil implements ServiceInter
 		return getReplyList(map, reviewDao, replyPaging.getPagingHtml().toString());
 	}
 
-	public void deleteReply(int borvNum, int repNum) {
+	public HashMap<String, Object> deleteReply(int currentPage, int borvNum, int repNum) {
+		HashMap<String, Object> resultMap = new HashMap<>();
 		reviewDao.updateDownReplyCount(borvNum);
 		reviewDao.deleteReply(repNum);
+		resultMap.put("result", "/studymate/reviewRead/" + currentPage + "-" + borvNum  + "?update=y");
+		return resultMap;
 	}
 
 	@Override

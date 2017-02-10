@@ -24,53 +24,60 @@
 			<form:form id="multiform" action="${pageContext.request.contextPath}/roomWrite" method="POST" enctype="multipart/form-data" commandName="roomDto">
 				<table class="table">
 					<tr>
-						<td><label for="memName">작성자</label></td>
-						<td colspan="2">${sessionScope.memId}</td>
+						<td class="col-xs-9">
+							<label for="memName pull-left">작성자 : ${sessionScope.memId}</label>
+						</td>
+						<td class="col-xs-3" colspan="2"></td>
 					</tr>
 					<tr>
-						<td><label for="borName">지점명</label></td>
-						<td><form:input id="borName" path="borName" maxlength="10" placeholder="예)ㅇㅇ지점"/></td>
-						<td><form:errors path="borName" /></td>
+						<td class="col-xs-9">
+							<label for="borName pull-left">지점명</label>
+							<form:input id="borName" path="borName" cssClass="form-control" maxlength="10" placeholder="예)ㅇㅇ지점"/>
+						</td>
+						<td class="col-xs-3"><form:errors path="borName" /></td>
 					</tr>
 					<tr>
-						<td class="col-xs-2"><label for="borAddr">주소</label></td>
-						<td class="col-xs-6"><form:input path="borAddr" id="addr" placeholder="주소" cssClass="form-control" /><button type="button" class="btn btn-default"  id="btnaddr" >주소찾기</button></td>
-						<td class="col-xs-4"><form:errors path="borAddr" /></td>
+						<td class="col-xs-9">
+							<label for="borAddr pull-left">주소</label>
+							<form:input path="borAddr" id="addr" placeholder="주소" cssClass="form-control" /><button type="button" class="btn btn-default"  id="btnaddr" >주소찾기</button>
+						</td>
+						<td class="col-xs-3"><form:errors path="borAddr" /></td>
 					</tr>
 					<tr>
-						<td class="col-xs-2"><label for="borArea">상세주소</label></td>
-						<td class="col-xs-6"><form:input path="borArea" id="detailaddr" placeholder="상세주소" cssClass="form-control" maxlength="20"/></td>
-						<td class="col-xs-4"><form:errors path="borArea" /></td>
+						<td class="col-xs-9">
+							<label for="borArea pull-left">상세주소</label>
+							<form:input path="borArea" id="detailaddr" placeholder="상세주소" cssClass="form-control" maxlength="20"/>
+						</td>
+						<td class="col-xs-3"><form:errors path="borArea" /></td>
 					</tr>
 					<tr>
-						<td><label for="file">썸네일</label></td>
-						<td>
+						<td class="col-xs-9">
+							<label for="file">썸네일</label>
 							<div class="form-group">
 								<input type="file" name="file" />
 								<span class="help-block">업로드는 3Mb까지 가능합니다.</span>
 							</div>
 						</td>
-						<td></td>
+						<td class="col-xs-3"></td>
 					</tr>
 					<tr>
-						<td><label>파일리스트</label></td>
-						<td id="filelist" colspan="2"></td>
+						<td class="col-xs-9">
+							<label>파일리스트</label>
+							<span id="filelist"></span>
+						</td>
+						<td class="col-xs-3" colspan="2"></td>
+					</tr>
+					<tr>
+						<td class="col-xs-9">
+							<label for="borIntro">한줄소개</label><form:input path="borIntro" cssClass="form-control" maxlength="25"/>
+						</td>
+						<td class="col-xs-3"><form:errors path="borIntro" /></td>
 					</tr>
 				</table>
 				<br><br>
 				<hr>
 				<!-- Button Area -->
-				<footer id="con_footer">
-					<div class="btndiv">
-						<div class="pull-right">
-							<button class="btn btn-success btn-font" type="button" id="btnreg">예약</button>
-						</div>
-						<div class="pull-left">
-							<button class="btn btn-primary btn-font" type="button" id="btnlist">목록</button>
-							<button class="btn btn-info btn-font" type="button" id="btnback">뒤로</button>
-						</div>
-					</div>
-				</footer>
+				<%@include file="../common/boardBtn/WriteFormBtn.jsp" %>
 			</form:form>
 		</div>
 		<input type="hidden" id="boardid" value="room">

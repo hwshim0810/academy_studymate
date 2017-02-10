@@ -45,16 +45,7 @@
 				<br><br>
 				<hr>
 				<!-- Button Area -->
-				<footer id="con_footer">
-					<div class="btndiv">
-						<div class="pull-right">
-							<button class="btn btn-success btn-font"  type="button"  id="btnreg">등록</button>
-						</div>
-						<div class="pull-left">
-							<button class="btn btn-primary btn-font" type="button" id="btnlist">목록</button>
-						</div>
-					</div>
-				</footer>
+				<%@include file="../common/boardBtn/WriteFormBtn.jsp" %>
 			</form:form>
 		</div>
 		<input type="hidden" id="boardid" value="review">

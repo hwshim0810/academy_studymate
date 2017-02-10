@@ -14,6 +14,7 @@
 				<%@include file="../common/Header.jsp"%>
 			</c:otherwise>
 		</c:choose>
+		<%@include file="../common/BoardSubnav.jsp" %>
 		<div class="body_top">
 		</div>
 		<section class="body center_align">
@@ -31,15 +32,14 @@
 				<br><br>
 				<hr>
 				<!-- Button Area -->
-				<!-- 답글수정필요 -->
 				<footer id="con_footer">
 					<div class="btndiv">
-						<div class="pull-left">
-							<c:if test="${sessionScope.memId eq ${qnaDto.memId}">
+						<div class="pull-right">
+							<c:if test="${sessionScope.memId eq qnaDto.memId}">
 								<button class="btn btn-warning btn-font btn-read"   id="btnupdate">수정</button>
 								<button class="btn btn-danger btn-font btn-read"  id="btndelete">삭제</button>
 							</c:if>
-							<c:if test="${qnaDto.boqLev == 0}">
+							<c:if test="${qnaDto.boqLev == 0 and sessionScope.memId eq 'admin'}">
 								<button class="btn btn-info btn-font" id="btncomment">답글</button>
 							</c:if>
 						</div>
@@ -54,6 +54,7 @@
 		<input type="hidden" id="boardsubtitle" value="${qnaDto.boqNum}번 글">
 		<input type="hidden" id="boardupdate" value="${updateUrl}">
 		<input type="hidden" id="boarddelete" value="${deleteUrl}">
+		<input type="hidden" id="boardcomment" value="${commentUrl}">
 		<%@include file="../common/Footer.jsp" %>
 		<%@include file="../common/Board.jsp" %>
 	</body>

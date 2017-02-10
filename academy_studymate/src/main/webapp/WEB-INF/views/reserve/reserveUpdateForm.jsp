@@ -20,16 +20,16 @@
 		<section class="body center_align">
 			<%@include file="../common/AdminSubnav.jsp" %>
 			<article>
-				<form:form name = "updateform" action="${pageContext.request.contextPath}/qnaUpdate/${currentPage}-${resDto.resNum}" method="post" commandName="resDto">
+				<form:form name = "updateform" action="${pageContext.request.contextPath}/reserveUpdate/${currentPage}-${resDto.resNum}" method="post" commandName="resDto">
 					<table class="table">
 						<tr>
 							<td><label>회원ID</label></td>
 							<td>${resDto.memId}</td>
-							<td></td>
+							<td><input type="hidden" name="memId" value="${resDto.memId}" /></td>
 						</tr>
 						<tr>
 							<td><label for="memName">예약자명</label></td>
-							<td><form:input path="memName" placeholder="예약자명" maxlength="10"/></td>
+							<td><form:input path="memName" placeholder="예약자명" maxlength="10" value="${resDto.memName}"/></td>
 							<td><form:errors path="memName" /></td>
 						</tr>
 						<tr>
@@ -40,11 +40,7 @@
 						<tr>
 							<td><label for="borName">예약지점</label></td>
 							<td>
-								<select name="borNum" id="borselect">
-									<c:forEach var="rooms" items="${rooms}">
-										<option value="${rooms.borNum}">${rooms.borName}</option>
-									</c:forEach>
-								</select>
+								<form:input path="borName" id="resborName" value="${resDto.borName}" cssClass="form-control" readonly="true" />
 							</td>
 						</tr>
 						<tr>
@@ -68,27 +64,26 @@
 							<td></td>
 						</tr>
 					</table>
-					<!-- 수정요망 -->
-					<input type="hidden" name="memId" value="${resDto.memId}" />
-					<input type="hidden" name="borName" id="resborName" value="${resDto.borName}" />
 					<br><br>
 					<hr>
 					<!-- Button Area -->
-					<footer id="con_footer">
-						<div class="btndiv">
-							<div class="pull-right">
-								<button class="btn btn-success btn-font" id="btnreg">수정</button>
-							</div>
-							<div class="pull-left">
-								<button class="btn btn-primary btn-font" id="btnlist">목록</button>
-							</div>
-						</div>
-					</footer>
+					<%@include file="../common/boardBtn/UpdatePageBtn.jsp" %>
 				</form:form>
 			</article>
 		</section>
-		<input type="hidden" id="boardtitle" value="예약관리">
-		<input type="hidden" id="boardid" value="reserve">
+		<c:choose>
+			<c:when test="${sessionScope.memId eq 'admin' }">
+				<input type="hidden" id="boardid" value="reserve">
+				<input type="hidden" id="boardtitle" value="예약관리">
+				<input type="hidden" id="boardsubtitle" value="예약수정">
+			</c:when>
+			<c:otherwise>
+				<input type="hidden" id="boardid" value="reserve">
+				<input type="hidden" id="client_page" value="memberMypage">
+				<input type="hidden" id="boardtitle_client" value="마이페이지">
+				<input type="hidden" id="boardsubtitle" value="예약수정">
+			</c:otherwise>
+		</c:choose>
 		<%@include file="../common/Footer.jsp" %>
 		<%@include file="../common/Board.jsp" %>
 	</body>

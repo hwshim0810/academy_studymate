@@ -107,15 +107,12 @@ public class ReviewController {
 		return resultmap;
 	}
 	
-	@RequestMapping("reviewRead/revReplyDelete/{currentPage}-{borvNum}-{repNum}-{update}")
-	public String deleteReply(@PathVariable("currentPage") int currentPage, 
-			@PathVariable("borvNum") int borvNum,  
-			@PathVariable("repNum") int repNum, 
-			@PathVariable("update") String update,
+	@RequestMapping(value = "revReplyDelete", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public HashMap<String, Object> deleteReply(int currentPage, int borvNum, int repNum, 
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
 		
-		reviewService.deleteReply(borvNum, repNum);
-		return "redirect:/reviewRead/" + currentPage + "-" + borvNum  +"-" + update;
+		return reviewService.deleteReply(currentPage, borvNum, repNum);
 	}
 }

@@ -15,6 +15,7 @@
 				<%@include file="../common/Header.jsp"%>
 			</c:otherwise>
 		</c:choose>
+		<%@include file="../common/BoardSubnav.jsp" %>
 		<div class="body_top">
 		</div>
 		<section class="body center_align">
@@ -23,8 +24,11 @@
 				<table class="table">
 					<tr>
 						<td><label for="memName">작성자</label></td>
-						<td>${qnaDto.memName}</td>
-						<td></td>
+						<td>${sessionScope.memName}</td>
+						<td>
+							<input type="hidden" name="memName" value="${sessionScope.memName}">
+							<input type="hidden" name="memId" value="${sessionScope.memId}">
+						</td>
 					</tr>
 					<tr>
 						<td><label for="boqTitle">제목</label></td>
@@ -53,12 +57,11 @@
 				</footer>
 				<input type="hidden" name="boqNum" value="${qnaDto.boqNum}">
 				<input type="hidden" name="boqGroupnum" value="${qnaDto.boqGroupnum}">
-				<input type="hidden" name="memId" value="admin" />
-				<input type="hidden" name="memName" id="memName" value="운영자" />
 			</form:form>
 		</section>
-		<input type="hidden" id="boardtitle" value="QnA">
 		<input type="hidden" id="boardid" value="qna">
+		<input type="hidden" id="boardtitle" value="QnA">
+		<input type="hidden" id="boardsubtitle" value="답변작성">
 		<%@include file="../common/Footer.jsp" %>
 		<%@include file="../common/Board.jsp" %>
 		<script src="<c:url value='/resources/js/boardWrite/qnaWrite.js'/>" charset="utf-8"></script>

@@ -52,16 +52,20 @@ public class QnaServiceImpl extends CommonServiceUtil implements ServiceInterfac
 		if (update.equals("n"))
 			qnaDao.updateReadCount(boqNum);
 
-		model.addAttribute("qnaDto", qnaDao.read(boqNum));
+		QnaDto qnaDto = (QnaDto) qnaDao.read(boqNum);
+		model.addAttribute("qnaDto", qnaDto);
 		model.addAttribute("qnaPrev", qnaDao.readPrev(boqNum));
 		model.addAttribute("qnaNext", qnaDao.readNext(boqNum));
+		model.addAttribute("qnaGroupnum", qnaDto.getBoqGroupnum());
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("keyField", keyField);
 		model.addAttribute("keyWord", keyWord);
 		model.addAttribute("listBtn", "/qnaList/1");
 		model.addAttribute("updateBtn", "/qnaUpdate");
 		model.addAttribute("deleteBtn", "/qnaDelete");
+		model.addAttribute("commentBtn", "/qnaComment");
 		model.addAttribute("primaryKey", boqNum);
+	
 		return model;
 	}
 
