@@ -249,14 +249,9 @@
 													<th>예약시간</th>
 												</tr>
 											</thead>
-											<tbody>
+											<tbody id="resResult">
 												<c:forEach var="item" items="${resList}">
-													<c:url value="/reserveRead/${currentPage}-${item.resNum}" var="readUrl">
-														<c:if test="${not empty keyField && not empty keyWord}">
-															<c:param name="keyField" value="${keyField}" />
-															<c:param name="keyWord" value="${keyWord}" />
-														</c:if>
-													</c:url>
+													<c:url value="/reserveRead/${currentPage}-${item.resNum}" var="readUrl" />
 													<tr>
 														<td class="hidden-xs hidden-sm table_center">${item.resNum}</td>
 														<td class="table_center"><a href="${readUrl}">${item.memName}</a></td>
@@ -266,12 +261,17 @@
 													</tr>
 												</c:forEach>
 											</tbody>
-											<tfoot>
+											<tfoot id="tfoot">
 												<tr>
 													<td colspan="5" align="center">${pageHtml}</td>
 												</tr>
 											</tfoot>
 										</table>
+										<form action="${pageContext.request.contextPath}/memResPaging" method="POST" id="pagingform">
+											<input type="hidden" name="totalCount" value="${totalCount}" id="totalCount" />
+											<input type="hidden" name="resPage" value=""  id="resPage"/>
+											<input type="hidden" name="memId" value="${memDto.memId}">
+										</form>
 									</div>
 									<!-- Siteout Information -->
 									<div class="tab-pane" id="mem_siteout">

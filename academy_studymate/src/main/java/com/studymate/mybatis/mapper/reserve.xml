@@ -23,6 +23,10 @@
 		SELECT count(*) FROM reserve <include refid="search" />
 	</select>
 	
+	<select id="getCountMemRes" resultType="Integer" parameterType="String">
+		SELECT count(*) FROM reserve  WHERE memId = #{memId} 
+	</select>
+	
 	<select id="list" resultType="ReserveDto" parameterType="java.util.HashMap">
 		SELECT <include refid="columns" />   
 		FROM( SELECT ROWNUM num, <include refid="columns" />  
@@ -31,8 +35,11 @@
 				ORDER BY resRegdate DESC ) ) WHERE num between #{startRow} and #{endRow}
 	</select>
 	
-	<select id="memResList" resultType="ReserveDto" parameterType="String">
-		SELECT <include refid="columns" /> FROM reserve WHERE memId = #{memId} ORDER BY resRegdate DESC 
+	<select id="memResList" resultType="ReserveDto" parameterType="java.util.HashMap">
+		SELECT <include refid="columns" />   
+		FROM( SELECT ROWNUM num, <include refid="columns" />  
+			FROM ( SELECT <include refid="columns" /> FROM reserve  WHERE memId = #{memId} 
+				ORDER BY resRegdate DESC ) ) WHERE num between #{startRow} and #{endRow}
 	</select>
 	
 	<select id="read" resultType="ReserveDto"  parameterType="Integer">

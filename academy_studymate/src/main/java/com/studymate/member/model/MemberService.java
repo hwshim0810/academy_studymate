@@ -44,4 +44,6 @@ public interface MemberService  {
 	String memberFindPass(FindPassDto findPassDto);
 
 	String memberFindId(Model model, FindIdDto findIdDto);
+
+	HashMap<String, Object> resPaging(int resPage, String memId);
 }

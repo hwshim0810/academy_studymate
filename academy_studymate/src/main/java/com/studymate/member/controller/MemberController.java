@@ -172,4 +172,10 @@ public class MemberController {
 		
 		return memberService.memberFindId(model, findIdDto);
 	}
+	
+	@RequestMapping(value = "memResPaging", produces = "application/json")
+	@ResponseBody
+	public HashMap<String, Object> resPaging(int resPage, String memId) {
+		return memberService.resPaging(resPage, memId);
+	}
 }

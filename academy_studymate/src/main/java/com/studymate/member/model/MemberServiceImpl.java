@@ -17,6 +17,7 @@ import com.studymate.common.Dto;
 import com.studymate.find.model.FindDao;
 import com.studymate.qna.model.QnaDao;
 import com.studymate.reserve.model.ReserveDao;
+import com.studymate.reserve.model.ReserveDto;
 import com.studymate.review.model.ReviewDao;
 
 @Service
@@ -174,9 +175,46 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 	@Override
 	public Model myPage(Model model, HttpSession session) {
 		String memId = (String) session.getAttribute("memId");
+		
+		int blockCount = 5; 
+		int blockPage = 5;
+		int totalCount = resDao.getCountMemRes(memId);
+		
+		MemberResPaging memResPaging = new MemberResPaging(1, totalCount, blockCount, blockPage);
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("startRow", memResPaging.getStartCount());
+		map.put("endRow", memResPaging.getEndCount());
+		map.put("memId", memId);
+		
+		List<ReserveDto> list = resDao.memResList(map);
+		
+		model.addAttribute("currentPage", 1);
+		model.addAttribute("pageHtml", memResPaging.getPagingHtml().toString());
 		model.addAttribute("memDto", memDao.read(memId));
-		model.addAttribute("resList", resDao.memResList(memId));
+		model.addAttribute("resList", list);
 		return model;
+	}
+	
+	@Override
+	public HashMap<String, Object> resPaging(int resPage, String memId) {
+		HashMap<String, Object> map = new  HashMap<>();
+		HashMap<String, Object> resultMap = new HashMap<>();
+		
+		int blockCount = 5; 
+		int blockPage = 5;
+		int totalCount = resDao.getCountMemRes(memId);
+		MemberResPaging memResPaging = new MemberResPaging(resPage, totalCount, blockCount, blockPage);
+		
+		map.put("startRow", memResPaging.getStartCount());
+		map.put("endRow", memResPaging.getEndCount());
+		map.put("memId", memId);
+		
+		List<ReserveDto> list = resDao.memResList(map);
+		resultMap.put("pageHtml", memResPaging.getPagingHtml().toString());
+		resultMap.put("resList", list);
+
+		return resultMap;
 	}
 
 	@Override

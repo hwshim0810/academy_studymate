@@ -43,10 +43,10 @@
 						    </div>
 						</div>
 						<div class="col-xs-6">
-							<button type="button" class="btn btn-primary pull-right" id="btntoindex">메인페이지</button>
+							<button type="button" class="btn btn-primary btn-font pull-right" id="btntoindex">홈으로</button>
 						</div>
 						<div class="col-xs-6">
-							<button type="button" class="btn btn-success pull-left" id="btntomypage">마이페이지</button>
+							<button type="button" class="btn btn-success btn-font pull-left" id="btntomypage">내정보</button>
 						</div>
 					</div>
 				</article>

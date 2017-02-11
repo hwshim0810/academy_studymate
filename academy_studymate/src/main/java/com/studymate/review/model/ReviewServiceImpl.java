@@ -97,7 +97,7 @@ public class ReviewServiceImpl extends CommonServiceUtil implements ServiceInter
 	public String deleteHasReply(Model model, ReviewDto reviewDto, int currentPage) {
 		int borvNum = ((ReviewDto) reviewDto).getBorvNum();
 		int replyCount =  reviewDao.hasReply(borvNum);
-		// 어떻게 모델처리하지??
+
 		if (replyCount == 0) {
 			reviewDao.delete(borvNum);
 			return "redirect:/reviewList/" + currentPage;
