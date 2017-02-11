@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.studymate.member.model.FindIdDto;
+import com.studymate.member.model.FindPassDto;
 import com.studymate.member.model.LoginDto;
 import com.studymate.member.model.MemberDto;
 import com.studymate.member.model.MemberService;
@@ -58,11 +60,11 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "memberWrite" , method = RequestMethod.POST)
-	public String memberJoin(@Valid MemberDto memDto, BindingResult result) {
+	public String memberJoin(HttpSession session, @Valid MemberDto memDto, BindingResult result) {
 		if (result.hasErrors())
 			return "/member/memberWrite";
 		
-		memberService.memberJoin(memDto);
+		memberService.memberJoin(session, memDto);
 
 		return "/member/joinSuccess";
 	}
@@ -147,5 +149,27 @@ public class MemberController {
 	public String deleteMem(String memId, int currentPage) {
 		memberService.deleteMem(memId);
 		return "redirect:/memberList/" + currentPage;
+	}
+	
+	@RequestMapping(value = "memberFind", method = RequestMethod.GET)
+	public String memberFind(Model model) {
+		memberService.findForm(model);
+		return "/member/memberFindForm";
+	}
+	
+	@RequestMapping("memberFindPass")
+	public String memberFindPass(@Valid FindPassDto findPassDto, BindingResult result) {
+		if (result.hasErrors())
+			return "/member/memberFindForm";
+		
+		return memberService.memberFindPass(findPassDto);
+	}
+	
+	@RequestMapping("memberFindId")
+	public String memberFindId(Model model, @Valid FindIdDto findIdDto, BindingResult result) {
+		if (result.hasErrors())
+			return "/member/memberFindForm";
+		
+		return memberService.memberFindId(model, findIdDto);
 	}
 }

@@ -8,9 +8,8 @@
 	</head>
 	<body>
 		<script type="text/javascript">
-			alert('아이디나 비밀번호를 확인해주세요.');
-			//location.href = '${pageContext.request.contextPath}/login';
-			history.back();
+			alert('임시비밀번호가 회원님의 메일로 전송되었습니다.');
+			location.href = '/studymate/login';
 		</script>
 	</body>
 </html>

@@ -28,6 +28,7 @@
 		<typeAlias type="com.studymate.review.model.ReviewDto" alias="ReviewDto" />
 		<typeAlias type="com.studymate.review.model.ReviewReplyDto" alias="ReviewReplyDto" />
 		<typeAlias type="com.studymate.reserve.model.ReserveDto" alias="ReserveDto" />
+		<typeAlias type="com.studymate.member.model.FindIdDto" alias="FindIdDto" />
 	</typeAliases>
 
 </configuration>

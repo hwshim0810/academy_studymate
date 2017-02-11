@@ -16,7 +16,7 @@
 }
 .main {
 	min-height: 550px;
-    padding-top: 50px;
+    padding-top: 20px;
     padding-left: 15px
 }
 .dtoinfo {
@@ -109,11 +109,9 @@ textarea {
   padding:10px;
   margin-top:11px;
 }
-
 #btnaddr {
 	margin-top: 10px;
 }
-
 .ul_padding {
 	padding-left: 15px;
 }
@@ -128,5 +126,11 @@ textarea {
 }
 
 .read_row {
-	padding: 50px 0px;
+	padding-top:50px;
+	padding-bottom: 15px;
+}
+
+#map {
+	width: 384px;
+	height: 300px;
 }

@@ -1,5 +1,6 @@
 package com.studymate.room.model;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.google.code.geocoder.Geocoder;
+import com.google.code.geocoder.GeocoderRequestBuilder;
+import com.google.code.geocoder.model.GeocodeResponse;
+import com.google.code.geocoder.model.GeocoderRequest;
+import com.google.code.geocoder.model.GeocoderResult;
+import com.google.code.geocoder.model.GeocoderStatus;
+import com.google.code.geocoder.model.LatLng;
 import com.studymate.common.CommonServiceUtil;
 import com.studymate.common.Dto;
 import com.studymate.common.ServiceInterface;
@@ -110,5 +118,34 @@ public class RoomServiceImpl extends CommonServiceUtil implements ServiceInterfa
 		model.addAttribute("roomDto", new RoomDto());
 		return model;
 	}
+	
+	public HashMap<String, Object> geoCoding(String location) {
+		if (location == null)  
+			return null;
+		
+		HashMap<String, Object> resultMap = new HashMap<>();
+		Geocoder geocoder = new Geocoder();
+		// setAddress : 변환하려는 주소 (경기도 성남시 분당구 등)
+		// setLanguate : 인코딩 설정
+		GeocoderRequest geocoderRequest = new GeocoderRequestBuilder().setAddress(location).setLanguage("ko").getGeocoderRequest();
+		GeocodeResponse geocoderResponse;
+
+		try {
+			geocoderResponse = geocoder.geocode(geocoderRequest);
+			
+			if (geocoderResponse.getStatus() == GeocoderStatus.OK & !geocoderResponse.getResults().isEmpty()) {
+				GeocoderResult geocoderResult=geocoderResponse.getResults().iterator().next();
+				LatLng latitudeLongitude = geocoderResult.getGeometry().getLocation();
+								  
+				resultMap.put("wd", latitudeLongitude.getLat().toString());
+				resultMap.put("kd", latitudeLongitude.getLng().toString());
+				return resultMap;
+			}
+		
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+			return null;
+		}
 
 }

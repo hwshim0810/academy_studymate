@@ -8,8 +8,7 @@
 	</head>
 	<body>
 		<script type="text/javascript">
-			alert('아이디나 비밀번호를 확인해주세요.');
-			//location.href = '${pageContext.request.contextPath}/login';
+			alert('회원정보가 다릅니다.');
 			history.back();
 		</script>
 	</body>

@@ -185,6 +185,13 @@
 			    <artifactId>spring-context-support</artifactId>
 			    <version>3.2.8.RELEASE</version>
 			</dependency>
+			
+			<!-- Google 위경도 구하기 -->
+			<dependency>
+				<groupId>com.google.code.geocoder-java</groupId>
+				<artifactId>geocoder-java</artifactId>
+				<version>0.16</version>
+			</dependency>
 
 
 	

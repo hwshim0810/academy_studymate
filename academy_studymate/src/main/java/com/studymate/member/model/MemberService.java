@@ -9,12 +9,13 @@ import org.springframework.ui.Model;
 public interface MemberService  {
 	public static final String GUESTLEVEL = "member/notMem";
 	public static final String WRONGPASS = "member/wrongPass";
+	public static final String WRONGINFO = "member/wrongInfo";
 	
 	String login(HttpSession session, LoginDto loginDto);
 
 	void logout(HttpSession session);
 
-	void memberJoin(MemberDto memDto);
+	void memberJoin(HttpSession session, MemberDto memDto);
 
 	HashMap<String, Object> isAbleId(String memId);
 
@@ -37,4 +38,10 @@ public interface MemberService  {
 	Model updateClient(Model model, MemberDto memDto);
 
 	HashMap<String, Object> isRightPass(String memId, String oldPass);
+
+	Model findForm(Model model);
+
+	String memberFindPass(FindPassDto findPassDto);
+
+	String memberFindId(Model model, FindIdDto findIdDto);
 }

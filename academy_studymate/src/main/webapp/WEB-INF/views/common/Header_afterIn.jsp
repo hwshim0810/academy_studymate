@@ -12,6 +12,21 @@
 				<a class="navbar-brand" href="${pageContext.request.contextPath}">Logo</a>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
+				<div class="row">
+					<ul class="nav navbar-nav navbar-right">
+							<li><a href="${pageContext.request.contextPath}/logoutConfirm">로그아웃</a></li>
+							<c:choose>
+								<c:when test="${sessionScope.memId eq 'admin'}">
+									<li class="hidden-xs hidden-sm bar">|</li>
+									<li><a href="${pageContext.request.contextPath}/reserveList/1">관리페이지</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="hidden-xs hidden-sm bar">|</li>
+									<li><a href="${pageContext.request.contextPath}/memberMypage">마이페이지</a></li>
+								</c:otherwise>
+							</c:choose>
+					</ul>
+				</div>
 				<ul class="nav navbar-nav lottemartdream normal w400 navsize">
 					<li class="active"><a href="${pageContext.request.contextPath}/siteInfo">사이트 소개</a></li>
 						<li class="hidden-xs hidden-sm bar">|</li>
@@ -36,19 +51,6 @@
 							</ul>
 						</div>
 					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="${pageContext.request.contextPath}/logoutConfirm">로그아웃</a></li>
-					<c:choose>
-						<c:when test="${sessionScope.memId eq 'admin'}">
-							<li class="hidden-xs hidden-sm bar">|</li>
-							<li><a href="${pageContext.request.contextPath}/reserveList/1">관리페이지</a></li>
-						</c:when>
-						<c:otherwise>
-							<li class="hidden-xs hidden-sm bar">|</li>
-							<li><a href="${pageContext.request.contextPath}/memberMypage">마이페이지</a></li>
-						</c:otherwise>
-					</c:choose>
 				</ul>
 			</div>
 		</div>

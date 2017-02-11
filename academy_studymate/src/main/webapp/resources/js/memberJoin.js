@@ -1,4 +1,12 @@
 $(function() {
+	$("#btnfindid").bind('click', function() {
+		$("#findIdForm").submit();
+	});
+	
+	$("#btnfindpass").bind('click', function() {
+		$("#findPassForm").submit();
+	});
+	
     $("input[name=memPass]").keypress(function(key) {
         if (key.keyCode == 13) {
         	key.preventDefault();

@@ -22,7 +22,7 @@
 			<article id="contents">
 				<header id="con_header" class="col-xs-12">
 					<h2 class="normal w300 subsize">${roomDto.borName}</h2>
-					<div class="dtoinfo">
+					<div>
 						등록일 <strong>${roomDto.borRegdate}</strong>
 					</div>
 				</header>
@@ -37,14 +37,30 @@
 								<dt>주소</dt>
 								<dd>${roomDto.borAddr}</dd>
 								<dd>${roomDto.borArea}</dd>
-								<dt>평점</dt>
-								<dd></dd>
+								<dt>한줄소개</dt>
+								<dd>${roomDto.borIntro}</dd>
 							</dl>
 						</div>
 					</div>
+					<div class="row">
+						<div class="col-xs-5">
+							<div class="col-xs-4 read_img">
+								<img alt="지점이미지" src="${pageContext.request.contextPath}/resources/roomImg/${roomDto.borFilename}">
+							</div>
+							<div class="col-xs-4 read_img">
+								<img alt="지점이미지" src="${pageContext.request.contextPath}/resources/roomImg/${roomDto.borFilename}">
+							</div>
+							<div class="col-xs-4 read_img">
+								<img alt="지점이미지" src="${pageContext.request.contextPath}/resources/roomImg/${roomDto.borFilename}">
+							</div>
+						</div>
+						<div class="col-xs-7">
+						
+						</div>
+					</div>
 					<div class="row read_row">
-						<div class="col-xs-5 read_img">
-							<img alt="지점이미지" src="${pageContext.request.contextPath}/resources/roomImg/${roomDto.borFilename}">
+						<div class="col-xs-5 read_img" >
+							<div id="map" class="hidden-xs hidden-sm"></div>
 						</div>
 						<div class="col-xs-7 read_info">
 							<h2>오시는 길</h2>
@@ -56,7 +72,7 @@
 								<dt>자가용</dt>
 								<dd></dd>
 							</dl>
-							<br><br>
+							<br><br><br>
 							<hr>
 				        	<c:url value="/reserveSeleted/${roomDto.borNum}" var="selectedRes">
 				        		<c:param name="borName" value="${roomDto.borName}" />
@@ -87,7 +103,10 @@
 		<input type="hidden" id="boardsubtitle" value="${roomDto.borName}">
 		<input type="hidden" id="boardupdate" value="${updateUrl}">
 		<input type="hidden" id="boarddelete" value="${deleteUrl}">
+		<input type="hidden" id="borAddr" value="${roomDto.borAddr}">
 		<%@include file="../common/Footer.jsp" %>
 		<%@include file="../common/Board.jsp" %>
+		<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=60028587da6bdcb31d41cbd67222999d"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/roomRead.js?v=12"></script>
 	</body>
 </html>

@@ -18,8 +18,8 @@ public class EmailSender {
          
          MimeMessage msg = mailSender.createMimeMessage();
          try {
-             msg.setSubject(email.getSubject());
-             msg.setText(email.getContent());
+             msg.setSubject(email.getSubject(), "UTF-8");
+             msg.setText(email.getContent(), "UTF-8", "html");
              msg.setRecipients(MimeMessage.RecipientType.TO , InternetAddress.parse(email.getReceiver()));
             
          } catch (MessagingException e) {

@@ -1,5 +1,6 @@
 package com.studymate.member.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -68,8 +69,15 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 	}
 
 	@Override
-	public void memberJoin(MemberDto memDto) {
+	public void memberJoin(HttpSession session, MemberDto memDto) {
 		memDao.write(memDto);
+		if (session.getAttribute("memId") == null) {
+			
+			HashMap<String, String> email = getWelcomeContents(
+					((MemberDto) memDto).getMemId(), ((MemberDto) memDto).getMemEmail());
+
+			sendEmailHelper(email.get("subject"), email.get("content"), email.get("receiver"));
+		}
 	}
 
 	@Override
@@ -188,6 +196,54 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 		} else {
 			resultMap.put("searchResult", "NO");
 			return resultMap;
+		}
+	}
+
+	@Override
+	public Model findForm(Model model) {
+		model.addAttribute("findIdDto", new FindIdDto());
+		model.addAttribute("findPassDto", new FindPassDto());
+		return model;
+	}
+
+	@Override
+	public String memberFindPass(FindPassDto findPassDto) {
+		String inputId = findPassDto.getMemId();
+		String inputName = findPassDto.getMemName();
+		String inputEmail = findPassDto.getMemEmail();
+		
+		MemberDto memDto = memDao.read(inputId);
+		if (memDto == null) 
+			return GUESTLEVEL;
+		else if (memDto.getMemName().equals(inputName) && memDto.getMemEmail().equals(inputEmail)) {
+			String randomString = getRandomString().substring(0, 8);
+			
+			HashMap<String, String> email = getPassEmail(memDto, randomString);
+			sendEmailHelper(email.get("subject"), email.get("content"), email.get("receiver"));
+			
+			memDto.setMemPass(randomString);
+			memDao.updatePass(memDto);
+			return "/member/findPassSuccess";
+		} else {
+			return WRONGINFO;
+		}
+	}
+
+	@Override
+	public String memberFindId(Model model, FindIdDto findIdDto) {
+		List<MemberDto> tempList = memDao.findId(findIdDto);
+		List<MemberDto> list = new ArrayList<>();
+		
+		if (tempList.isEmpty()) {
+			return GUESTLEVEL;
+		} else {
+			for(MemberDto memDto : tempList) {
+				String temp = memDto.getMemId();
+				memDto.setMemId(temp.substring(0, temp.length()-2));
+				list.add(memDto);
+			}
+			model.addAttribute("memList", list);
+			return "/member/findIdSuccess";
 		}
 	}
 

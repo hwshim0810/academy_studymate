@@ -4,7 +4,7 @@
 <html>
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>삭제</title>
+	<title>확인</title>
 	</head>
 	<body>
 		<script type="text/javascript">

@@ -1,7 +1,5 @@
 package com.studymate.reserve.model;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,8 +12,6 @@ import org.springframework.ui.Model;
 
 import com.studymate.common.CommonServiceUtil;
 import com.studymate.common.Dto;
-import com.studymate.common.EmailDto;
-import com.studymate.common.EmailSender;
 import com.studymate.common.ServiceInterface;
 import com.studymate.room.model.RoomDao;
 import com.studymate.room.model.RoomDto;
@@ -26,10 +22,6 @@ public class ReserveServiceImpl extends CommonServiceUtil implements ServiceInte
 	ReserveDao reserveDao;
 	@Autowired
 	RoomDao roomDao;
-	@Autowired
-    EmailSender emailSender;
-	@Autowired
-	EmailDto email;
 	
 	@Override
 	public Model list(HttpSession session, Model model, int currentPage, String keyField, String keyWord) {
@@ -84,28 +76,9 @@ public class ReserveServiceImpl extends CommonServiceUtil implements ServiceInte
 		if (mailCheck == null) { // 수신미동의시
 			reserveDao.write(resDto);
 		} else {
-			SimpleDateFormat fmt = new SimpleDateFormat("yyyy년 MM월 dd일");
-			Date today = new Date();
+			HashMap<String, String> email = getReserveEmailContents(resDto);
+			sendEmailHelper(email.get("subject"), email.get("content"), email.get("receiver"));
 			
-			email.setSubject("Studymate에서 " + ((ReserveDto) resDto).getMemId() +" 님께 보내드리는 예약안내 메일입니다.");
-			email.setReceiver(((ReserveDto) resDto).getMemEmail());
-			email.setContent(
-						"안녕하십니까? Studymate에 예약해주셔서 감사합니다.\n"
-					+ "예약번호: " + ((ReserveDto) resDto).getResNum() + "\n"
-					+ "예약자명: " + ((ReserveDto) resDto).getMemName() + "\n"
-					+ "이용예정일: " + ((ReserveDto) resDto).getResDate() + "\n"
-					+ "방문예정시간: " + ((ReserveDto) resDto).getResVisit() + "\n"
-					+ "이용예정시간: " + ((ReserveDto) resDto).getResTime() + "\n"
-					+ "예약지점: " + ((ReserveDto) resDto).getBorName() + "\n"
-					+ "예약인원: " + ((ReserveDto) resDto).getResCount() + "\n"
-					+ "예약날짜: " + fmt.format(today) + "\n\n"
-					+ "예약시간에 맞추어 방문해주시기를 바랍니다.");
-			try {
-				emailSender.SendEmail(email);
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println("SendException");
-			}
 			reserveDao.write(resDto);
 		}
 		

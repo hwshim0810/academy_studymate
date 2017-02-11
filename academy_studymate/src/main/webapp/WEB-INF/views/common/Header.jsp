@@ -12,6 +12,13 @@
 				<a class="navbar-brand" href="${pageContext.request.contextPath}">Logo</a>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
+				<div class="row">
+					<ul class="nav navbar-nav navbar-right lottemartdream normal w400">
+						<li><a href="${pageContext.request.contextPath}/login">로그인</a></li>
+						<li class="hidden-xs hidden-sm bar">|</li>
+						<li><a href="${pageContext.request.contextPath}/memberWrite">회원가입</a></li>
+					</ul>
+				</div>
 				<ul class="nav navbar-nav lottemartdream normal w400 navsize">
 					<li class="active"><a href="${pageContext.request.contextPath}/siteInfo">사이트 소개</a></li>
 						<li class="hidden-xs hidden-sm bar">|</li>
@@ -22,13 +29,13 @@
 					<!-- <li><a href="${pageContext.request.contextPath}/findList/1">모임찾기</a></li>
 						<li class="hidden-xs hidden-sm bar">|</li> -->
 					<li class="dropdown">
-						<a class="dropbtn dropdown-toggle" data-toggle="dropdown" href="#">커뮤니티<span class="caret hidden-md hidden-lg"></span></a>
+						<a class="dropbtn dropdown-toggle" data-toggle="dropdown" href="#">커뮤니티<span class="caret hidden-sm hidden-md hidden-lg"></span></a>
 						<ul class="nonestyle dropdown-menu hidden-md hidden-lg" >
 								<li><a href="${pageContext.request.contextPath}/qnaList/1">QnA</a></li>
 								<li><a href="${pageContext.request.contextPath}/reviewList/1">방문후기</a></li>
 								<li><a href="#">FAQ</a></li>
 						</ul>
-						<div class="dropdown-content hidden-xs hidden-sm">
+						<div class="dropdown-content hidden-xs">
 							<ul class="nonestyle" >
 								<li><a href="${pageContext.request.contextPath}/qnaList/1">QnA</a></li>
 								<li><a href="${pageContext.request.contextPath}/reviewList/1">방문후기</a></li>
@@ -36,14 +43,6 @@
 							</ul>
 						</div>
 					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="${pageContext.request.contextPath}/login">로그인</a></li>
-					<li class="hidden-xs hidden-sm bar">|</li>
-					<li><a href="${pageContext.request.contextPath}/memberWrite">회원가입</a></li>
-					<!-- 추후 삭제예정 -->
-					<!-- <li class="hidden-xs hidden-sm bar">|</li>
-					<li><a href="${pageContext.request.contextPath}/reserveList/1">관리페이지</a></li> -->
 				</ul>
 			</div>
 		</div>

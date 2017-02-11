@@ -30,7 +30,6 @@
 		</where>
 	</sql>
 
-
 	<select id="totalcount" resultType="Integer" >
 		SELECT count(*) FROM member <include refid="search" /> 
 	</select>
@@ -47,6 +46,10 @@
 		SELECT <include refid="columns" />  FROM member WHERE memId = #{memId}
 	</select>
 	
+	<select id="findId" resultType="MemberDto" parameterType="FindIdDto">
+		SELECT <include refid="columns" /> FROM member WHERE memName = #{memName} and memEmail = #{memEmail} 
+	</select>
+	
 	<insert id="write"  parameterType="MemberDto">
 		INSERT INTO member VALUES ( #{memId}, #{memPass}, #{memName}, #{memSex}, #{memBirth}, #{memAddr}, #{memArea}, #{memEmail}, '가입', sysdate) 
 	</insert>
@@ -61,6 +64,10 @@
 	
 	<update id="updateDelMem" parameterType="String">
 		UPDATE member SET memPass = #{memPass}, memSex = #{memSex}, memBirth = #{memBirth}, memAddr = #{memAddr}, memArea = #{memArea}, memEmail = #{memEmail}, memSiteout = '탈퇴' WHERE memId = #{memId}  
+	</update>
+	
+	<update id="updatePass">
+		UPDATE member SET memPass = #{memPass} WHERE memId = #{memId} 
 	</update>
 	
 	<delete id="deleteMem" parameterType="String">
