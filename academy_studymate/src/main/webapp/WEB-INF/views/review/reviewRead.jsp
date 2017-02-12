@@ -18,7 +18,7 @@
 			</c:choose>
 			<div class="body_top">
 			</div>
-			<section class="body center_align">
+			<section class="body_high center_align">
 				<div class="boardtitle lottemartdream"></div>
 				<article id="contents">
 					<header id="con_header" class="col-xs-12">
@@ -38,13 +38,13 @@
 								<c:choose>
 									<c:when test="${not empty reviewReply}">
 										<c:forEach var="reply" items="${reviewReply}">
-											<tr>
+											<tr class="rpRow">
 												<td>${reply.memName}</td>
 												<td>${reply.repContent}</td>
 												<td>	${reply.repRegdate}</td>
 												<c:choose>
 													<c:when test="${reply.memName eq sessionScope.memName}">
-														<td><button class="btn btn-danger btn-font pull-right" id="btnrepdel" type="button">삭제</button></td>
+														<td><button class="btn btn-danger btn-font pull-right btnrepdel"  type="button">삭제</button></td>
 													</c:when>
 													<c:otherwise>
 														<td></td>

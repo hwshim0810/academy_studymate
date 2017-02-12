@@ -17,8 +17,8 @@
 			</c:choose>
 			<div class="body_top">
 			</div>
+			<section class="body_low center_align">
 				<%@include file="../common/BoardSubnav.jsp" %>
-			<section class="body center_align">
 				<div class="boardmaintitle lottemartdream"></div>
 				<table class="table table-hover">
 					<thead>

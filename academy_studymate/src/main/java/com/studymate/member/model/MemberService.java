@@ -46,4 +46,6 @@ public interface MemberService  {
 	String memberFindId(Model model, FindIdDto findIdDto);
 
 	HashMap<String, Object> resPaging(int resPage, String memId);
+
+	HashMap<String, Object> resDetail(int resNum);
 }

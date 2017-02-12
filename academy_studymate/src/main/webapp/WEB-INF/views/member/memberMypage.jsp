@@ -19,7 +19,7 @@
 			</c:choose>
 			<div class="body_top">
 			</div>
-			<section class="body center_align">
+			<section class="body_high center_align">
 				<div class="boardtitle lottemartdream"></div>
 				<div class="subnav lottemartdream normal w400" >
 					<article class="main">
@@ -90,11 +90,6 @@
 											<div class="col-xs-3">가입일</div>
 											<div class="col-xs-9">${memDto.memRegdate}</div>
 										</div>
-										<p>
-											<a class="btn btn-success" href="http://j.mp/metronictheme" target="_blank">
-												Learn more...
-											</a>
-										</p>
 									</div>
 									<!-- Member Update -->
 									<div class="tab-pane" id="mem_update">
@@ -104,7 +99,7 @@
 												<legend class="sr-only">정보수정</legend>
 												<div class="col-xs-12">
 													<h2>비밀번호 수정</h2>
-													<br><hr>
+													<hr>
 												</div>
 												<div class="form-group mzbzero">
 													<label class="col-xs-4 control-label" for="memId">아이디</label>  
@@ -157,7 +152,7 @@
 												</div>
 												<div class="col-xs-12">
 													<h2>개인정보</h2>
-													<br><hr>
+													<hr>
 												</div>
 												<div class="form-group">
 													<label class="col-xs-4 control-label" for="memName">이름</label>  
@@ -251,10 +246,9 @@
 											</thead>
 											<tbody id="resResult">
 												<c:forEach var="item" items="${resList}">
-													<c:url value="/reserveRead/${currentPage}-${item.resNum}" var="readUrl" />
 													<tr>
 														<td class="hidden-xs hidden-sm table_center">${item.resNum}</td>
-														<td class="table_center"><a href="${readUrl}">${item.memName}</a></td>
+														<td class="table_center"><a class="resDetail cursor_p" id="${item.resNum}">${item.memName}</a></td>
 														<td class="table_center">${item.borName}</td>
 														<td class="table_center">${item.resDate}</td>
 														<td class="table_center">${item.resTime}</td>
@@ -267,11 +261,17 @@
 												</tr>
 											</tfoot>
 										</table>
+										<form action="${pageContext.request.contextPath}/memResDetail" method="POST" id="detailform">
+											<input type="hidden" name="resNum" value="" />
+										</form>
 										<form action="${pageContext.request.contextPath}/memResPaging" method="POST" id="pagingform">
 											<input type="hidden" name="totalCount" value="${totalCount}" id="totalCount" />
 											<input type="hidden" name="resPage" value=""  id="resPage"/>
 											<input type="hidden" name="memId" value="${memDto.memId}">
 										</form>
+										
+										<div id="detailResult">
+										</div>
 									</div>
 									<!-- Siteout Information -->
 									<div class="tab-pane" id="mem_siteout">
@@ -280,10 +280,9 @@
 										    <div class="panel-body">
 										    	<div>
 										    		<ul class="text-center nonestyle lottemartdream">
-										    			<li>회원탈퇴시 예약은 모두 취소됩니다.</li>
-										    			<li>아이디는 중복가입을 막기위해 보존됩니다.</li>
-										    			<li>아이디를 제외한 정보는 모두 삭제됩니다.</li>
-										    			<li>게시판의 글은 보존되나 삭제를 원하시면 탈퇴전 QnA게시판에 문의바랍니다.</li>
+										    			<li class="mypage_row">회원탈퇴시 예약은 모두 취소됩니다.</li>
+										    			<li class="mypage_row">회원님이 게시판에 쓴 모든글은 삭제됩니다.</li>
+										    			<li class="mypage_row">${memDto.memId}님이 탈퇴하는 경우 모든 정보는 되돌릴 수 없습니다.</li>
 										    		</ul>
 										    	</div>
 											    <div class="text-center">

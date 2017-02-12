@@ -18,7 +18,7 @@
 			</c:choose>
 			<div class="body_top">
 			</div>
-			<section class="body center_align">
+			<section class="body_low center_align">
 			<!-- 관리자 여부로 서브메뉴 구분필요 -->
 				<c:if test="${sessionScope.memId eq 'admin'}">
 					<%@include file="../common/AdminSubnav.jsp" %>

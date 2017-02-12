@@ -2,11 +2,17 @@ package com.studymate.common.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.studymate.common.model.IndexService;
 
 @Controller
 public class IndexController {
+	@Autowired
+	IndexService indexService;
 	
 	@RequestMapping("siteInfo")
 	public String siteInfo() {
@@ -14,8 +20,8 @@ public class IndexController {
 	}
 
 	@RequestMapping("main")
-	public String indexView(HttpSession session) {
-		session.setAttribute("page", "redirect:main");
+	public String indexView(HttpSession session,Model model) {
+		indexService.getIndexInfo(session, model);
 		return "common/home";
 	}
 	

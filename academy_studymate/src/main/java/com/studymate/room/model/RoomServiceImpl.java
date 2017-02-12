@@ -1,6 +1,7 @@
 package com.studymate.room.model;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,23 +62,44 @@ public class RoomServiceImpl extends CommonServiceUtil implements ServiceInterfa
 	public void write(Dto dto) {}
 	
 	public void write(MultipartHttpServletRequest request, Dto roomDto) throws Exception {
-		MultipartFile file = request.getFile("file");
+		MultipartFile file = request.getFile("main");
+		List<MultipartFile> subList = request.getFiles("sub");
 	    
 	    String uploadPath = request.getServletContext().getRealPath("resources/roomImg/");
-		String orginFileName = file.getOriginalFilename();
-		String[] fileNames = {};
+		String mainOriginName = file.getOriginalFilename();
+		String[] mainFileNames = {};
+		ArrayList<String> subFileNames = new ArrayList<>();
+	
+		if (!(mainOriginName.equals("")))
+			mainFileNames = fileUpload(file, mainOriginName, uploadPath + "/");
 		
-		if (!(orginFileName.equals("")))
-			fileNames = fileUpload(file, orginFileName, uploadPath + "/");
-		
-		((RoomDto) roomDto).setBorNewFilename(fileNames[0]);
-		((RoomDto) roomDto).setBorFilename(fileNames[1]);
+		((RoomDto) roomDto).setBorMainpath(mainFileNames[0]);
+		((RoomDto) roomDto).setBorMain(mainFileNames[1]);
 		
 		roomDao.write(roomDto);
+		int borNum = roomDao.getBorNum();
+		
+		for (MultipartFile subFile : subList) {
+			RoomSubDto subDto = new RoomSubDto();
+			String subOriginName = subFile.getOriginalFilename();
+			
+			if (!(subOriginName.equals(""))) {
+				subFileUpload(subFile, subOriginName, subFileNames, uploadPath + "/");
+				subDto.setBorNum(borNum);
+				subDto.setBorSubpath(subFileNames.get(0));
+				subDto.setBorSub(subFileNames.get(1));
+
+				roomDao.writeSubFile(subDto);
+				subFileNames.clear();
+			}
+			
+		}
+
 	}
 
 	@Override// 상세읽기 : 조회수는 update로 오지않았을경우만
 	public Model read(Model model, int borNum, int currentPage, String update, String keyField, String keyWord) {
+		model.addAttribute("subFileList", roomDao.readSubFile(borNum));
 		model.addAttribute("roomDto", roomDao.read(borNum));
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("keyField", keyField);
@@ -98,8 +120,15 @@ public class RoomServiceImpl extends CommonServiceUtil implements ServiceInterfa
 	@Override
 	public Model delete(Model model, Dto roomDto) {
 		int borNum = ((RoomDto) roomDto).getBorNum();
-		String filePath = ((RoomDto) roomDao.read(borNum)).getBorNewFilename();
+		String filePath = ((RoomDto) roomDao.read(borNum)).getBorMainpath();
+		List<RoomSubDto> subFilePath = roomDao.readSubFile(borNum);
+		
 		if (!(filePath.equals(""))) fileDelete(filePath);
+		
+		for(RoomSubDto subDto : subFilePath) {
+			String subFilepath = subDto.getBorSubpath();
+			if (!subFilePath.equals("")) fileDelete(subFilepath);
+		}
 		
 		roomDao.delete(borNum);
 		

@@ -285,4 +285,13 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 		}
 	}
 
+	@Override
+	public HashMap<String, Object> resDetail(int resNum) {
+		HashMap<String, Object> resultMap = new HashMap<>();
+		ReserveDto resDto = (ReserveDto) resDao.read(resNum);
+		
+		resultMap.put("resDto", resDto);
+		return resultMap;
+	}
+
 }

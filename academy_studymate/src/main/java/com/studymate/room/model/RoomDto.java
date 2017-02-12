@@ -6,21 +6,27 @@ import com.studymate.common.Dto;
 
 public class RoomDto extends Dto{
 	int borNum;
-	String borName, borAddr, borArea, borFilename, borNewFilename;
+	String borName, borAddr, borArea, borMain, borMainpath;
 	String borIntro;
 	Date borRegdate;
 	
+	public String getBorMain() {
+		return borMain;
+	}
+	public void setBorMain(String borMain) {
+		this.borMain = borMain;
+	}
+	public String getBorMainpath() {
+		return borMainpath;
+	}
+	public void setBorMainpath(String borMainpath) {
+		this.borMainpath = borMainpath;
+	}
 	public String getBorIntro() {
 		return borIntro;
 	}
 	public void setBorIntro(String borIntro) {
 		this.borIntro = borIntro;
-	}
-	public String getBorNewFilename() {
-		return borNewFilename;
-	}
-	public void setBorNewFilename(String borNewFilename) {
-		this.borNewFilename = borNewFilename;
 	}
 	public int getBorNum() {
 		return borNum;
@@ -45,12 +51,6 @@ public class RoomDto extends Dto{
 	}
 	public void setBorArea(String borArea) {
 		this.borArea = borArea;
-	}
-	public String getBorFilename() {
-		return borFilename;
-	}
-	public void setBorFilename(String borFilename) {
-		this.borFilename = borFilename;
 	}
 	public Date getBorRegdate() {
 		return borRegdate;

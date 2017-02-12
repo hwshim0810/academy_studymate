@@ -17,7 +17,7 @@
 			</c:choose>
 			<div class="body_top">
 			</div>
-			<section class="body center_align">
+			<section class="body_higher center_align">
 				<c:if test="${sessionScope.memId eq 'admin'}">
 					<%@include file="../common/AdminSubnav.jsp" %>
 				</c:if>
@@ -37,7 +37,7 @@
 								</c:url>
 								<figure>
 						        	<a href="${readUrl}">
-						        		<img alt="지점이미지" src="${pageContext.request.contextPath}/resources/roomImg/${item.borFilename}">
+						        		<img alt="지점썸네일" src="${pageContext.request.contextPath}/resources/roomImg/${item.borMain}">
 						        	</a>
 							        <figcaption>
 							        	<ul class="ul_padding">

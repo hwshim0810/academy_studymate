@@ -92,7 +92,13 @@ $(function() {
 		$("#pagingform").submit();
 	});
 	
-    $('#pagingform').ajaxForm ({
+	$(document).on("click", ".resDetail",function(event) {
+		var id = event.target.id;
+		$("input[name=resNum]").val(id);
+		$("#detailform").submit();
+	});
+	
+    $('#detailform').ajaxForm ({
         cache: false,
         dataType:"json",
         //보내기전 validation check가 필요할경우
@@ -100,10 +106,26 @@ $(function() {
         	return true;
         },
         success: function(data, statusText){
-            output(data); //받은 정보를 화면 출력하는 함수 호출
+            detailOutput(data); //받은 정보를 화면 출력하는 함수 호출
         },
         error: function(e){
-            alert("에러발생!!");
+            alert("상세에러발생!!");
+            console.log(e);
+        }                               
+ 	});
+	
+	
+    $('#pagingform').ajaxForm ({
+        cache: false,
+        dataType:"json",
+        beforeSubmit: function (data, frm, opt) {
+        	return true;
+        },
+        success: function(data, statusText){
+            output(data);
+        },
+        error: function(e){
+            alert("여기에러발생!!");
             console.log(e);
         }                               
  	});
@@ -119,7 +141,7 @@ function output(data) {
 			count++;
 			$("#resResult").append('<tr id="rp' + count +'">');
 			$("#rp" + count).append('<td>' + item.resNum);
-			$("#rp" + count).append('<td>' + item.memName);
+			$("#rp" + count).append('<td><a class="resDetail" id="'+ item.resNum + '">' + item.memName + '</a>');
 			$("#rp" + count).append('<td>' + item.borName);
 			$("#rp" + count).append('<td>' + item.resDate);
 			$("#rp" + count).append('<td>' + item.resTime);
@@ -132,14 +154,38 @@ function output(data) {
 
     //$('#multiform')[0].reset();  //폼 초기화(리셋);
     //$('#multiform').resetForm();   //위코드와 동일 (jQuery.Form 플러그인 메서드)
-//    $('#replyform').clearForm(); //(jQuery.Form 플러그인 메서드)
+    //$('#replyform').clearForm(); //(jQuery.Form 플러그인 메서드)
      
-    //IE에서 폼 리셋후 input[type=file] 초기화 안되는 문제. 
-    //(파일이름은 지워지지만 files 프로퍼티에는 파일정보 남아있음.)
-    /* if(/(MSIE|Trident)/.test(navigator.userAgent)) {
-    	//ie 일때 input[type=file] init.
-    	$("#multiform input[type=file]").each(function(index){
-    		$(this).replaceWith($(this).clone(true));
-    	});
-    } */
+}
+function detailOutput(data) {
+	$("#detailResult").html('');
+
+	$("#detailResult").append('<hr>');
+	$("#detailResult").append('<h2>예약상세정보</h2>');
+	$("#detailResult").append('<hr>');
+	$("#detailResult").append('<div class="row mypage_row" id="resNum">');
+	$("#resNum").append('<div class="col-xs-6">예약번호</div>');
+	$("#resNum").append('<div class="col-xs-6">'+ data.resDto.resNum + ' 번</div>');
+	$("#detailResult").append('<div class="row mypage_row" id="resName">');
+	$("#resName").append('<div class="col-xs-6">예약자명</div>');
+	$("#resName").append('<div class="col-xs-6">'+ data.resDto.memName + '</div>');
+	$("#detailResult").append('<div class="row mypage_row" id="borName">');
+	$("#borName").append('<div class="col-xs-6">예약지점</div>');
+	$("#borName").append('<div class="col-xs-6">'+ data.resDto.borName + '</div>');
+	$("#detailResult").append('<div class="row mypage_row" id="resDate">');
+	$("#resDate").append('<div class="col-xs-6">예약일자</div>');
+	$("#resDate").append('<div class="col-xs-6">'+ data.resDto.resDate + '</div>');
+	$("#detailResult").append('<div class="row mypage_row" id="resTime">');
+	$("#resTime").append('<div class="col-xs-6">이용시간</div>');
+	$("#resTime").append('<div class="col-xs-6">'+ data.resDto.resTime + ' 시간</div>');
+	$("#detailResult").append('<div class="row mypage_row" id="resVisit">');
+	$("#resVisit").append('<div class="col-xs-6">방문예정시간</div>');
+	$("#resVisit").append('<div class="col-xs-6">'+ data.resDto.resVisit + '</div>');
+	$("#detailResult").append('<div class="row mypage_row" id="resCount">');
+	$("#resCount").append('<div class="col-xs-6">이용인원</div>');
+	$("#resCount").append('<div class="col-xs-6">'+ data.resDto.resCount + ' 명</div>');
+	$("#detailResult").append('<div class="row mypage_row" id="resRegdate">');
+	$("#resRegdate").append('<div class="col-xs-6">예약일</div>');
+	$("#resRegdate").append('<div class="col-xs-6">'+ data.resDto.resRegdate + '</div>');
+	
 }

@@ -23,21 +23,22 @@
 					<div class="main">
 						<div class="container col-xs-12">
 							<div class="panel panel-info">
-							    <div class="panel-heading"><h4 class="lottemartdream text-center">예약완료</h4></div>
+							    <div class="panel-heading lottemartdream"><h2 class="text-center">예약완료</h2></div>
 							    <div class="panel-body">
 							    	<div>
 							    		<ol class="text-center nonestyle lottemartdream">
-							    			<li>예약번호 : ${resDto.resNum}</li>
-							    			<li>예약자명 : ${resDto.memName}</li>
-							    			<li>이용예정일:  ${resDto.resDate}</li>
-							    			<li>방문예정시간: ${resDto.resVisit}</li>
-							    			<li>이용예정시간: ${resDto.resTime}</li>
-							    			<li>예약지점: ${resDto.borName}</li>
-							    			<li>예약인원: ${resDto.resCount}</li>
+							    			<li>예약번호 :<span class="bora">${resDto.resNum} 번</span></li>
+							    			<li>예약자명 : <span class="bora">${resDto.memName}</span></li>
+							    			<li>이용예정일:  <span class="bora">${resDto.resDate}</span></li>
+							    			<li>방문예정시간: <span class="bora">${resDto.resVisit}</span></li>
+							    			<li>이용예정시간: <span class="bora">${resDto.resTime} 시간</span></li>
+							    			<li>예약지점: <span class="bora">${resDto.borName}</span></li>
+							    			<li>예약인원: <span class="bora">${resDto.resCount} 명</span></li>
 							    		</ol>
 							    	</div>
-								    <div class="text-center">
-							    		<h4 class="lottemartdream">예약시간에 맞추어 방문해주시기를 바랍니다.</h4>
+							    	<hr>
+								    <div class="text-center lottemartdream">
+							    		<h4>예약시간에 맞추어 방문해주시기를 바랍니다.</h4>
 							    	</div>
 							    </div>
 						    </div>

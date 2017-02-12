@@ -13,7 +13,7 @@
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<div class="row">
-					<ul class="nav navbar-nav navbar-right">
+					<ul class="nav navbar-nav navbar-right lottemartdream normal w400">
 							<li><a href="${pageContext.request.contextPath}/logoutConfirm">로그아웃</a></li>
 							<c:choose>
 								<c:when test="${sessionScope.memId eq 'admin'}">

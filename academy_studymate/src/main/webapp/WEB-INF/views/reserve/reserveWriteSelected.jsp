@@ -18,7 +18,7 @@
 			</c:choose>
 			<div class="body_top">
 			</div>
-			<section class="body_higher center_align">
+			<section class="body_high center_align">
 				<c:if test="${sessionScope.memId eq 'admin'}">
 					<%@include file="../common/AdminSubnav.jsp" %>
 				</c:if>
@@ -110,7 +110,7 @@
 								<div class="form-group">
 									<label class="col-xs-4 control-label" for="resTime">이용예정시간</label>  
 									<div class="col-xs-6">
-										<input type="number" name="resTime" min="1" max="12"  />&nbsp;시간
+										<input type="number" name="resTime" min="1" max="12"  value="1" />&nbsp;시간
 									</div>
 									<div class="col-xs-2">
 									</div>
@@ -118,7 +118,7 @@
 								<div class="form-group">
 									<label class="col-xs-4 control-label" for="resCount">예약인원</label>  
 									<div class="col-xs-6">
-										<input type="number" name="resCount" min="1" max="10"  />&nbsp;명
+										<input type="number" name="resCount" min="1" max="10"  value="1" />&nbsp;명
 									</div>
 									<div class="col-xs-2">
 									</div>
@@ -138,6 +138,7 @@
 									<c:choose>
 										<c:when test="${sessionScope.memId eq 'admin'}">
 											<button class="btn btn-primary btn-font"  type="button"  id="btnlist">목록</button>
+											<button class="btn btn-info btn-font" id="btnback">뒤로</button>
 											<input type="hidden" id="boardid" value="reserve">
 											<input type="hidden" id="boardtitle" value="예약관리">
 											<input type="hidden" id="boardsubtitle" value="예약추가">

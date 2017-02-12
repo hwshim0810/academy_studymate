@@ -178,4 +178,10 @@ public class MemberController {
 	public HashMap<String, Object> resPaging(int resPage, String memId) {
 		return memberService.resPaging(resPage, memId);
 	}
+	
+	@RequestMapping(value = "memResDetail", produces = "application/json")
+	@ResponseBody
+	public HashMap<String, Object> resDetail(int resNum) {
+		return memberService.resDetail(resNum);
+	}
 }

@@ -5,6 +5,7 @@
 	text-align: center;
 	padding: 30px 15px;
 	margin-bottom: 50px;
+	bottom: 65px;
 }
 .block {
 	display: inline-block;
@@ -55,6 +56,9 @@
 textarea {
 	resize:none;
 }
+.rpRow {
+	height: 56px;
+}
 
 @media screen and (max-width: 760px) {
 .textcontent {
@@ -102,7 +106,9 @@ textarea {
   box-shadow: 2px 2px 5px rgba(0,0,0,0.5);;
 }
 #roomcolumn figure img {
-  width:100%;
+  max-width:100%;
+  width: 460px;
+  height: 287px;
 }
 #roomcolumn figure figcaption {
   border-top:1px solid rgba(0,0,0,0.2);
@@ -118,7 +124,14 @@ textarea {
 
 /* Room read Css */
 .read_img img {
-	width:100%;
+	max-width:100%;
+	width:98px;
+	height:60px;
+}
+.read_mainimg img {
+	max-width:100%;
+	width: 384px;
+	height: 240px;
 }
 
 .read_info h2 {

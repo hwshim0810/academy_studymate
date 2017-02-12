@@ -17,7 +17,7 @@
 			</c:choose>
 			<div class="body_top">
 			</div>
-			<section class="body center_align">
+			<section class="body_low center_align">
 				<div class="boardmaintitle lottemartdream"></div>
 				<table class="table table-hover">
 					<thead>
@@ -32,8 +32,10 @@
 						<c:forEach var="item" items="${noticeList}">
 							<c:url value="/noticeRead/${currentPage}-${item.bonNum}" var="readUrl">
 								<c:param name="update" value="n" />
-								<c:param name="keyField" value="${keyField}" />
-								<c:param name="keyWord" value="${keyWord}" />
+								<c:if test="${not empty keyField && not empty keyWord}">
+									<c:param name="keyField" value="${keyField}" />
+									<c:param name="keyWord" value="${keyWord}" />
+								</c:if>
 							</c:url>
 							<tr>
 								<td class="table_center hidden-xs">${item.bonNum}</td>

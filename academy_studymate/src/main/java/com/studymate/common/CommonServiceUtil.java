@@ -2,6 +2,7 @@ package com.studymate.common;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -48,6 +49,23 @@ public class CommonServiceUtil {
 			String[] result = {uploadFile.getPath(), originFileName};
 			return result;
 	}
+	
+	protected void subFileUpload(MultipartFile subFile, String subOriginName, ArrayList<String> subFileNames, String uploadPath) {
+		File uploadFile = new File(uploadPath + subOriginName);
+		// 같은 파일 존재시
+		if(uploadFile.exists()){
+			subOriginName = new Date().getTime() + subOriginName;
+			uploadFile = new File(uploadPath + subOriginName);
+		}
+		try {
+			subFile.transferTo(uploadFile);
+		} catch (Exception e) {
+			System.err.println("Upload Exception");
+		}
+		
+		subFileNames.add(uploadFile.getPath());
+		subFileNames.add(subOriginName);
+}
 	
 	protected void fileDelete(String filePath) {
 		File file = new File(filePath);

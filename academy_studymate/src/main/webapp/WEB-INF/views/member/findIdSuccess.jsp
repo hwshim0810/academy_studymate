@@ -18,7 +18,7 @@
 			</c:choose>
 			<div class="body_top">
 			</div>
-			<section class="body center_align">
+			<section class="body_low center_align">
 				<div class="boardtitle lottemartdream"></div>
 				<article id="contents">
 					<div class="main">

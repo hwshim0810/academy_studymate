@@ -4,7 +4,6 @@ $(function() {
 	$.post('/studymate/getLocation', 'borAddr=' + borAddr , function(resultMap) {
 		var x = resultMap.wd;
 		var y = resultMap.kd;
-		
 		var container = document.getElementById('map');
 		var options = { //지도를 생성할 때 필요한 기본 옵션
 			center: new daum.maps.LatLng(x, y), //지도의 중심좌표.

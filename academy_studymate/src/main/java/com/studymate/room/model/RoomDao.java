@@ -11,4 +11,10 @@ public interface RoomDao extends Dao {
 
 	String getBorName(int borNum);
 
+	void writeSubFile(RoomSubDto subDto);
+
+	List<RoomSubDto> readSubFile(int borNum);
+
+	int getBorNum();
+
 }
