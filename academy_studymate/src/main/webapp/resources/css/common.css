@@ -85,6 +85,13 @@ html,body { height: 100%; margin: 0; padding: 0; }
 .cursor_p {
 	cursor: pointer;
 }
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+.errormsg {
+	min-height: 28px;
+}
 
 @media screen and (min-width: 760px) {
 .center_align {

@@ -162,3 +162,9 @@ textarea {
 .respaging {
 	cursor: pointer;
 }
+.mypage {
+	text-align: center;
+	padding: 30px 15px;
+	margin-bottom: 50px;
+	bottom: 65px;
+}

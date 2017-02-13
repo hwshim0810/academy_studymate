@@ -18,7 +18,7 @@
 			</c:choose>
 			<div class="body_top">
 			</div>
-			<section class="body center_align">
+			<section class="body_high center_align">
 				<%@include file="../common/AdminSubnav.jsp" %>
 				<div class="boardtitle lottemartdream"></div>
 				<article id="contents">
@@ -30,14 +30,10 @@
 					</header>
 					<br><br><br>
 					<article class="main">
-						<form:form id="memForm" class="form-horizontal" method="POST" commandName="memDto" action="${pageContext.request.contextPath}/memberUpdate/${currentPage}">
-							<fieldset>
+						<form:form id="memForm" class="form-horizontal" method="POST" commandName="memberDto" action="${pageContext.request.contextPath}/memberUpdate/${currentPage}">
 								<!-- Form Name -->
 								<legend class="sr-only">회원정보수정</legend>
-								<div class="col-xs-12">
-									<h2>정보 수정</h2>
-									<br><hr>
-								</div>
+								<br><br><hr>
 								<div class="form-group mzbzero">
 									<label class="col-xs-4 control-label" for="memId">아이디</label>  
 									<div class="col-xs-6">
@@ -56,8 +52,14 @@
 										<form:input path="memName" placeholder="이름" value="${memDto.memName}" readonly="true" maxlength="10" cssClass="form-control" />
 									</div>
 									<div class="col-xs-2">
-										<form:errors path="memName" />
 									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-xs-4"></div>
+									<div class="col-xs-6">
+										<form:errors path="memName" cssClass="label label-danger" delimiter="/"/>
+									</div>
+									<div class="col-xs-2"></div>
 								</div>
 								<div class="form-group">
 									<label class="col-xs-4 control-label" for="memAddr">주소</label>  
@@ -66,8 +68,14 @@
 										<button type="button" class="btn btn-default pull-left"  id="btnaddr" >주소찾기</button>
 									</div>
 									<div class="col-xs-2">
-										<form:errors path="memAddr" />
 									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-xs-4"></div>
+									<div class="col-xs-6">
+										<form:errors path="memAddr" cssClass="label label-danger" delimiter="/"/>
+									</div>
+									<div class="col-xs-2"></div>
 								</div>
 								<div class="form-group">
 									<label class="col-xs-4 control-label" for="detailaddr">상세주소</label>  
@@ -75,8 +83,14 @@
 										<form:input path="memArea" id="detailaddr" value="${memDto.memArea}" placeholder="상세주소" cssClass="form-control" maxlength="20"/>
 									</div>
 									<div class="col-xs-2">
-										<form:errors path="memArea" />
 									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-xs-4"></div>
+									<div class="col-xs-6">
+										<form:errors path="memArea" cssClass="label label-danger" delimiter="/"/>
+									</div>
+									<div class="col-xs-2"></div>
 								</div>
 								<div class="form-group">
 									<label class="col-xs-4 control-label" for="memEmail">Email</label>  
@@ -84,8 +98,14 @@
 										<form:input path="memEmail" value="${memDto.memEmail}" placeholder="예)exam@exam.com" cssClass="form-control" maxlength="20"/>
 									</div>
 									<div class="col-xs-2">
-										<form:errors path="memEmail" />
 									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-xs-4"></div>
+									<div class="col-xs-6">
+										<form:errors path="memEmail" cssClass="label label-danger" delimiter="/"/>
+									</div>
+									<div class="col-xs-2"></div>
 								</div>
 								<div class="form-group">
 									<label class="col-xs-4 control-label" for="memSex">성별</label>  
@@ -100,7 +120,6 @@
 										</c:choose>
 									</div>
 									<div class="col-xs-2">
-										<form:errors path="memSex" />
 									</div>
 								</div>
 								<div class="form-group">
@@ -116,10 +135,8 @@
 										</c:choose>
 									</div>
 									<div class="col-xs-2">
-										<form:errors path="memBirth" />
 									</div>
 								</div>
-							</fieldset>
 							<!-- Button Area -->
 							<footer id="con_footer">
 								<div class="btndiv">

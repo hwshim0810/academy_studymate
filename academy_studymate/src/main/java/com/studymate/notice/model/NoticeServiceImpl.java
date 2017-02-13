@@ -66,6 +66,7 @@ public class NoticeServiceImpl extends CommonServiceUtil implements ServiceInter
 		model.addAttribute("listBtn", "/noticeList/1");
 		model.addAttribute("updateBtn", "/noticeUpdate");
 		model.addAttribute("deleteBtn", "/noticeDelete");
+		model.addAttribute("primaryKey", bonNum);
 		return model;
 	}
 

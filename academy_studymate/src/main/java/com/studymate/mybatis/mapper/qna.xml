@@ -33,6 +33,10 @@
 		SELECT nvl(max(boqNum),1) FROM qna 
 	</select>
 	
+	<select id="getCommentCount" resultType="Integer">
+		SELECT count(*) FROM qna WHERE boqGroupnum = #{boqGroupnum}  
+	</select>
+	
 	<select id="list" resultType="QnaDto" parameterType="java.util.HashMap">
 		SELECT <include refid="columns" /> 
 		FROM( SELECT ROWNUM num, <include refid="columns" />   

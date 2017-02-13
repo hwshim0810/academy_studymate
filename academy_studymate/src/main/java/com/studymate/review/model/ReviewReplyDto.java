@@ -5,11 +5,11 @@ import java.sql.Date;
 import com.studymate.common.Dto;
 
 public class ReviewReplyDto extends Dto {
-	int repNum;
-	String repContent;
-	int borvNum;
-	Date repRegdate;
-	String memName, memId;
+	private int repNum;
+	private String repContent;
+	private int borvNum;
+	private Date repRegdate;
+	private String memName, memId;
 	
 	public Date getRepRegdate() {
 		return repRegdate;

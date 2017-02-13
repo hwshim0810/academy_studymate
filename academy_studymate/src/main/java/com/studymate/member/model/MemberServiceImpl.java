@@ -168,7 +168,7 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 	@Override
 	public Model writeForm(Model model) {
 		model.addAttribute("loginDto", new LoginDto());
-		model.addAttribute("memDto", new MemberDto());
+		model.addAttribute("memberDto", new MemberDto());
 		return model;
 	}
 
@@ -191,7 +191,7 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 		
 		model.addAttribute("currentPage", 1);
 		model.addAttribute("pageHtml", memResPaging.getPagingHtml().toString());
-		model.addAttribute("memDto", memDao.read(memId));
+		model.addAttribute("memberDto", memDao.read(memId));
 		model.addAttribute("resList", list);
 		return model;
 	}

@@ -228,6 +228,11 @@ $(function() {
        dataType:"json",
        //보내기전 validation check가 필요할경우
        beforeSubmit: function (data, frm, opt) {
+    	   var repContent = $('#replyform input[name=repContent]').val().trim();
+    	   if (repContent == '') {
+    		   alert('내용을 입력해주십시오');
+    		   return false;
+    	   }
            return true;
        },
        success: function(data, statusText){

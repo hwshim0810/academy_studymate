@@ -66,7 +66,7 @@ public class ReserveServiceImpl extends CommonServiceUtil implements ServiceInte
 	public Model writeFormSelected(Model model, String borName, int borNum) {
 		model.addAttribute("borNum", borNum);
 		model.addAttribute("borName", borName);
-		model.addAttribute("resDto", new ReserveDto());
+		model.addAttribute("reserveDto", new ReserveDto());
 		return model;
 	}
 

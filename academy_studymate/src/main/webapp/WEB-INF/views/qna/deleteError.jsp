@@ -9,6 +9,7 @@
 	<body>
 		<script type="text/javascript">
 			alert('답글이 있는 글은 삭제할 수 없습니다');
+			history.back();
 		</script>
 	</body>
 </html>

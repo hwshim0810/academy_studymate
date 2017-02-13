@@ -7,7 +7,7 @@
 		</div>
 		<div class="pull-left">
 			<button class="btn btn-primary btn-font" type="button" id="btnlist">목록</button>
-			<button class="btn btn-info btn-font" id="btnback">뒤로</button>
+			<button class="btn btn-info btn-font"  type="button" id="btnback">뒤로</button>
 		</div>
 	</div>
 </footer>

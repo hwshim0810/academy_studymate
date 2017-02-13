@@ -22,6 +22,48 @@ $(function() {
 	$("#btnclientUpdate").bind('click', function() {
 		var memId = $("#memId").val();
 		var oldPass = $("#oldPass").val();
+		var passConfirm = $("#memPassConfirm").val();
+		var memPass = $("#memPass").val();
+		var memAddr = $.trim($("#detailaddr").val());
+		var memEmail = $.trim($("#memEmail").val());
+		console.log(memAddr);
+		console.log(memEmail);
+		
+		if (memAddr == '' || memEmail == '') {
+			$.alert({
+				buttons: {
+					tryAgain: {
+			            text: '돌아가기',
+			            btnClass: 'btn-red',
+			            keys: ['enter','esc'],
+			            action: function(){
+			            }
+					}
+				},
+				title: '확인',
+			    type: 'red',
+			    content: '입력란을 확인해주십시오.'
+			});
+			return false;
+		}
+		
+		if (memPass != passConfirm) {
+			$.alert({
+				buttons: {
+					tryAgain: {
+			            text: '돌아가기',
+			            btnClass: 'btn-red',
+			            keys: ['enter','esc'],
+			            action: function(){
+			            }
+					}
+				},
+				title: '확인',
+			    type: 'red',
+			    content: '비밀번호를 확인해주십시오.'
+			});
+			return false;
+		}
 		
 		$.post('/studymate/isRightPass', { memId : memId, oldPass : oldPass } , function(resultMap) {
 			var result = resultMap.searchResult;

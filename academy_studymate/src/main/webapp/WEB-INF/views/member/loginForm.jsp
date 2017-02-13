@@ -31,8 +31,8 @@
 									<div class="col-xs-6">
 										 <form:input path="memId" id="memId" placeholder="아이디" cssClass="form-control" />
 									</div>
-									<div class="col-xs-2">
-										<form:errors path="memId" />
+									<div class="col-xs-2 nopadding">
+										<form:errors path="memId" cssClass="label label-danger" />
 									</div>
 								</div>
 								<div class="form-group">
@@ -40,8 +40,8 @@
 									<div class="col-xs-6">
 										<form:password id="memPass" path="memPass" placeholder="비밀번호" maxlength="12" cssClass="form-control" />
 									</div>
-									<div class="col-xs-2">
-										<form:errors path="memPass" />
+									<div class="col-xs-2 nopadding">
+										<form:errors path="memPass" cssClass="label label-danger" />
 									</div>
 								</div>
 								

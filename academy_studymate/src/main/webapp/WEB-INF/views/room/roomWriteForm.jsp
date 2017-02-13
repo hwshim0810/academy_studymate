@@ -35,21 +35,33 @@
 								<label for="borName pull-left">지점명</label>
 								<form:input id="borName" path="borName" cssClass="form-control" maxlength="10" placeholder="예)ㅇㅇ지점"/>
 							</td>
-							<td class="col-xs-3"><form:errors path="borName" /></td>
+							<td class="col-xs-3"></td>
+						</tr>
+						<tr>
+							<td class="col-xs-9"></td>
+							<td class="col-xs-3"><form:errors path="borName" delimiter="/" cssClass="label label-danger"/></td>
 						</tr>
 						<tr>
 							<td class="col-xs-9">
 								<label for="borAddr pull-left">주소</label>
 								<form:input path="borAddr" id="addr" placeholder="주소" cssClass="form-control" readonly="true" /><button type="button" class="btn btn-default"  id="btnaddr" >주소찾기</button>
 							</td>
-							<td class="col-xs-3"><form:errors path="borAddr" /></td>
+							<td class="col-xs-3"></td>
+						</tr>
+						<tr>
+							<td class="col-xs-9"></td>
+							<td class="col-xs-3"><form:errors path="borAddr" delimiter="/" cssClass="label label-danger"/></td>
 						</tr>
 						<tr>
 							<td class="col-xs-9">
 								<label for="borArea pull-left">상세주소</label>
 								<form:input path="borArea" id="detailaddr" placeholder="상세주소" cssClass="form-control" maxlength="20"/>
 							</td>
-							<td class="col-xs-3"><form:errors path="borArea" /></td>
+							<td class="col-xs-3"></td>
+						</tr>
+						<tr>
+							<td class="col-xs-9"></td>
+							<td class="col-xs-3"><form:errors path="borArea" delimiter="/" cssClass="label label-danger"/></td>
 						</tr>
 						<tr>
 							<td class="col-xs-9">
@@ -84,6 +96,10 @@
 								<label for="borIntro">한줄소개</label><form:input path="borIntro" cssClass="form-control" maxlength="25"/>
 							</td>
 							<td class="col-xs-3"><form:errors path="borIntro" /></td>
+						</tr>
+						<tr>
+							<td class="col-xs-9"></td>
+							<td class="col-xs-3"><form:errors path="borIntro" delimiter="/" cssClass="label label-danger"/></td>
 						</tr>
 					</table>
 					<br><br>

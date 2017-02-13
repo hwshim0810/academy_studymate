@@ -65,8 +65,11 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "noticeUpdate/{currentPage}", method = RequestMethod.POST)
-	public String update(Model model ,NoticeDto noticeDto, int bonNum, 
+	public String update(Model model ,@Valid NoticeDto noticeDto, BindingResult result, int bonNum, 
 			@PathVariable("currentPage") int currentPage) {
+		if (result.hasErrors())
+			return "/notice/noticeUpdateForm";
+		
 		noticeService.update(model, noticeDto);
 		return "redirect:/noticeRead/" + currentPage + "-" + bonNum + "?update=y";
 	}

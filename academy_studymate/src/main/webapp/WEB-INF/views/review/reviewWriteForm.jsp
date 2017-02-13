@@ -16,10 +16,10 @@
 					<%@include file="../common/Header.jsp"%>
 				</c:otherwise>
 			</c:choose>
-			<%@include file="../common/BoardSubnav.jsp" %>
 			<div class="body_top">
 			</div>
 			<div class="body center_align">
+				<%@include file="../common/BoardSubnav.jsp" %>
 				<div class="boardtitle lottemartdream"></div>
 				<br><br><br>
 				<form:form method="POST" commandName="reviewDto" action="${pageContext.request.contextPath}/reviewWrite">
@@ -35,7 +35,14 @@
 						<tr>
 							<td><label for="borvTitle">제목</label></td>
 							<td><form:input id="borvTitle" path="borvTitle" maxlength="25" cssClass="form-control" placeholder="제목을 입력해주세요"/></td>
-							<td><form:errors path="borvTitle" /></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="errormsg" colspan="2">
+								<form:errors path="borvTitle" delimiter="/" cssClass="label label-danger"/>
+								<form:errors path="borvContent" delimiter="/" cssClass="label label-danger"/>
+							</td>
 						</tr>
 						<tr>
 							<td><label for="borvContent">내용</label></td>

@@ -47,9 +47,9 @@ public class ReserveController {
 	
 	@RequestMapping(value = "reserveWrite", method = RequestMethod.POST)
 	public String write(HttpSession session, Model model, 
-			@Valid ReserveDto resDto, String mailCheck, BindingResult result) {
+			@Valid ReserveDto resDto, BindingResult result, @RequestParam(required = false) String mailCheck) {
 		if (result.hasErrors())
-			return "/reserve/reserveWriteForm";
+			return "/reserve/reserveWriteSelected";
 
 		String page = resService.writeNsendEmail(session, model, resDto, mailCheck);
 		return page;

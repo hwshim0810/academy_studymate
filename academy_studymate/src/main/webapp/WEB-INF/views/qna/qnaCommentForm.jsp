@@ -16,10 +16,10 @@
 					<%@include file="../common/Header.jsp"%>
 				</c:otherwise>
 			</c:choose>
-			<%@include file="../common/BoardSubnav.jsp" %>
 			<div class="body_top">
 			</div>
 			<section class="body center_align">
+				<%@include file="../common/BoardSubnav.jsp" %>
 				<div class="boardtitle lottemartdream"></div>
 				<form:form name = "updateform" action="${pageContext.request.contextPath}/qnaComment/${currentPage}" method="post" commandName="qnaDto">
 					<table class="table">
@@ -34,11 +34,18 @@
 						<tr>
 							<td><label for="boqTitle">제목</label></td>
 							<td>${qnaDto.boqTitle}</td>
-							<td><input type="hidden" name="boqTitle" value="${qnaDto.boqTitle}"></td>
+							<td>	<input type="hidden" name="boqTitle" value="${qnaDto.boqTitle}"></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="errormsg" colspan="2">
+								<form:errors path="boqTitle" delimiter="/" cssClass="label label-danger"/>
+								<form:errors path="boqContent" delimiter="/" cssClass="label label-danger"/>
+							</td>
 						</tr>
 						<tr>
 							<td><label for="boqContent">내용</label></td>
-							<td><form:textarea cssClass="textcontent" path="boqContent" value="${qnaDto.boqContent}" /></td>
+							<td><form:textarea cssClass="textcontent" path="boqContent" value="${qnaDto.boqContent}" cols="100" rows="20"/></td>
 							<td></td>
 						</tr>
 					</table>

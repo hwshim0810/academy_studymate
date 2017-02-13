@@ -2,7 +2,7 @@
 <footer id="con_footer">
 	<div class="btndiv">
 		<div class="pull-left">
-			<button class="btn btn-primary btn-font" id="btnlist">목록</button>
+			<button class="btn btn-primary btn-font" type="button" id="btnlist">목록</button>
 		</div>
 	</div>
 </footer>

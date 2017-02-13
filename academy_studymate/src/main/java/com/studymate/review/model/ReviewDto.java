@@ -2,14 +2,21 @@ package com.studymate.review.model;
 
 import java.sql.Date;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.studymate.common.Dto;
 
 public class ReviewDto extends Dto {
-	int borvNum;
-	String borvTitle, borvContent;
-	int borvReplycount, borvReadcount;
-	Date borvRegdate;
-	String memName, memId;
+	private int borvNum;
+	@NotEmpty(message="제목필수입력") @Size(min=5,message="제목최소 5자이상")
+	private String borvTitle;
+	@NotEmpty(message="내용필수입력") @Size(min=12,message="내용최소 5자이상")
+	private String borvContent;
+	private int borvReplycount, borvReadcount;
+	private Date borvRegdate;
+	private String memName, memId;
 	
 	public int getBorvNum() {
 		return borvNum;

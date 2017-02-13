@@ -15,10 +15,10 @@
 					<%@include file="../common/Header.jsp"%>
 				</c:otherwise>
 			</c:choose>
-			<%@include file="../common/BoardSubnav.jsp" %>
 			<div class="body_top">
 			</div>
 			<section class="body center_align">
+				<%@include file="../common/BoardSubnav.jsp" %>
 				<div class="boardtitle lottemartdream"></div>
 				<article id="contents">
 					<header id="con_header" class="col-xs-12">
@@ -40,7 +40,7 @@
 									<button class="btn btn-warning btn-font btn-read"   id="btnupdate">수정</button>
 									<button class="btn btn-danger btn-font btn-read"  id="btndelete">삭제</button>
 								</c:if>
-								<c:if test="${qnaDto.boqLev == 0 and sessionScope.memId eq 'admin'}">
+								<c:if test="${qnaDto.boqLev == 0 and sessionScope.memId eq 'admin' and commentCount == 1}">
 									<button class="btn btn-info btn-font" id="btncomment">답글</button>
 								</c:if>
 							</div>

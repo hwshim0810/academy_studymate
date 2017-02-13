@@ -9,4 +9,6 @@ public interface QnaDao extends Dao{
 
 	public int maxSequence();
 
+	public int getCommentCount(int boqGroupnum);
+
 }

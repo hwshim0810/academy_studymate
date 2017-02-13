@@ -21,7 +21,7 @@
 			</div>
 			<section class="body_high center_align">
 				<div class="boardtitle lottemartdream"></div>
-				<div class="subnav lottemartdream normal w400" >
+				<div class="mypage lottemartdream normal w400" >
 					<article class="main">
 						<div class="tabbable-panel">
 							<div class="tabbable-line">
@@ -42,30 +42,30 @@
 								<div class="tab-content">
 									<!-- Member Info -->
 									<div class="tab-pane active" id="mem_info">
-										<h2>${memDto.memId} 님의 정보</h2>
+										<h2>${memberDto.memId} 님의 정보</h2>
 										<br><hr>
 										<div class="row mypage_row">
 											<div class="col-xs-3">이름</div>
-											<div class="col-xs-9">${memDto.memName}</div>
+											<div class="col-xs-9">${memberDto.memName}</div>
 										</div>
 										<div class="row mypage_row">
 											<div class="col-xs-3">주소</div>
-											<div class="col-xs-9">${memDto.memAddr}</div>
+											<div class="col-xs-9">${memberDto.memAddr}</div>
 										</div>
 										<div class="row mypage_row">
 											<div class="col-xs-3"></div>
-											<div class="col-xs-9">${memDto.memArea}</div>
+											<div class="col-xs-9">${memberDto.memArea}</div>
 										</div>
 										<div class="row mypage_row">
 											<div class="col-xs-3">Email</div>
-											<div class="col-xs-9">${memDto.memEmail}</div>
+											<div class="col-xs-9">${memberDto.memEmail}</div>
 										</div>
 										<div class="row mypage_row">
 											<div class="col-xs-3">생일</div>
 											<div class="col-xs-9">
 												<c:choose>
-													<c:when test="${not empty memDto.memBirth}">
-														${memDto.memBirth}
+													<c:when test="${not empty memberDto.memBirth}">
+														${memberDto.memBirth}
 													</c:when>
 													<c:otherwise>
 														미입력
@@ -77,8 +77,8 @@
 											<div class="col-xs-3">성별</div>
 											<div class="col-xs-9">
 												<c:choose>
-													<c:when test="${not empty memDto.memSex}">
-														${memDto.memSex}
+													<c:when test="${not empty memberDto.memSex}">
+														${memberDto.memSex}
 													</c:when>
 													<c:otherwise>
 														미입력
@@ -88,12 +88,12 @@
 										</div>
 										<div class="row mypage_row">
 											<div class="col-xs-3">가입일</div>
-											<div class="col-xs-9">${memDto.memRegdate}</div>
+											<div class="col-xs-9">${memberDto.memRegdate}</div>
 										</div>
 									</div>
 									<!-- Member Update -->
 									<div class="tab-pane" id="mem_update">
-										<form:form id="memForm" class="form-horizontal" method="POST" commandName="memDto" action="${pageContext.request.contextPath}/memberUpdateClient">
+										<form:form id="memForm" class="form-horizontal" method="POST" commandName="memberDto" action="${pageContext.request.contextPath}/memberUpdateClient">
 											<fieldset>
 												<!-- Form Name -->
 												<legend class="sr-only">정보수정</legend>
@@ -104,7 +104,7 @@
 												<div class="form-group mzbzero">
 													<label class="col-xs-4 control-label" for="memId">아이디</label>  
 													<div class="col-xs-6">
-														<form:input path="memId" value="${memDto.memId}" readonly="true" cssClass="form-control"/>
+														<form:input path="memId" value="${memberDto.memId}" readonly="true" cssClass="form-control"/>
 													</div>
 													<div class="col-xs-2">
 													</div>
@@ -132,7 +132,6 @@
 														<span class="help-block pull-left">비밀번호 6~12자 가능</span>
 													</div>
 													<div class="col-xs-2">
-														<form:errors path="memPass" />
 													</div>
 												</div>
 												<div class="form-group" >
@@ -157,45 +156,62 @@
 												<div class="form-group">
 													<label class="col-xs-4 control-label" for="memName">이름</label>  
 													<div class="col-xs-6">
-														<form:input path="memName" placeholder="이름" value="${memDto.memName}" readonly="true" maxlength="10" cssClass="form-control" />
+														<form:input path="memName" placeholder="이름" value="${memberDto.memName}" readonly="true" maxlength="10" cssClass="form-control" />
 													</div>
 													<div class="col-xs-2">
-														<form:errors path="memName" />
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-xs-4 control-label" for="memAddr">주소</label>  
 													<div class="col-xs-6">
-														<form:input path="memAddr" id="addr" value="${memDto.memAddr}" placeholder="주소" cssClass="form-control" readonly="true"/>
+														<form:input path="memAddr" id="addr" value="${memberDto.memAddr}" placeholder="주소" cssClass="form-control" readonly="true"/>
 														<button type="button" class="btn btn-default pull-left"  id="btnaddr" >주소찾기</button>
 													</div>
 													<div class="col-xs-2">
-														<form:errors path="memAddr" />
 													</div>
+												</div>
+												<div class="form-group">
+													<div class="col-xs-4"></div>
+													<div class="col-xs-6">
+														<form:errors path="memAddr" cssClass="label label-danger pull-left" delimiter="/"/>
+													</div>
+													<div class="col-xs-2"></div>
 												</div>
 												<div class="form-group">
 													<label class="col-xs-4 control-label" for="detailaddr">상세주소</label>  
 													<div class="col-xs-6">
-														<form:input path="memArea" id="detailaddr" value="${memDto.memArea}" placeholder="상세주소" cssClass="form-control" maxlength="20"/>
+														<form:input path="memArea" id="detailaddr" value="${memberDto.memArea}" placeholder="상세주소" cssClass="form-control" maxlength="20"/>
 													</div>
 													<div class="col-xs-2">
-														<form:errors path="memArea" />
 													</div>
+												</div>
+												<div class="form-group">
+													<div class="col-xs-4"></div>
+													<div class="col-xs-6">
+														<form:errors path="memArea" cssClass="label label-danger pull-left" delimiter="/"/>
+													</div>
+													<div class="col-xs-2"></div>
 												</div>
 												<div class="form-group">
 													<label class="col-xs-4 control-label" for="memEmail">Email</label>  
 													<div class="col-xs-6">
-														<form:input path="memEmail" value="${memDto.memEmail}" placeholder="예)exam@exam.com" cssClass="form-control" maxlength="20"/>
+														<input type="email"  id="memEmail" name="memEmail" value="${memberDto.memEmail}" placeholder="예)exam@exam.com" class="form-control" maxlength="20" />
 													</div>
 													<div class="col-xs-2">
-														<form:errors path="memEmail" />
 													</div>
+												</div>
+												<div class="form-group">
+													<div class="col-xs-4"></div>
+													<div class="col-xs-6">
+														<form:errors path="memEmail" cssClass="label label-danger pull-left" delimiter="/"/>
+													</div>
+													<div class="col-xs-2"></div>
 												</div>
 												<div class="form-group">
 													<label class="col-xs-4 control-label" for="memSex">성별</label>  
 													<div class="col-xs-6">
 														<c:choose>
-															<c:when test="${memDto.memSex eq '남자'}">
+															<c:when test="${memberDto.memSex eq '남자'}">
 																<span class="pull-left"><form:radiobutton path="memSex" checked="true" value="남자" label="남자" /></span>
 															</c:when>
 															<c:otherwise>
@@ -204,15 +220,14 @@
 														</c:choose>
 													</div>
 													<div class="col-xs-2">
-														<form:errors path="memSex" />
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-xs-4 control-label" for="memBirth">생년월일</label>  
 													<div class="col-xs-6">
 														<c:choose>
-															<c:when test="${not empty memDto.memBirth}">
-																<form:input path="memBirth" value="${memDto.memBirth}" cssClass="form-control birthdate" readonly="true" />
+															<c:when test="${not empty memberDto.memBirth}">
+																<form:input path="memBirth" value="${memberDto.memBirth}" cssClass="form-control birthdate" readonly="true" />
 															</c:when>
 															<c:otherwise>
 																<form:input path="memBirth" cssClass="form-control birthdate" readonly="true" />
@@ -220,7 +235,6 @@
 														</c:choose>
 													</div>
 													<div class="col-xs-2">
-														<form:errors path="memBirth" />
 													</div>
 												</div>
 												<div class="col-xs-12">
@@ -267,7 +281,7 @@
 										<form action="${pageContext.request.contextPath}/memResPaging" method="POST" id="pagingform">
 											<input type="hidden" name="totalCount" value="${totalCount}" id="totalCount" />
 											<input type="hidden" name="resPage" value=""  id="resPage"/>
-											<input type="hidden" name="memId" value="${memDto.memId}">
+											<input type="hidden" name="memId" value="${memberDto.memId}">
 										</form>
 										
 										<div id="detailResult">
@@ -288,7 +302,7 @@
 											    <div class="text-center">
 										    		<h4 class="lottemartdream">위 사항에 모두 동의하신다면 탈퇴버튼을 눌러주세요.</h4>
 										    		<form action="${pageContext.request.contextPath}/memberDelete" method="POST" id="siteoutForm">
-										    			<input type="hidden" name="memId" value="${memDto.memId}">
+										    			<input type="hidden" name="memId" value="${memberDto.memId}">
 											    		<button type="button" class="btn btn-danger btn-font" id="btnsiteout">회원탈퇴</button>
 										    		</form>
 										    	</div>
@@ -306,7 +320,7 @@
 			<!-- Hidden parameter -->
 			<input type="hidden" id="boardid" value="member">
 			<input type="hidden" id="boardtitle_client" value="마이페이지">
-			<input type="hidden" id="boardsubtitle" value="${memDto.memId}님">
+			<input type="hidden" id="boardsubtitle" value="${memberDto.memId}님">
 			<input type="hidden" id="client_page" value="${pageContext.request.contextPath}/memberMypage">
 			<%@include file="../common/Footer.jsp" %>
 			<%@include file="../common/Board.jsp" %>

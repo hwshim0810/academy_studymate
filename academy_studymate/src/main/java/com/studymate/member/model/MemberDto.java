@@ -2,10 +2,27 @@ package com.studymate.member.model;
 
 import java.sql.Date;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.studymate.common.Dto;
 
 public class MemberDto extends Dto {
-	private String memId, memPass, memName, memSex, memBirth, memAddr, memArea, memEmail, memSiteout;
+	@NotEmpty (message="아이디필수입력")
+	private String memId;
+	@NotEmpty (message="암호필수입력") @Size(min=6,message="6자이상")
+	private String memPass;
+	@NotEmpty (message="이름필수입력") @Size(min=2,message="2자이상")
+	private String memName;
+	@NotEmpty (message="주소필수입력")
+	private String memAddr;
+	@NotEmpty (message="상세주소필수입력") @Size(min=3,message="3자이상")
+	private String memArea;
+	@Email(message="메일주소양식필요") @NotEmpty(message="메일필수입력") @Size(min=5,message="5자이상")
+	private String memEmail;
+	private String memSex, memBirth, memSiteout;
 	private Date memRegdate;
 	
 	public MemberDto() {}

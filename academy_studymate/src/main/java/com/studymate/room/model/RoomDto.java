@@ -2,12 +2,23 @@ package com.studymate.room.model;
 
 import java.sql.Date;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.studymate.common.Dto;
 
 public class RoomDto extends Dto{
-	int borNum;
-	String borName, borAddr, borArea, borMain, borMainpath;
-	String borIntro;
+	private int borNum;
+	@NotEmpty(message="지점명필수입력") @Size(min=5,message="최소 5자이상")
+	private String borName;
+	@NotEmpty(message="주소필수입력")
+	private String borAddr;
+	@NotEmpty(message="상세주소필수입력")
+	private String borArea;
+	private String borMain, borMainpath;
+	@NotEmpty(message="한줄소개필수입력")
+	private String borIntro;
 	Date borRegdate;
 	
 	public String getBorMain() {

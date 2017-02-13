@@ -53,11 +53,15 @@ public class QnaServiceImpl extends CommonServiceUtil implements ServiceInterfac
 			qnaDao.updateReadCount(boqNum);
 
 		QnaDto qnaDto = (QnaDto) qnaDao.read(boqNum);
+		int boqGroupnum = qnaDto.getBoqGroupnum();
+		int commentCount = qnaDao.getCommentCount(boqGroupnum);
+		
 		model.addAttribute("qnaDto", qnaDto);
 		model.addAttribute("qnaPrev", qnaDao.readPrev(boqNum));
 		model.addAttribute("qnaNext", qnaDao.readNext(boqNum));
-		model.addAttribute("qnaGroupnum", qnaDto.getBoqGroupnum());
-		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("qnaGroupnum", boqGroupnum);
+		model.addAttribute("commentCount", commentCount)
+;		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("keyField", keyField);
 		model.addAttribute("keyWord", keyWord);
 		model.addAttribute("listBtn", "/qnaList/1");
@@ -100,7 +104,7 @@ public class QnaServiceImpl extends CommonServiceUtil implements ServiceInterfac
 			return "redirect:/qnaList/" + currentPage;
 		}
 		else
-			return "redirect:/qna/deleteError";
+			return "/qna/deleteError";
 	}
 	
 
@@ -118,10 +122,10 @@ public class QnaServiceImpl extends CommonServiceUtil implements ServiceInterfac
 		qnaDao.write(qnaDto);
 	}
 	
-	@Override
-	public Model setCurrentPage(Model model, int currentPage, int boqNum) {
+	public Model setQnaCurrentPage(Model model, int currentPage, int boqNum, int gNum) {
 		model.addAttribute("boqNum", boqNum);
 		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("gNum", gNum);
 		return model;
 	}
 	
@@ -129,6 +133,12 @@ public class QnaServiceImpl extends CommonServiceUtil implements ServiceInterfac
 	public Model writeForm(Model model) {
 		model.addAttribute("qnaDto", new QnaDto());
 		return model;
+	}
+
+	@Override
+	public Model setCurrentPage(Model model, int currentPage, int num) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

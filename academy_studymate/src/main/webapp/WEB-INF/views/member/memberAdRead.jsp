@@ -17,7 +17,7 @@
 			</c:choose>
 			<div class="body_top">
 			</div>
-			<section class="body_low center_align">
+			<section class="body center_align">
 				<%@include file="../common/AdminSubnav.jsp" %>
 				<div class="boardtitle lottemartdream"></div>
 				<article id="contents">

@@ -69,9 +69,9 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value = "reviewUpdate/{currentPage}-{borvNum}", method = RequestMethod.POST)
-	public String update(Model model ,@Valid ReviewDto reviewDto, 
+	public String update(Model model ,@Valid ReviewDto reviewDto, BindingResult result,
 			@PathVariable("borvNum") int borvNum, 
-			@PathVariable("currentPage") int currentPage, BindingResult result) {
+			@PathVariable("currentPage") int currentPage) {
 		if (result.hasErrors())
 			return "/review/reviewUpdateForm";
 		

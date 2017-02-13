@@ -10,8 +10,9 @@ import com.studymate.common.Dto;
 
 public class NoticeDto extends Dto {
 	int bonNum;
-	@NotEmpty @Size(min=5, message="제목은 최소 5글자 이상입니다.")
+	@NotEmpty(message="제목필수입력") @Size(min=5,message="제목최소 5자이상")
 	String bonTitle;
+	@NotEmpty(message="내용필수입력") @Size(min=12,message="내용최소 5자이상")
 	String bonContent;
 	int bonReadcount;
 	Date bonRegdate;

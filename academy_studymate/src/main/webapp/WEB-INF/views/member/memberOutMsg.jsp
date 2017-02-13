@@ -31,10 +31,10 @@
 							    </div>
 						    </div>
 						</div>
-						<div class="col-xs-6">
+						<div class="col-xs-7">
 							<button type="button" class="btn btn-primary btn-font pull-right" id="btntoindex">홈으로</button>
 						</div>
-						<div class="col-xs-6"></div>
+						<div class="col-xs-5"></div>
 					</div>
 				</article>
 			</section>

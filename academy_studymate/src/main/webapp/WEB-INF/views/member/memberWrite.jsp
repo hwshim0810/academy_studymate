@@ -18,7 +18,7 @@
 			</c:choose>
 			<div class="body_top">
 			</div>
-			<section class="body_low center_align">
+			<section class="body_higher center_align">
 			<!-- 관리자 여부로 서브메뉴 구분필요 -->
 				<c:if test="${sessionScope.memId eq 'admin'}">
 					<%@include file="../common/AdminSubnav.jsp" %>
@@ -34,7 +34,7 @@
 					</div>
 				</article>
 				<article>
-					<form:form id="memForm" class="form-horizontal" method="POST" commandName="memDto" action="${pageContext.request.contextPath}/memberWrite">
+					<form:form id="memForm" class="form-horizontal" method="POST" commandName="memberDto" action="${pageContext.request.contextPath}/memberWrite">
 						<div class="container col-xs-12">
 							<fieldset>
 								<!-- Form Name -->
@@ -54,13 +54,19 @@
 										</div>
 									</div>
 									<div class="col-xs-2">
-										<form:errors path="memId" />
 									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-xs-4"></div>
+									<div class="col-xs-6">
+										<form:errors path="memId" cssClass="label label-danger" delimiter="/"/>
+									</div>
+									<div class="col-xs-2"></div>
 								</div>
 								<div class="form-group" >
 									<div class="col-xs-4"></div>
 									<div class="col-xs-6">
-											 <span class="help-block pull-left">알파벳으로 시작/알파벳,숫자 혼용 5~11자 가능</span>
+										 <span class="help-block pull-left">알파벳으로 시작/알파벳,숫자 혼용 5~11자 가능</span>
 									</div>
 									<div class="col-xs-2"></div>
 								</div>
@@ -71,8 +77,14 @@
 										<span class="help-block">비밀번호 6~12자 가능</span>
 									</div>
 									<div class="col-xs-2">
-										<form:errors path="memPass" />
 									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-xs-4"></div>
+									<div class="col-xs-6">
+										<form:errors path="memPass" cssClass="label label-danger" delimiter="/"/>
+									</div>
+									<div class="col-xs-2"></div>
 								</div>
 								<div class="form-group" >
 									<label class="col-xs-4 control-label" for="memPassConfirm">*비밀번호확인</label>  
@@ -99,8 +111,14 @@
 										<form:input path="memName" placeholder="이름" maxlength="10" cssClass="form-control" />
 									</div>
 									<div class="col-xs-2">
-										<form:errors path="memName" />
 									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-xs-4"></div>
+									<div class="col-xs-6">
+										<form:errors path="memName" cssClass="label label-danger" delimiter="/"/>
+									</div>
+									<div class="col-xs-2"></div>
 								</div>
 								<div class="form-group">
 									<label class="col-xs-4 control-label" for="memAddr">*주소</label>  
@@ -109,8 +127,14 @@
 										<button type="button" class="btn btn-default"  id="btnaddr" >주소찾기</button>
 									</div>
 									<div class="col-xs-2">
-										<form:errors path="memAddr" />
 									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-xs-4"></div>
+									<div class="col-xs-6">
+										<form:errors path="memAddr" cssClass="label label-danger" delimiter="/"/>
+									</div>
+									<div class="col-xs-2"></div>
 								</div>
 								<div class="form-group">
 									<label class="col-xs-4 control-label" for="detailaddr">*상세주소</label>  
@@ -118,8 +142,14 @@
 										<form:input path="memArea" id="detailaddr" placeholder="상세주소" cssClass="form-control" maxlength="20"/>
 									</div>
 									<div class="col-xs-2">
-										<form:errors path="memArea" />
 									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-xs-4"></div>
+									<div class="col-xs-6">
+										<form:errors path="memArea" cssClass="label label-danger" delimiter="/"/>
+									</div>
+									<div class="col-xs-2"></div>
 								</div>
 								<div class="form-group">
 									<label class="col-xs-4 control-label" for="memEmail">*Email</label>  
@@ -127,8 +157,14 @@
 										<form:input path="memEmail" placeholder="예)exam@exam.com" cssClass="form-control" maxlength="20"/>
 									</div>
 									<div class="col-xs-2">
-										<form:errors path="memEmail" />
 									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-xs-4"></div>
+									<div class="col-xs-6">
+										<form:errors path="memEmail" cssClass="label label-danger" delimiter="/" />
+									</div>
+									<div class="col-xs-2"></div>
 								</div>
 								<div class="form-group">
 									<label class="col-xs-4 control-label" for="memSex">성별</label>  

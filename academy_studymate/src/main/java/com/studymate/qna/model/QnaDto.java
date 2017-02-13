@@ -2,18 +2,24 @@ package com.studymate.qna.model;
 
 import java.sql.Date;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.studymate.common.Dto;
 
 public class QnaDto extends Dto {
-	int boqNum ;
-	String boqTitle;
-	String boqContent;
-	int boqGroupnum, boqSeq,  boqLev;
-	Date boqRegdate; 
-	int boqReadcount;
-	String memName;
-	String memId;
-	Integer boqRefnum;
+	private int boqNum ;
+	@NotEmpty(message="제목필수입력") @Size(min=5,message="제목최소 5자이상")
+	private String boqTitle;
+	@NotEmpty(message="내용필수입력") @Size(min=12,message="내용최소 5자이상")
+	private String boqContent;
+	private int boqGroupnum, boqSeq,  boqLev;
+	private Date boqRegdate; 
+	private int boqReadcount;
+	private String memName;
+	private String memId;
+	private Integer boqRefnum;
 	
 	public Integer getBoqRefnum() {
 		return boqRefnum;

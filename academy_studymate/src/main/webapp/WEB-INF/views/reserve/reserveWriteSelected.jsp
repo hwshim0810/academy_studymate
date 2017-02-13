@@ -35,7 +35,7 @@
 					</div>
 				</article>
 				<article>
-					<form:form id="resForm" class="form-horizontal" method="POST" commandName="resDto" action="${pageContext.request.contextPath}/reserveWrite">
+					<form:form id="resForm" class="form-horizontal" method="POST" commandName="reserveDto" action="${pageContext.request.contextPath}/reserveWrite">
 						<div class="container col-xs-12">
 							<fieldset>
 								<!-- Form Name -->
@@ -47,7 +47,7 @@
 								<div class="form-group">
 									<label class="col-xs-4 control-label" for="memId">아이디</label>  
 									<div class="col-xs-6">
-										<form:input path="memId" id="memId" placeholder="아이디" readonly="true" cssClass="form-control" value="${sessionScope.memId}" />
+										<form:input path="memId" placeholder="아이디" readonly="true" cssClass="form-control" value="${sessionScope.memId}" />
 									</div>
 									<div class="col-xs-2">
 									</div>
@@ -58,8 +58,11 @@
 										<form:input path="memName" placeholder="예약자명" maxlength="10" cssClass="form-control" />
 									</div>
 									<div class="col-xs-2">
-										<form:errors path="memName" />
 									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-xs-4"></div>
+									<div class="col-xs-8"><form:errors path="memName" delimiter="/" cssClass="label label-danger"/></div>
 								</div>
 								<div class="form-group">
 									<label class="col-xs-4 control-label" for="memEmail">Email</label>  
@@ -67,8 +70,11 @@
 										<form:input path="memEmail" placeholder="예)exam@exam.com" cssClass="form-control" maxlength="20"/>
 									</div>
 									<div class="col-xs-2">
-										<form:errors path="memEmail" />
 									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-xs-4"></div>
+									<div class="col-xs-8"><form:errors path="memEmail" delimiter="/" cssClass="label label-danger"/></div>
 								</div>
 								<div class="form-group">
 									<label class="col-xs-4 control-label" >안내메일 수신여부</label>  
@@ -83,7 +89,7 @@
 									<label class="col-xs-4 control-label" for="borName">예약지점명</label>  
 									<div class="col-xs-6">
 										<form:input path="borName" readonly="true" maxlength="30" value="${borName}" cssClass="form-control"/>
-										<input type="hidden" name="borNum" value="${borNum}" />
+										<form:hidden path="borNum" value="${borNum}"/>
 									</div>
 									<div class="col-xs-2">
 										<form:errors path="borName" />
@@ -95,8 +101,11 @@
 										<form:input path="resDate" placeholder="예약날짜" cssClass="form-control date" />
 									</div>
 									<div class="col-xs-2">
-										<form:errors path="resDate" />
 									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-xs-4"></div>
+									<div class="col-xs-8"><form:errors path="resDate" delimiter="/" cssClass="label label-danger"/></div>
 								</div>
 								<div class="form-group">
 									<label class="col-xs-4 control-label" for="resVisit">방문예정시간</label>  
