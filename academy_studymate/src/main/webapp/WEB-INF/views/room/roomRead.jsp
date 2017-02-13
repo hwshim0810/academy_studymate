@@ -31,15 +31,13 @@
 							<div class="col-xs-12 col-sm-5 read_mainimg text-center">
 								<img id="read_mainimg" alt="지점이미지" src="${pageContext.request.contextPath}/resources/roomImg/${roomDto.borMain}">
 							</div>
-							<div class="col-xs-12 col-sm-7 read_info">
+							<div class="col-xs-12 col-sm-7 read_info lottemartdream">
 								<h2>${roomDto.borName}</h2>
-								<dl>
-									<dt>주소</dt>
-									<dd>${roomDto.borAddr}</dd>
-									<dd>${roomDto.borArea}</dd>
-									<dt>한줄소개</dt>
-									<dd>${roomDto.borIntro}</dd>
-								</dl>
+									<h4>주소</h4>
+									<p>${roomDto.borAddr}</p>
+									<p>${roomDto.borArea}</p>
+									<h4>한줄소개</h4>
+									<p>${roomDto.borIntro}</p>
 							</div>
 						</div>
 						<div class="row hidden-xs">
@@ -61,14 +59,12 @@
 							<div class="col-xs-12 col-sm-5 read_map" >
 								<div id="map" class="hidden-xs"></div>
 							</div>
-							<div class="col-xs-12 col-sm-7 read_info">
+							<div class="col-xs-12 col-sm-7 read_info lottemartdream">
 								<h2>오시는 길</h2>
-								<dl>
-									<dt>지하철</dt>
-									<dd>${roomDto.borMetro}</dd>
-									<dt>버스</dt>
-									<dd>${roomDto.borBus}</dd>
-								</dl>
+									<h4>지하철</h4>
+									<p>${roomDto.borMetro}</p>
+									<h4>버스</h4>
+									<p>${roomDto.borBus}</p>
 								<br><br><br>
 								<hr>
 					        	<c:url value="/reserveSeleted/${roomDto.borNum}" var="selectedRes">

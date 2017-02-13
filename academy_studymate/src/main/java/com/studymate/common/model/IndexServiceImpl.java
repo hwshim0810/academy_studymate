@@ -30,11 +30,10 @@ public class IndexServiceImpl extends CommonServiceUtil implements IndexService 
 		map.put("keyWord", "");
 		map.put("keyField", "");
 		map.put("startRow", 1);
-		map.put("endRow", 7);
+		map.put("endRow", 5);
 		
 		List<Dto> noticeList = getList(noticeDao, map);
 		List<Dto> reviewList = getList(reviewDao, map);
-		map.put("endRow", 5);
 		List<Dto> roomList = getList(roomDao, map);
 		
 		model.addAttribute("noticeList", noticeList);

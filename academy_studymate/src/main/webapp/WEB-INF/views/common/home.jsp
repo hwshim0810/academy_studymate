@@ -4,6 +4,7 @@
 <html>
 	<head>
 		<%@include file="./Head.jsp" %>
+		<link rel="stylesheet" href="<c:url value='/resources/css/mypage.css' />" />
 	</head>
 	<body>
 		<div class="wrapper">
@@ -22,10 +23,9 @@
 			      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 			      <li data-target="#myCarousel" data-slide-to="1"></li>
 			    </ol>-->
-			
 			    <!-- Wrapper for slides -->
-			    <div class="carousel-inner" role="listbox">
-			      <div class="item active banner1">
+			    <div class="carousel-inner hidden-xs" role="listbox">
+			      <div class="item active">
 			        <img src="${pageContext.request.contextPath}/resources/img/idx_main1.jpg" alt="메인배너"> 
 	                <div class="carousel-caption lottemartdream normal w250">
 			            <h2 class="pull-right">안정된 분위기를 가진 열람실을 이용해보세요.</h2>
@@ -67,14 +67,39 @@
 		</div>
 		<div class="body center_align">
 			<div class="row">
-				<div class="col-xs-12 col-sm-6 home_cell">
-					<div class="simple_banner_wrap" data-type="vslide" data-interval="3000">
-						<ul>
-							<li><img src="https://placehold.it/1200x400?text=Another Image Maybe" alt="Image"></li>
-							<li><img src="https://placehold.it/1200x400?text=Another Image Maybe" alt="Image"></li>
-						</ul>
+				<section class="col-xs-12 col-sm-6 home_cell">
+					<div id="myCarousel" class="carousel slide" data-ride="carousel">
+						<div class="carousel-inner" role="listbox">
+						     <div class="item active">
+						        <a href="${pageContext.request.contextPath}/roomList/1">
+						        	<img class="mini_banner" src="${pageContext.request.contextPath}/resources/img/main.jpg" alt="지점소개배너">
+						        </a> 
+				                <div class="carousel-caption lottemartdream normal w250">
+				                	<a class="acolor" href="${pageContext.request.contextPath}/roomList/1">
+						            	<h3 class="pull-right">Studymate지점소개</h3>
+						            </a>
+						        </div>      
+						      </div>
+					      
+						    <c:forEach var="roomDto" items="${roomList }">
+						      <div class="item">
+						      	<a href="${pageContext.request.contextPath}/roomRead/1-${roomDto.borNum}">
+									<img class="mini_banner" id="read_mainimg" alt="지점이미지" src="${pageContext.request.contextPath}/resources/roomImg/${roomDto.borMain}" style="height: 309px;">
+								</a>
+								 <div class="carousel-caption lottemartdream normal w250">
+						            	<a class="acolor" href="${pageContext.request.contextPath}/roomRead/1-${roomDto.borNum}">
+						            		<h3 class="pull-right">${roomDto.borName}</h3>
+						            	</a>
+						            	<a class="acolor" href="${pageContext.request.contextPath}/roomRead/1-${roomDto.borNum}">
+						            		<p class="pull-right">${roomDto.borIntro}</p>
+						            	</a>
+						        </div>
+							 </div>
+							</c:forEach>
+				     	 </div>
+					
 					</div>
-				</div>
+				</section>
 				<div class="col-xs-12 col-sm-6 home_cell">
 					<div class="tabbable-panel cell_high">
 						<div class="tabbable-line">
@@ -123,7 +148,6 @@
 			</div>
 		</div>
 		<%@include file="./Footer.jsp" %>
-		<%@include file="loadscript/HomeScript.jsp" %>
 		</div>
 	</body>
 </html>

@@ -118,7 +118,17 @@
 					<br><br>
 					<hr>
 					<!-- Button Area -->
-					<%@include file="../common/boardBtn/UpdatePageBtn.jsp" %>
+					<footer id="con_footer">
+						<div class="btndiv">
+							<div class="pull-right">
+								<input type="submit" class="btn btn-success btn-font"  value="수정">
+							</div>
+							<div class="pull-left">
+								<button class="btn btn-primary btn-font" id="btnlist" type="button">목록</button>
+								<button class="btn btn-info btn-font" id="btnback" type="button">뒤로</button>
+							</div>
+						</div>
+					</footer>
 					<input type="hidden" name="currentPage" value="${currentPage}" />
 					<input type="hidden" name="borNum"  value="${roomDto.borNum}" />
 				</form:form>

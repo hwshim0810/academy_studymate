@@ -229,5 +229,8 @@ function detailOutput(data) {
 	$("#detailResult").append('<div class="row mypage_row" id="resRegdate">');
 	$("#resRegdate").append('<div class="col-xs-6">예약일</div>');
 	$("#resRegdate").append('<div class="col-xs-6">'+ data.resDto.resRegdate + '</div>');
+	$("#detailResult").append('<div class="row mypage_row" id="resButton">');
+	$("#resButton").append('<div class="col-xs-6"><a class="pull-left" href="/${pageContext.request.contextPath}/reserveUpdate/1-' + data.resDto.resNum + '">수정</a>');
+	$("#resButton").append('<div class="col-xs-6"><a class="pull-right" href="/${pageContext.request.contextPath}/reserveDelete/1-' + data.resDto.resNum + '">삭제</a>');
 	
 }

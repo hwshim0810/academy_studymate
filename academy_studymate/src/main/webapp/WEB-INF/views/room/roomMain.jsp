@@ -22,7 +22,7 @@
 				</c:if>
 				<div class="boardmaintitle lottemartdream"></div>
 				<div class="row text-center">
-					<div class="col-xs-3"><strong>지역별</strong></div>
+					<div class="col-xs-3"><strong>지역별보기</strong></div>
 					<div class="col-xs-9">
 						<ul class="list-inline">
 							<li>강남구</li>

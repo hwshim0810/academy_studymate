@@ -5,7 +5,6 @@
 <html>
 	<head>
 		<%@include file="../common/Head.jsp" %>
-		<link rel="stylesheet" href="<c:url value='/resources/css/mypage.css' />" />
 	</head>
 	<body>
 		<div class="wrapper">
