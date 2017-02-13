@@ -15,8 +15,7 @@
 					<%@include file="../common/Header.jsp"%>
 				</c:otherwise>
 			</c:choose>
-			<div class="body_top">
-			</div>
+			<%@include file="../common/Body_top.jsp"%>
 			<section class="body center_align">
 				<div class="boardtitle lottemartdream"></div>
 				<article id="contents">
@@ -41,6 +40,7 @@
 			<!-- Hidden parameter -->
 			<input type="hidden" id="boardid" value="member">
 			<input type="hidden" id="boardtitle_client" value="회원탈퇴">
+			<input type="hidden" id="boardinfo" value="다음에 또 이용바랍니다">
 			<%@include file="../common/Footer.jsp" %>
 			<%@include file="../common/Board.jsp" %>
 			<%@include file="../common/Joinscript.jsp" %>

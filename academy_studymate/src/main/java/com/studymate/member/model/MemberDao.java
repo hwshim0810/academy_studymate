@@ -18,6 +18,6 @@ public interface MemberDao extends Dao {
 
 	void updatePass(MemberDto memDto);
 
-	List<MemberDto> findId(FindIdDto findIdDto);
+	List<MemberDto> findId(FindDto findIdDto);
 
 }

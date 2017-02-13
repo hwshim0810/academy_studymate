@@ -16,8 +16,7 @@
 					<%@include file="../common/Header.jsp"%>
 				</c:otherwise>
 			</c:choose>
-			<div class="body_top">
-			</div>
+			<%@include file="../common/Body_top.jsp"%>
 			<section class="body_low center_align">
 				<div class="boardtitle lottemartdream"></div>
 				<article id="contents">
@@ -50,6 +49,7 @@
 			<input type="hidden" id="boardtitle_client" value="로그인">
 			<input type="hidden" id="boardsubtitle" value="찾기완료">
 			<input type="hidden" id="client_page" value="${pageContext.request.contextPath}/login">
+			<input type="hidden" id="boardinfo" value="아이디를 확인하세요">
 			<%@include file="../common/Footer.jsp" %>
 			<%@include file="../common/Board.jsp" %>
 			<%@include file="../common/Joinscript.jsp" %>

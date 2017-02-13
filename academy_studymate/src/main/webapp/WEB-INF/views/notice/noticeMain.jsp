@@ -15,8 +15,7 @@
 					<%@include file="../common/Header.jsp"%>
 				</c:otherwise>
 			</c:choose>
-			<div class="body_top">
-			</div>
+			<%@include file="../common/Body_top.jsp"%>
 			<section class="body_low center_align">
 				<div class="boardmaintitle lottemartdream"></div>
 				<table class="table table-hover">
@@ -69,10 +68,11 @@
 					</div>
 				</footer>
 			</section>
+			<input type="hidden" id="boardid" value="notice">
+			<input type="hidden" id="boardtitle" value="공지사항">
 			<input type="hidden" id="boardpage" value="${currentPage}">
 			<input type="hidden" id="boardtotal" value="${totalCount}">
-			<input type="hidden" id="boardtitle" value="공지사항">
-			<input type="hidden" id="boardid" value="notice">
+			<input type="hidden" id="boardinfo" value="Studymate에서 보내드리는 소식들입니다">
 			<%@include file="../common/Footer.jsp" %>
 			<%@include file="../common/Board.jsp" %>
 		</div>

@@ -16,8 +16,7 @@
 					<%@include file="../common/Header.jsp"%>
 				</c:otherwise>
 			</c:choose>
-			<div class="body_top">
-			</div>
+			<%@include file="../common/Body_top.jsp"%>
 			<section class="body_higher center_align">
 			<!-- 관리자 여부로 서브메뉴 구분필요 -->
 				<c:if test="${sessionScope.memId eq 'admin'}">
@@ -206,6 +205,7 @@
 			</section>
 			<input type="hidden" id="boardid" value="member">
 			<input type="hidden" id="boardtitle_client" value="회원가입">
+			<input type="hidden" id="boardinfo" value="Studymate의 모든 서비스를 이용해보세요">
 			<!-- 관리자와 구분필요 -->
 			<%@include file="../common/JoinFooter.jsp" %>
 			<%@include file="../common/Board.jsp" %>

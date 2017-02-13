@@ -16,8 +16,7 @@
 					<%@include file="../common/Header.jsp"%>
 				</c:otherwise>
 			</c:choose>
-			<div class="body_top">
-			</div>
+			<%@include file="../common/Body_top.jsp"%>
 			<section class="body center_align">
 				<%@include file="../common/AdminSubnav.jsp" %>
 				<article>
@@ -77,12 +76,14 @@
 					<input type="hidden" id="boardid" value="reserve">
 					<input type="hidden" id="boardtitle" value="예약관리">
 					<input type="hidden" id="boardsubtitle" value="예약수정">
+					<input type="hidden" id="boardinfo" value="관리자권한의 예약수정입니다">
 				</c:when>
 				<c:otherwise>
 					<input type="hidden" id="boardid" value="reserve">
 					<input type="hidden" id="client_page" value="memberMypage">
 					<input type="hidden" id="boardtitle_client" value="마이페이지">
 					<input type="hidden" id="boardsubtitle" value="예약수정">
+					<input type="hidden" id="boardinfo" value="예약수정을 할 수 있습니다">
 				</c:otherwise>
 			</c:choose>
 			<%@include file="../common/Footer.jsp" %>

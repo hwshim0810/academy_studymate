@@ -16,8 +16,7 @@
 					<%@include file="../common/Header.jsp"%>
 				</c:otherwise>
 			</c:choose>
-			<div class="body_top">
-			</div>
+			<%@include file="../common/Body_top.jsp"%>
 			<section class="body_high center_align">
 				<c:if test="${sessionScope.memId eq 'admin'}">
 					<%@include file="../common/AdminSubnav.jsp" %>
@@ -151,12 +150,14 @@
 											<input type="hidden" id="boardid" value="reserve">
 											<input type="hidden" id="boardtitle" value="예약관리">
 											<input type="hidden" id="boardsubtitle" value="예약추가">
+											<input type="hidden" id="boardinfo" value="관리자권한의 예약추가">
 										</c:when>
 										<c:otherwise>
 											<button class="btn btn-info btn-font" id="btnback">뒤로</button>
 											<input type="hidden" id="boardid" value="room">
 											<input type="hidden" id="boardtitle" value="지점소개">
 											<input type="hidden" id="boardsubtitle" value="지점예약">
+											<input type="hidden" id="boardinfo" value="Studymate를 예약방문해보세요">
 										</c:otherwise>
 									</c:choose>
 								</div>

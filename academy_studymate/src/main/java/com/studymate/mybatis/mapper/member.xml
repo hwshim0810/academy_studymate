@@ -46,7 +46,7 @@
 		SELECT <include refid="columns" />  FROM member WHERE memId = #{memId}
 	</select>
 	
-	<select id="findId" resultType="MemberDto" parameterType="FindIdDto">
+	<select id="findId" resultType="MemberDto" parameterType="FindDto">
 		SELECT <include refid="columns" /> FROM member WHERE memName = #{memName} and memEmail = #{memEmail} 
 	</select>
 	

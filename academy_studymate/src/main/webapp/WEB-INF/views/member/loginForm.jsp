@@ -16,8 +16,7 @@
 					<%@include file="../common/Header.jsp"%>
 				</c:otherwise>
 			</c:choose>
-			<div class="body_top">
-			</div>
+			<%@include file="../common/Body_top.jsp"%>
 			<section class="body_low center_align">
 				<div class="boardtitle lottemartdream"></div>
 				<article id="contents">
@@ -28,20 +27,20 @@
 								<legend class="sr-only">로그인</legend>
 								<div class="form-group">
 									<label class="col-xs-4 control-label" for="memId">아이디</label>  
-									<div class="col-xs-6">
+									<div class="col-xs-8 col-sm-6">
 										 <form:input path="memId" id="memId" placeholder="아이디" cssClass="form-control" />
 									</div>
-									<div class="col-xs-2 nopadding">
-										<form:errors path="memId" cssClass="label label-danger" />
+									<div class="hidden-xs col-sm-2 nopadding">
+										<form:errors path="memId" cssClass="label label-danger" delimiter="/"/>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-xs-4 control-label" for="memPass">비밀번호</label>  
-									<div class="col-xs-6">
+									<div class="col-xs-8 col-sm-6">
 										<form:password id="memPass" path="memPass" placeholder="비밀번호" maxlength="12" cssClass="form-control" />
 									</div>
-									<div class="col-xs-2 nopadding">
-										<form:errors path="memPass" cssClass="label label-danger" />
+									<div class="hidden-xs col-sm-2 nopadding">
+										<form:errors path="memPass" cssClass="label label-danger" delimiter="/"/>
 									</div>
 								</div>
 								
@@ -69,9 +68,16 @@
 									<div class="hidden-xs  col-sm-4"></div>
 									<div class="col-xs-12 col-sm-6 lottemartdream w250">
 										<span>아이디나 비밀번호를 잊어버렸어요.</span>
-										<a class="btn btn-info btn-font pull-right"  href="/studymate/memberFind">아이디/비밀번호찾기</a>
 									</div>
 									<div class="hidden-xs  col-sm-2"></div>
+								</div>
+								<div class="row">
+									<div class="hidden-xs col-sm-4"></div>
+									<div class="col-xs-12 col-sm-6">
+										<a class="btn btn-info btn-font pull-right"  href="/studymate/memberFindPass">비밀번호찾기</a>
+										<a id="id_a"  class="btn btn-info btn-font pull-right"  href="/studymate/memberFindId">아이디찾기</a>
+									</div>
+									<div class="hidden-xs col-xm-2"></div>
 								</div>
 	
 								<div class="col-xs-12">
@@ -94,6 +100,7 @@
 			<!-- Hidden parameter -->
 			<input type="hidden" id="boardid" value="member">
 			<input type="hidden" id="boardtitle_client" value="로그인">
+			<input type="hidden" id="boardinfo" value="Studymate에 오신걸 환영합니다">
 			<%@include file="../common/Footer.jsp" %>
 			<%@include file="../common/Board.jsp" %>
 			<%@include file="../common/Joinscript.jsp" %>

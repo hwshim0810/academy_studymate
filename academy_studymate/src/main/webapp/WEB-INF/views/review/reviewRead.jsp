@@ -16,8 +16,7 @@
 					<%@include file="../common/Header.jsp"%>
 				</c:otherwise>
 			</c:choose>
-			<div class="body_top">
-			</div>
+			<%@include file="../common/Body_top.jsp"%>
 			<section class="body_high center_align">
 				<div class="boardtitle lottemartdream"></div>
 				<article id="contents">
@@ -132,6 +131,7 @@
 			<input type="hidden" id="boardupdate" value="${updateUrl}">
 			<input type="hidden" id="boarddelete" value="${deleteUrl}">
 			<input type="hidden" id="currentPage" value="${currentPage}">
+			<input type="hidden" id="boardinfo" value="${reviewDto.memName}님의 방문후기">
 			<%@include file="../common/Footer.jsp" %>
 			<%@include file="../common/Board.jsp" %>
 		</div>

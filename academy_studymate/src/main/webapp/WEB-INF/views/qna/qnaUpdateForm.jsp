@@ -16,8 +16,7 @@
 					<%@include file="../common/Header.jsp"%>
 				</c:otherwise>
 			</c:choose>
-			<div class="body_top">
-			</div>
+			<%@include file="../common/Body_top.jsp"%>
 			<section class="body center_align">
 				<%@include file="../common/BoardSubnav.jsp" %>
 				<div class="boardtitle lottemartdream"></div>
@@ -57,6 +56,7 @@
 			<input type="hidden" id="boardid" value="qna">
 			<input type="hidden" id="boardtitle" value="QnA">
 			<input type="hidden" id="boardsubtitle" value="글 수정">
+			<input type="hidden" id="boardinfo" value="Qna게시글을 수정합니다">
 			<%@include file="../common/Footer.jsp" %>
 			<%@include file="../common/Board.jsp" %>
 			<script src="<c:url value='/resources/js/boardWrite/qnaWrite.js'/>" charset="utf-8"></script>

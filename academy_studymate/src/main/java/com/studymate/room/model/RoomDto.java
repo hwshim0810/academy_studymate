@@ -19,8 +19,23 @@ public class RoomDto extends Dto{
 	private String borMain, borMainpath;
 	@NotEmpty(message="한줄소개필수입력")
 	private String borIntro;
+	private String borMetro;
+	private String borBus;
 	Date borRegdate;
 	
+	
+	public String getBorMetro() {
+		return borMetro;
+	}
+	public void setBorMetro(String borMetro) {
+		this.borMetro = borMetro;
+	}
+	public String getBorBus() {
+		return borBus;
+	}
+	public void setBorBus(String borBus) {
+		this.borBus = borBus;
+	}
 	public String getBorMain() {
 		return borMain;
 	}

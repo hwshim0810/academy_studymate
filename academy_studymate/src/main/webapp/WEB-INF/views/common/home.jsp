@@ -16,22 +16,43 @@
 				</c:otherwise>
 			</c:choose>
 			
-			<div id="myCarousel" class="carousel slide hidden-xs" data-ride="carousel">
-			    <!-- Indicators -->
+			<div id="myCarousel" class="carousel slide" data-ride="carousel">
+			    <!-- Indicators 
 			    <ol class="carousel-indicators">
 			      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 			      <li data-target="#myCarousel" data-slide-to="1"></li>
-			    </ol>
+			    </ol>-->
 			
 			    <!-- Wrapper for slides -->
 			    <div class="carousel-inner" role="listbox">
-			      <div class="item active">
-			        <img src="https://placehold.it/1200x400?text=IMAGE" alt="Image">     
+			      <div class="item active banner1">
+			        <img src="${pageContext.request.contextPath}/resources/img/idx_main1.jpg" alt="메인배너"> 
+	                <div class="carousel-caption lottemartdream normal w250">
+			            <h2 class="pull-right">안정된 분위기를 가진 열람실을 이용해보세요.</h2>
+			        </div>      
 			      </div>
-			
-			      <div class="item">
-			        <img src="https://placehold.it/1200x400?text=Another Image Maybe" alt="Image">     
+			      
+			     <div class="item banner1">
+			        <img src="${pageContext.request.contextPath}/resources/img/idx_main2.jpg" alt="메인배너"> 
+	                <div class="carousel-caption lottemartdream normal w250">
+			            <h2 class="pull-right">Studymate에서 일시적인 사무공간을 지원해드립니다!</h2>
+			        </div>      
 			      </div>
+			      
+    			  <div class="item banner1">
+			        <img src="${pageContext.request.contextPath}/resources/img/idx_main3.jpg" alt="메인배너"> 
+	                <div class="carousel-caption lottemartdream normal w250">
+			            <h2 class="pull-right">다양한 크기의 부스가 준비되어있습니다.</h2>
+			        </div>      
+			      </div>
+			      
+        		  <div class="item banner1">
+			        <img src="${pageContext.request.contextPath}/resources/img/idx_main4.jpg" alt="메인배너"> 
+	                <div class="carousel-caption lottemartdream normal w250">
+			            <h2 class="pull-right">오픈스터디룸에서 여러분의 작업에 자극을 받아보세요.</h2>
+			        </div>      
+			      </div>
+			      
 			    </div>
 			
 			    <!-- Left and right controls -->
@@ -57,7 +78,7 @@
 				<div class="col-xs-12 col-sm-6 home_cell">
 					<div class="tabbable-panel cell_high">
 						<div class="tabbable-line">
-							<ul class="nav nav-tabs ">
+							<ul class="nav nav-tabs lottemartdream">
 								<li class="active">
 									<a href="#noticeList" data-toggle="tab">공지사항</a>
 								</li>

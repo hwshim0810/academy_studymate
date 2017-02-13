@@ -16,8 +16,7 @@
 					<%@include file="../common/Header.jsp"%>
 				</c:otherwise>
 			</c:choose>
-			<div class="body_top">
-			</div>
+			<%@include file="../common/Body_top.jsp"%>
 			<section class="body center_align">
 				<%@include file="../common/BoardSubnav.jsp" %>
 				<div class="boardtitle lottemartdream"></div>
@@ -53,9 +52,10 @@
 					<%@include file="../common/boardBtn/UpdatePageBtn.jsp" %>
 				</form:form>
 			</section>
+			<input type="hidden" id="boardid" value="review">
 			<input type="hidden" id="boardtitle" value="방문후기">
 			<input type="hidden" id="boardsubtitle" value="후기수정">
-			<input type="hidden" id="boardid" value="review">
+			<input type="hidden" id="boardinfo" value="후기를 수정합니다">
 			<%@include file="../common/Footer.jsp" %>
 			<%@include file="../common/Board.jsp" %>
 			<script src="<c:url value='/resources/js/boardWrite/reviewWrite.js'/>" charset="utf-8"></script>

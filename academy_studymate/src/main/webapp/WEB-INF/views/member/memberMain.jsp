@@ -15,8 +15,7 @@
 					<%@include file="../common/Header.jsp"%>
 				</c:otherwise>
 			</c:choose>
-			<div class="body_top">
-			</div>
+			<%@include file="../common/Body_top.jsp"%>
 			<section class="body_low center_align">
 				<%@include file="../common/AdminSubnav.jsp" %>
 				<div class="boardmaintitle lottemartdream"></div>
@@ -62,6 +61,7 @@
 			<input type="hidden" id="boardtitle" value="회원관리">
 			<input type="hidden" id="boardpage" value="${currentPage}">
 			<input type="hidden" id="boardtotal" value="${totalCount}">
+			<input type="hidden" id="boardinfo" value="관리자권한의 회원관리입니다">
 			<%@include file="../common/Footer.jsp" %>
 			<%@include file="../common/Board.jsp" %>
 		</div>

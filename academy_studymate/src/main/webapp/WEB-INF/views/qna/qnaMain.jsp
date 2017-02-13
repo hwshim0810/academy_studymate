@@ -15,8 +15,7 @@
 					<%@include file="../common/Header.jsp"%>
 				</c:otherwise>
 			</c:choose>
-			<div class="body_top">
-			</div>
+			<%@include file="../common/Body_top.jsp"%>
 			<section class="body_low center_align">
 				<%@include file="../common/BoardSubnav.jsp" %>
 				<div class="boardmaintitle lottemartdream"></div>
@@ -83,6 +82,7 @@
 			<input type="hidden" id="boardtotal" value="${totalCount}">
 			<input type="hidden" id="boardtitle" value="QnA">
 			<input type="hidden" id="boardid" value="qna">
+			<input type="hidden" id="boardinfo" value="궁금한점이 있다면 문의남겨주세요">
 			<%@include file="../common/Footer.jsp" %>
 			<%@include file="../common/Board.jsp" %>
 		</div>

@@ -17,8 +17,7 @@
 					<%@include file="../common/Header.jsp"%>
 				</c:otherwise>
 			</c:choose>
-			<div class="body_top">
-			</div>
+			<%@include file="../common/Body_top.jsp"%>
 			<section class="body_high center_align">
 				<div class="boardtitle lottemartdream"></div>
 				<div class="mypage lottemartdream normal w400" >
@@ -322,6 +321,7 @@
 			<input type="hidden" id="boardtitle_client" value="마이페이지">
 			<input type="hidden" id="boardsubtitle" value="${memberDto.memId}님">
 			<input type="hidden" id="client_page" value="${pageContext.request.contextPath}/memberMypage">
+			<input type="hidden" id="boardinfo" value="회원님의 정보를 확인해보세요">
 			<%@include file="../common/Footer.jsp" %>
 			<%@include file="../common/Board.jsp" %>
 			<%@include file="../common/MypageScript.jsp" %>

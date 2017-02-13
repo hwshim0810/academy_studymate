@@ -239,13 +239,12 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 
 	@Override
 	public Model findForm(Model model) {
-		model.addAttribute("findIdDto", new FindIdDto());
-		model.addAttribute("findPassDto", new FindPassDto());
+		model.addAttribute("findDto", new FindDto());
 		return model;
 	}
 
 	@Override
-	public String memberFindPass(FindPassDto findPassDto) {
+	public String memberFindPass(FindDto findPassDto) {
 		String inputId = findPassDto.getMemId();
 		String inputName = findPassDto.getMemName();
 		String inputEmail = findPassDto.getMemEmail();
@@ -268,7 +267,7 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 	}
 
 	@Override
-	public String memberFindId(Model model, FindIdDto findIdDto) {
+	public String memberFindId(Model model, FindDto findIdDto) {
 		List<MemberDto> tempList = memDao.findId(findIdDto);
 		List<MemberDto> list = new ArrayList<>();
 		

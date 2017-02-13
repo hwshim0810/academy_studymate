@@ -16,10 +16,11 @@
 					<%@include file="../common/Header.jsp"%>
 				</c:otherwise>
 			</c:choose>
-			<%@include file="../common/BoardSubnav.jsp" %>
-			<div class="body_top">
-			</div>
-			<div class="body center_align">
+			<%@include file="../common/Body_top.jsp"%>
+			<div class="body_higher center_align">
+				<c:if test="${sessionScope.memId eq 'admin'}">
+					<%@include file="../common/AdminSubnav.jsp" %>
+				</c:if>
 				<div class="boardtitle lottemartdream"></div>
 				<br><br><br>
 				<form:form id="multiform" action="${pageContext.request.contextPath}/roomWrite" method="POST" enctype="multipart/form-data" commandName="roomDto">
@@ -38,8 +39,8 @@
 							<td class="col-xs-3"></td>
 						</tr>
 						<tr>
-							<td class="col-xs-9"></td>
-							<td class="col-xs-3"><form:errors path="borName" delimiter="/" cssClass="label label-danger"/></td>
+							<td class="col-xs-9"><form:errors path="borName" delimiter="/" cssClass="label label-danger"/></td>
+							<td class="col-xs-3"></td>
 						</tr>
 						<tr>
 							<td class="col-xs-9">
@@ -49,8 +50,8 @@
 							<td class="col-xs-3"></td>
 						</tr>
 						<tr>
-							<td class="col-xs-9"></td>
-							<td class="col-xs-3"><form:errors path="borAddr" delimiter="/" cssClass="label label-danger"/></td>
+							<td class="col-xs-9"><form:errors path="borAddr" delimiter="/" cssClass="label label-danger"/></td>
+							<td class="col-xs-3"></td>
 						</tr>
 						<tr>
 							<td class="col-xs-9">
@@ -60,8 +61,8 @@
 							<td class="col-xs-3"></td>
 						</tr>
 						<tr>
-							<td class="col-xs-9"></td>
-							<td class="col-xs-3"><form:errors path="borArea" delimiter="/" cssClass="label label-danger"/></td>
+							<td class="col-xs-9"><form:errors path="borArea" delimiter="/" cssClass="label label-danger"/></td>
+							<td class="col-xs-3"></td>
 						</tr>
 						<tr>
 							<td class="col-xs-9">
@@ -95,11 +96,23 @@
 							<td class="col-xs-9">
 								<label for="borIntro">한줄소개</label><form:input path="borIntro" cssClass="form-control" maxlength="25"/>
 							</td>
-							<td class="col-xs-3"><form:errors path="borIntro" /></td>
+							<td class="col-xs-3"></td>
 						</tr>
 						<tr>
-							<td class="col-xs-9"></td>
-							<td class="col-xs-3"><form:errors path="borIntro" delimiter="/" cssClass="label label-danger"/></td>
+							<td class="col-xs-9"><form:errors path="borIntro" delimiter="/" cssClass="label label-danger"/></td>
+							<td class="col-xs-3"></td>
+						</tr>
+						<tr>
+							<td class="col-xs-9">
+								<label for="borIntro">지하철?</label><form:input path="borMetro" cssClass="form-control" maxlength="40"/>
+							</td>
+							<td class="col-xs-3"></td>
+						</tr>
+						<tr>
+							<td class="col-xs-9">
+								<label for="borIntro">버스?</label><form:input path="borBus" cssClass="form-control" maxlength="40"/>
+							</td>
+							<td class="col-xs-3"></td>
 						</tr>
 					</table>
 					<br><br>
@@ -111,6 +124,7 @@
 			<input type="hidden" id="boardid" value="room">
 			<input type="hidden" id="boardtitle" value="지점관리">
 			<input type="hidden" id="boardsubtitle" value="지점등록">
+			<input type="hidden" id="boardinfo" value="새로운 지점을 등록합니다">
 			<%@include file="../common/Footer.jsp" %>
 			<%@include file="../common/Board.jsp" %>
 		</div>

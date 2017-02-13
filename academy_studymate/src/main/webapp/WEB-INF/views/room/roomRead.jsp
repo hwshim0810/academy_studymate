@@ -16,8 +16,7 @@
 					<%@include file="../common/Header.jsp"%>
 				</c:otherwise>
 			</c:choose>
-			<div class="body_top">
-			</div>
+			<%@include file="../common/Body_top.jsp"%>
 			<section class="body_high center_align">
 				<div class="boardtitle lottemartdream"></div>
 				<article id="contents">
@@ -66,11 +65,9 @@
 								<h2>오시는 길</h2>
 								<dl>
 									<dt>지하철</dt>
-									<dd>${roomDto.borAddr}</dd>
+									<dd>${roomDto.borMetro}</dd>
 									<dt>버스</dt>
-									<dd></dd>
-									<dt>자가용</dt>
-									<dd></dd>
+									<dd>${roomDto.borBus}</dd>
 								</dl>
 								<br><br><br>
 								<hr>
@@ -104,6 +101,7 @@
 			<input type="hidden" id="boardupdate" value="${updateUrl}">
 			<input type="hidden" id="boarddelete" value="${deleteUrl}">
 			<input type="hidden" id="borAddr" value="${roomDto.borAddr}">
+			<input type="hidden" id="boardinfo" value="지역별 지점소개입니다">
 			<%@include file="../common/Footer.jsp" %>
 			<%@include file="../common/Board.jsp" %>
 			<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=60028587da6bdcb31d41cbd67222999d"></script>

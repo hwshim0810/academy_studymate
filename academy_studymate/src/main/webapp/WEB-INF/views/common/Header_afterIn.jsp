@@ -9,7 +9,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>                        
 				</button>
-				<a class="navbar-brand" href="${pageContext.request.contextPath}">Logo</a>
+				<a class="navbar-brand hidden-sm hidden-md hidden-lg" href="${pageContext.request.contextPath}">StudyMate</a>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<div class="row">
@@ -27,10 +27,14 @@
 							</c:choose>
 					</ul>
 				</div>
-				<ul class="nav navbar-nav lottemartdream normal w400 navsize">
+				<ul class="nav navbar-nav logonav lottemartdream normal w400 navsize">
 					<li class="active"><a href="${pageContext.request.contextPath}/siteInfo">사이트 소개</a></li>
 						<li class="hidden-xs hidden-sm bar">|</li>
 					<li><a href="${pageContext.request.contextPath}/noticeList/1">공지사항</a></li>
+						<li class="hidden-xs hidden-sm bar">|</li>
+					<li><a class="hidden-xs logolink" href="${pageContext.request.contextPath}">
+							<img src="${pageContext.request.contextPath}/resources/img/StudyMateLogo.png" alt="로고">
+						 </a></li>
 						<li class="hidden-xs hidden-sm bar">|</li>
 					<li><a href="${pageContext.request.contextPath}/roomList/1">지점소개</a></li>
 						<li class="hidden-xs hidden-sm bar">|</li>

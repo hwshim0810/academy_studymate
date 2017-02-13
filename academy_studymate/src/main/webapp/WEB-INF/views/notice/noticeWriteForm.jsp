@@ -16,8 +16,7 @@
 					<%@include file="../common/Header.jsp"%>
 				</c:otherwise>
 			</c:choose>
-			<div class="body_top">
-			</div>
+			<%@include file="../common/Body_top.jsp"%>
 			<div class="body center_align">
 				<div class="boardtitle lottemartdream"></div>
 				<br><br><br>
@@ -50,6 +49,7 @@
 			<input type="hidden" id="boardid" value="notice">
 			<input type="hidden" id="boardtitle" value="공지사항">
 			<input type="hidden" id="boardsubtitle" value="공지작성">
+			<input type="hidden" id="boardinfo" value="공지사항을 작성합니다">
 			<%@include file="../common/Footer.jsp" %>
 			<%@include file="../common/Board.jsp" %>
 			<script src="<c:url value='/resources/js/boardWrite/noticeWrite.js'/>" charset="utf-8"></script>

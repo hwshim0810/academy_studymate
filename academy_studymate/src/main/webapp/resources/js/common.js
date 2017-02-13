@@ -7,9 +7,11 @@ $(function () {
 	var subtitle = $('#boardsubtitle').val();
 	var totalcount = $('#boardtotal').val();
 	var currentpage = $('#boardpage').val();
+	var infomsg = $('#boardinfo').val();
 	
 	
 	if (title != undefined) {
+		$('#infodiv').html('<h1>' + title + '</h1><p>' + infomsg + '</p>');
 		$(".boardmaintitle").html(
 				'<h1 class="htag normal w300 subsize">'	+ title + '</h1>'
 				+ '<div class="pull-left count"><span>총 ' + totalcount + '건 현재 '	+ currentpage + ' 페이지</span></div>'
@@ -19,6 +21,7 @@ $(function () {
 				+ '</ol></div>'
 				+ '<br><br><hr>');
 	} else {
+		$('#infodiv').html('<h1>' + title_client + '</h1><p>' + infomsg + '</p>');
 		$(".boardmaintitle").html(
 				'<h1 class="htag normal w300 subsize">'	+ title_client + '</h1>'
 				+ '<div class="pull-left count"><span>총 ' + totalcount + '건 현재 '	+ currentpage + ' 페이지</span></div>'
