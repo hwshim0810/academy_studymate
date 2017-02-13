@@ -6,15 +6,16 @@ import java.util.Map;
 import com.studymate.common.Dao;
 
 public interface RoomDao extends Dao {
+	int getBorNum();
 
 	List<RoomDto> getAllRoom(Map<String, Object> map);
 
 	String getBorName(int borNum);
 
-	void writeSubFile(RoomSubDto subDto);
-
 	List<RoomSubDto> readSubFile(int borNum);
 
-	int getBorNum();
+	void writeSubFile(RoomSubDto subDto);
+
+	void updateSubFile(RoomSubDto oldSubDto);
 
 }

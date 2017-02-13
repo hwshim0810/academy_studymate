@@ -23,11 +23,11 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th class="hidden-xs hidden-sm">번호</th>
-							<th>제목</th>
-							<th>글쓴이</th>
-							<th>작성일</th>
-							<th class="hidden-xs hidden-sm">조회</th>
+							<th width="10%" class="hidden-xs hidden-sm">번호</th>
+							<th width="40%">제목</th>
+							<th width="20%">글쓴이</th>
+							<th width="20%">작성일</th>
+							<th width="10%" class="hidden-xs hidden-sm">조회</th>
 						</tr>
 					</thead>
 					<tbody>

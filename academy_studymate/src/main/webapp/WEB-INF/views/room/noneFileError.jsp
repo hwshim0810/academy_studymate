@@ -7,17 +7,9 @@
 		<title>삭제</title>
 	</head>
 	<body>
-		<form action="${pageContext.request.contextPath}/roomDelete" id="delForm" method="post">
-			<input type="hidden"  name="borNum" value="${borNum}" />
-			<input type="hidden" name="currentPage" value="${currentPage}" />
-		</form>
 		<script type="text/javascript">
-			if (confirm("글을 삭제하시겠습니까?") == true) {
-				console.log(document.getElementById('delForm'));
-				document.getElementById('delForm').submit();
-			} else {
+				alert('파일을 등록해주십시오.');
 				history.back();
-			} 
 		</script>
 	</body>
 </html>

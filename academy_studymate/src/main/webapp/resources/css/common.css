@@ -232,6 +232,15 @@ body {
     padding-left: 5px;
     min-height: 850px;
 	}
+.body_low {
+    width: 100%;
+    height: auto;
+    padding-top: 44px;
+    padding-bottom: 40px;
+    padding-right: 5px;
+    padding-left: 5px;
+    min-height: 850px;
+	}
 	
 .body_high {
     width: 100%;
@@ -275,7 +284,7 @@ body {
     height: 250px;
     -webkit-background-size: cover;
     background-size: cover;
-    background-image: url(../img/test.jpg);
+    background-image: url(../img/body_top.jpg);
 }
 
 .btn-font {

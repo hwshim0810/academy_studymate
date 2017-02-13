@@ -56,7 +56,7 @@
 								<label for="file">메인썸네일</label>
 								<div class="form-group">
 									<input type="file" name="main" />
-									<span class="help-block">업로드는 3Mb까지 가능합니다.</span>
+									<span class="help-block">개당 업로드 3Mb / 파일 1개 필수.</span>
 								</div>
 							</td>
 							<td class="col-xs-3"></td>
@@ -66,7 +66,7 @@
 								<label for="file">서브썸네일</label>
 								<div class="form-group">
 									<input type="file" name="sub" />
-									<span class="help-block">업로드 3Mb / 파일2개 필요.</span>
+									<span class="help-block">개당 업로드 3Mb / 파일2개 필수.</span>
 								</div>
 							</td>
 							<td class="col-xs-3"></td>

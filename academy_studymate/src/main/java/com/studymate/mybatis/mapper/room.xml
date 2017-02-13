@@ -4,7 +4,7 @@
               
 <mapper namespace="com.studymate.room.model.RoomDao">
 	<sql id="columns"> borNum, borName, borAddr, borArea, borMain, borMainpath, borIntro, borRegdate </sql>
-	<sql id="subColumns"> borNum, borSub, borSubpath </sql>
+	<sql id="subColumns"> borSubnum, borNum, borSub, borSubpath, borIdx </sql>
 	
 	<sql id="search">
 		<where>
@@ -48,19 +48,23 @@
 	</select>
 	
 	<select id="readSubFile" resultType="RoomSubDto" parameterType="Integer">
-		SELECT <include refid="subColumns" /> FROM roomsub WHERE borNum = #{borNum} 
+		SELECT <include refid="subColumns" /> FROM roomsub WHERE borNum = #{borNum} ORDER BY borSubnum 
 	</select>
 	
 	<insert id="write"  parameterType="RoomDto">
-		INSERT INTO room VALUES (	borNum.nextval, #{borName}, #{borAddr}, #{borArea}, #{borMain}, #{borMainpath}, ' ', sysdate) 
+		INSERT INTO room VALUES (	borNum.nextval, #{borName}, #{borAddr}, #{borArea}, #{borMain}, #{borMainpath}, #{borIntro}, sysdate) 
 	</insert>
 	
 	<insert id="writeSubFile" parameterType="RoomSubDto">
-		INSERT INTO roomsub VALUES ( #{borNum}, #{borSub}, #{borSubpath} ) 
+		INSERT INTO roomsub VALUES (borSubnum.nextval, #{borNum}, #{borSub}, #{borSubpath}, #{borIdx} ) 
 	</insert>
 	
 	<update id="update" parameterType="RoomDto">
-		UPDATE room SET borName = #{borName}, borAddr = #{borAddr}, borArea = #{borArea}, borIntro = #{borIntro} WHERE borNum = #{borNum}  
+		UPDATE room SET borName = #{borName}, borAddr = #{borAddr}, borArea = #{borArea}, borMain = #{borMain}, borMainpath = #{borMainpath}, borIntro = #{borIntro} WHERE borNum = #{borNum}  
+	</update>
+	
+	<update id="updateSubFile" parameterType="RoomSubDto">
+		UPDATE roomsub SET borSub = #{borSub}, borSubpath = #{borSubpath} WHERE borNum = #{borNum} and borIdx = #{borIdx}  
 	</update>
 	
 	<delete id="delete" parameterType="Integer">

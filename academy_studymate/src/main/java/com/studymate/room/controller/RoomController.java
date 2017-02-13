@@ -45,8 +45,8 @@ public class RoomController {
 		if (result.hasErrors())
 			return "/room/roomWriteForm";
 		
-		roomService.write(request, roomDto);
-		return "redirect:/roomList/1";
+		String page = roomService.write(request, roomDto);
+		return page;
 	}
 	
 	@RequestMapping("roomRead/{currentPage}-{borNum}")
@@ -60,18 +60,25 @@ public class RoomController {
 		return "/room/roomRead";
 	}
 	
-	@RequestMapping(value = "roomUpdate", method = RequestMethod.GET)
-	public String update(Model model, int bonNum, int currentPage, String update,
+	@RequestMapping(value = "roomUpdate/{currentPage}-{borNum}", method = RequestMethod.GET)
+	public String update(Model model, 
+			@PathVariable("borNum") int borNum, 
+			@PathVariable("currentPage") int currentPage, 
+			@RequestParam(required = false) String update,
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
-		roomService.read(model, bonNum, currentPage, update, keyField, keyWord);
+		roomService.read(model, borNum, currentPage, update, keyField, keyWord);
 		return "/room/roomUpdateForm";
 	}
 	
 	@RequestMapping(value = "roomUpdate", method = RequestMethod.POST)
-	public String update(Model model ,RoomDto roomDto, int bonNum, int currentPage) {
-		roomService.update(model, roomDto);
-		return "redirect:/roomRead/"+ currentPage + "-" + bonNum + "?update=y";
+	public String update(Model model , MultipartHttpServletRequest request,
+			@Valid RoomDto roomDto, int currentPage, BindingResult result) {
+		if (result.hasErrors())
+			return "/room/roomUpdateForm";
+		
+		String page = roomService.updateRoom(request, roomDto);
+		return page;
 	}
 	
 	@RequestMapping(value = "roomDelete/{currentPage}-{borNum}", method = RequestMethod.GET)

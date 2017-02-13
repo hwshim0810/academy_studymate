@@ -23,10 +23,10 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th class="hidden-xs hidden-sm">회원이름</th>
-							<th>아이디</th>
-							<th>가입일</th>
-							<th>탈퇴여부</th>
+							<th width="20%" class="hidden-xs hidden-sm">회원이름</th>
+							<th width="40%">아이디</th>
+							<th width="30%">가입일</th>
+							<th width="20%">탈퇴여부</th>
 						</tr>
 					</thead>
 					<tbody>

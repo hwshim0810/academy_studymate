@@ -22,10 +22,10 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th class="hidden-xs hidden-sm">번호</th>
-							<th>제목</th>
-							<th>작성일</th>
-							<th>조회</th>
+							<th width="10%" class="hidden-xs hidden-sm">번호</th>
+							<th width="50%">제목</th>
+							<th width="30%">작성일</th>
+							<th width="10%" class="hidden-xs hidden-sm">조회</th>
 						</tr>
 					</thead>
 					<tbody>

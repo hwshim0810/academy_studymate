@@ -6,6 +6,15 @@
 	padding: 30px 15px;
 	margin-bottom: 50px;
 	bottom: 65px;
+	background-color: rgba(193, 193, 193, 0.86);
+    border-radius: 10em;
+}
+.subnav div a {
+	color: #2b2626;
+}
+.subnav div a:hover {
+	color: #f01010;
+	text-decoration: none;
 }
 .block {
 	display: inline-block;
@@ -33,6 +42,7 @@
 }
 .htag {
 	padding: 10px 10px;
+	color: rgba(200, 11, 11, 0.67);
 }
 .infoP {
 	padding-left: 10px;

@@ -23,11 +23,11 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th class="hidden-xs hidden-sm">번호</th>
-							<th>예약회원</th>
-							<th>예약지점</th>
-							<th>예약날짜</th>
-							<th>예약시간</th>
+							<th width="10%" class="hidden-xs hidden-sm">번호</th>
+							<th width="20%">예약회원</th>
+							<th width="30%">예약지점</th>
+							<th width="30%">예약날짜</th>
+							<th width="10%">예약시간</th>
 						</tr>
 					</thead>
 					<tbody>

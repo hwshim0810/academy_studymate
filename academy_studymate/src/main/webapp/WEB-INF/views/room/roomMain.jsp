@@ -22,6 +22,17 @@
 					<%@include file="../common/AdminSubnav.jsp" %>
 				</c:if>
 				<div class="boardmaintitle lottemartdream"></div>
+				<div class="row text-center">
+					<div class="col-xs-3"><strong>지역별</strong></div>
+					<div class="col-xs-9">
+						<ul class="list-inline">
+							<li>강남구</li>
+							<li>강북구</li>
+							<li>서초구</li>
+							<li>동작구</li>
+						</ul>
+					</div>
+				</div>
 				<article id="roomcolumn">
 					<c:choose>
 						<c:when test="${empty roomList}">
@@ -40,15 +51,17 @@
 						        		<img alt="지점썸네일" src="${pageContext.request.contextPath}/resources/roomImg/${item.borMain}">
 						        	</a>
 							        <figcaption>
-							        	<ul class="ul_padding">
-							        		<li><label>지점명: </label>${item.borName}</li>
-							        		<li><label>주소: </label>${item.borAddr}&nbsp;${item.borArea}</li>
+							        	<ul class="ul_padding list-unstyled">
+							        		<li><h3>${item.borName}</h3></li>
+							        		<li>${item.borAddr}&nbsp;${item.borArea}</li>
 							        	</ul>
-							        	<a href="${readUrl}" class="btn btn-info btn-font">상세정보</a>
-							        	<c:url value="/reserveSeleted/${item.borNum}" var="selectedRes">
-							        		<c:param name="borName" value="${item.borName}" />
-							        	</c:url>
-							        	<a class="btn btn-success btn-font btnwrite" href="${selectedRes}">예약하기</a>
+							        	<div class="pull-right">
+								        	<a href="${readUrl}" class="btn btn-info btn-font">상세정보</a>
+								        	<c:url value="/reserveSeleted/${item.borNum}" var="selectedRes">
+								        		<c:param name="borName" value="${item.borName}" />
+								        	</c:url>
+								        	<a class="btn btn-success btn-font btnwrite" href="${selectedRes}">예약하기</a>
+							        	</div>
 							        </figcaption>
 						     	</figure>
 					     	</c:forEach>
