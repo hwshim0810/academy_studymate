@@ -200,6 +200,18 @@ function output(data) {
      
 }
 function detailOutput(data) {
+	// Today
+	var now = new Date();
+    var year= now.getFullYear();
+    var month = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
+    var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
+    var todayArr = [year, month, day];
+    // ReserveDay
+	var resDateArr = data.resDto.resDate.split('-');
+	//Compareday
+	var todayDateCompare = new Date(todayArr[0], todayArr[1], todayArr[2]);
+	var resDateCompare = new Date(resDateArr[0], resDateArr[1], resDateArr[2]);
+	
 	$("#detailResult").html('');
 
 	$("#detailResult").append('<hr>');
@@ -230,7 +242,10 @@ function detailOutput(data) {
 	$("#resRegdate").append('<div class="col-xs-6">예약일</div>');
 	$("#resRegdate").append('<div class="col-xs-6">'+ data.resDto.resRegdate + '</div>');
 	$("#detailResult").append('<div class="row mypage_row" id="resButton">');
-	$("#resButton").append('<div class="col-xs-6"><a class="pull-left" href="/${pageContext.request.contextPath}/reserveUpdate/1-' + data.resDto.resNum + '">수정</a>');
-	$("#resButton").append('<div class="col-xs-6"><a class="pull-right" href="/${pageContext.request.contextPath}/reserveDelete/1-' + data.resDto.resNum + '">삭제</a>');
-	
+
+	if(todayDateCompare.getTime() < resDateCompare.getTime()) {
+		$("#resButton").append('<div class="col-xs-6"><a class="btn btn-warning btn-font pull-right" href="/studymate/reserveUpdate/1-' + data.resDto.resNum + '">수정</a>');
+		$("#resButton").append('<div class="col-xs-6"><a class="btn btn-danger btn-font pull-left" href="/studymate/reserveDelete/1-' + data.resDto.resNum + '">삭제</a>');
+        return;
+    }
 }

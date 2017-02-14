@@ -11,7 +11,11 @@
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
-
+   	<!-- Controller에 가기 전에 sessionInterceptor에가서 로직을 수행 후 Controller로 이동 -->
+ 	<interceptors>
+        <beans:bean class="com.studymate.common.SessionInterceptor"/> <!-- HandlerInterceptor 인터페이스를 구현한 클래스 -->
+	</interceptors>
+	
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
@@ -51,7 +55,7 @@
 	</beans:bean>
 	
 	<beans:bean id="findDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<beans:property name="mapperInterface" value="com.studymate.find.model.FindDao" />
+		<beans:property name="mapperInterface" value="com.studymate.find.model.FindStudyDao" />
 		<beans:property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</beans:bean>
 	

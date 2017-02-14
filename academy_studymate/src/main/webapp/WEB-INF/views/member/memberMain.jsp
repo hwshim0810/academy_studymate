@@ -16,7 +16,7 @@
 				</c:otherwise>
 			</c:choose>
 			<%@include file="../common/Body_top.jsp"%>
-			<section class="body_low center_align">
+			<section class="body_high center_align">
 				<%@include file="../common/AdminSubnav.jsp" %>
 				<div class="boardmaintitle lottemartdream"></div>
 				<table class="table table-hover">

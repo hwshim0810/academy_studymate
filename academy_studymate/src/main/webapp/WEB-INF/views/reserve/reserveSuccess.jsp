@@ -26,7 +26,6 @@
 							    <div class="panel-body">
 							    	<div>
 							    		<ol class="text-center nonestyle lottemartdream">
-							    			<li>예약번호 :<span class="bora">${resDto.resNum} 번</span></li>
 							    			<li>예약자명 : <span class="bora">${resDto.memName}</span></li>
 							    			<li>이용예정일:  <span class="bora">${resDto.resDate}</span></li>
 							    			<li>방문예정시간: <span class="bora">${resDto.resVisit}</span></li>

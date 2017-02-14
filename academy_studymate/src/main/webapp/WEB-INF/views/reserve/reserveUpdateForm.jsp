@@ -17,9 +17,12 @@
 				</c:otherwise>
 			</c:choose>
 			<%@include file="../common/Body_top.jsp"%>
-			<section class="body center_align">
-				<%@include file="../common/AdminSubnav.jsp" %>
+			<section class="body_high center_align">
+				<c:if test="${sessionScope.memId eq 'admin' }">
+					<%@include file="../common/AdminSubnav.jsp" %>
+				</c:if>
 				<article>
+					<div class="boardtitle lottemartdream"></div>
 					<form:form name = "updateform" action="${pageContext.request.contextPath}/reserveUpdate/${currentPage}-${resDto.resNum}" method="post" commandName="resDto">
 						<table class="table">
 							<tr>
@@ -67,7 +70,19 @@
 						<br><br>
 						<hr>
 						<!-- Button Area -->
-						<%@include file="../common/boardBtn/UpdatePageBtn.jsp" %>
+						<footer id="con_footer">
+							<div class="btndiv">
+								<div class="pull-right">
+									<input type="submit" class="btn btn-success btn-font" value="수정">
+								</div>
+								<div class="pull-left">
+									<c:if test="${sessionScope.memId eq 'admin'}">
+										<button class="btn btn-primary btn-font" id="btnlist" type="button">목록</button>
+									</c:if>
+									<button class="btn btn-info btn-font" id="btnback" type="button">뒤로</button>
+								</div>
+							</div>
+						</footer>
 					</form:form>
 				</article>
 			</section>
@@ -83,7 +98,7 @@
 					<input type="hidden" id="client_page" value="memberMypage">
 					<input type="hidden" id="boardtitle_client" value="마이페이지">
 					<input type="hidden" id="boardsubtitle" value="예약수정">
-					<input type="hidden" id="boardinfo" value="예약수정을 할 수 있습니다">
+					<input type="hidden" id="boardinfo" value="예약전일까지 수정가능합니다">
 				</c:otherwise>
 			</c:choose>
 			<%@include file="../common/Footer.jsp" %>

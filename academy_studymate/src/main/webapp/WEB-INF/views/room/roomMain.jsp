@@ -24,11 +24,14 @@
 				<div class="row text-center">
 					<div class="col-xs-3"><strong>지역별보기</strong></div>
 					<div class="col-xs-9">
-						<ul class="list-inline">
-							<li>강남구</li>
-							<li>강북구</li>
-							<li>서초구</li>
-							<li>동작구</li>
+						<ul class="list-inline">	
+							<li> | </li>
+							<li><a href="${pageContext.request.contextPath}/roomList/1">전체보기</a></li>
+							<li> | </li>
+							<li><a href="${pageContext.request.contextPath}/roomList/1?keyField=borAddr&keyWord=강남구">강남구</a></li>
+							<li><a href="${pageContext.request.contextPath}/roomList/1?keyField=borAddr&keyWord=강북구">강북구</a></li>
+							<li><a href="${pageContext.request.contextPath}/roomList/1?keyField=borAddr&keyWord=서초구">서초구</a></li>
+							<li><a href="${pageContext.request.contextPath}/roomList/1?keyField=borAddr&keyWord=동작구">동작구</a></li>
 						</ul>
 					</div>
 				</div>

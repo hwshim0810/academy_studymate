@@ -112,10 +112,13 @@ public class ReserveServiceImpl extends CommonServiceUtil implements ServiceInte
 		return resultMap;
 	}
 
-	@Override
-	public Model update(Model model, Dto resDto) {
+	public String updateRes(HttpSession session, Dto resDto, int currentPage, int resNum) {
 		reserveDao.update(resDto);
-		return model;
+		
+		if (session.getAttribute("memId").equals("admin"))
+			return "redirect:/reserveRead/" + currentPage  + "-" + resNum;
+		else
+			return "redirect:/memberMypage";
 	}
 
 	@Override
@@ -133,6 +136,12 @@ public class ReserveServiceImpl extends CommonServiceUtil implements ServiceInte
 
 	@Override // 이메일 전송으로 인해 사용하지 않음
 	public void write(Dto dto) {
+	}
+
+	@Override // 페이지이동으로 인해 사용하지않음
+	public Model update(Model model, Dto dto) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

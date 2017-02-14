@@ -13,8 +13,8 @@
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<div class="row">
-					<ul class="nav navbar-nav navbar-right lottemartdream normal w400">
-						<li><a href="${pageContext.request.contextPath}/login">로그인</a></li>
+					<ul class="nav navbar-nav navbar-right loginnav lottemartdream normal w400">
+						<li><a href="${pageContext.request.contextPath}/loginForm">로그인</a></li>
 						<li class="hidden-xs hidden-sm bar">|</li>
 						<li><a href="${pageContext.request.contextPath}/memberWrite">회원가입</a></li>
 					</ul>
@@ -37,13 +37,13 @@
 						<ul class="nonestyle dropdown-menu hidden-md hidden-lg" >
 								<li><a href="${pageContext.request.contextPath}/qnaList/1">QnA</a></li>
 								<li><a href="${pageContext.request.contextPath}/reviewList/1">방문후기</a></li>
-								<li><a href="#">FAQ</a></li>
+								<li><a href="#">이벤트</a></li>
 						</ul>
 						<div class="dropdown-content hidden-xs">
 							<ul class="nonestyle" >
 								<li><a href="${pageContext.request.contextPath}/qnaList/1">QnA</a></li>
 								<li><a href="${pageContext.request.contextPath}/reviewList/1">방문후기</a></li>
-								<li><a href="${pageContext.request.contextPath}/faq">FAQ</a></li>
+								<li><a href="${pageContext.request.contextPath}/faq">이벤트</a></li>
 							</ul>
 						</div>
 					</li>

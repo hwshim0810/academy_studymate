@@ -78,15 +78,14 @@ public class ReserveController {
 	}
 	
 	@RequestMapping(value = "reserveUpdate/{currentPage}-{resNum}", method = RequestMethod.POST)
-	public String update(Model model ,@Valid ReserveDto resDto, 
+	public String update(HttpSession session ,@Valid ReserveDto resDto, BindingResult result,
 			@PathVariable("resNum") int resNum, 
-			@PathVariable("currentPage") int currentPage,
-			BindingResult result) {
+			@PathVariable("currentPage") int currentPage) {
 		if (result.hasErrors())
 			return "/reserve/reserveUpdateForm";
 		
-		resService.update(model, resDto);
-		return "redirect:/reserveRead/" + currentPage  + "-" + resNum;
+		String page = resService.updateRes(session, resDto, currentPage, resNum);
+		return page;
 	}
 	
 	@RequestMapping(value = "reserveDelete/{currentPage}-{resNum}", method = RequestMethod.GET)

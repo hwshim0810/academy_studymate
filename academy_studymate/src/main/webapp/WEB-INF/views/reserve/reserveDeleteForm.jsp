@@ -12,7 +12,7 @@
 			<input type="hidden"  name="currentPage" value="${currentPage}">
 		</form>
 		<script type="text/javascript">
-			if (confirm("예약을 삭제하시겠습니까?") == true) {
+			if (confirm("예약을 취소하시겠습니까?") == true) {
 				document.getElementById('delForm').submit();
 			} else {
 				history.back();

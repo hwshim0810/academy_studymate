@@ -4,7 +4,7 @@ import java.sql.Date;
 
 import com.studymate.common.Dto;
 
-public class FindDto extends Dto {
+public class FindStudyDto extends Dto {
 	int bofNum;
 	String bofTitle, bofLgsub, bofSmsub, bofIngdate, bofDay, bofIngtime; 
 	int bofMemnum, bofCanmem;

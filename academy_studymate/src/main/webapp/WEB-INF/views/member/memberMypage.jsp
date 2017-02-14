@@ -246,6 +246,17 @@
 									</div>
 									<!-- 전체 예약내역 -->
 									<div class="tab-pane" id="mem_reserve">
+										<div class="panel panel-info">
+										    <div class="panel-heading"><h4 class="lottemartdream text-center">안내사항</h4></div>
+										    <div class="panel-body">
+										    	<div>
+										    		<ul class="text-center nonestyle lottemartdream">
+										    			<li class="mypage_row">조회된 예약은 총${totalCount}건 입니다.</li>
+										    			<li class="mypage_row">예약 수정/취소는 <strong>하루 전</strong>까지 가능합니다.</li>
+										    		</ul>
+										    	</div>
+										    </div>
+									    </div>
 										<table class="table table-hover">
 											<thead>
 												<tr>
@@ -253,7 +264,7 @@
 													<th>예약자명</th>
 													<th>예약지점</th>
 													<th>예약날짜</th>
-													<th>예약시간</th>
+													<th class="hidden-xs">예약시간</th>
 												</tr>
 											</thead>
 											<tbody id="resResult">
@@ -263,7 +274,7 @@
 														<td class="table_center"><a class="resDetail cursor_p" id="${item.resNum}">${item.memName}</a></td>
 														<td class="table_center">${item.borName}</td>
 														<td class="table_center">${item.resDate}</td>
-														<td class="table_center">${item.resTime}</td>
+														<td class="table_center hidden-xs">${item.resTime}</td>
 													</tr>
 												</c:forEach>
 											</tbody>

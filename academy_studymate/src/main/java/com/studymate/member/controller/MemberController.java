@@ -26,7 +26,7 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping(value = "login", method = RequestMethod.GET)
+	@RequestMapping(value = "loginForm", method = RequestMethod.GET)
 	public String login(Model model) {
 		memberService.writeForm(model);
 		return "/member/loginForm";

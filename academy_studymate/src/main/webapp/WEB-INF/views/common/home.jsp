@@ -17,7 +17,7 @@
 				</c:otherwise>
 			</c:choose>
 			
-			<div id="myCarousel" class="carousel slide" data-ride="carousel">
+			<div id="myCarousel" class="carousel slide boxshadow" data-ride="carousel">
 			    <!-- Indicators 
 			    <ol class="carousel-indicators">
 			      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -28,7 +28,7 @@
 			      <div class="item active">
 			        <img src="${pageContext.request.contextPath}/resources/img/idx_main1.jpg" alt="메인배너"> 
 	                <div class="carousel-caption lottemartdream normal w250">
-			            <h2 class="pull-right">안정된 분위기를 가진 열람실을 이용해보세요.</h2>
+			            <h2 class="pull-right">편안한 분위기의 열람실을 이용해보세요.</h2>
 			        </div>      
 			      </div>
 			      
@@ -68,7 +68,7 @@
 		<div class="body center_align">
 			<div class="row">
 				<section class="col-xs-12 col-sm-6 home_cell">
-					<div id="myCarousel" class="carousel slide" data-ride="carousel">
+					<div id="myCarousel" class="carousel slide boxshadow" data-ride="carousel">
 						<div class="carousel-inner" role="listbox">
 						     <div class="item active">
 						        <a href="${pageContext.request.contextPath}/roomList/1">
@@ -101,7 +101,7 @@
 					</div>
 				</section>
 				<div class="col-xs-12 col-sm-6 home_cell">
-					<div class="tabbable-panel cell_high">
+					<div class="tabbable-panel cell_high boxshadow">
 						<div class="tabbable-line">
 							<ul class="nav nav-tabs lottemartdream">
 								<li class="active">

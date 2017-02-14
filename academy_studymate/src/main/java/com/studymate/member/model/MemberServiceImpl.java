@@ -14,7 +14,7 @@ import org.springframework.ui.Model;
 
 import com.studymate.common.CommonServiceUtil;
 import com.studymate.common.Dto;
-import com.studymate.find.model.FindDao;
+import com.studymate.find.model.FindStudyDao;
 import com.studymate.qna.model.QnaDao;
 import com.studymate.reserve.model.ReserveDao;
 import com.studymate.reserve.model.ReserveDto;
@@ -29,7 +29,7 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 	@Autowired
 	QnaDao qnaDao;
 	@Autowired
-	FindDao findDao;
+	FindStudyDao findDao;
 	@Autowired
 	ReserveDao resDao;
 	
@@ -193,6 +193,7 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 		model.addAttribute("pageHtml", memResPaging.getPagingHtml().toString());
 		model.addAttribute("memberDto", memDao.read(memId));
 		model.addAttribute("resList", list);
+		model.addAttribute("totalCount", totalCount);
 		return model;
 	}
 	

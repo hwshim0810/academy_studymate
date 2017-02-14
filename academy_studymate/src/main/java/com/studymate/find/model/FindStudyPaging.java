@@ -1,6 +1,6 @@
 package com.studymate.find.model;
 
-public class FindPaging {
+public class FindStudyPaging {
 	private int currentPage; // 현재페이지
 	private int totalCount; // 전체 게시물 수
 	private int totalPage; // 전체 페이지 수
@@ -12,7 +12,7 @@ public class FindPaging {
 	private int endPage; // 마지막 페이지
 	private StringBuffer pagingHtml;
 
-	public FindPaging (int currentPage, int totalCount, int blockCount, int blockPage, String keyField, String keyWord) {
+	public FindStudyPaging (int currentPage, int totalCount, int blockCount, int blockPage, String keyField, String keyWord) {
 		this.blockCount = blockCount;
 		this.blockPage = blockPage;
 		this.currentPage = currentPage;

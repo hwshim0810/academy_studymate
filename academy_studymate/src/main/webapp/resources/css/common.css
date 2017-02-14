@@ -124,7 +124,11 @@ html,body { height: 100%; margin: 0; padding: 0; }
 }
 
 }
-
+#myNavbar {
+	 padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 50px;
+}
 .carousel-inner img {
       width: 100%; /* Set width to 100% */
       margin: auto;
@@ -189,6 +193,12 @@ li.dropdown {
 }
 .logonav {
 	height: 85px;
+}
+.loginnav {
+    position: absolute;
+    padding-bottom: 0px;
+    bottom: 0px;
+    right: 160px;
 }
 
 }
@@ -356,6 +366,9 @@ section.carousel .item img{
 }
 .acolor {
 	color : #fff;
+}
+.boxshadow {
+	box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
 }
 /* Footer CSS */
 .footer {
