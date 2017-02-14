@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import com.studymate.common.CommonServiceUtil;
 import com.studymate.common.Dto;
 import com.studymate.common.ServiceInterface;
+import com.studymate.member.model.MemberDao;
 import com.studymate.room.model.RoomDao;
 import com.studymate.room.model.RoomDto;
 
@@ -22,6 +23,8 @@ public class ReserveServiceImpl extends CommonServiceUtil implements ServiceInte
 	ReserveDao reserveDao;
 	@Autowired
 	RoomDao roomDao;
+	@Autowired
+	MemberDao memberDao;
 	
 	@Override
 	public Model list(HttpSession session, Model model, int currentPage, String keyField, String keyWord) {
@@ -87,7 +90,7 @@ public class ReserveServiceImpl extends CommonServiceUtil implements ServiceInte
 			return "redirect:/reserveList/1";
 		else {
 			model.addAttribute("resDto", resDto);
-			return "/reserve/reserveSuccess"; 
+			return "redirect:/memberMypage"; 
 		}
 	}
 

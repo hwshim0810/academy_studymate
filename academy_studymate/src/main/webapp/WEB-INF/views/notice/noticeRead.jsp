@@ -16,7 +16,7 @@
 				</c:otherwise>
 			</c:choose>
 			<%@include file="../common/Body_top.jsp"%>
-			<section class="body center_align">
+			<section class="body_high center_align">
 				<div class="boardtitle lottemartdream"></div>
 				<article id="contents">
 					<header id="con_header" class="col-xs-12">
@@ -30,6 +30,55 @@
 					</div>
 					<br><br>
 					<hr>
+					<!-- Next, Prev -->
+					<div class="row">
+						<div class="col-xs-3 lottemartdream">
+							 <label class="pull-left">다음글</label>
+						</div>
+						<div class="col-xs-9 lottemartdream">
+							<c:url value="/noticeRead/${currentPage}-${noticePrev.bonNum}" var="prevUrl">
+								<c:param name="update" value="n" />
+								<c:if test="${not empty keyField && not empty keyWord}">
+									<c:param name="keyField" value="${keyField}" />
+									<c:param name="keyWord" value="${keyWord}" />
+								</c:if>
+							</c:url>
+							<c:choose>
+								<c:when test="${not empty noticePrev}">
+									<a href="${prevUrl}">
+									${noticePrev.bonTitle}
+									</a>
+								</c:when>
+								<c:otherwise>
+								<span>다음글이 존재하지않습니다.</span>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-3 lottemartdream">
+							 <label class="pull-left">이전글</label>
+						</div>
+						<div class="col-xs-9 lottemartdream">
+							<c:url value="/noticeRead/${currentPage}-${noticeNext.bonNum}" var="nextUrl">
+								<c:param name="update" value="n" />
+								<c:if test="${not empty keyField && not empty keyWord}">
+									<c:param name="keyField" value="${keyField}" />
+									<c:param name="keyWord" value="${keyWord}" />
+								</c:if>
+							</c:url>
+							<c:choose>
+								<c:when test="${not empty noticeNext}">
+									<a href="${nextUrl}">
+									${noticeNext.bonTitle}
+									</a>
+								</c:when>
+								<c:otherwise>
+								<span>이전글이 존재하지않습니다.</span>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</div>
 					<!-- Button Area -->
 					<footer id="con_footer">
 						<div class="btndiv">

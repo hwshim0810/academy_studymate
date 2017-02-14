@@ -45,15 +45,18 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 		String id = memDto.getMemId();
 		String pass = memDto.getMemPass();
 		String siteOut = memDto.getMemSiteout();
+		String email = memDto.getMemEmail();
 		
 		if (id.equals("admin") && pass.equals(memPass)) {
 			session.setAttribute("memId", id);
 			session.setAttribute("memName", memDto.getMemName());
+			session.setAttribute("memEmail", email);
 			return (String) session.getAttribute("page");
 			
 		} else if (pass.equals(memPass) && siteOut.equals("가입")) {
 			session.setAttribute("memId", id);
-			session.setAttribute("memName", memDto.getMemName());			
+			session.setAttribute("memName", memDto.getMemName());	
+			session.setAttribute("memEmail", email);
 			return (String) session.getAttribute("page");
 			
 		} else if  (siteOut.equals("탈퇴")) {

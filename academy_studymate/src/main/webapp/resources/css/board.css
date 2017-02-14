@@ -3,9 +3,7 @@
 }
 .subnav {
 	text-align: center;
-	padding: 30px 15px;
-	margin-bottom: 50px;
-	bottom: 65px;
+	bottom: 28px;
 	background-color: rgba(218, 0, 0, 0.69);
     border-radius: 10em;
 }
@@ -43,6 +41,7 @@
 .htag {
 	padding: 10px 10px;
 	color: rgba(200, 11, 11, 0.67);
+	margin-top: 0px;
 }
 .infoP {
 	padding-left: 10px;

@@ -25,13 +25,13 @@
 							<div class="tabbable-line">
 								<ul class="nav nav-tabs ">
 									<li class="active">
+										<a href="#mem_reserve" data-toggle="tab">예약내역</a>
+									</li>
+									<li>
 										<a href="#mem_info" data-toggle="tab">회원정보</a>
 									</li>
 									<li>
 										<a href="#mem_update" data-toggle="tab">정보수정</a>
-									</li>
-									<li>
-										<a href="#mem_reserve" data-toggle="tab">예약내역</a>
 									</li>
 									<li>
 										<a href="#mem_siteout" data-toggle="tab">회원탈퇴</a>

@@ -128,7 +128,7 @@ html,body { height: 100%; margin: 0; padding: 0; }
 #myNavbar {
 	 padding-left: 30px;
     padding-right: 30px;
-    padding-top: 50px;
+    padding-top: 30px;
 }
 .carousel-inner img {
       width: 100%; /* Set width to 100% */
@@ -141,10 +141,13 @@ html,body { height: 100%; margin: 0; padding: 0; }
 }
 
 .logolink img {
-	height: 115px;
+	height: 90px;
 }
 
 @media screen and (min-width: 750px) {
+.header {
+    height: 99px;
+}
 .navbar-brand {
 	float:left;
 	padding: 15px;
@@ -198,7 +201,7 @@ li.dropdown {
 .loginnav {
     position: absolute;
     padding-bottom: 0px;
-    bottom: 0px;
+    bottom: 85px;
     right: 160px;
 }
 
@@ -304,7 +307,7 @@ body {
 .body_top {
     position: relative;
     width: 100%;
-    height: 250px;
+    height: 135px;
     -webkit-background-size: cover;
     background-size: cover;
     background-image: url(../img/body_top.jpg);

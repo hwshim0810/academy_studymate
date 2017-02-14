@@ -113,6 +113,55 @@
 					</article>
 					<br><br>
 					<hr>
+					<!-- Next, Prev -->
+					<div class="row">
+						<div class="col-xs-3 lottemartdream">
+							 <label class="pull-left">다음글</label>
+						</div>
+						<div class="col-xs-9 lottemartdream">
+							<c:url value="/reviewRead/${currentPage}-${reviewPrev.borvNum}" var="prevUrl">
+								<c:param name="update" value="n" />
+								<c:if test="${not empty keyField && not empty keyWord}">
+									<c:param name="keyField" value="${keyField}" />
+									<c:param name="keyWord" value="${keyWord}" />
+								</c:if>
+							</c:url>
+							<c:choose>
+								<c:when test="${not empty reviewPrev}">
+									<a href="${prevUrl}">
+									${noticePrev.borvTitle}
+									</a>
+								</c:when>
+								<c:otherwise>
+								<span>다음글이 존재하지않습니다.</span>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-3 lottemartdream">
+							 <label class="pull-left">이전글</label>
+						</div>
+						<div class="col-xs-9 lottemartdream">
+							<c:url value="/reviewRead/${currentPage}-${reviewNext.borvNum}" var="nextUrl">
+								<c:param name="update" value="n" />
+								<c:if test="${not empty keyField && not empty keyWord}">
+									<c:param name="keyField" value="${keyField}" />
+									<c:param name="keyWord" value="${keyWord}" />
+								</c:if>
+							</c:url>
+							<c:choose>
+								<c:when test="${not empty reviewNext}">
+									<a href="${nextUrl}">
+									${reviewNext.borvTitle}
+									</a>
+								</c:when>
+								<c:otherwise>
+								<span>이전글이 존재하지않습니다.</span>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</div>
 					<!-- Button Area -->
 					<footer id="con_footer">
 						<div class="btndiv">

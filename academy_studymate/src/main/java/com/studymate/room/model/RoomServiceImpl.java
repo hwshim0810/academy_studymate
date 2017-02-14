@@ -36,7 +36,7 @@ public class RoomServiceImpl extends CommonServiceUtil implements ServiceInterfa
 		map.put("keyWord", keyWord);
 		map.put("keyField", keyField);
 		
-		int blockCount = 6; 
+		int blockCount = 4; 
 		int blockPage = 10;
 		int totalCount = getTotalCount(roomDao, map);
 		

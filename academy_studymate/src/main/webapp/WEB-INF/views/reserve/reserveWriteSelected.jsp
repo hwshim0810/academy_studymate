@@ -54,7 +54,7 @@
 								<div class="form-group">
 									<label class="col-xs-4 control-label" for="memName">예약자명</label>  
 									<div class="col-xs-6">
-										<form:input path="memName" placeholder="예약자명" maxlength="10" cssClass="form-control" />
+										<form:input path="memName" placeholder="예약자명" readonly="true" maxlength="10" cssClass="form-control" value="${sessionScope.memName}"/>
 									</div>
 									<div class="col-xs-2">
 									</div>
@@ -66,7 +66,7 @@
 								<div class="form-group">
 									<label class="col-xs-4 control-label" for="memEmail">Email</label>  
 									<div class="col-xs-6">
-										<form:input path="memEmail" placeholder="예)exam@exam.com" cssClass="form-control" maxlength="20"/>
+										<form:input path="memEmail" placeholder="예)exam@exam.com" readonly="true" cssClass="form-control" maxlength="20" value="${sessionScope.memEmail }"/>
 									</div>
 									<div class="col-xs-2">
 									</div>

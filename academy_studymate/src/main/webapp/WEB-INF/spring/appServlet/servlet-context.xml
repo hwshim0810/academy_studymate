@@ -74,6 +74,11 @@
 		<beans:property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
 	</beans:bean>
 	
+	<beans:bean id="eventDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<beans:property name="mapperInterface" value="com.studymate.event.model.EventDao" />
+		<beans:property name="sqlSessionTemplate" ref="sqlSessionTemplate" />
+	</beans:bean>
+	
 	<!-- gmail -->
     <beans:bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" >
         <beans:property name="host" value="smtp.gmail.com" />
