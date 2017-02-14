@@ -6,9 +6,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <!-- BootStrap -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css?v=1'/>">
+<link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css?v=2'/>">
 <!-- CommonScript -->
 <script src="<c:url value='/resources/js/common.js?v=4'/>" charset="utf-8"></script> 
 <!-- CommonCss -->
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/common.css?v=1'/>" />
+<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/common.css?v=2'/>" />
 <title>Studymate</title>

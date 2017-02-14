@@ -18,8 +18,11 @@ import com.studymate.reserve.model.ReservePaging;
 import com.studymate.room.model.RoomDao;
 import com.studymate.room.model.RoomDto;
 
+@Service
 public class FindServiceImpl extends CommonServiceUtil implements ServiceInterface {
-	FindStudyDao reserveDao;
+	@Autowired
+	FindStudyDao findDao;
+	@Autowired
 	RoomDao roomDao;
 	
 	@Override
@@ -30,27 +33,27 @@ public class FindServiceImpl extends CommonServiceUtil implements ServiceInterfa
 		
 		int blockCount = 10; 
 		int blockPage = 10;
-		int totalCount = getTotalCount(reserveDao, map);
+		int totalCount = getTotalCount(findDao, map);
 		
-		ReservePaging noticePaging = new ReservePaging(currentPage, totalCount, blockCount, blockPage, keyField, keyWord);
+		FindStudyPaging findStudyPaging = new FindStudyPaging(currentPage, totalCount, blockCount, blockPage, keyField, keyWord);
 		
-		map.put("startRow", noticePaging.getStartCount());
-		map.put("endRow", noticePaging.getEndCount());
+		map.put("startRow", findStudyPaging.getStartCount());
+		map.put("endRow", findStudyPaging.getEndCount());
 		
-		List<Dto> list = getList(reserveDao, map); 
+		List<Dto> list = getList(findDao, map); 
 		
 		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("resList", list);
 		model.addAttribute("currentPage", currentPage);
-		model.addAttribute("pageHtml", noticePaging.getPagingHtml().toString());
+		model.addAttribute("pageHtml", findStudyPaging.getPagingHtml().toString());
 		model.addAttribute("keyField", keyField);
 		model.addAttribute("keyWord", keyWord);
 		
-		session.setAttribute("page", "redirect:reserveList/1");
+		session.setAttribute("page", "redirect:findList/1");
 		return model;
 	}
 	
-	@Override // 관리자 예약시
+	@Override 
 	public Model writeForm(Model model) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyWord", "");
@@ -73,12 +76,12 @@ public class FindServiceImpl extends CommonServiceUtil implements ServiceInterfa
 		String sessionId = (String) session.getAttribute("memId");
 		
 		if (mailCheck == null) { // 수신미동의시
-			reserveDao.write(resDto);
+			findDao.write(resDto);
 		} else {
 			HashMap<String, String> email = getReserveEmailContents(resDto);
 			sendEmailHelper(email.get("subject"), email.get("content"), email.get("receiver"));
 			
-			reserveDao.write(resDto);
+			findDao.write(resDto);
 		}
 		
 		// 예약의 주체에 따라 페이지 이동
@@ -92,7 +95,7 @@ public class FindServiceImpl extends CommonServiceUtil implements ServiceInterfa
 
 	@Override// 상세읽기 : 조회수는 update로 오지않았을경우만
 	public Model read(Model model, int resNum, int currentPage, String update, String keyField, String keyWord) {
-		model.addAttribute("resDto", reserveDao.read(resNum));
+		model.addAttribute("resDto", findDao.read(resNum));
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("keyField", keyField);
 		model.addAttribute("keyWord", keyWord);
@@ -112,7 +115,7 @@ public class FindServiceImpl extends CommonServiceUtil implements ServiceInterfa
 	}
 
 	public String updateRes(HttpSession session, Dto resDto, int currentPage, int resNum) {
-		reserveDao.update(resDto);
+		findDao.update(resDto);
 		
 		if (session.getAttribute("memId").equals("admin"))
 			return "redirect:/reserveRead/" + currentPage  + "-" + resNum;
@@ -122,7 +125,7 @@ public class FindServiceImpl extends CommonServiceUtil implements ServiceInterfa
 
 	@Override
 	public Model delete(Model model, Dto resDto) {
-		reserveDao.delete(((ReserveDto) resDto).getResNum());
+		findDao.delete(((ReserveDto) resDto).getResNum());
 		return model;
 	}
 	

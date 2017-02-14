@@ -75,9 +75,9 @@
 						        	<img class="mini_banner" src="${pageContext.request.contextPath}/resources/img/main.jpg" alt="지점소개배너">
 						        </a> 
 				                <div class="carousel-caption lottemartdream normal w250">
-				                	<a class="acolor" href="${pageContext.request.contextPath}/roomList/1">
-						            	<h3 class="pull-right">Studymate지점소개</h3>
-						            </a>
+						            	<h3 class="pull-right">
+						            		<a class="acolor" href="${pageContext.request.contextPath}/roomList/1">Studymate지점소개</a>
+						            	</h3>
 						        </div>      
 						      </div>
 					      
@@ -87,12 +87,12 @@
 									<img class="mini_banner" id="read_mainimg" alt="지점이미지" src="${pageContext.request.contextPath}/resources/roomImg/${roomDto.borMain}" style="height: 309px;">
 								</a>
 								 <div class="carousel-caption lottemartdream normal w250">
-						            	<a class="acolor" href="${pageContext.request.contextPath}/roomRead/1-${roomDto.borNum}">
-						            		<h3 class="pull-right">${roomDto.borName}</h3>
-						            	</a>
-						            	<a class="acolor" href="${pageContext.request.contextPath}/roomRead/1-${roomDto.borNum}">
-						            		<p class="pull-right">${roomDto.borIntro}</p>
-						            	</a>
+						            	<h3 class="pull-right">
+						            		<a class="acolor" href="${pageContext.request.contextPath}/roomRead/1-${roomDto.borNum}">${roomDto.borName}</a>
+						            	</h3>
+						            	<p class="pull-right">
+						            		<a class="acolor" href="${pageContext.request.contextPath}/roomRead/1-${roomDto.borNum}">${roomDto.borIntro}</a>
+						            	</p>
 						        </div>
 							 </div>
 							</c:forEach>

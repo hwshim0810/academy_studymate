@@ -25,6 +25,7 @@
 						<div>
 							등록일 <strong>${roomDto.borRegdate}</strong>
 						</div>
+						<hr>
 					</header>
 					<div class="main">
 						<div class="row read_row">

@@ -9,7 +9,9 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>                        
 				</button>
-				<a class="navbar-brand hidden-sm hidden-md hidden-lg" href="${pageContext.request.contextPath}">StudyMate</a>
+				<div class="hidden_brand">
+					<a class="navbar-brand hidden-sm hidden-md hidden-lg" href="${pageContext.request.contextPath}">StudyMate</a>
+				</div>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<div class="row">
