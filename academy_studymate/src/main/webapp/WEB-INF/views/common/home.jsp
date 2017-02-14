@@ -136,7 +136,9 @@
 													<c:param name="keyWord" value="${keyWord}" />
 												</c:if>
 											</c:url>
-											<div class="col-xs-12 lighter lottemartdream main_list"><a href="${readUrl}">${item.borvTitle}</a></div>
+											<div class="col-xs-12 lighter lottemartdream main_list">
+												<a href="${readUrl}">${item.borvTitle}</a>
+											</div>
 										</c:forEach>
 									</div>
 								</div>

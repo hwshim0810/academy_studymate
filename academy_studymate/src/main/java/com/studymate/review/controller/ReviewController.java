@@ -115,4 +115,10 @@ public class ReviewController {
 		
 		return reviewService.deleteReply(currentPage, borvNum, repNum);
 	}
+	
+	@RequestMapping(value = "updateLike", produces = "application/json")
+	@ResponseBody
+	public void updateLike(int borvNum) {
+		reviewService.updateLike(borvNum);
+	}
 }

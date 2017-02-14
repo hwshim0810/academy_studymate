@@ -15,4 +15,6 @@ public interface ReviewDao extends Dao{
 
 	public int replyTotalCount(Map<String, Object> map);
 
+	public void updateLike(int borvNum);
+
 }

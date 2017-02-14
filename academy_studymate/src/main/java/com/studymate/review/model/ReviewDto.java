@@ -16,8 +16,15 @@ public class ReviewDto extends Dto {
 	private String borvContent;
 	private int borvReplycount, borvReadcount;
 	private Date borvRegdate;
+	private int borvLike;
 	private String memName, memId;
 	
+	public int getBorvLike() {
+		return borvLike;
+	}
+	public void setBorvLike(int borvLike) {
+		this.borvLike = borvLike;
+	}
 	public int getBorvNum() {
 		return borvNum;
 	}

@@ -29,4 +29,9 @@ public class IndexController {
 	public String faq() {
 		return "etc/faq";
 	}
+	
+	@RequestMapping("needLogin")
+	public String confirmLoginForm() {
+		return "common/needLogin";
+	}
 }

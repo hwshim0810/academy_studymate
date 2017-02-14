@@ -40,7 +40,10 @@
 							</c:url>
 							<tr>
 								<td class="hidden-xs hidden-sm table_center">${item.borvNum}</td>
-								<td class="table_center"><a href="${readUrl}">${item.borvTitle}</a> <span class="badge">${item.borvReplycount}</span></td>
+								<td class="table_center">
+									<a href="${readUrl}">${item.borvTitle}</a> <span class="badge">${item.borvReplycount}</span>
+									<c:if test="${item.borvLike >= 10 }"><span class="glyphicon glyphicon-thumbs-up"></span></c:if>
+								</td>
 								<td class="table_center">${item.memName}</td>
 								<td class="table_center">${item.borvRegdate}</td>
 								<td class="hidden-xs hidden-sm table_center">${item.borvReadcount}</td>

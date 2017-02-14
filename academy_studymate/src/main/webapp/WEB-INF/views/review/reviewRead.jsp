@@ -29,6 +29,9 @@
 					<div class="main">
 						${reviewDto.borvContent}
 					</div>
+					<article class="col-xs-12 text-center">
+						<div><button type="button" id="like" class="btn btn-default btn-font"><span class="glyphicon glyphicon-thumbs-up"></span> 좋아요!</button></div>
+					</article>
 					<!-- ReplyList Area -->
 					<article class="replyread_div col-xs-12">
 						<div class="pull-left reply_list"><strong>댓글목록</strong></div>
@@ -134,6 +137,7 @@
 			<input type="hidden" id="boardinfo" value="${reviewDto.memName}님의 방문후기">
 			<%@include file="../common/Footer.jsp" %>
 			<%@include file="../common/Board.jsp" %>
+			<script type="text/javascript"src="<c:url value='/resources/js/plugin/jquery.cookie.js' />"></script>
 		</div>
 	</body>
 </html>

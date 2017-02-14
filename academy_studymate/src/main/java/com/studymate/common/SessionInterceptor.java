@@ -1,8 +1,11 @@
 package com.studymate.common;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -18,6 +21,8 @@ public class SessionInterceptor extends HandlerInterceptorAdapter{
 		// 요청하는 URL주소가 같은지 확인
 		// pass through when access login.do, join.do
 		String URI = request.getRequestURI();
+		Map<?, ?> pathVariables
+			= (Map<?, ?>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
 		
 		if (URI.equals("/studymate/loginForm") || URI.equals("/studymate/memberWrite")) {
 			if (memId != null) {//같은 로그인 정보로 다른 브라우져에서 다시 접속할때 작동
@@ -28,27 +33,54 @@ public class SessionInterceptor extends HandlerInterceptorAdapter{
 			}
 		}
 		// where other pages 입력값이 NULL이면 sendRedirect로 보냄	
-		switch (URI) {
-		case "/studymate/memberList":case "/studymate/reserveList":
-		case "/studymate/memberAdRead":case "/studymate/reserveWrite":
-		case "/studymate/memberMypage":case "/studymate/reserveSeleted":
-		case "/studymate/memberUpdateClient":case "/studymate/reserveUpdate":
-		case "/studymate/memberUpdate":case "/studymate/reserveRead":
-		case "/studymate/memberDelete":case "/studymate/reserveDelete":
-		case "/studymate/isAbleId":case "/studymate/reviewWrite":
-		case "/studymate/isRightPass":	case "/studymate/reviewRead":
-		case "/studymate/memResPaging":case "/studymate/reviewUpdate":
-		case "/studymate/memResDetail":case "/studymate/reviewDelete":
-		case "/studymate/memberRealDel":case "/studymate/revReplyList":
-		case "/studymate/noticeWrite":case "/studymate/revReplyWrite":
-		case "/studymate/noticeUpdate":case "/studymate/revReplyDelete":
-		case "/studymate/noticeDelete":case "/studymate/roomWrite":
-		case "/studymate/qnaWrite":case "/studymate/roomUpdate":
-		case "/studymate/qnaUpdate":case "/studymate/roomDelete":
-		case "/studymate/qnaDelete":case "/studymate/getLocation":
-		case "/studymate/qnaComment":
+		String currentPage = (String) pathVariables.get("currentPage");
+		String memKey = (String) pathVariables.get("memId");
+		String bonKey = (String) pathVariables.get("bonNum");
+		String boqKey = (String) pathVariables.get("boqNum");
+		String borKey = (String) pathVariables.get("borNum");
+		String resKey = (String) pathVariables.get("resNum");
+		String borvKey = (String) pathVariables.get("borvNum");
+		
+		if (URI.equals("/studymate/memberList/" + currentPage) || URI.equals("/studymate/memberAdRead/" + currentPage + "-" + memKey) 
+				|| URI.equals("/studymate/memberUpdate/" + currentPage + "-" + memKey) || URI.equals("/studymate/memberUpdate/" + currentPage) 
+				|| URI.equals("/studymate/memberRealDel/" + currentPage) || URI.equals("/studymate/noticeUpdate/" + currentPage + "-" + bonKey) 
+				|| URI.equals("/studymate/noticeUpdate/" + currentPage) || URI.equals("/studymate/noticeDelete/" + currentPage + "-" + bonKey) 
+				|| URI.equals("/studymate/qnaRead/" + currentPage + "-" + boqKey) || URI.equals("/studymate/qnaUpdate/" + currentPage + "-" + boqKey) 
+				|| URI.equals("/studymate/qnaUpdate/" + currentPage) || URI.equals("/studymate/qnaDelete/" + currentPage + "-" + boqKey) 
+				|| URI.equals("/studymate/qnaComment/" + currentPage + "-" + boqKey) || URI.equals("/studymate/qnaComment/" + currentPage) 
+				|| URI.equals("/studymate/reserveList/" + currentPage) || URI.equals("/studymate/reserveSeleted/" + borKey) 
+				|| URI.equals("/studymate/reserveRead/" + currentPage + "-" + resKey) || URI.equals("/studymate/reserveUpdate/" + currentPage + "-" + resKey) 
+				|| URI.equals("/studymate/reserveDelete/" + currentPage + "-" + resKey) || URI.equals("/studymate/reviewRead/" + currentPage + "-" + borvKey) 
+				|| URI.equals("/studymate/reviewUpdate/" + currentPage + "-" + borvKey) || URI.equals("/studymate/reviewDelete/" + currentPage + "-" + borvKey) 
+				|| URI.equals("/studymate/roomUpdate/" + currentPage + "-" + borKey) || URI.equals("/studymate/roomDelete/" + currentPage + "-" + borKey)) {
+		
 			if(memId == null) {
-				response.sendRedirect(request.getContextPath() + "/loginForm");
+				response.sendRedirect(request.getContextPath() + "/needLogin");
+				return false; // false를 리턴하면 Controller로 이동하지 않는다.
+			} else {
+				return true;	
+			}
+		}
+		
+		switch (URI) {
+		case "/studymate/reserveWrite":
+		case "/studymate/memberMypage":
+		case "/studymate/memberUpdateClient":
+		case "/studymate/isAbleId":
+		case "/studymate/reviewWrite":
+		case "/studymate/isRightPass":
+		case "/studymate/memResPaging":
+		case "/studymate/memResDetail":
+		case "/studymate/memberRealDel":
+		case "/studymate/revReplyList":
+		case "/studymate/noticeWrite":
+		case "/studymate/revReplyWrite":
+		case "/studymate/revReplyDelete":
+		case "/studymate/roomWrite":
+		case "/studymate/qnaWrite":
+		case "/studymate/getLocation":
+			if(memId == null) {
+				response.sendRedirect(request.getContextPath() + "/needLogin");
 				return false; // false를 리턴하면 Controller로 이동하지 않는다.
 			} else {
 				return true;	

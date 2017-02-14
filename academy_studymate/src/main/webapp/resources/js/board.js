@@ -248,6 +248,22 @@ $(function() {
     	var src = $(this).attr('src');
     	$("#read_mainimg").attr('src', src);
     });
+    
+    // 추천
+    $("#like").bind('click', function() {
+    	var studymateLike = $.cookie("studymateLike");
+    	var borvNum = $("#replyBorv").val();
+    	if (studymateLike == undefined || studymateLike != borvNum) {
+    		$.cookie('studymateLike', borvNum, { expires: 1});
+    		$.post('/studymate/updateLike', {borvNum : borvNum} , function() {
+    			alert('추천하였습니다!');
+    		});
+    		return false;
+    	} else {
+    		alert('이미 추천하셨습니다.');
+    		return false;
+    	}
+    });
 	
 });
 

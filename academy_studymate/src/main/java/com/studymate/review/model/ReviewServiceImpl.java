@@ -160,4 +160,8 @@ public class ReviewServiceImpl extends CommonServiceUtil implements ServiceInter
 		return model;
 	}
 
+	public void updateLike(int borvNum) {
+		reviewDao.updateLike(borvNum);
+	}
+
 }

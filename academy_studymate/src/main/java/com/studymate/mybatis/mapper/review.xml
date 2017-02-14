@@ -4,7 +4,7 @@
               
 <mapper namespace="com.studymate.review.model.ReviewDao">
 	
-	<sql id="columns"> borvNum, borvTitle, borvContent, borvReplycount, borvReadcount, borvRegdate, memName, memId </sql>
+	<sql id="columns"> borvNum, borvTitle, borvContent, borvReplycount, borvReadcount, borvRegdate, borvLike, memName, memId </sql>
 	<sql id="replyColumns"> repNum, repContent, borvNum, repRegdate, memName, memId </sql>
 	
 	<sql id="search">
@@ -60,9 +60,9 @@
 	
 	<select id="readPrev" resultType="ReviewDto"  parameterType="Integer">
 		<![CDATA[
-        SELECT borvNum, borvTitle, borvContent, borvReplycount, borvReadcount, borvRegdate, memName, memId 
+        SELECT borvNum, borvTitle, borvContent, borvReplycount, borvReadcount, borvRegdate, borvLike, memName, memId 
           FROM (
-	                SELECT borvNum, borvTitle, borvContent, borvReplycount, borvReadcount, borvRegdate, memName, memId FROM review 
+	                SELECT borvNum, borvTitle, borvContent, borvReplycount, borvReadcount, borvRegdate, borvLike, memName, memId FROM review 
 	                WHERE borvNum > #{borvNum}  
 	                ORDER BY borvNum ASC 
                ) WHERE ROWNUM = 1
@@ -71,9 +71,9 @@
 	
 	<select id="readNext" resultType="ReviewDto"  parameterType="Integer">
 		<![CDATA[
-        SELECT borvNum, borvTitle, borvContent, borvReplycount, borvReadcount, borvRegdate, memName, memId 
+        SELECT borvNum, borvTitle, borvContent, borvReplycount, borvReadcount, borvRegdate, borvLike, memName, memId 
           FROM (
-	                SELECT borvNum, borvTitle, borvContent, borvReplycount, borvReadcount, borvRegdate, memName, memId FROM review 
+	                SELECT borvNum, borvTitle, borvContent, borvReplycount, borvReadcount, borvRegdate, borvLike, memName, memId FROM review 
 	                WHERE borvNum < #{borvNum}  
 	                ORDER BY borvNum ASC 
                ) WHERE ROWNUM = 1
@@ -81,7 +81,7 @@
 	</select>
 	
 	<insert id="write"  parameterType="ReviewDto">
-		INSERT INTO review VALUES (	borvNum.nextval, #{borvTitle}, #{borvContent}, 0, 0, sysdate, #{memName}, #{memId} ) 
+		INSERT INTO review VALUES (	borvNum.nextval, #{borvTitle}, #{borvContent}, 0, 0, sysdate, 0, #{memName}, #{memId} ) 
  	</insert>
 	
 	<insert id="writeReply" parameterType="ReviewReplyDto">
@@ -102,6 +102,10 @@
 	
 	<update id="updateDownReplyCount" parameterType="Integer">
 		UPDATE review SET borvReplycount = borvReplycount-1 WHERE borvNum = #{borvNum} 
+	</update>
+	
+	<update id="updateLike" parameterType="Integer">
+		UPDATE review SET borvLike = borvLike+1 WHERE borvNum = #{borvNum} 
 	</update>
 	
 	<delete id="delete" parameterType="Integer">
