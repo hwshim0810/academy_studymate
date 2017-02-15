@@ -7,6 +7,6 @@
 .event.right {
     padding-bottom: 10px;
 }
-.event.right h3 {
+#eventTitle {
 	margin-top: 0px;
 }

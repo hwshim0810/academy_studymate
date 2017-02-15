@@ -42,7 +42,7 @@
 						        		</a>
 									</div>
 									<div class="col-xs-12 col-sm-9 event right lottemartdream">
-										<h3><a href="${readUrl}">${item.boeTitle}</a></h3>
+										<h3 id="eventTitle"><a href="${readUrl}">${item.boeTitle}</a></h3>
 										<p>기간 : ${item.boeDaterange}</p>
 										<p>남은인원 : ${item.boeAble}</p>
 										<span>조회수 : ${item.boeReadcount}</span>&nbsp;
