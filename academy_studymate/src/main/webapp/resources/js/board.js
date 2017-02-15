@@ -14,6 +14,7 @@ $(function() {
 		location.href = context + boardid + 'Write';
 	});
 	
+
 //	$(".btn-read").bind('click', function() {
 //		var action = this.prop("id");
 //		location.href = context + boardid + action + updateid;
@@ -41,11 +42,15 @@ $(function() {
 	$("#btnreply").bind('click', function() {
 		$("#replyform").submit();
 	});
-
-	$(".btnrepdel").bind('click', function() {
+	
+	$(document).on("click", ".btnrepdel",function(event) {
 		var currentPage = $("#currentPage").val();
 		var borvNum = $("input[name=borvNum]").val();
 		var repNum = $("#repNum").val();
+		var newRepnum = $("#newRepnum").val();
+		
+		if (repNum == undefined) 
+			repNum = newRepnum;
 		
 		$.post('/studymate/revReplyDelete', {currentPage : currentPage, borvNum : borvNum, repNum : repNum} , function(resultMap) {
 			location.href = resultMap.result;
@@ -279,10 +284,11 @@ function output(data) {
 			$("#rp" + count).append('<td>' + item.repContent);
 			$("#rp" + count).append('<td>' + item.repRegdate);
 			if (memId == 'admin' || item.memName == memName) {
-				$("#rp" + count).append('<td><button class="btn btn-danger btn-font pull-right btnrepdel">삭제</button>');
+				$("#rp" + count).append('<td id="btnrow"><button class="btn btn-danger btn-font pull-right btnrepdel">삭제</button>');
 			} else {
 				$("#rp" + count).append('<td>');
 			}
+			$("#btnrow").append('<input type="hidden" id="newRepnum" value="' + item.repNum + '" />');
 		});
 		$("#tfoot").html('');
 		$("#tfoot").append('<tr id="tfpaging">');
