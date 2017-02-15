@@ -1,7 +1,9 @@
 package com.studymate.event.model;
 
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -9,12 +11,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.studymate.common.CommonServiceUtil;
 import com.studymate.common.Dto;
 import com.studymate.common.ServiceInterface;
-import com.studymate.notice.model.NoticeDto;
-import com.studymate.notice.model.NoticePaging;
 
 @Service
 public class EventServiceImpl extends CommonServiceUtil implements ServiceInterface {
@@ -31,17 +33,36 @@ public class EventServiceImpl extends CommonServiceUtil implements ServiceInterf
 		int blockPage = 10;
 		int totalCount = getTotalCount(eventDao, map);
 		
-		NoticePaging noticePaging = new NoticePaging(currentPage, totalCount, blockCount, blockPage, keyField, keyWord);
+		EventPaging eventPaging = new EventPaging(currentPage, totalCount, blockCount, blockPage, keyField, keyWord);
 		
-		map.put("startRow", noticePaging.getStartCount());
-		map.put("endRow", noticePaging.getEndCount());
+		map.put("startRow", eventPaging.getStartCount());
+		map.put("endRow", eventPaging.getEndCount());
 		
-		List<Dto> list = getList(eventDao, map); 
+		ArrayList<Dto> list = (ArrayList<Dto>) getList(eventDao, map); 
+		
+		for (Dto eventDto : list) { // 마감여부파악
+			int boeAble = ((EventDto) eventDto).getBoeAble();
+			try {
+				if (((EventDto) eventDto).getBoeIsEnd().equals("Y")) continue;
+				
+				Date boeDate = FMT.parse(((EventDto) eventDto).getBoeDaterange().substring(13));
+				int result  = NOW.compareTo(boeDate);
+				
+				if (boeAble == 0 || result > 0) {
+					((EventDto) eventDto).setBoeIsEnd("Y");
+					eventDao.updateIsEnd(((EventDto) eventDto).getBoeNum());
+				}
+			} catch (ParseException e) {
+				System.err.println("Dateparse exception");
+				e.printStackTrace();
+			}
+			
+		}
 		
 		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("eventList", list);
 		model.addAttribute("currentPage", currentPage);
-		model.addAttribute("pageHtml", noticePaging.getPagingHtml().toString());
+		model.addAttribute("pageHtml", eventPaging.getPagingHtml().toString());
 		model.addAttribute("keyField", keyField);
 		model.addAttribute("keyWord", keyWord);
 		
@@ -49,7 +70,7 @@ public class EventServiceImpl extends CommonServiceUtil implements ServiceInterf
 		return model;
 	}
 
-	@Override
+	@Override // 파일로 인하여 사용하지않음
 	public void write(Dto eventDto) {
 		eventDao.write(eventDto);
 	}
@@ -80,7 +101,7 @@ public class EventServiceImpl extends CommonServiceUtil implements ServiceInterf
 
 	@Override
 	public Model delete(Model model, Dto eventDto) {
-		eventDao.delete(((NoticeDto) eventDto).getBonNum());
+		eventDao.delete(((EventDto) eventDto).getBoeNum());
 		return model;
 	}
 
@@ -95,5 +116,71 @@ public class EventServiceImpl extends CommonServiceUtil implements ServiceInterf
 	public Model writeForm(Model model) {
 		model.addAttribute("eventDto", new EventDto());
 		return model;
+	}
+
+	public String write(MultipartHttpServletRequest request, EventDto eventDto) {
+		MultipartFile file = request.getFile("main");
+	   
+		if (file == null) return "/room/noneFileError";
+		
+	    String uploadPath = request.getServletContext().getRealPath("resources/eventImg/");
+		String mainOriginName = file.getOriginalFilename();
+		String[] mainFileNames = {};
+	
+		mainFileNames = fileUpload(file, mainOriginName, uploadPath + "/");
+		
+		((EventDto) eventDto).setBoeMainpath(mainFileNames[0]);
+		((EventDto) eventDto).setBoeMain(mainFileNames[1]);
+		
+		eventDao.write(eventDto);
+		
+		return "redirect:/eventList/1";
+	}
+
+	public String updateRoom(MultipartHttpServletRequest request, EventDto eventDto) {
+		int boeNum = ((EventDto) eventDto).getBoeNum();
+		
+		MultipartFile file = request.getFile("main");
+		if (file == null || file.getOriginalFilename().equals("")) return "/room/noneFileError";
+		
+		// Oldfile Delete
+		EventDto oldDto = (EventDto) eventDao.read(boeNum);
+		String oldFilePath = oldDto.getBoeMainpath();
+		fileDelete(oldFilePath);
+		
+		// Newfile Write & Update
+	    String uploadPath = request.getServletContext().getRealPath("resources/eventImg/");
+		String mainOriginName = file.getOriginalFilename();
+		String[] mainFileNames = {};
+	
+		mainFileNames = fileUpload(file, mainOriginName, uploadPath + "/");
+		
+		((EventDto) eventDto).setBoeMainpath(mainFileNames[0]);
+		((EventDto) eventDto).setBoeMain(mainFileNames[1]);
+		eventDao.update(eventDto);
+		
+		// Maybe It can be Datainput after forward readPage..?
+		return "redirect:eventRead/" + request.getParameter("currentPage") + "-" + boeNum;
+	}
+
+	public HashMap<String, Object> joinEvent(String memId, int boeNum) {
+		HashMap<String, Object> resultMap = new HashMap<>();
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("memId", memId);
+		map.put("boeNum", boeNum);
+		
+		int result = eventDao.hasEvent(map);
+		EventDto eventDto = (EventDto) eventDao.read(boeNum);
+		
+		if (result > 0 || eventDto.getBoeIsEnd().equals("Y") || eventDto.getBoeAble() == 0) {
+			resultMap.put("eventResult", "NO");
+			return resultMap;
+		} else {
+			eventDao.writeEventsub(map);
+			eventDao.updateAble(boeNum);
+			resultMap.put("eventResult", "OK");
+			return resultMap;
+		}
 	}
 }

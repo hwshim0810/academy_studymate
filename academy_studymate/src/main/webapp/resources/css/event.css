@@ -1,0 +1,9 @@
+.event.left a img {
+    width: 200px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    border-radius: 2.5em;
+}
+.event.right {
+    padding-bottom: 10px;
+}

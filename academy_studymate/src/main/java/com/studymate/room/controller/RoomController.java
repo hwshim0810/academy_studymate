@@ -73,7 +73,7 @@ public class RoomController {
 	
 	@RequestMapping(value = "roomUpdate", method = RequestMethod.POST)
 	public String update(Model model , MultipartHttpServletRequest request,
-			@Valid RoomDto roomDto, int currentPage, BindingResult result) {
+			@Valid RoomDto roomDto, BindingResult result, int currentPage) {
 		if (result.hasErrors())
 			return "/room/roomUpdateForm";
 		

@@ -135,10 +135,17 @@ textarea {
 }
 
 /* Room read Css */
+.read_img {
+	padding: 0px;
+}
 .read_img img {
 	max-width:100%;
 	width:98px;
 	height:60px;
+}
+.read_mainimg {
+	padding-left: 0px;
+	padding-right: 15px;
 }
 .read_mainimg img {
 	max-width:100%;
@@ -154,10 +161,14 @@ textarea {
 	padding-top:50px;
 	padding-bottom: 15px;
 }
+.read_rowdiv{
+	padding-left: 10px;
+}
 
 #map {
 	width: 384px;
 	height: 300px;
+	border: 1px solid;
 }
 
 /* Mypage Css */

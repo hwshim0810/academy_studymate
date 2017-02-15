@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+              "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+              
+<mapper namespace="com.studymate.event.model.EventDao">
+	<sql id="columns"> boeNum , boeTitle , boeContent, boeReadcount, boeAble, boeDaterange, boeIsEnd, boeMain, boeMainpath, boeRegdate </sql>
+	
+	<sql id="search">
+		<where>
+			<if test="keyWord!=null and keyWord!=''">
+				<if test="keyField=='boeTitleNcontent'">
+					boeTitle LIKE '%'||#{keyWord}||'%' or boeContent LIKE '%'||#{keyWord}||'%'  
+				</if>
+				<if test="keyField=='boeTitle'">
+					boeTitle LIKE '%'||#{keyWord}||'%' 
+				</if>
+				<if test="keyField=='boeContent'">
+					boeContent LIKE '%'||#{keyWord}||'%' 
+				</if>
+			</if>
+		</where>
+	</sql>
+
+	<select id="totalcount" resultType="Integer" >
+		SELECT count(*) FROM event <include refid="search" />
+	</select>
+	
+	<select id="list" resultType="EventDto" parameterType="java.util.HashMap">
+		SELECT <include refid="columns" />   
+		FROM( SELECT ROWNUM num, <include refid="columns" />  
+			FROM ( SELECT <include refid="columns" /> FROM event 
+			<include refid="search" /> 
+				ORDER BY boeRegdate DESC ) ) WHERE num between #{startRow} and #{endRow}
+	</select>
+	
+	<select id="getBoeNum" resultType="Integer">
+		SELECT max(boeNum) FROM event  
+	</select>
+	
+	<select id="read" resultType="EventDto"  parameterType="Integer">
+		SELECT <include refid="columns" /> FROM event WHERE boeNum = #{boeNum}
+	</select>
+	
+	<select id="readPrev" resultType="EventDto"  parameterType="Integer">
+		<![CDATA[
+        SELECT boeNum , boeTitle , boeContent, boeReadcount, boeAble, boeDaterange, boeIsEnd, boeMain, boeMainpath, boeRegdate  
+          FROM (
+	                SELECT boeNum , boeTitle , boeContent, boeReadcount, boeAble, boeDaterange, boeIsEnd, boeMain, boeMainpath, boeRegdate   FROM event 
+	                WHERE boeNum > #{boeNum}  
+	                ORDER BY boeNum ASC 
+               ) WHERE ROWNUM = 1
+         ]]>
+	</select>
+	
+	<select id="readNext" resultType="EventDto"  parameterType="Integer">
+		<![CDATA[
+        SELECT boeNum , boeTitle , boeContent, boeReadcount, boeAble, boeDaterange, boeIsEnd, boeMain, boeMainpath, boeRegdate  
+          FROM (
+	                SELECT boeNum , boeTitle , boeContent, boeReadcount, boeAble, boeDaterange, boeIsEnd, boeMain, boeMainpath, boeRegdate   FROM event 
+	                WHERE boeNum < #{boeNum}  
+	                ORDER BY boeNum ASC 
+               ) WHERE ROWNUM = 1
+         ]]>
+	</select>
+	
+	<select id="hasEvent" parameterType="java.util.HashMap" resultType="Integer">
+		SELECT count(*) FROM eventsub WHERE memId = #{memId} and boeNum = #{boeNum} 
+	</select>
+	
+	<insert id="write"  parameterType="EventDto">
+		INSERT INTO event VALUES ( boeNum.nextval, #{boeTitle}, #{boeContent}, 0, #{boeAble}, #{boeDaterange}, 'N', #{boeMain}, #{boeMainpath}, sysdate) 
+	</insert>
+	
+	<insert id="writeEventsub" parameterType="java.util.HashMap">
+		INSERT INTO eventsub VALUES ( boeSubnum.nextval, #{memId}, #{boeNum} ) 
+	</insert>
+	
+	<update id="update" parameterType="EventDto">
+		UPDATE event SET boeTitle = #{boeTitle}, boeContent = #{boeContent}, boeAble = #{boeAble}, boeDaterange = #{boeDaterange}, boeMain = #{boeMain}, boeMainpath = #{boeMainpath}   
+		WHERE boeNum = #{boeNum}  
+	</update>
+	
+	<update id="updateReadCount" parameterType="Integer">
+		UPDATE event SET boeReadcount = boeReadcount+1 WHERE boeNum = #{boeNum} 
+	</update>
+	
+	<update id="updateIsEnd" parameterType="Integer">
+		UPDATE event SET boeIsEnd = 'Y' WHERE boeNum = #{boeNum} 
+	</update>
+	
+	<update id="updateAble" parameterType="Integer">
+		UPDATE event SET boeAble = boeAble-1 WHERE boeNum = #{boeNum} 
+	</update>
+	
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM event WHERE boeNum = #{boeNum} 
+	</delete>
+	
+</mapper>

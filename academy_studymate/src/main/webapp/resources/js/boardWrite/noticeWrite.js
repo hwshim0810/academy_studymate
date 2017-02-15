@@ -1,3 +1,12 @@
+$(function() {
+	$("#btnreg").bind('click', function() {
+		submitContents();
+	});
+	$("#btnup").bind('click', function() {
+		submitContents();
+	});
+});
+
 var oEditors = [];
 		
 		nhn.husky.EZCreator.createInIFrame({

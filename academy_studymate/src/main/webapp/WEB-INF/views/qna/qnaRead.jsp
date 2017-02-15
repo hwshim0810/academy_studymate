@@ -100,7 +100,7 @@
 			<!-- Hidden parameter -->
 			<input type="hidden" id="boardid" value="qna">
 			<input type="hidden" id="boardtitle" value="QnA">
-			<input type="hidden" id="boardsubtitle" value="${qnaDto.boqNum}번 글">
+			<input type="hidden" id="boardsubtitle" value="# ${qnaDto.boqNum}">
 			<input type="hidden" id="boardupdate" value="${updateUrl}">
 			<input type="hidden" id="boarddelete" value="${deleteUrl}">
 			<input type="hidden" id="boardcomment" value="${commentUrl}">

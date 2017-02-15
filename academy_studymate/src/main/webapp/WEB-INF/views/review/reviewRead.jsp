@@ -179,7 +179,7 @@
 			<!-- Hidden parameter -->
 			<input type="hidden" id="boardid" value="review">
 			<input type="hidden" id="boardtitle" value="방문후기">
-			<input type="hidden" id="boardsubtitle" value="${reviewDto.borvNum}번 글">
+			<input type="hidden" id="boardsubtitle" value="# ${reviewDto.borvNum}">
 			<input type="hidden" id="boardupdate" value="${updateUrl}">
 			<input type="hidden" id="boarddelete" value="${deleteUrl}">
 			<input type="hidden" id="currentPage" value="${currentPage}">

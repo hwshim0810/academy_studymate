@@ -51,13 +51,16 @@ public class SessionInterceptor extends HandlerInterceptorAdapter{
 			case "getBorName":
 			case "reviewList":
 			case "roomList":
+			case "roomRead":
+			case "eventList":
+			case "eventRead":
 			case "getLocation":
 			case "siteInfo":
 			case "faq":
 				return true;
 			default:
 				if (memId != null) {
-					if (memId.equals("admin")) { // 관리자권한확인
+					if (!memId.equals("admin")) { // 관리자권한확인
 						switch (paths[2]) {
 						case "memberList":
 						case "memberAdRead":
@@ -69,7 +72,10 @@ public class SessionInterceptor extends HandlerInterceptorAdapter{
 						case "roomWrite":
 						case "roomUpdate":
 						case "roomDelete":
-							response.sendRedirect(request.getContextPath() + "/needLogin");
+						case "eventWrite":
+						case "eventUpdate":
+						case "eventDelete":
+							response.sendRedirect(request.getContextPath() + "/main");
 							return false;
 						}
 					}

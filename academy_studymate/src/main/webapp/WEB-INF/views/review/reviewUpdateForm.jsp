@@ -58,7 +58,7 @@
 			<input type="hidden" id="boardinfo" value="후기를 수정합니다">
 			<%@include file="../common/Footer.jsp" %>
 			<%@include file="../common/Board.jsp" %>
-			<script src="<c:url value='/resources/js/boardWrite/reviewWrite.js'/>" charset="utf-8"></script>
+			<script src="<c:url value='/resources/js/boardWrite/reviewWrite.js?v=2'/>" charset="utf-8"></script>
 		</div>
 	</body>
 </html>

@@ -30,6 +30,7 @@
 		<typeAlias type="com.studymate.review.model.ReviewReplyDto" alias="ReviewReplyDto" />
 		<typeAlias type="com.studymate.reserve.model.ReserveDto" alias="ReserveDto" />
 		<typeAlias type="com.studymate.room.model.RoomSubDto" alias="RoomSubDto" />
+		<typeAlias type="com.studymate.event.model.EventDto" alias="EventDto" />
 	</typeAliases>
 
 </configuration>

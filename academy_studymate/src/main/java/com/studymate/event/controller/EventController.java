@@ -1,5 +1,7 @@
 package com.studymate.event.controller;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.studymate.event.model.EventDto;
 import com.studymate.event.model.EventServiceImpl;
@@ -26,28 +30,30 @@ public class EventController {
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
 		eventService.list(session, model, currentPage, keyField, keyWord);
-		return "/notice/noticeMain";
+		return "/event/eventMain";
 	}
 	
 	@RequestMapping(value = "eventWrite", method = RequestMethod.GET)
 	public String write(Model model) {
 		eventService.writeForm(model);
-		return "/notice/noticeWriteForm";
+		return "/event/eventWriteForm";
 	}
 	
 	@RequestMapping(value = "eventWrite", method = RequestMethod.POST)
-	public String write(@Valid EventDto eventDto, BindingResult result) {
+	public String write(MultipartHttpServletRequest request, @Valid EventDto eventDto,
+			BindingResult result) throws Exception {
 		if (result.hasErrors())
 			return "/event/eventWriteForm";
-
-		eventService.write(eventDto);
-		return "redirect:/eventList/1";
+		
+		String page = eventService.write(request, eventDto);
+		return page;
 	}
 	
 	@RequestMapping("eventRead/{currentPage}-{boeNum}")
 	public String read(Model model, 
 			@PathVariable("boeNum") int boeNum, 
-			@PathVariable("currentPage") int currentPage, String update,
+			@PathVariable("currentPage") int currentPage, 
+			@RequestParam(required = false) String update,
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
 		eventService.read(model, boeNum, currentPage, update, keyField, keyWord);
@@ -56,22 +62,23 @@ public class EventController {
 	
 	@RequestMapping(value = "eventUpdate/{currentPage}-{boeNum}", method = RequestMethod.GET)
 	public String update(Model model, 
-			@PathVariable("boeNum") int boeNum, 
-			@PathVariable("currentPage") int currentPage, String update,
+			@PathVariable("boeNum") int boreum, 
+			@PathVariable("currentPage") int currentPage, 
+			@RequestParam(required = false) String update,
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
-		eventService.read(model, boeNum, currentPage, update, keyField, keyWord);
-		return "/notice/noticeUpdateForm";
+		eventService.read(model, boreum, currentPage, update, keyField, keyWord);
+		return "/event/eventUpdateForm";
 	}
 	
-	@RequestMapping(value = "eventUpdate/{currentPage}", method = RequestMethod.POST)
-	public String update(Model model ,@Valid EventDto eventDto, BindingResult result, int boeNum, 
-			@PathVariable("currentPage") int currentPage) {
+	@RequestMapping(value = "eventUpdate", method = RequestMethod.POST)
+	public String update(Model model , MultipartHttpServletRequest request,
+			@Valid EventDto eventDto,BindingResult result, int currentPage ) {
 		if (result.hasErrors())
-			return "/event/eventUpdateForm";
+			return "/room/roomUpdateForm";
 		
-		eventService.update(model, eventDto);
-		return "redirect:/eventRead/" + currentPage + "-" + boeNum + "?update=y";
+		String page = eventService.updateRoom(request, eventDto);
+		return page;
 	}
 	
 	@RequestMapping(value = "eventDelete/{currentPage}-{boeNum}", method = RequestMethod.GET)
@@ -83,9 +90,15 @@ public class EventController {
 	}
 	
 	@RequestMapping(value = "eventDelete", method = RequestMethod.POST)
-	public String delete(Model model,  EventDto eventDto, int currentPage) {
+	public String delete(Model model, EventDto eventDto, int currentPage) {
 		eventService.delete(model, eventDto);
-		return "redirect:/noticeList/" + currentPage;
+		return "redirect:/eventList/" + currentPage;
+	}
+	
+	@RequestMapping(value= "joinEvent", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public HashMap<String, Object> joinEvent(String memId, int boeNum) {
+		return eventService.joinEvent(memId, boeNum);
 	}
 	
 }

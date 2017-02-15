@@ -30,7 +30,7 @@
 	</select>
 	
 	<select id="maxSequence" resultType="Integer">
-		SELECT nvl(max(boqNum),1) FROM qna 
+		SELECT nvl(max(boqNum),2) FROM qna 
 	</select>
 	
 	<select id="getCommentCount" resultType="Integer">
@@ -72,7 +72,7 @@
 	</select>
 	
 	<select id="isComment" resultType="QnaDto"  parameterType="Integer">
-		SELECT <include refid="columns" />  FROM qna WHERE boqNum = #{bonNum} 
+		SELECT <include refid="columns" />  FROM qna WHERE boqNum = #{boqNum} 
 	</select>
 	
 	<select id="hasComment" resultType="Integer">

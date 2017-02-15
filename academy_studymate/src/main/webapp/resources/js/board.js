@@ -14,10 +14,6 @@ $(function() {
 		location.href = context + boardid + 'Write';
 	});
 	
-	$("#btnreg").bind('click', function() {
-		submitContents();
-	});
-
 //	$(".btn-read").bind('click', function() {
 //		var action = this.prop("id");
 //		location.href = context + boardid + action + updateid;

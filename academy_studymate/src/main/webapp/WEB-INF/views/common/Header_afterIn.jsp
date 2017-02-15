@@ -53,7 +53,7 @@
 							<ul class="nonestyle" >
 								<li><a href="${pageContext.request.contextPath}/qnaList/1">QnA</a></li>
 								<li><a href="${pageContext.request.contextPath}/reviewList/1">방문후기</a></li>
-								<li><a href="${pageContext.request.contextPath}/faq">이벤트</a></li>
+								<li><a href="${pageContext.request.contextPath}/eventList/1">이벤트</a></li>
 							</ul>
 						</div>
 					</li>

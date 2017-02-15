@@ -76,7 +76,7 @@ public class QnaServiceImpl extends CommonServiceUtil implements ServiceInterfac
 	@Override
 	public void write(Dto qnaDto) {
 		int boqGroupnum = qnaDao.maxSequence();
-		if (boqGroupnum != 1) boqGroupnum++;
+		if (boqGroupnum != 2) boqGroupnum++;
 		
 		((QnaDto) qnaDto).setBoqGroupnum(boqGroupnum);
 		

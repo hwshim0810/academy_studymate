@@ -30,7 +30,7 @@
 					<div class="main">
 						<div class="row read_row">
 							<div class="col-xs-12 col-sm-5 read_mainimg text-center">
-								<img id="read_mainimg" alt="지점이미지" src="${pageContext.request.contextPath}/resources/roomImg/${roomDto.borMain}">
+								<img class="img-thumbnail" id="read_mainimg" alt="지점이미지" src="${pageContext.request.contextPath}/resources/roomImg/${roomDto.borMain}">
 							</div>
 							<div class="col-xs-12 col-sm-7 read_info lottemartdream">
 								<h2>${roomDto.borName}</h2>
@@ -41,14 +41,14 @@
 									<p>${roomDto.borIntro}</p>
 							</div>
 						</div>
-						<div class="row hidden-xs">
+						<div class="row hidden-xs read_rowdiv">
 							<div class="col-xs-5">
 								<div class="col-xs-4 read_img">
-									<img id="main_thumb" class="room_thumb" alt="지점이미지" src="${pageContext.request.contextPath}/resources/roomImg/${roomDto.borMain}">
+									<img id="main_thumb" class="room_thumb img-thumbnail" alt="지점이미지" src="${pageContext.request.contextPath}/resources/roomImg/${roomDto.borMain}">
 								</div>
 								<c:forEach var="item" items="${subFileList}">
 									<div class="col-xs-4 read_img">
-										<img class="room_thumb" alt="지점이미지" src="${pageContext.request.contextPath}/resources/roomImg/${item.borSub}">
+										<img class="room_thumb img-thumbnail" alt="지점이미지" src="${pageContext.request.contextPath}/resources/roomImg/${item.borSub}">
 									</div>
 								</c:forEach>
 							</div>

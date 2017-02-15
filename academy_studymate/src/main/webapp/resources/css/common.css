@@ -379,6 +379,9 @@ section.carousel .item img{
 .boxshadow {
 	box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
 }
+.carousel-caption h2 {
+	cursor: default;
+}
 /* Footer CSS */
 .footer {
 	position: absolute;

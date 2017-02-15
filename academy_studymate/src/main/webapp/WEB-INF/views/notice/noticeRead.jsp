@@ -96,7 +96,7 @@
 			<!-- Hidden parameter -->
 			<input type="hidden" id="boardid" value="notice">
 			<input type="hidden" id="boardtitle" value="공지사항">
-			<input type="hidden" id="boardsubtitle" value="${noticeDto.bonNum}번글">
+			<input type="hidden" id="boardsubtitle" value="# ${noticeDto.bonNum}">
 			<input type="hidden" id="boardupdate" value="${updateUrl}">
 			<input type="hidden" id="boarddelete" value="${deleteUrl}">
 			<input type="hidden" id="boardinfo" value="Studymate에서 보내드리는 소식">

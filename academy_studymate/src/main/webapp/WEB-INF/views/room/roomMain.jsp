@@ -22,12 +22,11 @@
 				</c:if>
 				<div class="boardmaintitle lottemartdream"></div>
 				<div class="row text-center">
-					<div class="col-xs-3"><strong>지역별보기</strong></div>
+					<div class="col-xs-3">
+						<a href="${pageContext.request.contextPath}/roomList/1"><strong>모든지점</strong></a>
+					</div>
 					<div class="col-xs-9">
-						<ul class="list-inline">	
-							<li> | </li>
-							<li><a href="${pageContext.request.contextPath}/roomList/1">전체보기</a></li>
-							<li> | </li>
+						<ul class="list-inline lottemartdream">	
 							<li><a href="${pageContext.request.contextPath}/roomList/1?keyField=borAddr&keyWord=강남구">강남구</a></li>
 							<li><a href="${pageContext.request.contextPath}/roomList/1?keyField=borAddr&keyWord=강북구">강북구</a></li>
 							<li><a href="${pageContext.request.contextPath}/roomList/1?keyField=borAddr&keyWord=서초구">서초구</a></li>
@@ -53,7 +52,7 @@
 						        		<img alt="지점썸네일" src="${pageContext.request.contextPath}/resources/roomImg/${item.borMain}">
 						        	</a>
 							        <figcaption>
-							        	<ul class="ul_padding list-unstyled">
+							        	<ul class="ul_padding list-unstyled lottemartdream">
 							        		<li><h3>${item.borName}</h3></li>
 							        		<li>${item.borAddr}&nbsp;${item.borArea}</li>
 							        	</ul>

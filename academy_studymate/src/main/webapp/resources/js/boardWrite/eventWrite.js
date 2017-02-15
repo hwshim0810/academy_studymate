@@ -2,7 +2,6 @@ $(function() {
 	$("#btnreg").bind('click', function() {
 		submitContents();
 	});
-	
 	$("#btnup").bind('click', function() {
 		submitContents();
 	});
@@ -12,7 +11,7 @@ var oEditors = [];
 		
 		nhn.husky.EZCreator.createInIFrame({
 		    oAppRef: oEditors,
-		    elPlaceHolder: "borvContent",
+		    elPlaceHolder: "boeContent",
 		    sSkinURI: "/studymate/resources/smartEdit/SmartEditor2Skin.html",
 		    fCreator: "createSEditor2",
 		    htParams: {
@@ -24,17 +23,17 @@ var oEditors = [];
 		
 function submitContents(elClickedObj) {
     // 에디터의 내용이 textarea에 적용된다.
-    oEditors.getById["borvContent"].exec("UPDATE_CONTENTS_FIELD", []);
+    oEditors.getById["boeContent"].exec("UPDATE_CONTENTS_FIELD", []);
  
     // 에디터의 내용에 대한 값 검증은 이곳에서
     // document.getElementById("ir1").value를 이용해서 처리한다.
  
-	var comments = $('#borvContent').val();
+	var comments = $('#boeContent').val();
 	var objReplace = new RegExp(); 
 	objReplace = /[<][^>]*[>]|(&nbsp;*)|(\s*)|(\n*)/gi; 
 	comments = comments.replace(objReplace, "");
 
-	$('#borvContent').val($("#borvContent").val().replace(unescape("%uFEFF"), ""));
+	$('#boeContent').val($("#boeContent").val().replace(unescape("%uFEFF"), ""));
     try {
         elClickedObj.form.submit();
     } catch(e) {} }

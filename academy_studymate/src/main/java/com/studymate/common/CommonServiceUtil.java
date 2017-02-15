@@ -23,7 +23,10 @@ public class CommonServiceUtil {
     EmailSender emailSender;
 	@Autowired
 	EmailDto email;
-
+	
+	protected static final SimpleDateFormat FMT = new SimpleDateFormat("yyyy/MM/dd");
+	protected static final Date NOW = new Date();
+	
 	protected int getTotalCount(Dao dao, Map<String, Object> map) {
 		return dao.totalcount(map);
 	}

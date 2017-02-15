@@ -59,7 +59,7 @@
 			<input type="hidden" id="boardinfo" value="Qna게시글을 수정합니다">
 			<%@include file="../common/Footer.jsp" %>
 			<%@include file="../common/Board.jsp" %>
-			<script src="<c:url value='/resources/js/boardWrite/qnaWrite.js'/>" charset="utf-8"></script>
+			<script src="<c:url value='/resources/js/boardWrite/qnaWrite.js?v=1'/>" charset="utf-8"></script>
 		</div>
 	</body>
 </html>
