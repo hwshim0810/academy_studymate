@@ -2,10 +2,15 @@ package com.studymate.event.model;
 
 import java.sql.Date;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.studymate.common.Dto;
 
 public class EventDto extends Dto {
 	private int boeNum;
+	@NotEmpty(message="제목필수입력") @Size(min=5,message="제목최소 5자이상")
 	private String boeTitle;
 	private String boeContent;
 	private int boeReadcount;

@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 
 import com.studymate.common.CommonServiceUtil;
 import com.studymate.common.Dto;
+import com.studymate.event.model.EventDao;
+import com.studymate.event.model.EventDto;
 import com.studymate.notice.model.NoticeDao;
 import com.studymate.review.model.ReviewDao;
 import com.studymate.room.model.RoomDao;
@@ -23,6 +25,8 @@ public class IndexServiceImpl extends CommonServiceUtil implements IndexService 
 	NoticeDao noticeDao;
 	@Autowired
 	RoomDao roomDao;
+	@Autowired
+	EventDao eventDao;
 	
 	@Override
 	public Model getIndexInfo(HttpSession session, Model model) {
@@ -35,7 +39,9 @@ public class IndexServiceImpl extends CommonServiceUtil implements IndexService 
 		List<Dto> noticeList = getList(noticeDao, map);
 		List<Dto> reviewList = getList(reviewDao, map);
 		List<Dto> roomList = getList(roomDao, map);
+		EventDto eventDto = eventDao.readLatestOne();
 		
+		model.addAttribute("eventDto", eventDto);
 		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("reviewList", reviewList);
 		model.addAttribute("roomList", roomList);

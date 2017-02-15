@@ -67,6 +67,10 @@
 		SELECT count(*) FROM eventsub WHERE memId = #{memId} and boeNum = #{boeNum} 
 	</select>
 	
+	<select id="readLatestOne" resultType="EventDto">
+		SELECT rownum, <include refid="columns" /> FROM event WHERE rownum = 1 ORDER BY boeRegdate 	
+	</select>
+	
 	<insert id="write"  parameterType="EventDto">
 		INSERT INTO event VALUES ( boeNum.nextval, #{boeTitle}, #{boeContent}, 0, #{boeAble}, #{boeDaterange}, 'N', #{boeMain}, #{boeMainpath}, sysdate) 
 	</insert>

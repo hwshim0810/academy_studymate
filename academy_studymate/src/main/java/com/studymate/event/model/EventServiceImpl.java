@@ -137,7 +137,7 @@ public class EventServiceImpl extends CommonServiceUtil implements ServiceInterf
 		return "redirect:/eventList/1";
 	}
 
-	public String updateRoom(MultipartHttpServletRequest request, EventDto eventDto) {
+	public String updateEvent(MultipartHttpServletRequest request, EventDto eventDto) {
 		int boeNum = ((EventDto) eventDto).getBoeNum();
 		
 		MultipartFile file = request.getFile("main");
@@ -160,7 +160,7 @@ public class EventServiceImpl extends CommonServiceUtil implements ServiceInterf
 		eventDao.update(eventDto);
 		
 		// Maybe It can be Datainput after forward readPage..?
-		return "redirect:eventRead/" + request.getParameter("currentPage") + "-" + boeNum;
+		return "redirect:eventRead/" + request.getParameter("currentPage") + "-" + boeNum + "/?update=y";
 	}
 
 	public HashMap<String, Object> joinEvent(String memId, int boeNum) {

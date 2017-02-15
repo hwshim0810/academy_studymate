@@ -20,7 +20,6 @@
 			<div class="body_high center_align">
 				<%@include file="../common/BoardSubnav.jsp" %>
 				<div class="boardtitle lottemartdream"></div>
-				<br><br><br>
 				<form:form id="multiform" method="POST" commandName="eventDto" enctype="multipart/form-data" action="${pageContext.request.contextPath}/eventUpdate">
 					<table class="table">
 						<tr>
@@ -38,6 +37,7 @@
 							<td class="errormsg" colspan="2">
 								<form:errors path="boeTitle" delimiter="/" cssClass="label label-danger"/>
 								<form:errors path="boeContent" delimiter="/" cssClass="label label-danger"/>
+								<form:errors path="boeDaterange" delimiter="/" cssClass="label label-danger"/>
 							</td>
 						</tr>
 						<tr>
@@ -59,10 +59,6 @@
 							<td>
 								<form:input path="boeDaterange" cssClass="form-control" value="${eventDto.boeDaterange}" placeholder="이벤트 기간" />
 							</td>
-						</tr>
-						<tr>
-							<td><form:errors path="boeDaterange" delimiter="/" cssClass="label label-danger"/></td>
-							<td></td>
 						</tr>
 						<tr>
 							<td>
@@ -88,6 +84,8 @@
 					<hr>
 					<!-- Button Area -->
 					<%@include file="../common/boardBtn/UpdatePageBtn.jsp" %>
+					<input type="hidden" name="currentPage" value="${currentPage}" />
+					<input type="hidden" name="boeNum"  value="${eventDto.boeNum}" />
 				</form:form>
 			</div>
 			<input type="hidden" id="boardid" value="event">

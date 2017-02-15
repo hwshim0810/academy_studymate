@@ -14,4 +14,6 @@ public interface EventDao extends Dao {
 
 	void updateAble(int boeNum);
 
+	EventDto readLatestOne();
+
 }

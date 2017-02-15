@@ -62,12 +62,12 @@ public class EventController {
 	
 	@RequestMapping(value = "eventUpdate/{currentPage}-{boeNum}", method = RequestMethod.GET)
 	public String update(Model model, 
-			@PathVariable("boeNum") int boreum, 
+			@PathVariable("boeNum") int boeNum, 
 			@PathVariable("currentPage") int currentPage, 
 			@RequestParam(required = false) String update,
 			@RequestParam(required = false) String keyField, 
 			@RequestParam(required = false) String keyWord) {
-		eventService.read(model, boreum, currentPage, update, keyField, keyWord);
+		eventService.read(model, boeNum, currentPage, update, keyField, keyWord);
 		return "/event/eventUpdateForm";
 	}
 	
@@ -75,9 +75,9 @@ public class EventController {
 	public String update(Model model , MultipartHttpServletRequest request,
 			@Valid EventDto eventDto,BindingResult result, int currentPage ) {
 		if (result.hasErrors())
-			return "/room/roomUpdateForm";
+			return "/event/eventUpdateForm/";
 		
-		String page = eventService.updateRoom(request, eventDto);
+		String page = eventService.updateEvent(request, eventDto);
 		return page;
 	}
 	

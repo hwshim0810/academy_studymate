@@ -35,7 +35,7 @@
 			     <div class="item banner1">
 			        <img src="${pageContext.request.contextPath}/resources/img/idx_main2.jpg" alt="메인배너"> 
 	                <div class="carousel-caption lottemartdream normal w250">
-			            <h2 class="pull-right">Studymate에서 일시적인 사무공간을 지원해드립니다!</h2>
+			            <h2 class="pull-right">Studymate에서 사무공간을 지원해드립니다!</h2>
 			        </div>      
 			      </div>
 			      
@@ -49,7 +49,7 @@
         		  <div class="item banner1">
 			        <img src="${pageContext.request.contextPath}/resources/img/idx_main4.jpg" alt="메인배너"> 
 	                <div class="carousel-caption lottemartdream normal w250">
-			            <h2 class="pull-right">오픈스터디룸에서 여러분의 작업에 자극을 받아보세요.</h2>
+			            <h2 class="pull-right">오픈스터디룸에서 지적자극을 받아보세요.</h2>
 			        </div>      
 			      </div>
 			      
@@ -65,7 +65,7 @@
 			      <span class="sr-only">다음배너</span>
 			    </a>
 		</div>
-		<div class="body center_align">
+		<div class="body_index center_align">
 			<div class="row">
 				<section class="col-xs-12 col-sm-6 home_cell">
 					<div id="myCarousel" class="carousel slide boxshadow" data-ride="carousel">
@@ -146,10 +146,29 @@
 						</div>
 					</div>
 				</div>
-
+				
+				<div class="row idx_event">
+					<div class="col-xs-12 lottemartdream">
+						<h3>
+							<a href="${pageContext.request.contextPath}/eventList/1">
+							Studymate 이벤트<span class="glyphicon glyphicon-plus"></span>
+							</a>
+						</h3>
+					</div>
+					<div class="col-xs-12 event_under">
+						<div class="hidden-xs lottemartdream normal w250">
+				            <h1 class="pull-right"><a href="${eventUrl}">${eventDto.boeTitle}</a></h1>
+				        </div>
+				        <div class="hidden-sm hidden-md hidden-lg idx_xshide lottemartdream">
+				      	  <h4 class="pull-right"><a href="${eventUrl}">${eventDto.boeTitle}</a> </h4>
+				        </div>
+					</div>
+				</div>				
+				
 			</div>
 		</div>
 		<%@include file="./Footer.jsp" %>
+		<%@include file="./Board.jsp" %>
 		</div>
 	</body>
 </html>
