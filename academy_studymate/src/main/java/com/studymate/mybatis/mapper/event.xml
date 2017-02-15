@@ -68,7 +68,7 @@
 	</select>
 	
 	<select id="readLatestOne" resultType="EventDto">
-		SELECT rownum, <include refid="columns" /> FROM event WHERE rownum = 1 ORDER BY boeRegdate 	
+		SELECT rownum, <include refid="columns" /> FROM event WHERE rownum = 1 ORDER BY boeRegdate 	DESC 
 	</select>
 	
 	<insert id="write"  parameterType="EventDto">
