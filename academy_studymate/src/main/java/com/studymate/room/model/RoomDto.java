@@ -10,7 +10,7 @@ import com.studymate.common.Dto;
 
 public class RoomDto extends Dto{
 	private int borNum;
-	@NotEmpty(message="지점명필수입력") @Size(min=4,message="최소 4자이상")
+	@NotEmpty(message="지점명필수입력") @Size(min=3,message="최소 3자이상")
 	private String borName;
 	@NotEmpty(message="주소필수입력")
 	private String borAddr;
