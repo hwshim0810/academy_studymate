@@ -23,7 +23,8 @@
 					<header id="con_header" class="col-xs-12 lottemartdream">
 						<h2 class="normal w300 subsize">${eventDto.boeTitle}</h2>
 						<div class="lottemartdream">
-							등록일 <strong>${eventDto.boeRegdate}</strong>
+							<p>등록일 <strong>${eventDto.boeRegdate}</strong></p>
+							<p>남은인원 <strong>${eventDto.boeAble}</strong>명</p>
 						</div>
 						<hr>
 					</header>
