@@ -102,8 +102,8 @@
 			<input type="hidden" id="boardtitle_client" value="로그인">
 			<input type="hidden" id="boardinfo" value="Studymate에 오신걸 환영합니다">
 			<%@include file="../common/Footer.jsp" %>
-			<%@include file="../common/Board.jsp" %>
-			<%@include file="../common/Joinscript.jsp" %>
+			<%@include file="../common/loadscript/Board.jsp" %>
+			<%@include file="../common/loadscript/Joinscript.jsp" %>
 		</div>
 	</body>
 </html>

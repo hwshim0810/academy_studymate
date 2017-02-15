@@ -2,6 +2,7 @@ package com.studymate.member.controller;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -59,13 +60,13 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "memberWrite" , method = RequestMethod.POST)
-	public String memberJoin(HttpSession session, @Valid MemberDto memDto, BindingResult result) {
+	public String memberJoin(HttpSession session, @Valid MemberDto memDto, BindingResult result, HttpServletRequest request) {
 		if (result.hasErrors())
 			return "/member/memberWrite";
 		
-		memberService.memberJoin(session, memDto);
+		String page = memberService.memberJoin(session, memDto, request);
 
-		return "/member/joinSuccess";
+		return page;
 	}
 	
 	@RequestMapping(value= "isAbleId", method = RequestMethod.POST, produces = "application/json")

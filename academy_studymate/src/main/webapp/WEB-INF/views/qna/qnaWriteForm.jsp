@@ -18,7 +18,7 @@
 			</c:choose>
 			<%@include file="../common/Body_top.jsp"%>
 			<div class="body center_align">
-				<%@include file="../common/BoardSubnav.jsp" %>
+				<%@include file="../common/nav/BoardSubnav.jsp" %>
 				<div class="boardtitle lottemartdream"></div>
 				<br><br><br>
 				<form:form method="POST" commandName="qnaDto" action="${pageContext.request.contextPath}/qnaWrite">
@@ -59,7 +59,7 @@
 			<input type="hidden" id="boardsubtitle" value="문의작성">
 			<input type="hidden" id="boardinfo" value="궁금한점이 있다면 남겨주세요">
 			<%@include file="../common/Footer.jsp" %>
-			<%@include file="../common/Board.jsp" %>
+			<%@include file="../common/loadscript/Board.jsp" %>
 			<script src="<c:url value='/resources/js/boardWrite/qnaWrite.js'/>" charset="utf-8"></script>
 		</div>
 	</body>

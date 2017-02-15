@@ -17,7 +17,7 @@
 			</c:choose>
 			<%@include file="../common/Body_top.jsp"%>
 			<section class="body_low center_align">
-				<%@include file="../common/BoardSubnav.jsp" %>
+				<%@include file="../common/nav/BoardSubnav.jsp" %>
 				<div class="boardmaintitle lottemartdream"></div>
 				<table class="table table-hover">
 					<thead>
@@ -84,7 +84,7 @@
 			<input type="hidden" id="boardid" value="qna">
 			<input type="hidden" id="boardinfo" value="궁금한점이 있다면 문의남겨주세요">
 			<%@include file="../common/Footer.jsp" %>
-			<%@include file="../common/Board.jsp" %>
+			<%@include file="../common/loadscript/Board.jsp" %>
 		</div>
 	</body>
 </html>

@@ -18,7 +18,7 @@
 			<%@include file="../common/Body_top.jsp"%>
 			<section class="body_higher center_align">
 				<c:if test="${sessionScope.memId eq 'admin'}">
-					<%@include file="../common/AdminSubnav.jsp" %>
+					<%@include file="../common/nav/AdminSubnav.jsp" %>
 				</c:if>
 				<div class="boardmaintitle lottemartdream"></div>
 				<article>
@@ -79,7 +79,7 @@
 			<input type="hidden" id="boardtotal" value="${totalCount}">
 			<input type="hidden" id="boardinfo" value="Studymate의 이벤트가 모인 공간입니다.">
 			<%@include file="../common/Footer.jsp" %>
-			<%@include file="../common/Board.jsp" %>
+			<%@include file="../common/loadscript/Board.jsp" %>
 			<%@include file="../common/scriptCssLoad/EventPageScript.jsp" %>
 		</div>
 	</body>

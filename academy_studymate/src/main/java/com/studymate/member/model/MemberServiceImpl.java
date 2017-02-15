@@ -6,9 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -32,28 +34,30 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 	FindStudyDao findDao;
 	@Autowired
 	ReserveDao resDao;
-	
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
+
 	@Override
 	public String login(HttpSession session, LoginDto loginDto) {
-		String memId = loginDto.getMemId();
-		String memPass = loginDto.getMemPass();
+		String inputMemId = loginDto.getMemId();
+		String inputMemPass = loginDto.getMemPass();
 		
-		MemberDto memDto = memDao.read(memId);
+		MemberDto memDto = memDao.read(inputMemId);
 		
 		if (memDto == null) return GUESTLEVEL;
 		
 		String id = memDto.getMemId();
-		String pass = memDto.getMemPass();
+		String encodedPassword = memDto.getMemPass();
 		String siteOut = memDto.getMemSiteout();
 		String email = memDto.getMemEmail();
 		
-		if (id.equals("admin") && pass.equals(memPass)) {
+		if (id.equals("admin") && passwordEncoder.matches(inputMemPass, encodedPassword)) {
 			session.setAttribute("memId", id);
 			session.setAttribute("memName", memDto.getMemName());
 			session.setAttribute("memEmail", email);
 			return (String) session.getAttribute("page");
 			
-		} else if (pass.equals(memPass) && siteOut.equals("가입")) {
+		} else if (passwordEncoder.matches(inputMemPass, encodedPassword) && siteOut.equals("가입")) {
 			session.setAttribute("memId", id);
 			session.setAttribute("memName", memDto.getMemName());	
 			session.setAttribute("memEmail", email);
@@ -73,22 +77,32 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 	}
 
 	@Override
-	public void memberJoin(HttpSession session, MemberDto memDto) {
-		memDao.write(memDto);
+	public String memberJoin(HttpSession session, MemberDto memDto, HttpServletRequest request) {
+		String passConfirm = request.getParameter("memPassConfirm");
+
+		if (passConfirm.equals(memDto.getMemPass())) {
+			String encryptPassword = passwordEncoder.encode(memDto.getMemPass());
+			memDto.setMemPass(encryptPassword);
+			memDao.write(memDto);
+		} else
+			return "/member/wrongJoin";
+		
 		if (session.getAttribute("memId") == null) {
 			
 			HashMap<String, String> email = getWelcomeContents(
 					((MemberDto) memDto).getMemId(), ((MemberDto) memDto).getMemEmail());
 
 			sendEmailHelper(email.get("subject"), email.get("content"), email.get("receiver"));
-		}
+			return "/member/joinSuccess";
+		} else
+			return "/member/wrongJoin";
 	}
 
 	@Override
 	public HashMap<String, Object> isAbleId(String memId) {
 		MemberDto memDto = memDao.read(memId);
 		HashMap<String, Object> resultMap = new HashMap<>();
-	
+		
 		if (memDto == null) {
 			resultMap.put("searchResult", "OK");
 			return resultMap;
@@ -141,6 +155,8 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 
 	@Override
 	public Model update(Model model, MemberDto memDto) {
+		String encryptPassword = passwordEncoder.encode(memDto.getMemPass());
+		memDto.setMemPass(encryptPassword);
 		memDao.update(memDto);
 		return model;
 	}
@@ -232,7 +248,7 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 		HashMap<String, Object> resultMap = new HashMap<>();
 		MemberDto memDto = memDao.read(memId);
 		
-		if (memDto.getMemPass().equals(oldPass)) {
+		if (passwordEncoder.matches(oldPass, memDto.getMemPass())) {
 			resultMap.put("searchResult", "OK");
 			return resultMap;
 		} else {
@@ -258,11 +274,12 @@ public class MemberServiceImpl extends CommonServiceUtil implements MemberServic
 			return GUESTLEVEL;
 		else if (memDto.getMemName().equals(inputName) && memDto.getMemEmail().equals(inputEmail)) {
 			String randomString = getRandomString().substring(0, 8);
+			String encryptPassword = passwordEncoder.encode(randomString);
 			
 			HashMap<String, String> email = getPassEmail(memDto, randomString);
 			sendEmailHelper(email.get("subject"), email.get("content"), email.get("receiver"));
 			
-			memDto.setMemPass(randomString);
+			memDto.setMemPass(encryptPassword);
 			memDao.updatePass(memDto);
 			return "/member/findPassSuccess";
 		} else {

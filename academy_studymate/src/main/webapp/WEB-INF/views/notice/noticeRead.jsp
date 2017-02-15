@@ -101,7 +101,7 @@
 			<input type="hidden" id="boarddelete" value="${deleteUrl}">
 			<input type="hidden" id="boardinfo" value="Studymate에서 보내드리는 소식">
 			<%@include file="../common/Footer.jsp" %>
-			<%@include file="../common/Board.jsp" %>
+			<%@include file="../common/loadscript/Board.jsp" %>
 		</div>
 	</body>
 </html>

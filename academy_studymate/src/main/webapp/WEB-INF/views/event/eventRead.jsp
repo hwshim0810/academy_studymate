@@ -74,7 +74,7 @@
 			<input type="hidden" id="boeNum" value="${eventDto.boeNum}">
 			<input type="hidden" id="memId" value="${sessionScope.memId}">
 			<%@include file="../common/Footer.jsp" %>
-			<%@include file="../common/Board.jsp" %>
+			<%@include file="../common/loadscript/Board.jsp" %>
 			<%@include file="../common/scriptCssLoad/EventPageScript.jsp" %>
 		</div>
 	</body>

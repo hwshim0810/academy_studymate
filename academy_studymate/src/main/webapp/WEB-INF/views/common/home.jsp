@@ -168,7 +168,7 @@
 			</div>
 		</div>
 		<%@include file="./Footer.jsp" %>
-		<%@include file="./Board.jsp" %>
+		<%@include file="./loadscript/Board.jsp" %>
 		</div>
 	</body>
 </html>

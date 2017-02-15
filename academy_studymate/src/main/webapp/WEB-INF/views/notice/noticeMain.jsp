@@ -74,7 +74,7 @@
 			<input type="hidden" id="boardtotal" value="${totalCount}">
 			<input type="hidden" id="boardinfo" value="Studymate에서 보내드리는 소식들입니다">
 			<%@include file="../common/Footer.jsp" %>
-			<%@include file="../common/Board.jsp" %>
+			<%@include file="../common/loadscript/Board.jsp" %>
 		</div>
 	</body>
 </html>

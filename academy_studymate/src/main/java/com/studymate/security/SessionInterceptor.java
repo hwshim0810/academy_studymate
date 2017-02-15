@@ -38,7 +38,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter{
 			case "login":
 			case "logoutConfirm":
 			case "logout":
-			case "isAbled":
+			case "isAbleId":
 			case "memberMypage":
 			case "isRightPass":
 			case "memberFind":
@@ -47,6 +47,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter{
 			case "memResPaging":
 			case "memResDetail":
 			case "noticeList":
+			case "noticeRead":
 			case "qnaList":
 			case "getBorName":
 			case "reviewList":

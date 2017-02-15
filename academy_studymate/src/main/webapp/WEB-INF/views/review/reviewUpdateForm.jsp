@@ -18,7 +18,7 @@
 			</c:choose>
 			<%@include file="../common/Body_top.jsp"%>
 			<section class="body center_align">
-				<%@include file="../common/BoardSubnav.jsp" %>
+				<%@include file="../common/nav/BoardSubnav.jsp" %>
 				<div class="boardtitle lottemartdream"></div>
 				<br><br><br>
 				<form:form name = "updateform" action="${pageContext.request.contextPath}/reviewUpdate/${currentPage}-${reviewDto.borvNum}" method="post" commandName="reviewDto">
@@ -57,7 +57,7 @@
 			<input type="hidden" id="boardsubtitle" value="후기수정">
 			<input type="hidden" id="boardinfo" value="후기를 수정합니다">
 			<%@include file="../common/Footer.jsp" %>
-			<%@include file="../common/Board.jsp" %>
+			<%@include file="../common/loadscript/Board.jsp" %>
 			<script src="<c:url value='/resources/js/boardWrite/reviewWrite.js?v=2'/>" charset="utf-8"></script>
 		</div>
 	</body>

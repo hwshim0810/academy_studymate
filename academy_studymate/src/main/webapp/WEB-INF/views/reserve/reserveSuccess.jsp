@@ -55,8 +55,8 @@
 			<input type="hidden" id="boardtitle_client" value="예약완료">
 			<input type="hidden" id="boardinfo" value="예약해주셔서 감사합니다">
 			<%@include file="../common/Footer.jsp" %>
-			<%@include file="../common/Board.jsp" %>
-			<%@include file="../common/Joinscript.jsp" %>
+			<%@include file="../common/loadscript/Board.jsp" %>
+			<%@include file="../common/loadscript/Joinscript.jsp" %>
 		</div>
 	</body>
 </html>

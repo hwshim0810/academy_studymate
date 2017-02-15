@@ -19,7 +19,7 @@
 			<%@include file="../common/Body_top.jsp"%>
 			<section class="body_high center_align">
 				<c:if test="${sessionScope.memId eq 'admin'}">
-					<%@include file="../common/AdminSubnav.jsp" %>
+					<%@include file="../common/nav/AdminSubnav.jsp" %>
 				</c:if>
 				<div class="boardtitle lottemartdream"></div>
 				<article class="resInfo">
@@ -167,7 +167,7 @@
 				</article>
 			</section>
 			<%@include file="../common/Footer.jsp" %>
-			<%@include file="../common/Board.jsp" %>
+			<%@include file="../common/loadscript/Board.jsp" %>
 		</div>
 	</body>
 </html>

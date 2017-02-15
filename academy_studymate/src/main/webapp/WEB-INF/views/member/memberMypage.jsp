@@ -334,8 +334,8 @@
 			<input type="hidden" id="client_page" value="${pageContext.request.contextPath}/memberMypage">
 			<input type="hidden" id="boardinfo" value="회원님의 정보를 확인해보세요">
 			<%@include file="../common/Footer.jsp" %>
-			<%@include file="../common/Board.jsp" %>
-			<%@include file="../common/MypageScript.jsp" %>
+			<%@include file="../common/loadscript/Board.jsp" %>
+			<%@include file="../common/loadscript/MypageScript.jsp" %>
 		</div>
 	</body>
 </html>

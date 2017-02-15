@@ -51,8 +51,8 @@
 			<input type="hidden" id="client_page" value="${pageContext.request.contextPath}/login">
 			<input type="hidden" id="boardinfo" value="아이디를 확인하세요">
 			<%@include file="../common/Footer.jsp" %>
-			<%@include file="../common/Board.jsp" %>
-			<%@include file="../common/Joinscript.jsp" %>
+			<%@include file="../common/loadscript/Board.jsp" %>
+			<%@include file="../common/loadscript/Joinscript.jsp" %>
 		</div>
 	</body>
 </html>

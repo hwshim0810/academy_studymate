@@ -19,7 +19,7 @@
 		<section class="body_high center_align">
 		<!-- 관리자 여부로 서브메뉴 구분필요 -->
 			<c:if test="${sessionScope.memId eq 'admin'}">
-				<%@include file="../common/AdminSubnav.jsp" %>
+				<%@include file="../common/nav/AdminSubnav.jsp" %>
 			</c:if>
 			<div class="boardtitle lottemartdream"></div>
 			<article class="resInfo">
@@ -112,7 +112,7 @@
 		<input type="hidden" id="boardinfo" value="회원정보를 잊으셨나요?">
 		<!-- 관리자와 구분필요 -->
 		<%@include file="../common/JoinFooter.jsp" %>
-		<%@include file="../common/Board.jsp" %>
-		<%@include file="../common/Joinscript.jsp" %>
+		<%@include file="../common/loadscript/Board.jsp" %>
+		<%@include file="../common/loadscript/Joinscript.jsp" %>
 	</body>
 </html>

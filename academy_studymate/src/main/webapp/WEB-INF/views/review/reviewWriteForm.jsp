@@ -18,7 +18,7 @@
 			</c:choose>
 			<%@include file="../common/Body_top.jsp"%>
 			<div class="body center_align">
-				<%@include file="../common/BoardSubnav.jsp" %>
+				<%@include file="../common/nav/BoardSubnav.jsp" %>
 				<div class="boardtitle lottemartdream"></div>
 				<br><br><br>
 				<form:form method="POST" commandName="reviewDto" action="${pageContext.request.contextPath}/reviewWrite">
@@ -60,7 +60,7 @@
 			<input type="hidden" id="boardsubtitle" value="후기작성">
 			<input type="hidden" id="boardinfo" value="지점별 리뷰를 남겨주세요">
 			<%@include file="../common/Footer.jsp" %>
-			<%@include file="../common/Board.jsp" %>
+			<%@include file="../common/loadscript/Board.jsp" %>
 			<script src="<c:url value='/resources/js/boardWrite/reviewWrite.js'/>" charset="utf-8"></script>
 		</div>
 	</body>

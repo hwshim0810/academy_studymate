@@ -57,7 +57,7 @@ $(function() {
 			  input    : true,
 			  message  : "사용하실 아이디를 입력해주세요."
 			}).done(function(data){
-
+				
 			data = data.trim();	
 			var idReg = /^[a-zA-Z][A-Za-z0-9]{4,10}$/g;
 			if (!data) {
@@ -97,7 +97,6 @@ $(function() {
 				});
 				return false;
 			}
-			
 			$.post('/studymate/isAbleId', 'memId=' + data, function(resultMap) {
 				var result = resultMap.searchResult;
 				

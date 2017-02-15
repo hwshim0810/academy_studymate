@@ -18,7 +18,7 @@
 			</c:choose>
 			<%@include file="../common/Body_top.jsp"%>
 			<div class="body_high center_align">
-				<%@include file="../common/BoardSubnav.jsp" %>
+				<%@include file="../common/nav/BoardSubnav.jsp" %>
 				<div class="boardtitle lottemartdream"></div>
 				<form:form id="multiform" method="POST" commandName="eventDto" enctype="multipart/form-data" action="${pageContext.request.contextPath}/eventUpdate">
 					<table class="table">
@@ -93,7 +93,7 @@
 			<input type="hidden" id="boardsubtitle" value="이벤트수정">
 			<input type="hidden" id="boardinfo" value="이벤트를 수정합니다">
 			<%@include file="../common/Footer.jsp" %>
-			<%@include file="../common/Board.jsp" %>
+			<%@include file="../common/loadscript/Board.jsp" %>
 			<%@include file="../common/scriptCssLoad/EventPageScript.jsp" %>
 		</div>
 	</body>

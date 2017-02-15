@@ -42,8 +42,8 @@
 			<input type="hidden" id="boardtitle_client" value="회원탈퇴">
 			<input type="hidden" id="boardinfo" value="다음에 또 이용바랍니다">
 			<%@include file="../common/Footer.jsp" %>
-			<%@include file="../common/Board.jsp" %>
-			<%@include file="../common/Joinscript.jsp" %>
+			<%@include file="../common/loadscript/Board.jsp" %>
+			<%@include file="../common/loadscript/Joinscript.jsp" %>
 		</div>
 	</body>
 </html>

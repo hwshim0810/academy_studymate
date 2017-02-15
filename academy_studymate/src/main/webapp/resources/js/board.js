@@ -85,7 +85,7 @@ $(function() {
 	});
 	
 	$("#btntologin").bind('click', function() {
-		location.href = context + 'login';
+		location.href = context + 'loginForm';
 	});
 	
 	$("#btntojoin").bind('click', function() {

@@ -17,7 +17,7 @@
 			</c:choose>
 			<%@include file="../common/Body_top.jsp"%>
 			<section class="body center_align">
-				<%@include file="../common/BoardSubnav.jsp" %>
+				<%@include file="../common/nav/BoardSubnav.jsp" %>
 				<div class="boardtitle lottemartdream"></div>
 				<article id="contents">
 					<header id="con_header" class="col-xs-12">
@@ -106,7 +106,7 @@
 			<input type="hidden" id="boardcomment" value="${commentUrl}">
 			<input type="hidden" id="boardinfo" value="궁금한점이 있다면 문의주세요">
 			<%@include file="../common/Footer.jsp" %>
-			<%@include file="../common/Board.jsp" %>
+			<%@include file="../common/loadscript/Board.jsp" %>
 		</div>
 	</body>
 </html>

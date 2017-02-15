@@ -20,7 +20,7 @@
 			<section class="body_higher center_align">
 			<!-- 관리자 여부로 서브메뉴 구분필요 -->
 				<c:if test="${sessionScope.memId eq 'admin'}">
-					<%@include file="../common/AdminSubnav.jsp" %>
+					<%@include file="../common/nav/AdminSubnav.jsp" %>
 				</c:if>
 				<div class="boardtitle lottemartdream"></div>
 				<article class="resInfo">
@@ -88,7 +88,7 @@
 								<div class="form-group" >
 									<label class="col-xs-4 control-label" for="memPassConfirm">*비밀번호확인</label>  
 									<div class="col-xs-6">
-										<input type="password"  id="memPassConfirm" placeholder="비밀번호확인" maxlength="12"  class="form-control" />
+										<input type="password"  id="memPassConfirm"  name="memPassConfirm" placeholder="비밀번호확인" maxlength="12"  class="form-control" />
 									</div>
 									<div class="col-xs-2">
 									</div>
@@ -206,10 +206,9 @@
 			<input type="hidden" id="boardid" value="member">
 			<input type="hidden" id="boardtitle_client" value="회원가입">
 			<input type="hidden" id="boardinfo" value="Studymate의 모든 서비스를 이용해보세요">
-			<!-- 관리자와 구분필요 -->
 			<%@include file="../common/JoinFooter.jsp" %>
-			<%@include file="../common/Board.jsp" %>
-			<%@include file="../common/Joinscript.jsp" %>
+			<%@include file="../common/loadscript/Board.jsp" %>
+			<%@include file="../common/loadscript/Joinscript.jsp" %>
 		</div>
 	</body>
 </html>

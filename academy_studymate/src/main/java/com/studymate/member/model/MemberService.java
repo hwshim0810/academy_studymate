@@ -2,6 +2,7 @@ package com.studymate.member.model;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
@@ -15,7 +16,7 @@ public interface MemberService  {
 
 	void logout(HttpSession session);
 
-	void memberJoin(HttpSession session, MemberDto memDto);
+	String memberJoin(HttpSession session, MemberDto memDto, HttpServletRequest request);
 
 	HashMap<String, Object> isAbleId(String memId);
 

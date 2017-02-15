@@ -185,7 +185,7 @@
 			<input type="hidden" id="currentPage" value="${currentPage}">
 			<input type="hidden" id="boardinfo" value="${reviewDto.memName}님의 방문후기">
 			<%@include file="../common/Footer.jsp" %>
-			<%@include file="../common/Board.jsp" %>
+			<%@include file="../common/loadscript/Board.jsp" %>
 			<script type="text/javascript"src="<c:url value='/resources/js/plugin/jquery.cookie.js' />"></script>
 		</div>
 	</body>

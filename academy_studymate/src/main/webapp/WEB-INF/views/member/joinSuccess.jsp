@@ -42,8 +42,8 @@
 			<input type="hidden" id="boardtitle_client" value="회원가입">
 			<input type="hidden" id="boardinfo" value="회원가입을 환영합니다">
 			<%@include file="../common/Footer.jsp" %>
-			<%@include file="../common/Board.jsp" %>
-			<%@include file="../common/Joinscript.jsp" %>
+			<%@include file="../common/loadscript/Board.jsp" %>
+			<%@include file="../common/loadscript/Joinscript.jsp" %>
 		</div>
 	</body>
 </html>
