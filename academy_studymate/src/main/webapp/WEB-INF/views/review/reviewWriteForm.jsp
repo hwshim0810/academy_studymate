@@ -61,7 +61,7 @@
 			<input type="hidden" id="boardinfo" value="지점별 리뷰를 남겨주세요">
 			<%@include file="../common/Footer.jsp" %>
 			<%@include file="../common/loadscript/Board.jsp" %>
-			<script src="<c:url value='/resources/js/boardWrite/reviewWrite.js'/>" charset="utf-8"></script>
+			<script src="<c:url value='/resources/js/boardWrite/reviewWrite.js?v=1'/>" charset="utf-8"></script>
 		</div>
 	</body>
 </html>

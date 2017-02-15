@@ -97,7 +97,7 @@
 			<%@include file="../common/Footer.jsp" %>
 			<%@include file="../common/loadscript/Board.jsp" %>
 			<%@include file="../common/scriptCssLoad/EventPageScript.jsp" %>
-			<script src="<c:url value='/resources/js/boardWrite/eventWrite.js'/>" charset="utf-8"></script>
+			<script src="<c:url value='/resources/js/boardWrite/eventWrite.js?v=1'/>" charset="utf-8"></script>
 		</div>
 	</body>
 </html>

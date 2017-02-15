@@ -52,7 +52,7 @@
 			<input type="hidden" id="boardinfo" value="공지사항을 작성합니다">
 			<%@include file="../common/Footer.jsp" %>
 			<%@include file="../common/loadscript/Board.jsp" %>
-			<script src="<c:url value='/resources/js/boardWrite/noticeWrite.js'/>" charset="utf-8"></script>
+			<script src="<c:url value='/resources/js/boardWrite/noticeWrite.js?v=1'/>" charset="utf-8"></script>
 		</div>
 	</body>
 </html>
