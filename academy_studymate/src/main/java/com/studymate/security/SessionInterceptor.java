@@ -33,6 +33,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter{
 			return true;
 		} else if (paths.length > 2) { //비접속에서도가능
 			switch (paths[2]) {
+			case "error":
 			case "needLogin":
 			case "main":
 			case "login":

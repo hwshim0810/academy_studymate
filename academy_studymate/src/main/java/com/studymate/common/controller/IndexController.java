@@ -34,4 +34,9 @@ public class IndexController {
 	public String confirmLoginForm() {
 		return "common/needLogin";
 	}
+	
+	@RequestMapping("error")
+	public String errorPage() {
+		return "common/error/errorPage";
+	}
 }
