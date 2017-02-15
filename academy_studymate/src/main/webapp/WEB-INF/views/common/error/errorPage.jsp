@@ -39,8 +39,8 @@
 			</section>
 			<!-- Hidden parameter -->
 			<input type="hidden" id="boardid" value="member">
-			<input type="hidden" id="boardtitle_client" value="회원탈퇴">
-			<input type="hidden" id="boardinfo" value="다음에 또 이용바랍니다">
+			<input type="hidden" id="boardtitle_client" value="일시장애">
+			<input type="hidden" id="boardinfo" value="문의하세요!">
 			<%@include file="../Footer.jsp" %>
 			<%@include file="../loadscript/Board.jsp" %>
 			<%@include file="../loadscript/Joinscript.jsp" %>
