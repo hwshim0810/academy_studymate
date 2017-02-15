@@ -32,12 +32,12 @@
 							</tr>
 							<tr>
 								<td><label for="memName">예약자명</label></td>
-								<td><form:input path="memName" placeholder="예약자명" maxlength="10" value="${resDto.memName}"/></td>
+								<td><form:input path="memName" placeholder="예약자명" readonly="true" maxlength="10" value="${resDto.memName}"/></td>
 								<td><form:errors path="memName" /></td>
 							</tr>
 							<tr>
 								<td><label>Email</label></td>
-								<td><form:input path="memEmail" placeholder="exam@exam.com" maxlength="30" value="${resDto.memEmail}" /></td>
+								<td><form:input path="memEmail" placeholder="exam@exam.com" readonly="true" maxlength="30" value="${resDto.memEmail}" /></td>
 								<td><form:errors path="memEmail" /></td>
 							</tr>
 							<tr>

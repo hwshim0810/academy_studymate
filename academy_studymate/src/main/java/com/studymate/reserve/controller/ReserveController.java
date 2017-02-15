@@ -33,9 +33,13 @@ public class ReserveController {
 	}
 	
 	@RequestMapping(value = "reserveWrite", method = RequestMethod.GET)
-	public String write(Model model) {
+	public String write(HttpSession session, Model model) {
 		resService.writeForm(model);
-		return "/reserve/reserveWriteForm";
+		
+		if (session.getAttribute("memId").equals("admin"))
+			return "/reserve/reserveWriteForm";
+		else
+			return "/common/needLogin";
 	}
 	
 	@RequestMapping(value ="reserveSeleted/{borNum}", method = RequestMethod.GET)

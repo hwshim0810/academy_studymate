@@ -1,0 +1,37 @@
+.scene {
+	height: 100vh;
+	overflow: hidden;
+	background-attachment: fixed;
+	background-size: cover;
+}
+.scene.one {
+	background-image: url(../img/introimg1.jpg);
+}
+.scene.two {
+	background-image: url(../img/introimg2.jpg);
+}
+.scene.three {
+	background-image: url(../img/introimg3.jpg);
+}
+.scene header {
+	color: white;
+	max-width: 80%;
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	font-size: 1.5rem; 
+	text-align: center;
+}
+.scene header h1 {
+	font-size : 2rem;
+	margin-bottom: 1rem;
+}
+.scene header h1:after{
+  content:'';
+  border-bottom:1px solid white;
+  width:18rem;
+  display: block;
+  margin:0 auto;
+  margin-top:1rem;
+}

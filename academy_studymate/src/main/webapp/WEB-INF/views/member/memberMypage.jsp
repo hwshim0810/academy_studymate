@@ -39,7 +39,7 @@
 								</ul>
 								<div class="tab-content">
 									<!-- Member Info -->
-									<div class="tab-pane active" id="mem_info">
+									<div class="tab-pane" id="mem_info">
 										<h2>${memberDto.memId} 님의 정보</h2>
 										<br><hr>
 										<div class="row mypage_row">
@@ -245,13 +245,14 @@
 										</form:form>
 									</div>
 									<!-- 전체 예약내역 -->
-									<div class="tab-pane" id="mem_reserve">
+									<div class="tab-pane active" id="mem_reserve">
 										<div class="panel panel-info">
 										    <div class="panel-heading"><h4 class="lottemartdream text-center">안내사항</h4></div>
 										    <div class="panel-body">
 										    	<div>
 										    		<ul class="text-center nonestyle lottemartdream">
-										    			<li class="mypage_row">조회된 예약은 총${totalCount}건 입니다.</li>
+										    			<li class="mypage_row">조회된 예약은 총 ${totalCount}건 입니다.</li>
+										    			<li class="mypage_row">예약자명을 클릭해 상세내역을 확인할 수 있습니다.</li>
 										    			<li class="mypage_row">예약 수정/취소는 <strong>하루 전</strong>까지 가능합니다.</li>
 										    		</ul>
 										    	</div>
