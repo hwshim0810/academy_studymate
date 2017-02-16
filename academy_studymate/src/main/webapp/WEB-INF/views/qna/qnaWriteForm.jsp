@@ -60,7 +60,7 @@
 			<input type="hidden" id="boardinfo" value="궁금한점이 있다면 남겨주세요">
 			<%@include file="../common/Footer.jsp" %>
 			<%@include file="../common/loadscript/Board.jsp" %>
-			<script src="<c:url value='/resources/js/boardWrite/qnaWrite.js?v=1'/>" charset="utf-8"></script>
+			<script src="<c:url value='/resources/js/boardWrite/qnaWrite.js?v=2'/>" charset="utf-8"></script>
 		</div>
 	</body>
 </html>

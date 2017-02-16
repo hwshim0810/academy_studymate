@@ -151,7 +151,7 @@ public class MemberController {
 		return "redirect:/memberList/" + currentPage;
 	}
 	
-	@RequestMapping(value = "memberFind", method = RequestMethod.GET)
+	@RequestMapping(value = "memberFindId", method = RequestMethod.GET)
 	public String memberFind(Model model) {
 		memberService.findForm(model);
 		return "/member/memberFindFormId";
@@ -166,7 +166,7 @@ public class MemberController {
 	@RequestMapping("memberFindPass")
 	public String memberFindPass(@Valid FindDto findDto, BindingResult result) {
 		if (result.hasErrors())
-			return "/member/memberFindForm";
+			return "/member/memberFindFormPass";
 		
 		return memberService.memberFindPass(findDto);
 	}
@@ -174,7 +174,7 @@ public class MemberController {
 	@RequestMapping("memberFindId")
 	public String memberFindId(Model model, @Valid FindDto findDto, BindingResult result) {
 		if (result.hasErrors())
-			return "/member/memberFindForm";
+			return "/member/memberFindFormId";
 		
 		return memberService.memberFindId(model, findDto);
 	}

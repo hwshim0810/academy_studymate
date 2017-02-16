@@ -155,6 +155,13 @@
 							</a>
 						</h3>
 					</div>
+					<c:url value="/eventRead/1-${eventDto.boeNum}" var="eventUrl">
+						<c:if test="${not empty keyField && not empty keyWord}">
+							<c:param name="keyField" value="${keyField}" />
+							<c:param name="keyWord" value="${keyWord}" />
+						</c:if>
+						<c:param name="update" value="n" />
+					</c:url>
 					<div class="col-xs-12 event_under">
 						<div class="hidden-xs lottemartdream normal w250">
 				            <h1 class="pull-right"><a href="${eventUrl}">${eventDto.boeTitle}</a></h1>

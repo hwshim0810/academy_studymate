@@ -32,23 +32,32 @@
 					<tbody>
 						<c:forEach var="item" items="${qnaList}">
 							<c:url value="/qnaRead/${currentPage}-${item.boqNum}" var="readUrl">
-								<c:param name="update" value="n" />
 								<c:if test="${not empty keyField && not empty keyWord}">
 									<c:param name="keyField" value="${keyField}" />
 									<c:param name="keyWord" value="${keyWord}" />
+								<c:param name="update" value="n" />
 								</c:if>
 							</c:url>
 							<tr>
 								<td class="hidden-xs hidden-sm table_center">${item.boqNum}</td>
 								<c:choose>
 									<c:when test="${item.boqLev > 0 }">
-									<td class="table_center"><a href="${readUrl}">답변 : ${item.boqTitle}</a></td>
+									<td class="table_center"><a href="${readUrl}"><strong>답변 : ${item.boqTitle}</strong></a></td>
 									</c:when>
 									<c:otherwise>
 									<td class="table_center"><a href="${readUrl}">${item.boqTitle}</a></td>
 									</c:otherwise>
 								</c:choose>
-								<td class="table_center">${item.memName}</td>
+								<td class="table_center">
+									<c:choose>
+										<c:when test="${item.memName eq '운영자'}">
+											<strong>${item.memName}</strong>
+										</c:when>
+										<c:otherwise>
+											${item.memName}
+										</c:otherwise>
+									</c:choose>
+								</td>
 								<td class="table_center">${item.boqRegdate}</td>
 								<td class="hidden-xs hidden-sm table_center">${item.boqReadcount}</td>
 							</tr>

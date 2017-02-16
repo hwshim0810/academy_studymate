@@ -29,7 +29,7 @@ public class EventServiceImpl extends CommonServiceUtil implements ServiceInterf
 		map.put("keyWord", keyWord);
 		map.put("keyField", keyField);
 		
-		int blockCount = 10; 
+		int blockCount = 5; 
 		int blockPage = 10;
 		int totalCount = getTotalCount(eventDao, map);
 		
