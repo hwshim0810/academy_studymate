@@ -35,8 +35,8 @@
 								<c:if test="${not empty keyField && not empty keyWord}">
 									<c:param name="keyField" value="${keyField}" />
 									<c:param name="keyWord" value="${keyWord}" />
-								<c:param name="update" value="n" />
 								</c:if>
+								<c:param name="update" value="n" />
 							</c:url>
 							<tr>
 								<td class="hidden-xs hidden-sm table_center">${item.boqNum}</td>
