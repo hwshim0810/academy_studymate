@@ -42,9 +42,9 @@ public class ReserveController {
 			return "/common/needLogin";
 	}
 	
-	@RequestMapping(value ="reserveSeleted/{borNum}", method = RequestMethod.GET)
+	@RequestMapping(value ="reserveSeleted/{borNum}-{borName}", method = RequestMethod.GET)
 	public String write(Model model, @PathVariable("borNum") int borNum, 
-			String borName) {
+			@PathVariable("borName") String borName) {
 		resService.writeFormSelected(model, borName, borNum);
 		return "/reserve/reserveWriteSelected";
 	}

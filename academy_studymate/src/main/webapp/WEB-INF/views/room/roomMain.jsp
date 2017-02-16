@@ -58,8 +58,7 @@
 							        	</ul>
 							        	<div class="pull-right">
 								        	<a href="${readUrl}" class="btn btn-info btn-font">상세정보</a>
-								        	<c:url value="/reserveSeleted/${item.borNum}" var="selectedRes">
-								        		<c:param name="borName" value="${item.borName}" />
+								        	<c:url value="/reserveSeleted/${item.borNum}-${item.borName}" var="selectedRes">
 								        	</c:url>
 								        	<a class="btn btn-success btn-font btnwrite" href="${selectedRes}">예약하기</a>
 							        	</div>

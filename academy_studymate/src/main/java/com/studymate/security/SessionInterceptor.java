@@ -1,8 +1,13 @@
 package com.studymate.security;
 
+import java.net.URLEncoder;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -14,7 +19,8 @@ public class SessionInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 		// check variable 입력 받았을 아이디 값을 받아온다.
-		Object memId = request.getSession().getAttribute("memId");
+		HttpSession session = request.getSession();
+		Object memId = session.getAttribute("memId");
 		// 요청하는 URL주소가 같은지 확인
 		// pass through when access login.do, join.do
 		String URI = request.getRequestURI();
@@ -60,6 +66,18 @@ public class SessionInterceptor extends HandlerInterceptorAdapter{
 			case "siteInfo":
 			case "faq":
 				return true;
+			case "reserveSeleted":
+				if (memId == null) {
+					Map<?, ?> pathVariables
+					= (Map<?, ?>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
+					String borNum = (String) pathVariables.get("borNum");
+					String borName = (String) pathVariables.get("borName");
+					
+					session.setAttribute("page", "redirect:reserveSeleted/" + borNum + "-"
+							+ URLEncoder.encode(borName, "UTF-8"));
+					response.sendRedirect(request.getContextPath() + "/needLogin");
+					return false;
+				}
 			default:
 				if (memId != null) {
 					if (!memId.equals("admin")) { // 관리자권한확인

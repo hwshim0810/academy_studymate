@@ -9,7 +9,7 @@
 	<body>
 		<script type="text/javascript">
 			alert('임시비밀번호가 회원님의 메일로 전송되었습니다.');
-			location.href = '/studymate/login';
+			location.href = '/studymate/loginForm';
 		</script>
 	</body>
 </html>
