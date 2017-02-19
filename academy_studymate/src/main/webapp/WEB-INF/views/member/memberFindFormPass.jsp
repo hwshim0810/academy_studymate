@@ -108,7 +108,7 @@
 		<input type="hidden" id="boardid" value="member">
 		<input type="hidden" id="boardtitle_client" value="로그인">
 		<input type="hidden" id="boardsubtitle" value="회원정보찾기">
-		<input type="hidden" id="client_page" value="${pageContext.request.contextPath}/login">
+		<input type="hidden" id="client_page" value="${pageContext.request.contextPath}/loginForm">
 		<input type="hidden" id="boardinfo" value="회원정보를 잊으셨나요?">
 		<!-- 관리자와 구분필요 -->
 		<%@include file="../common/JoinFooter.jsp" %>
